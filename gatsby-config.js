@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     siteUrl: 'https://headlessmultilingual.gatsbyjs.io',
@@ -21,11 +25,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-datocms',
       options: {
-        apiToken: 'df7ea117c4efe00347258c921623e2',
-        /**
-         * Example of how locale fallbacks should be set,
-         * refer to README.md for more infos
-         */
+        apiToken: process.env.DATOCMS_API_KEY,
         localeFallbacks: {
           'lt-LT': 'en',
           'sv-FI': 'it',
