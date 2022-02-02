@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://headlessmultilingual.gatsbyjs.io',
+    siteUrl: 'https://kryptonum.eu',
   },
   plugins: [
     {
@@ -27,8 +27,8 @@ module.exports = {
       options: {
         apiToken: process.env.DATOCMS_API_KEY,
         localeFallbacks: {
-          'lt-LT': 'en',
-          'sv-FI': 'it',
+          'en-EN': 'pl',
+          en: 'pl',
         },
       },
     },
