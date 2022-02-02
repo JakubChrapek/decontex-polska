@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import styled from 'styled-components';
+import {useLocation} from '@reach/router';
 import { LangContext } from '../../context/langProvider';
 import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
@@ -79,6 +80,11 @@ const Header = () => {
               title
               url
             }
+            logoWhite {
+              url
+              title
+              alt
+            }
           }
         }
       }
@@ -101,6 +107,7 @@ const Header = () => {
 
   const { currentLanguage } = useContext(LangContext);
   const { defaultLanguage } = useLanguages();
+  const { pathname } = useLocation();
 
   const {
     allDatoCmsWebsiteSetting: { edges: settingsEdges },
@@ -115,13 +122,19 @@ const Header = () => {
           .map(
             ({
               node: {
-                logo: { url, title, alt },
+                logo, logoWhite
               },
-            }) => (
-              <Navigator home ariaLabel={title} key={title}>
-                <img src={url} alt={alt} />
+            }) => {
+              let logoVariant = logo;
+              // TODO: get all locale root pathnames from DatoCMS and check if it is homepage
+              if(pathname === '/' || pathname === '/en') {
+                logoVariant = logoWhite;
+              }
+              return (
+              <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
+                <img src={logoVariant.url} alt={logoVariant.alt} />
               </Navigator>
-            )
+            )}
           )}
         <Nav>
           <NavList>
