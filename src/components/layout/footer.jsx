@@ -11,7 +11,10 @@ const FooterContainer = styled.div`
   width: var(--globalContainer);
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
 
   @media screen and (max-width: 1170px) {
     width: 100%;
@@ -29,34 +32,33 @@ const FooterContainer = styled.div`
 `;
 
 const Footer = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allDatoCmsFooter {
-        nodes {
-          id: originalId
-          textLeft {
-            value
-          }
-          textRight {
-            value
-          }
-          locale
-        }
-      }
-    }
-  `);
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     allDatoCmsFooter {
+  //       nodes {
+  //         id: originalId
+  //         textLeft {
+  //           value
+  //         }
+  //         textRight {
+  //           value
+  //         }
+  //         locale
+  //       }
+  //     }
+  //   }
+  // `);
 
   const { currentLanguage } = useContext(LangContext);
 
-  const {
-    allDatoCmsFooter: { nodes },
-  } = data;
+  // const {
+  //   allDatoCmsFooter: { nodes },
+  // } = data;
 
   return (
-    <SectionWrapper as="footer">
-      <Divider top />
+    <SectionWrapper bg="var(--primaryDark)" as="footer">
       <FooterContainer>
-        {nodes
+        {/* {nodes
           .filter(({ locale }) => locale === currentLanguage)
           .map(
             ({
@@ -66,14 +68,17 @@ const Footer = () => {
             }) => (
               <Fragment key={id}>
                 <Paragraph small centered as="div">
-                  <StructuredText data={textLeftValue} />
-                </Paragraph>
-                <Paragraph small centered as="div">
-                  <StructuredText data={textRightValue} />
-                </Paragraph>
-              </Fragment>
-            )
-          )}
+                  {/* <StructuredText data={textLeftValue} /> */}
+                {/* </Paragraph>
+                <Paragraph small centered as="div"> */}
+                  {/* <StructuredText data={textRightValue} /> */}
+                {/* </Paragraph>
+              </Fragment> */}
+            {/* ) */}
+          {/* )} } */}
+          <Paragraph small centered as="div">
+            Tralala
+          </Paragraph>
       </FooterContainer>
     </SectionWrapper>
   );

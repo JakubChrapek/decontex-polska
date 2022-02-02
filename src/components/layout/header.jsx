@@ -8,6 +8,7 @@ import useLanguages from '../../hooks/useLanguages';
 import Navigator from '../langHelpers/navigator';
 import MobileMenu from './mobileMenu';
 import { Divider } from './sectionStyles';
+import HeaderWaves from '../vectors/bgWaves';
 
 // Scoped styles
 
@@ -15,7 +16,8 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--globalPaddingLr);
+  flex-direction: column;
+  padding: var(--globalPaddingLr) 0 0;
   width: 100%;
   position: relative;
 `;
@@ -28,9 +30,13 @@ const HeaderContainer = styled.div`
 `;
 
 const Nav = styled.nav`
-  @media screen and (max-width: 768px) {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /* @media screen and (max-width: 768px) {
     display: none;
-  }
+  } */
 `;
 
 const NavList = styled.ul`
@@ -116,8 +122,8 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <HeaderContainer>
-        {settingsEdges
+      {/* <HeaderContainer> */}
+      {/* {settingsEdges
           .filter(({ node: { locale } }) => locale === currentLanguage)
           .map(
             ({
@@ -135,9 +141,9 @@ const Header = () => {
                 <img src={logoVariant.url} alt={logoVariant.alt} />
               </Navigator>
             )}
-          )}
-        <Nav>
-          <NavList>
+          )} */}
+      <Nav>
+        {/* <NavList>
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
@@ -157,15 +163,20 @@ const Header = () => {
                   </li>
                 ))
               )}
-          </NavList>
-        </Nav>
-        <HeaderRight>
+          </NavList> */}
+        <img
+          src={settingsEdges[0].node.logo.url}
+          alt={settingsEdges[0].node.logo.alt}
+        />
+      </Nav>
+      <HeaderWaves />
+      {/* <HeaderRight>
           <LanguageSwitcher />
           <VerticalDivider />
           <MobileMenu />
         </HeaderRight>
-        <Divider bottom />
-      </HeaderContainer>
+        <Divider bottom /> */}
+      {/* </HeaderContainer> */}
     </HeaderWrapper>
   );
 };

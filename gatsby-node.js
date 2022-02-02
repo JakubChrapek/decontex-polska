@@ -177,7 +177,7 @@ exports.createPages = async ({ graphql, actions }) => {
     let pageCounter = 0;
 
     /**
-     * Iterate trought all available locales, and increase
+     * Iterate trough all available locales, and increase
      * the counter when an article is generated,
      * since the query results are sorted with with the same criteria for any locale
      * we can export a skipNext variable which we will use to skip all the previous posts.

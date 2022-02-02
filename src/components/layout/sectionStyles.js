@@ -6,7 +6,7 @@ export const SectionWrapper = styled.section`
   display: flex;
   align-items: center;
   width: 100%;
-  background: white;
+  background: ${({ bg }) => (bg ? bg : 'white')};
   flex-direction: column;
   position: relative;
 

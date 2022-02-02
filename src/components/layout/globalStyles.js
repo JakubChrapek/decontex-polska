@@ -43,7 +43,7 @@ const GlobalStyles = createGlobalStyle`
         --gapXL: 60px; // 3.75rem
 
         /* Typography */
-        --defaultStack: -apple-system, BlinkMacSystemFont, "Helvetica", "Helvetica Neue", "Arial", sans-serif;
+        --defaultStack: 'DM Sans', -apple-system, BlinkMacSystemFont, "Helvetica", "Helvetica Neue", "Arial", sans-serif;
 
         --headingXXL: 3.25rem; // 52px
         --headingXL: 2.625rem; // 42px
@@ -82,6 +82,7 @@ const GlobalStyles = createGlobalStyle`
         color: var(--baseTextColor);
         margin: 0;
         padding: 0;
+        min-height: 100vh;
     }
 
     h1, h2, h3, p {

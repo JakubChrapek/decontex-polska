@@ -177,7 +177,7 @@ export const ArticleBody = styled.div`
   }
 `;
 
-// Synthax hightlighter
+// Syntax highlighter
 
 export const LanguageContainer = styled.div`
   position: absolute;

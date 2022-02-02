@@ -12,18 +12,19 @@ import {
 import { HeadingSmall, SectionTitle } from '../components/layout/headingStyles';
 import { Paragraph } from '../components/layout/paragraphStyles';
 import ArticleCard, { CardImgArtDir } from '../components/ui/articleCard';
+import styled from 'styled-components';
 
 const HomePageTemplate = ({
   data: {
     datoCmsHomepage: {
       seo: { seoTitle, seoDescription },
       hero: [heroEntry],
-      features,
-      featuredPostsTitle,
+      // features,
+      // featuredPostsTitle,
     },
-    datoCmsOtherPage: { guidePageSlug },
-    allDatoCmsBlogPost: { postNodes },
-    datoCmsWebsiteSetting: { seeTheGuideButton, seeAllButton, minsReadSuffix },
+    // datoCmsOtherPage: { guidePageSlug },
+    // allDatoCmsBlogPost: { postNodes },
+    // datoCmsWebsiteSetting: { seeTheGuideButton, seeAllButton, minsReadSuffix },
   },
   pageContext,
 }) => {
@@ -35,7 +36,7 @@ const HomePageTemplate = ({
       seoTitle={seoTitle}
       seoDescription={seoDescription}
     >
-      <Hero
+      {/* <Hero
         hasDivider
         alt={heroAlt}
         title={heroTitle}
@@ -59,8 +60,8 @@ const HomePageTemplate = ({
             ))}
           </SectionContainerGridThreeCols>
         }
-      />
-      <SectionWrapper>
+      /> */}
+      {/* <SectionWrapper>
         <SectionTitleContainer hasButton>
           <SectionTitle>{featuredPostsTitle}</SectionTitle>
           <Navigator className="classicButton classicButtonOutline" archive>
@@ -104,10 +105,54 @@ const HomePageTemplate = ({
             )
           )}
         </SectionContainerGridThreeCols>
-      </SectionWrapper>
+      </SectionWrapper> */}
+      <ComingSoon
+        title="Trwają prace nad stroną"
+        subtitle="Dbamy o zdrowie i życie strażaków "
+      />
     </PageWrapper>
   );
 };
+
+const ComingSoonWrapper = styled.section`
+  background: var(--primaryDark);
+`
+
+const SectionContainer = styled.div`
+  max-width: var(--globalContainer);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const Title = styled.p`
+  font-size: clamp(52px, 5vw, 72px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #fff;
+`
+
+const Subtitle = styled.p`
+  color: #ffffffB8;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.75;
+  font-weight: 400;
+  margin-top: clamp(26px, 2.5vw, 36px);
+`;
+
+const ComingSoon = ({title, subtitle}) => {
+  return (
+    <ComingSoonWrapper>
+      <SectionContainer as="div">
+        <Title>{title}</Title>
+        <Subtitle>{subtitle}</Subtitle>
+      </SectionContainer>
+    </ComingSoonWrapper>
+  );
+}
 
 export default HomePageTemplate;
 
