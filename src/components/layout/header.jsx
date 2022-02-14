@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import styled from 'styled-components';
-import {useLocation} from '@reach/router';
+import { useLocation } from '@reach/router';
 import { LangContext } from '../../context/langProvider';
 import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
@@ -17,15 +17,17 @@ const HeaderWrapper = styled.header`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: var(--globalPaddingLr) 0 0;
   width: 100%;
-  position: relative;
+  height: 88px;
+  position: fixed;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: var(--globalContainer);
+  max-width: 1220px;
+  padding: 0 30px;
+  width: 100%;
   align-items: center;
 `;
 
@@ -34,21 +36,34 @@ const Nav = styled.nav`
   width: 100%;
   justify-content: center;
   align-items: center;
-  /* @media screen and (max-width: 768px) {
-    display: none;
-  } */
 `;
 
 const NavList = styled.ul`
   display: grid;
   grid-auto-flow: column;
-  column-gap: var(--gapXL);
+  column-gap: 48px;
   & li a {
     color: var(--headingsColor);
     transition: color 0.1s linear;
     font-weight: 600;
     &:hover {
       color: var(--primaryColor);
+    }
+  }
+
+  &.right{
+    li a {
+      padding: 0 24px;
+      background: #51B8EB;
+      border-radius: 6px;
+      display: block;
+      height: 40px;
+      line-height: 40px;
+      color: var(--primaryLight);
+
+      &:hover{
+        color: var(--headingsColor);
+      }
     }
   }
 `;
@@ -100,30 +115,35 @@ const Header = () => {
             locale
             links {
               id: originalId
-              ariaLabel
-              name
               slug
+              name
+              ariaLabel
+              locale
+              originalId
+            }
+            linksRight {
+              id: originalId
+              slug
+              originalId
+              name
               locale
             }
           }
         }
       }
     }
-  `);
+  `)
 
-  const { currentLanguage } = useContext(LangContext);
-  const { defaultLanguage } = useLanguages();
-  const { pathname } = useLocation();
+  const { currentLanguage } = useContext(LangContext)
+  const { defaultLanguage } = useLanguages()
+  const { pathname } = useLocation()
 
-  const {
-    allDatoCmsWebsiteSetting: { edges: settingsEdges },
-    allDatoCmsMenu: { edges: menuEdges },
-  } = data;
+  const {allDatoCmsWebsiteSetting: { edges: settingsEdges }, allDatoCmsMenu: { edges: menuEdges }} = data
 
   return (
     <HeaderWrapper>
-      {/* <HeaderContainer> */}
-      {/* {settingsEdges
+      <HeaderContainer>
+        {settingsEdges
           .filter(({ node: { locale } }) => locale === currentLanguage)
           .map(
             ({
@@ -133,17 +153,18 @@ const Header = () => {
             }) => {
               let logoVariant = logo;
               // TODO: get all locale root pathnames from DatoCMS and check if it is homepage
-              if(pathname === '/' || pathname === '/en') {
+              if (pathname === '/' || pathname === '/en') {
                 logoVariant = logoWhite;
               }
               return (
-              <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
-                <img src={logoVariant.url} alt={logoVariant.alt} />
-              </Navigator>
-            )}
-          )} */}
-      <Nav>
-        {/* <NavList>
+                <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
+                  <img src={logoVariant.url} alt={logoVariant.alt} />
+                </Navigator>
+              )
+            }
+          )}
+        <Nav>
+          <NavList>
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
@@ -163,20 +184,40 @@ const Header = () => {
                   </li>
                 ))
               )}
-          </NavList> */}
-        <img
-          src={settingsEdges[0].node.logo.url}
-          alt={settingsEdges[0].node.logo.alt}
-        />
-      </Nav>
-      <HeaderWaves />
-      {/* <HeaderRight>
-          <LanguageSwitcher />
+          </NavList>
+        </Nav>
+        <HeaderRight>
+          {/* <LanguageSwitcher /> */}
+
+          <Nav>
+            <NavList className='right'>
+              {menuEdges
+                .filter(({ node: { locale } }) => locale === currentLanguage)
+                .map(({ node: { linksRight } }) =>
+                  linksRight.map(({ id, slug, locale, ariaLabel, name }) => (
+                    <li key={id}>
+                      <Link
+                        activeClassName="activeClassLink"
+                        to={
+                          locale === defaultLanguage
+                            ? `/${slug}`
+                            : `/${locale}/${slug}`
+                        }
+                        aria-label={ariaLabel}
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  ))
+                )}
+            </NavList>
+          </Nav>
           <VerticalDivider />
           <MobileMenu />
         </HeaderRight>
-        <Divider bottom /> */}
-      {/* </HeaderContainer> */}
+        <Divider bottom />
+      </HeaderContainer>
+
     </HeaderWrapper>
   );
 };

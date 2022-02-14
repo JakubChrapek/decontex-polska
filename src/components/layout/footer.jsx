@@ -76,9 +76,7 @@ const Footer = () => {
               </Fragment> */}
             {/* ) */}
           {/* )} } */}
-          <Paragraph small centered as="div">
-            Tralala
-          </Paragraph>
+          
       </FooterContainer>
     </SectionWrapper>
   );

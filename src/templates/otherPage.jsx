@@ -31,6 +31,7 @@ const OtherPageTemplate = ({
   },
   pageContext,
 }) => {
+  
   return (
     <PageWrapper
       pageData={pageContext}
@@ -62,122 +63,19 @@ const OtherPageTemplate = ({
             switch (__typename) {
               case 'DatoCmsHero':
                 return (
-                  <Hero
-                    alt={heroAlt}
-                    title={heroTitle}
-                    subtitle={heroSubtitle}
-                  />
+                  <></>
                 );
               case 'DatoCmsSectionImageLeft':
                 return (
-                  <SectionWrapper>
-                    <SectionContainerFlexTwoCols>
-                      <ColumnFlexTwoCols hasImg>
-                        <img src={image.url} alt={image.alt} />
-                      </ColumnFlexTwoCols>
-                      <ColumnFlexTwoCols>
-                        <TextBox as="div">
-                          <HeadingMedium>{title}</HeadingMedium>
-                          <Paragraph as="div">
-                            <StructuredText
-                              data={text}
-                              renderLinkToRecord={({
-                                children,
-                                transformedMeta,
-                              }) => {
-                                switch (__typename) {
-                                  case 'page':
-                                    return (
-                                      <Navigator
-                                        {...transformedMeta}
-                                        page
-                                        to={slug}
-                                      >
-                                        {children}
-                                      </Navigator>
-                                    );
-                                  case 'home':
-                                    return (
-                                      <Navigator {...transformedMeta} home>
-                                        {children}
-                                      </Navigator>
-                                    );
-
-                                  default:
-                                    return null;
-                                }
-                              }}
-                            />
-                          </Paragraph>
-                        </TextBox>
-                      </ColumnFlexTwoCols>
-                    </SectionContainerFlexTwoCols>
-                  </SectionWrapper>
+                  <></>
                 );
               case 'DatoCmsSectionImageRight':
                 return (
-                  <SectionWrapper>
-                    <SectionContainerFlexTwoColsReverse>
-                      <ColumnFlexTwoCols>
-                        <TextBox as="div">
-                          <HeadingMedium>{title}</HeadingMedium>
-                          <Paragraph as="div">
-                            <StructuredText
-                              data={text}
-                              renderLinkToRecord={({
-                                children,
-                                transformedMeta,
-                              }) => {
-                                switch (__typename) {
-                                  case 'DatoCmsOtherPage':
-                                    return (
-                                      <Navigator
-                                        {...transformedMeta}
-                                        page
-                                        to={slug}
-                                      >
-                                        {children}
-                                      </Navigator>
-                                    );
-                                  case 'DatoCmsHomepage':
-                                    return (
-                                      <Navigator {...transformedMeta} home>
-                                        {children}
-                                      </Navigator>
-                                    );
-
-                                  default:
-                                    return null;
-                                }
-                              }}
-                            />
-                          </Paragraph>
-                        </TextBox>
-                      </ColumnFlexTwoCols>
-                      <ColumnFlexTwoCols hasImg>
-                        <img src={image.url} alt={image.alt} />
-                      </ColumnFlexTwoCols>
-                    </SectionContainerFlexTwoColsReverse>
-                  </SectionWrapper>
+                  <></>
                 );
               case 'DatoCmsThreeFeaturesSet':
                 return (
-                  <SectionWrapper>
-                    <SectionContainerGridThreeCols>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{firstFeatureTitle}</HeadingSmall>
-                        <Paragraph>{firstFeatureDescription}</Paragraph>
-                      </TextBox>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{secondFeatureTitle}</HeadingSmall>
-                        <Paragraph>{secondFeatureDescription}</Paragraph>
-                      </TextBox>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{thirdFeatureTitle}</HeadingSmall>
-                        <Paragraph>{thirdFeatureDescription}</Paragraph>
-                      </TextBox>
-                    </SectionContainerGridThreeCols>
-                  </SectionWrapper>
+                  <></>
                 );
               default:
                 return null;
