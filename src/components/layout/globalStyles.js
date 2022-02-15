@@ -93,6 +93,12 @@ const GlobalStyles = createGlobalStyle`
     address, time {
         font-style: normal;
     }
+
+    .container{
+        max-width: 1200px;
+        padding: 0 20px;
+        margin: 0 auto;
+    }
     `;
 
 export default GlobalStyles;

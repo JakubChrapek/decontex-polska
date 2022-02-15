@@ -6,9 +6,7 @@ import { LangContext } from '../../context/langProvider';
 import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
 import Navigator from '../langHelpers/navigator';
-import MobileMenu from './mobileMenu';
-import { Divider } from './sectionStyles';
-import HeaderWaves from '../vectors/bgWaves';
+import { StructuredText } from 'react-datocms';
 
 // Scoped styles
 
@@ -19,7 +17,8 @@ const HeaderWrapper = styled.header`
   flex-direction: column;
   width: 100%;
   height: 88px;
-  position: fixed;
+  position: absolute;
+  z-index: 110;
 `;
 
 const HeaderContainer = styled.div`
@@ -42,24 +41,26 @@ const NavList = styled.ul`
   display: grid;
   grid-auto-flow: column;
   column-gap: 48px;
-  & li a {
-    color: var(--headingsColor);
-    transition: color 0.1s linear;
-    font-weight: 600;
+  & li a p {
+    color: var(--primaryLight);
+    transition: all 0.1s linear;
+    font-weight: 500;
+    opacity: 0.56;
     &:hover {
-      color: var(--primaryColor);
+      opacity: 1;
+      /* color: var(--primaryColor); */
     }
   }
 
   &.right{
-    li a {
+    li a p {
       padding: 0 24px;
       background: #51B8EB;
       border-radius: 6px;
       display: block;
       height: 40px;
       line-height: 40px;
-      color: var(--primaryLight);
+      opacity: 1;
 
       &:hover{
         color: var(--headingsColor);
@@ -116,7 +117,9 @@ const Header = () => {
             links {
               id: originalId
               slug
-              name
+              name {
+                value
+              }
               ariaLabel
               locale
               originalId
@@ -125,7 +128,9 @@ const Header = () => {
               id: originalId
               slug
               originalId
-              name
+              name {
+                value
+              }
               locale
             }
           }
@@ -138,7 +143,7 @@ const Header = () => {
   const { defaultLanguage } = useLanguages()
   const { pathname } = useLocation()
 
-  const {allDatoCmsWebsiteSetting: { edges: settingsEdges }, allDatoCmsMenu: { edges: menuEdges }} = data
+  const { allDatoCmsWebsiteSetting: { edges: settingsEdges }, allDatoCmsMenu: { edges: menuEdges } } = data
 
   return (
     <HeaderWrapper>
@@ -179,7 +184,7 @@ const Header = () => {
                       }
                       aria-label={ariaLabel}
                     >
-                      {name}
+                      <StructuredText data={name} />
                     </Link>
                   </li>
                 ))
@@ -205,17 +210,14 @@ const Header = () => {
                         }
                         aria-label={ariaLabel}
                       >
-                        {name}
+                        <StructuredText data={name} />
                       </Link>
                     </li>
                   ))
                 )}
             </NavList>
           </Nav>
-          <VerticalDivider />
-          <MobileMenu />
         </HeaderRight>
-        <Divider bottom />
       </HeaderContainer>
 
     </HeaderWrapper>

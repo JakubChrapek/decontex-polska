@@ -3,10 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { StructuredText } from 'react-datocms';
 import { LangContext } from '../../context/langProvider';
-import { Paragraph } from './paragraphStyles';
-import { SectionWrapper, Divider } from './sectionStyles';
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.footer`
   display: flex;
   width: var(--globalContainer);
   flex-direction: row;
@@ -56,9 +54,8 @@ const Footer = () => {
   // } = data;
 
   return (
-    <SectionWrapper bg="var(--primaryDark)" as="footer">
-      <FooterContainer>
-        {/* {nodes
+    <FooterContainer>
+      {/* {nodes
           .filter(({ locale }) => locale === currentLanguage)
           .map(
             ({
@@ -69,16 +66,15 @@ const Footer = () => {
               <Fragment key={id}>
                 <Paragraph small centered as="div">
                   {/* <StructuredText data={textLeftValue} /> */}
-                {/* </Paragraph>
+      {/* </Paragraph>
                 <Paragraph small centered as="div"> */}
-                  {/* <StructuredText data={textRightValue} /> */}
-                {/* </Paragraph>
+      {/* <StructuredText data={textRightValue} /> */}
+      {/* </Paragraph>
               </Fragment> */}
-            {/* ) */}
-          {/* )} } */}
-          
-      </FooterContainer>
-    </SectionWrapper>
+      {/* ) */}
+      {/* )} } */}
+
+    </FooterContainer>
   );
 };
 

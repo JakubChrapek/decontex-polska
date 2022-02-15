@@ -2,8 +2,6 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import useLanguages from '../hooks/useLanguages';
 import PageWrapper from '../components/layout/pageWrapper';
-import Hero from '../components/layout/hero';
-import Navigator from '../components/langHelpers/navigator';
 import {
   storeLocale,
   getStoredLocale,
@@ -20,18 +18,6 @@ const NotFoundPage = () => {
     query {
       datoCmsSite {
         locales
-      }
-      allDatoCmsNotFoundPage {
-        nodes {
-          seo {
-            seoTitle: title
-            seoDescription: description
-          }
-          title
-          subtitle
-          backToHomeText
-          locale
-        }
       }
     }
   `);
@@ -153,17 +139,7 @@ const NotFoundPage = () => {
 
     return (
       <PageWrapper {...pageWrapper} notFoundPage noHeader noFooter>
-        <Hero
-          {...hero}
-          fullView
-          centered
-          button={
-            <Navigator
-              {...navigatorProps}
-              className="classicButton classicButtonOutline"
-            />
-          }
-        />
+        
       </PageWrapper>
     );
   }
