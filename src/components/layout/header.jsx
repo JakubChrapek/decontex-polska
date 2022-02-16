@@ -42,13 +42,10 @@ const NavList = styled.ul`
   grid-auto-flow: column;
   column-gap: 48px;
   & li a p {
-    color: var(--primaryLight);
-    transition: all 0.1s linear;
-    font-weight: 500;
-    opacity: 0.56;
+    color: var(--navText);
+    transition: all 0.1s linear; 
     &:hover {
-      opacity: 1;
-      /* color: var(--primaryColor); */
+      color: var(--navHover);
     }
   }
 
@@ -60,10 +57,9 @@ const NavList = styled.ul`
       display: block;
       height: 40px;
       line-height: 40px;
-      opacity: 1;
+      color: var(--navHover);
 
       &:hover{
-        color: var(--headingsColor);
       }
     }
   }

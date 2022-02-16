@@ -38,10 +38,6 @@ const Container = styled.div`
 
     h1{
         padding-top: 240px;
-        font-weight: bold;
-        font-size: 72px;
-        line-height: 75px;
-        color: var(--primaryLight);
     }
 
     div{
@@ -53,23 +49,26 @@ const Container = styled.div`
             margin-right: 16px;
 
             &.c0{
-                background-color: var(--primaryLight);
-                color: var(--primaryDark);
+                background-color: var(--mainLightText);
+                p{
+                    color: var(--buttonText);
+                }
             }
 
             &.c1{
-                color: var(--primaryLight);
-                border: 1px solid var(--primaryLight);
+                border: 1px solid var(--mainLightText);
+                p{
+                    color: var(--mainLightText);
+                }
             }
         }
     }
  `
 
  const Text = styled.p`
-    font-size: 20px;
-    line-height: 180%;
-    color: var(--primaryLight); 
     padding-top: 12px;
     padding-bottom: 24px;
-    opacity: 0.56;
+    font-size: 20px;
+    line-height: 180%;
+    color: var(--subLightText);
  `

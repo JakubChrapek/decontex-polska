@@ -1,19 +1,26 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
-import styled from 'styled-components';
 import Hero from '../components/layout/heroMainPage';
 import ImageWithoutButton from '../components/layout/imageWithOutButton';
+import Grid from '../components/layout/gridMainPage';
+import Advantages from '../components/layout/advantages';
+import Certificates from '../components/layout/certificates';
+import News from '../components/layout/news';
 
-const HomePageTemplate = ({data, pageContext}) => {
+const HomePageTemplate = ({ data, pageContext }) => {
   return (
     <PageWrapper
       pageData={pageContext}
       seoTitle={data.seoTitle}
       seoDescription={data.seoDescription}
     >
-      <Hero data={data.datoCmsHomepage.hero[0]}/>
-      <ImageWithoutButton data={data.datoCmsHomepage.imageFlex[0]}/>
+      <Hero data={data.datoCmsHomepage.hero[0]} />
+      <ImageWithoutButton data={data.datoCmsHomepage.imageFlex[0]} />
+      <Grid data={data.datoCmsHomepage.grid[0]} />
+      <Advantages data={data.datoCmsHomepage.advantages[0]} />
+      <Certificates data={data.datoCmsHomepage.certificates[0]} />
+      <News data={data.datoCmsHomepage.news[0]} />
     </PageWrapper>
   );
 };
@@ -52,9 +59,12 @@ query HomePage($locale: String!) {
         value
       }
     }
-    newsText
-    newsTitle {
-      value
+    news{
+      buttonText
+      text
+      title {
+        value
+      }
     }
     grid {
       mainTitle {
@@ -102,10 +112,12 @@ query HomePage($locale: String!) {
       }
       text
       listRight {
-        value
+        title
+        text
       }
       listLeft {
-        value
+        title
+        text
       }
     }
   }

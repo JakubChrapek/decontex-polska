@@ -13,67 +13,6 @@ exports.createPages = async ({ graphql, actions }) => {
    * and simplify the customization.
    */
 
-  // Colors - Begin
-
-  const {
-    data: { datoCmsWebsiteSetting: colorNodes },
-  } = await graphql(`
-    query {
-      datoCmsWebsiteSetting {
-        primaryColor {
-          hex
-        }
-        primaryDark {
-          hex
-        }
-        primaryLight {
-          hex
-        }
-        headingsColor {
-          hex
-        }
-        baseTextColor {
-          hex
-        }
-        baseTextColorDark {
-          hex
-        }
-        disabledColor {
-          hex
-        }
-        dividerColor {
-          hex
-        }
-        markColor {
-          hex
-        }
-      }
-    }
-  `);
-
-  // Query the settings model on DatoCMS and define a path to export the queried settings
-  const settingsPath = 'src/static';
-
-  // Create the path if it doesn't exist
-  if (!fs.existsSync(settingsPath)) fs.mkdirSync(settingsPath);
-
-  // Manipulate the final object
-  const objArr = Object.keys(colorNodes);
-  const colors = {};
-  objArr.forEach((color) => {
-    Object.defineProperty(colors, `${color}`, {
-      value: colorNodes[color].hex,
-      enumerable: true,
-    });
-  });
-
-  // Save the JSON file with css color variables
-  fs.writeFileSync(
-    `${settingsPath}/colors.json`,
-    JSON.stringify(colors, undefined, 2)
-  );
-
-  // Colors - End
 
   // Blog and pages generation
 

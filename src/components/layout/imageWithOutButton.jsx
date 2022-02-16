@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { StructuredText } from 'react-datocms';
-import Logo from "../vectors/logo";
+import { StructuredText } from 'react-datocms'
+import Logo from "../vectors/logo"
 
 const ImageWithoutButton = ({ data }) => {
     return (
@@ -14,7 +14,7 @@ const ImageWithoutButton = ({ data }) => {
                     <StructuredText data={data.title} />
                     <p>{data.text}</p>
 
-                    <h6><Logo />{data.bottomText}</h6>
+                    <h3><Logo />{data.bottomText}</h3>
                 </div>
             </Container>
         </Wrapper>
@@ -34,7 +34,7 @@ const Container = styled.div`
 
     img{
         border-radius: 16px;
-        box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px rgba(27, 53, 94, 1)' : '-32px 32px 0px 0px rgba(27, 53, 94, 1)' : null};
+        box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
     }
 
     .textPart{
@@ -52,7 +52,7 @@ const Container = styled.div`
             line-height: 180%;
         }
 
-        h6{
+        h3{
             padding-top: 48px;
             margin-top: 48px;
             position: relative;
@@ -75,7 +75,7 @@ const Container = styled.div`
                 right: 0;
                 width: 100%;
                 height: 1px;
-                background-color: rgba(18, 17, 39, 0.16);
+                background-color: var(--divider);
             }
         }
     }

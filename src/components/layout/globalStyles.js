@@ -1,33 +1,67 @@
 import { createGlobalStyle } from 'styled-components';
-import colors from '../../static/colors.json';
 
-const {
-  primaryColor,
-  primaryDark,
-  primaryLight,
-  headingsColor,
-  baseTextColor,
-  baseTextColorDark,
-  disabledColor,
-  dividerColor,
-  markColor,
-} = colors;
+
 
 const GlobalStyles = createGlobalStyle`
 
     :root {
         
         /* Colors */
-        --primaryColor: ${primaryColor};
-        --primaryDark: ${primaryDark};
-        --primaryLight: ${primaryLight};
-        --headingsColor: ${headingsColor};
-        --baseTextColor: ${baseTextColor};
-        --baseTextColorDark: ${baseTextColorDark};
-        --disabledColor: ${disabledColor};
-        --dividerColor: ${dividerColor};
-        --markColor: ${markColor};
+        --superDarkText: #0A101A;
+        --mainDarkText: rgba(20, 32, 51, 1);
+        --subDarkText: rgba(18, 17, 39, 0.72);
+        --mainLightText: rgba(255, 255, 255, 1);
+        --subLightText: rgba(255, 255, 255, 0.72);
+
+        --backgroundDark: #142033;
+        --backgroundMedium: #1B355E;
+        --backgroundLight: #335180; 
+        --backgroundBlue: #D5EBF4;
+        --backgroundGrey: #F4F6FB;
         
+        --buttonText: rgba(51, 81, 128, 1);
+        --navText: rgba(255, 255, 255, 0.72);
+        --navHover: rgba(255, 255, 255, 1);
+
+        --blackButtonBackground: #0A101A;
+
+        --active: rgba(81, 184, 235, 1);
+        --divider: rgba(18, 17, 39, 0.16);
+    }
+
+    h1{
+        font-weight: bold;
+        font-size: 72px;
+        line-height: 75px;
+        color: var(--mainLightText);
+    }
+
+    h2{
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 130%;
+        letter-spacing: -2px;
+        color: var(--mainDarkText);
+    }
+
+    h3{
+
+    }
+
+    h4{
+
+    }
+
+    h5{
+
+    }
+
+    h6{
+
+    }
+
+    p{
+        color: var(--subDarkText);
 
     }
 
@@ -96,7 +130,7 @@ const GlobalStyles = createGlobalStyle`
 
     .container{
         max-width: 1200px;
-        padding: 0 20px;
+        padding: 0 45px;
         margin: 0 auto;
     }
     `;
