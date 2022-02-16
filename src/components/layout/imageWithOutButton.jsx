@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms';
+import Logo from "../vectors/logo";
 
 const ImageWithoutButton = ({ data }) => {
-    debugger
     return (
         <Wrapper>
             <Container isImgBackground={data.isImgBackground} isImgRight={data.isImgRight} className="container">
@@ -13,7 +13,8 @@ const ImageWithoutButton = ({ data }) => {
                 <div className="textPart">
                     <StructuredText data={data.title} />
                     <p>{data.text}</p>
-                    <h6>{data.bottomText}</h6>
+
+                    <h6><Logo />{data.bottomText}</h6>
                 </div>
             </Container>
         </Wrapper>
@@ -55,6 +56,16 @@ const Container = styled.div`
             padding-top: 48px;
             margin-top: 48px;
             position: relative;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 180%;
+            font-family: 'IBM Plex Sans';
+            display: flex;
+            align-items: center;
+
+            svg{
+                margin-right: 12px;
+            }
 
             &::before{
                 content: "";
