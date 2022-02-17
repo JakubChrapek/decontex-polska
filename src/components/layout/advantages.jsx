@@ -36,7 +36,9 @@ export default Advantages
 
 const Wrapper = styled.section`
     background-color: var(--backgroundGrey);
-    padding: 120px 0 150px;
+    padding: 120px 0 134px;
+    max-width: 1920px;
+    margin: 0 auto;
 `
 
 const Container = styled.div`

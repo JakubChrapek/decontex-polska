@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import { motion } from "framer-motion";
@@ -8,14 +8,27 @@ import { useSwipeable } from "react-swipeable";
 const News = ({ data }) => {
     const [position, positionSet] = useState(0);
 
+    const [canRight, changeCanRight] = useState(true);
+    const [canLeft, changeCanLeft] = useState(false);
+
+    useEffect(() => {
+        if(position === 1){
+            changeCanRight(false)
+            changeCanLeft(true)
+        } else if(position === 0){
+            changeCanLeft(false)
+            changeCanRight(true)
+        }
+    }, [position])
+
     const handlers = useSwipeable({
         onSwipedLeft: () => {
-            if (position !== 1) {
+            if (canRight) {
                 positionSet(position + 1)
             }
         },
         onSwipedRight: () => {
-            if (position !== 0) {
+            if (canLeft) {
                 positionSet(position - 1)
             }
         },
@@ -39,27 +52,27 @@ const News = ({ data }) => {
                             <motion.div
                                 className="sliderItem"
                                 animate={{
-                                    left: `${position * -624}px`,
+                                    left: `${position * -573}px`,
                                 }} >
                             </motion.div>
                             <motion.div
                                 className="sliderItem"
                                 animate={{
-                                    left: `${position * -624}px`,
+                                    left: `${position * -573}px`,
                                 }} >
                             </motion.div>
                             <motion.div
                                 className="sliderItem"
                                 animate={{
-                                    left: `${position * -624}px`,
+                                    left: `${position * -573}px`,
                                 }} >
                             </motion.div>
                         </div>
                     </div>
                 </Slider>
                 <SliderControls>
-                    <button disabled={!position} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
-                    <button disabled={position} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
+                    <button disabled={!canLeft} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
+                    <button disabled={!canRight} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
                 </SliderControls>
             </Container>
         </Wrapper>
@@ -69,10 +82,12 @@ const News = ({ data }) => {
 export default News
 
 const Wrapper = styled.section`
-    margin-top: 160px;
     padding: 96px 0 126px;
     background-color: var(--backgroundGrey);
     overflow: hidden;
+    max-width: 1920px;
+    margin: 0 auto;
+    margin-top: 160px;
 `
 
 const Container = styled.div`
@@ -116,14 +131,15 @@ const Slider = styled.div`
     .slider{
 
         display: grid;
-        grid-template-columns: 588px 588px 588px;
+        grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);
         grid-column-gap: 36px;
         margin-top: 150px;
-        width: fit-content;
+        width: 100%;
+        overflow: hidden;
 
         .sliderItem{
             background-color: red;
-            height: 442px;
+            aspect-ratio: 1.33/1;
             border-radius: 15px;
             position: relative;
         }

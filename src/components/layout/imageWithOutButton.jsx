@@ -25,6 +25,8 @@ export default ImageWithoutButton
 
 const Wrapper = styled.section`
     padding-top: 160px;
+    max-width: 1920px;
+    margin: 0 auto;
 `
 
 const Container = styled.div`

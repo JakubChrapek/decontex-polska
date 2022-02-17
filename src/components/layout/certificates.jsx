@@ -26,6 +26,8 @@ export default Certificates
 
 const Wrapper = styled.section`
     padding: 160px 0 0 0; 
+    max-width: 1920px;
+    margin: 0 auto;
 `
 
 const Container = styled.div`

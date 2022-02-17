@@ -23,6 +23,8 @@ const Hero = ({ data }) => {
 export default Hero
 
 const Wrapper = styled.section`
+    max-width: 1920px;
+    margin: 0 auto;
     min-height: 750px;
     width: 100%;
     position: relative;
