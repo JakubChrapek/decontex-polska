@@ -247,8 +247,8 @@ exports.createPages = async ({ graphql, actions }) => {
           backgroundColor {
             backgroundColorHex: hex
           }
-          primaryColor {
-            primaryColorHex: hex
+          themeColor {
+            themeColorHex: hex
           }
         }
       }
@@ -264,7 +264,7 @@ exports.createPages = async ({ graphql, actions }) => {
       description,
       settingsLocale,
       backgroundColor: { backgroundColorHex },
-      primaryColor: { primaryColorHex },
+      themeColor: { themeColorHex },
     },
   ] = settingsNodes;
 
@@ -297,7 +297,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const commonManifestData = {
     background_color: backgroundColorHex,
-    theme_color: primaryColorHex,
+    theme_color: themeColorHex,
     display: 'standalone',
     icons: [
       {

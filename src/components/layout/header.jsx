@@ -41,9 +41,19 @@ const NavList = styled.ul`
   display: grid;
   grid-auto-flow: column;
   column-gap: 48px;
+  .other{
+    a p {
+      color: var(--subDarkText);
+      &:hover{
+        color: var(--mainDarkText);
+      }
+    }
+  }
   & li a p {
     color: var(--navText);
     transition: all 0.1s linear; 
+
+    
     &:hover {
       color: var(--navHover);
     }
@@ -170,7 +180,7 @@ const Header = () => {
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
                 links.map(({ id, slug, locale, ariaLabel, name }) => (
-                  <li key={id}>
+                  <li key={id} className={pathname === '/' || pathname === '/en' ? '' : 'other'}>
                     <Link
                       activeClassName="activeClassLink"
                       to={
