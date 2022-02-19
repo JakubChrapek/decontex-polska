@@ -47,6 +47,11 @@ const Container = styled.div`
             font-weight: bold;
             font-size: 40px;
             line-height: 110%;
+
+            mark{
+                background: inherit;
+                color: red;
+            }
         }
 
         p{
@@ -70,12 +75,17 @@ const Container = styled.div`
                 height: 40px;
                 line-height: 40px;
                 color: var(--navHover);
+                position: relative;
                 
                 mark{
                     color: var(--navHover);
                     border-radius: 8px;
                     background-color: var(--blackButtonBackground);
-
+                    display: block;
+                    position: absolute;
+                    padding: 0 24px;
+                    width: max-content;
+                    left: 0;
                 }
 
             }

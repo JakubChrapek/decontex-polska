@@ -7,6 +7,8 @@ import Hero from '../components/layout/hero'
 import Text from '../components/layout/text';
 import ImageWithButton from '../components/layout/imageWithButton';
 import ImageWithBackgroundWave from '../components/layout/imageWithBackgroundWave';
+import StagesWithInform from '../components/layout/stagesWithInform';
+import Faq from '../components/layout/faq';
 
 const OtherPageTemplate = ({
   data: {
@@ -34,13 +36,17 @@ const OtherPageTemplate = ({
           renderBlock={({ record }) => {
             switch (record.__typename) {
               case 'DatoCmsSectionHero':
-                return  <Hero data={record} />
+                return <Hero data={record} />
               case 'DatoCmsSectionText':
-                return <Text data={record}/>
+                return <Text data={record} />
               case 'DatoCmsSectionImageWithButton':
-                return <ImageWithButton data={record}/>
+                return <ImageWithButton data={record} />
               case 'DatoCmsSectionImageWithBackgroundWave':
-                return <ImageWithBackgroundWave data={record}/>
+                return <ImageWithBackgroundWave data={record} />
+              case 'DatoCmsSectionStagesWithInform':
+                return <StagesWithInform data={record} />
+              case 'DatoCmsSectionFaq':
+                return <Faq data={record} />
               default:
                 return null
             }
