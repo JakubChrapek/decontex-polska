@@ -9,11 +9,14 @@ const Hero = ({ data }) => {
       <Container className="container">
         <Content>
           <div>
-            <StructuredText data={data.title}/>
+            <StructuredText data={data.title} />
             <p>{data.text}</p>
           </div>
           <div>
-            <img src={data.img.url}/>
+            {data.img
+              ? <img src={data.img.url} />
+              : null
+            }
           </div>
         </Content>
       </Container>
@@ -27,7 +30,7 @@ export default Hero
 const Wrapper = styled.section`
     max-width: 1920px;
     margin: 0 auto;
-    min-height: 750px;
+    padding-bottom: 150px;
     width: 100%;
     position: relative;
     background-color: var(--backgroundGrey);
@@ -44,9 +47,10 @@ const Content = styled.div`
     padding-top: 240px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     div{
-      max-width: 562px;
+        max-width: 562px;
     }
     
 
@@ -59,9 +63,14 @@ const Content = styled.div`
         margin-bottom: 12px;
     }
 
+    p{
+        font-size: 20px;
+        line-height: 180%;
+    }
+
     img{
-      border-radius: 16px;
-      box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
+        border-radius: 16px;
+        box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
     }
 
  `

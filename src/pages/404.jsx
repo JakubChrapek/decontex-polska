@@ -139,7 +139,7 @@ const NotFoundPage = () => {
 
     return (
       <PageWrapper {...pageWrapper} notFoundPage noHeader noFooter>
-        
+        awdawd
       </PageWrapper>
     );
   }

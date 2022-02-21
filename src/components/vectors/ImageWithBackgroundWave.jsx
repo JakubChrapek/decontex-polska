@@ -16,7 +16,6 @@ const Wrapper = styled.svg`
     position: absolute;
     width: 100%;
     height: auto;
-    min-width: 1920px;
     left: 0;
     transform: translateY(-45%);
     top: 0;
