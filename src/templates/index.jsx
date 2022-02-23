@@ -15,12 +15,12 @@ const HomePageTemplate = ({ data, pageContext }) => {
       seoTitle={data.seoTitle}
       seoDescription={data.seoDescription}
     >
-      {/* <Hero data={data.datoCmsHomepage.hero[0]} />
+      <Hero data={data.datoCmsHomepage.hero[0]} />
       <ImageWithoutButton data={data.datoCmsHomepage.imageFlex[0]} />
       <Grid data={data.datoCmsHomepage.grid[0]} />
       <Advantages data={data.datoCmsHomepage.advantages[0]} />
       <Certificates data={data.datoCmsHomepage.certificates[0]} />
-      <News data={data.datoCmsHomepage.news[0]} /> */}
+      <News data={data.datoCmsHomepage.news[0]} />
     </PageWrapper>
   );
 };

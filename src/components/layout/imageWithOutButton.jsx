@@ -24,7 +24,7 @@ const ImageWithoutButton = ({ data }) => {
 export default ImageWithoutButton
 
 const Wrapper = styled.section`
-    padding-top: 160px;
+    padding-top: clamp(80px, 11.1vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 `
@@ -35,6 +35,9 @@ const Container = styled.div`
     flex-direction: ${props => props.isImgRight ? 'row-reverse' : 'row'};
 
     img{
+        margin-left: 32px;
+        margin-bottom: 32px;
+        margin-right: 35px;
         border-radius: 16px;
         box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
     }
@@ -78,6 +81,44 @@ const Container = styled.div`
                 width: 100%;
                 height: 1px;
                 background-color: var(--divider);
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column-reverse;
+
+        img{
+            max-width: 600px;
+            width: 100%;
+            margin: 50px auto 32px auto;
+            transform: translateX(16px);
+            display: block;
+        }
+
+        .textPart{
+            max-width: 632px;
+            margin: 0 auto;
+
+            h3{
+                margin-top: clamp(32px, 4.7vw, 48px);
+                padding-top: clamp(32px, 4.7vw, 48px);
+            }
+        }
+    }
+
+    @media (max-width: 480px){
+        .textPart{
+            h2{
+                font-size: 32px;
+            }
+
+            p{
+                font-size: 16px;
+            }
+
+            h3{
+                font-size: 14px;
             }
         }
     }

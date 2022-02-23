@@ -32,6 +32,14 @@ const Wrapper = styled.section`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media (max-width: 1024px){
+        min-height: 680px;
+    }
+    
+    @media (max-width: 480px){
+        min-height: 620px;
+    }
 `
 
 const Container = styled.div`
@@ -40,6 +48,10 @@ const Container = styled.div`
 
     h1{
         padding-top: 240px;
+
+        @media (max-width: 1024px){
+            font-size: clamp(36px, 8.3vw, 72px);
+        }
     }
 
     div{
@@ -65,12 +77,28 @@ const Container = styled.div`
             }
         }
     }
+
+    @media (max-width: 480px){
+        div{
+            display: grid;
+            grid-row-gap: 16px;
+
+            a{
+                text-align: center;
+            }
+        }
+    }
  `
 
- const Text = styled.p`
+const Text = styled.p`
     padding-top: 12px;
     padding-bottom: 24px;
     font-size: 20px;
     line-height: 180%;
     color: var(--subLightText);
+
+    
+    @media (max-width: 1024px){
+        font-size: clamp(16px, 2.3vw, 20px);
+    }
  `

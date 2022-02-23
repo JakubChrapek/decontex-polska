@@ -240,6 +240,7 @@ const SocialMedia = styled.ul`
   }
 
   @media (max-width: 480px){
+    margin-bottom: 16px;
     
     li{
       margin: 0 32px 0 0;
@@ -257,7 +258,6 @@ const Copyright = styled.p`
   }
 
   @media (max-width: 480px){
-    margin-bottom: 16px;
     text-align: left;
   }
 `
@@ -274,7 +274,7 @@ const CopyAndSocialWrapper = styled.div`
 
   @media (max-width: 480px){
     margin-top: 56px;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 `
 

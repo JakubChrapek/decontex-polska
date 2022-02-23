@@ -36,7 +36,8 @@ export default Advantages
 
 const Wrapper = styled.section`
     background-color: var(--backgroundGrey);
-    padding: 120px 0 134px;
+    padding-top: clamp(80px, 11.1vw, 160px);
+    padding-bottom: clamp(80px, 11.1vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 `
@@ -49,6 +50,7 @@ const Container = styled.div`
 
     p{
         margin-bottom: 56px;
+        font-size: 16px;
     }
 
     div{
@@ -74,6 +76,16 @@ const Container = styled.div`
             line-height: 180%;
         }
     }
+
+    @media (max-width: 1024px) {
+        h2{
+            font-size: clamp(32px, 5.2vw, 48px);
+        }
+
+        p{
+            font-size: 14px;
+        }
+    }
 `
 
 const Flex = styled.div`
@@ -84,5 +96,13 @@ const Flex = styled.div`
     div{
         max-width: 521px;
         width: 100%;
+    }
+
+    @media (max-width: 870px){
+        grid-template-columns: 1fr;
+
+        div{
+            max-width: unset;
+        }
     }
 `

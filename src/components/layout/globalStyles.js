@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
     h1{
         font-weight: bold;
         font-size: 72px;
-        line-height: 75px;
+        line-height: 100%;
         color: var(--mainLightText);
     }
 
@@ -133,6 +133,10 @@ const GlobalStyles = createGlobalStyle`
         max-width: 1220px;
         padding: 0 35px;
         margin: 0 auto;
+
+        @media (max-width: 480px){
+            padding: 0 16px;
+        }
     }
     `;
 

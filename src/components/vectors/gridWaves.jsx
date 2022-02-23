@@ -27,7 +27,9 @@ const Wrapper = styled.div`
     transform: translateX(-50%) translateY(100%) ;
     z-index: -1;
     
-    @media (min-width: 1440px) {
+    @media (max-width: 1024px) {
+        bottom: 50%;
+        height: 55%;
     }
 
     svg{
