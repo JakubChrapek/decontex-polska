@@ -16,6 +16,8 @@ import ImageWithTextBackground from '../components/layout/imageWithTextBackgroun
 import CustomContent from '../components/layout/customContent';
 import HeroPartner from '../components/layout/heroPartner';
 import PartnersContent from '../components/layout/partnersContent';
+import Kontakt from '../components/layout/kontakt';
+import HeroOrders from '../components/layout/heroOrders';
 
 const OtherPageTemplate = ({
   data: {
@@ -69,7 +71,9 @@ const OtherPageTemplate = ({
               case 'DatoCmsSectionPartnersContent':
                 return <PartnersContent data={record} />
               case 'DatoCmsSectionContactInformation':
-                return <></>
+                return <Kontakt data={record} />
+              case 'DatoCmsSectionHeroOrder':
+                return <HeroOrders data={record}/>
               default:
                 return null
             }
@@ -348,6 +352,20 @@ export const query = graphql`
           leftInform {
             value
           }
+          buttonText
+        }
+        ... on DatoCmsSectionHeroOrder {
+          __typename
+          id: originalId
+          title {
+            value
+          }
+          text
+          subText
+          img {
+            url
+          }
+          buttonText
         }
       }
     }

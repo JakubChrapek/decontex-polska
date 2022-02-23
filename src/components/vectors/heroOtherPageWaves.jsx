@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 const Waves = () => {
     return (
-        <Wrapper>
-            <svg viewBox="0 0 1440 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Wrapper className="wrapper">
+            <svg className="svg" viewBox="0 0 1440 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M-4.00012 104V0L1068.35 96.2C1231.73 110.912 1391.88 76.94 1532 0V104H-4.00012Z" fill="white" />
             </svg>
         </Wrapper>

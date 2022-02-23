@@ -3,84 +3,22 @@ import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
 import useLanguages from '../hooks/useLanguages';
 
-const BlogArchiveTemplate = ({
-   data,
-  // {
-    // datoCmsArchivePage: {
-    //   hero: [{ heroTitle, heroSubtitle }],
-    //   seo: { seoTitle, seoDescription },
-    // },
-    // allDatoCmsBlogPost: { blogPostNodes },
-    // datoCmsWebsiteSetting: { minsReadSuffix },
-  // },
-  pageContext,
-}) => {
+const BlogArchiveTemplate = ({ data, pageContext }) => {
   const { defaultLanguage, blogPath } = useLanguages();
-  const { pagesNumber, archivePageNumber, locale } = pageContext;
+  const { pagesNumber, archivePageNumber, locale } = pageContext; 
   return (
     <PageWrapper
       pageData={pageContext}
       seoTitle={data.seoTitle}
       seoDescription={data.seoDescription}
     >
-      {/* <SectionWrapper isBlog>
-        <SectionContainerGridThreeCols>
-          {blogPostNodes.map(
-            ({
-              id,
-              meta: { firstPublishedAt },
-              minutesOfReading,
-              cardImage,
-              title,
-              subtitle,
-              author,
-              slug,
-            }) => (
-              <ArticleCard
-                key={id}
-                date={firstPublishedAt}
-                time={`${minutesOfReading} ${minsReadSuffix}`}
-                cardImg={
-                  cardImage &&
-                  CardImgArtDir(
-                    cardImage.gatsbyImageData,
-                    cardImage.squaredImage,
-                    cardImage.alt
-                  )
-                }
-                title={title}
-                excerpt={subtitle}
-                authorImg={author?.picture.gatsbyImageData}
-                authorAltImg={author?.picture.alt}
-                authorName={author?.name}
-                slug={slug}
-              />
-            )
-          )}
-        </SectionContainerGridThreeCols>
-        <ArchiveNav>
-          <ArchiveList>
-            {Array.from({ length: pagesNumber }, (_, index) => (
-              <li key={`page_number${index + 1}`}>
-                <ArchiveListLink
-                  as={index === archivePageNumber - 1 ? 'span' : ''}
-                  to={
-                    locale === defaultLanguage &&
-                    index !== archivePageNumber - 1
-                      ? `/${blogPath}/${index === 0 ? '' : index + 1}`
-                      : locale !== defaultLanguage &&
-                        index !== archivePageNumber - 1
-                      ? `/${locale}/${blogPath}/${index === 0 ? '' : index + 1}`
-                      : '/'
-                  }
-                >
-                  {index + 1}
-                </ArchiveListLink>
-              </li>
-            ))}
-          </ArchiveList>
-        </ArchiveNav>
-      </SectionWrapper> */}
+      
+      {data.allDatoCmsBlogPost.blogPostNodes.map(
+        (el) => (
+          <>awda</>
+        )
+      )}
+
     </PageWrapper>
   );
 };

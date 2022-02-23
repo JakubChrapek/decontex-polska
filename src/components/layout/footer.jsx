@@ -43,7 +43,6 @@ const Footer = () => {
   `);
 
   const { currentLanguage } = useContext(LangContext);
-
   return (
     <Wrapper>
       <Container className='container'>
@@ -78,26 +77,28 @@ const Footer = () => {
               )}
           </ul>
         </Nav>
-        <SocialMedia>
-          {data.allDatoCmsFooter.nodes
-            .filter(el => el.locale === currentLanguage)
-            .map(el =>
-              el.socialMedia.map((innerEl, index) => (
-                <li>
-                  <a className={`c` + index} aria-label={innerEl.ariaLabel} href={innerEl.slug} key={el.id}>
-                    <img src={innerEl.icon.url} />
-                  </a>
-                </li>
-              ))
-            )}
-        </SocialMedia>
-        <Copyright>
-          {data.allDatoCmsFooter.nodes
-            .filter(el => el.locale === currentLanguage)
-            .map(el =>
-              <>{el.copyright}</>
-            )}
-        </Copyright>
+        <CopyAndSocialWrapper>
+          <SocialMedia>
+            {data.allDatoCmsFooter.nodes
+              .filter(el => el.locale === currentLanguage)
+              .map(el =>
+                el.socialMedia.map((innerEl, index) => (
+                  <li>
+                    <a className={`c` + index} aria-label={innerEl.ariaLabel} href={innerEl.slug} key={el.id}>
+                      <img src={innerEl.icon.url} />
+                    </a>
+                  </li>
+                ))
+              )}
+          </SocialMedia>
+          <Copyright>
+            {data.allDatoCmsFooter.nodes
+              .filter(el => el.locale === currentLanguage)
+              .map(el =>
+                <>{el.copyright}</>
+              )}
+          </Copyright>
+        </CopyAndSocialWrapper>
       </Container>
       <Waves />
     </Wrapper>
@@ -122,6 +123,12 @@ const Container = styled.div`
   h2{
     text-align: center;
   }
+
+  @media (max-width: 1024px){
+    h2{
+      font-size: clamp(24px, 5.2vw , 48px);
+    }
+  }
 `
 
 const Flex = styled.div`
@@ -132,12 +139,13 @@ const Flex = styled.div`
   a{
     padding: 14px 32px;
     border-radius: 8px;
-    margin-right: 16px;
+    margin: 0 8px;
 
     &.c0{
       background-color: var(--active);
       p{
         color: var(--mainLightText);
+        text-align: center;
       }
     }
 
@@ -145,7 +153,26 @@ const Flex = styled.div`
       border: 1px solid var(--divider);
       p{
         color: var(--mainDarkText);
+        text-align: center;
       }
+    }
+  }
+
+  @media (max-width: 1024px){
+    a{
+      padding: clamp(7px, 1.8vw, 14px) clamp(16px, 4.1vw, 32px);
+    }
+  }
+
+  @media (max-width: 480px){
+    margin-bottom: 160px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: 16px;
+
+    a{
+      display: block;
+      padding: 14px 32px;
     }
   }
 `
@@ -160,12 +187,31 @@ const Nav = styled.nav`
       a{
         p{
           color: var(--navText);
+          line-height: 180%;
           transition: all 0.1s linear; 
           &:hover {
             color: var(--navHover);
           }
+          strong{
+            font-weight: 400;
+          }
         }
       }
+    }
+  }
+
+  
+  @media (max-width: 1024px) {
+    ul{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 8px;
+    }
+  }
+
+  @media (max-width: 480px){
+    ul{
+      grid-template-columns: 1fr;
     }
   }
 `
@@ -173,6 +219,7 @@ const Nav = styled.nav`
 const SocialMedia = styled.ul`
   width: fit-content;
   margin: 32px auto 0;
+  
   li{
     display: inline;
     margin: 0 24px;
@@ -183,12 +230,52 @@ const SocialMedia = styled.ul`
       opacity: 1;
     }
   }
+
+  @media (max-width: 1024px) {
+    margin: 0;
+
+    li{
+      margin: 0 0 0 32px;
+    }
+  }
+
+  @media (max-width: 480px){
+    
+    li{
+      margin: 0 32px 0 0;
+    }
+  }
 `
 
 const Copyright = styled.p`
   margin-top: 32px;
   text-align: center;
   color: var(--navText);
+  
+  @media (max-width: 1024px) {
+    margin: 0;
+  }
+
+  @media (max-width: 480px){
+    margin-bottom: 16px;
+    text-align: left;
+  }
+`
+
+const CopyAndSocialWrapper = styled.div`
+  display: grid;
+
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-top: 75px;
+  }
+
+  @media (max-width: 480px){
+    margin-top: 56px;
+    flex-direction: column-reverse;
+  }
 `
 
 // {

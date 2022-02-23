@@ -23,14 +23,24 @@ const Wrapper = styled.div`
     max-width: 1920px;
     width: 100%;
     transform: translateX(-50%);
+    background-color: var(--backgroundDark);
     
     @media (min-width: 1440px) {
         transform: translateX(-50%) translateY(2vw);
     }
 
+    @media (max-width: 1024px) {
+        height: 120px;
+    }
+
+    @media (max-width: 480px) {
+        height: 240px;
+    }
+
     svg{
         position: absolute;
-        bottom: 0;
+        top: 0;
+        transform: translateY(-100%);
         width: 100%;
 
         path{

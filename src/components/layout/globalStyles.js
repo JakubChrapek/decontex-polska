@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
         --superDarkText: #0A101A;
         --mainDarkText: rgba(20, 32, 51, 1);
         --subDarkText: rgba(18, 17, 39, 0.72);
+        --formDarkText: rgba(18, 17, 39, 0.4);
         --mainLightText: rgba(255, 255, 255, 1);
         --subLightText: rgba(255, 255, 255, 0.72);
 
@@ -40,7 +41,7 @@ const GlobalStyles = createGlobalStyle`
         font-weight: bold;
         font-size: 48px;
         line-height: 130%;
-        letter-spacing: -2px;
+        letter-spacing: -1px;
         color: var(--mainDarkText);
     }
 
@@ -129,8 +130,8 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .container{
-        max-width: 1200px;
-        padding: 0 45px;
+        max-width: 1220px;
+        padding: 0 35px;
         margin: 0 auto;
     }
     `;
