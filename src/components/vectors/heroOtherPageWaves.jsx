@@ -24,4 +24,17 @@ const Wrapper = styled.div`
         position: absolute;
         bottom: 0;
     }
+
+    @media (max-width: 1024px) {
+        top: unset;
+        bottom: 0;
+        height: 30%;
+        background-color: #fff;
+
+        svg{
+            bottom: unset;
+            top: 0;
+            transform: translateY(-100%);
+        }
+    }
 `

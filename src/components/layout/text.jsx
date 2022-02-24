@@ -29,4 +29,11 @@ const Container = styled.div`
 
         letter-spacing: -1.5px;
     }
+
+    @media (max-width: 1024px) {
+        p{
+        font-size: clamp(18px, 3.14vw,32px);
+
+        }
+    }
 `
