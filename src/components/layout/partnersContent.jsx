@@ -14,7 +14,7 @@ const PartnersContent = ({ data }) => {
                                 <p>{el.text}</p>
                             </div>
                             <div className='right'>
-                                <StructuredText data={el.otherInform}/>
+                                <StructuredText data={el.otherInform} />
                             </div>
                         </li>
                     ))}
@@ -30,8 +30,7 @@ const Wrapper = styled.section`
     padding-top: 160px;
     max-width: 1920px;
     margin: 0 auto;
-    margin-bottom: 100px;
-
+    margin-bottom: clamp(72px, 9.3vw, 100px);
 `
 
 const Container = styled.div`
@@ -45,7 +44,7 @@ const Container = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 38px 73px;
+            padding: clamp(24px, 4.1vw, 58px) clamp(16px, 5.2vw, 73px);
             border-radius: 15px;
 
             h2{
@@ -64,8 +63,9 @@ const Container = styled.div`
 
             .left{
                 box-sizing: content-box;
-                width: 557px;
-                padding: 26px 100px 26px 0;
+                width: 80%;
+                padding: 26px 0;
+                padding-right: clamp(36px, 6.9vw, 100px);
                 position: relative;
 
                 &::after{
@@ -82,7 +82,35 @@ const Container = styled.div`
             .right{
                 box-sizing: content-box;
                 width: 223px;
-                padding-left: 100px;
+                padding-left: clamp(36px, 6.9vw, 100px);
+            }
+        }
+    }
+
+    @media (max-width: 660px) {
+        ul{
+            li{
+                flex-direction: column;
+                align-items: flex-start;
+
+                .right{
+                    padding-left: 0;
+                    padding-top: 16px;
+                }
+
+                .left{
+                    padding-top: 0;
+                    padding-bottom: 16px;
+                    padding-right: 0;
+                    width: 100%;
+
+                    &::after{
+                        top: unset;
+                        left: 0;
+                        width: unset;
+                        height: 1px;
+                    }
+                }
             }
         }
     }

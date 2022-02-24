@@ -37,7 +37,7 @@ const Price = ({ data }) => {
 export default Price
 
 const Wrapper = styled.section`
-    padding-top: 160px;
+    padding-top: clamp(80px, 20vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 
@@ -67,6 +67,20 @@ const Flex = styled.div`
         margin-left: 200px;
         font-size: 18px;
         line-height: 180%;
+    }
+
+    @media (max-width: 1024px) {
+        display: grid;
+        grid-row-gap: 24px;
+        margin-bottom: 40px;
+
+        h2{
+            font-size: clamp(32px, 5.2vw, 40px);
+        }
+
+        p{
+            margin-left: 0;
+        }
     }
 `
 
@@ -102,6 +116,7 @@ const Table = styled.ul`
                 line-height: 110%;
                 letter-spacing: -1px;
                 color: var(--superDarkText);
+                padding-right: 8px;
             }
 
             .price{
@@ -138,4 +153,21 @@ const Table = styled.ul`
             }
         }
     }
+
+    @media (max-width: 660px) {
+        li{
+            display: grid;
+            padding-top: 30px;
+            padding-bottom: 22px;
+
+            ul{
+                margin-top: 8px;
+            }
+
+            .price{
+                margin-top: 20px;
+            }
+        }
+    }
+    
 `

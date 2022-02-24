@@ -10,7 +10,7 @@ const HeroOrders = ({ data }) => {
         <Wrapper>
             <Container className="container">
                 <Content>
-                    <div>
+                    <div className='textPart'>
                         <StructuredText data={data.title} />
                         <p>{data.text}</p>
                         <h3><Logo />{data.subText}</h3>
@@ -33,7 +33,7 @@ export default HeroOrders
 const Wrapper = styled.section`
     max-width: 1920px;
     margin: 0 auto;
-    padding-bottom: 150px;
+    padding-bottom: 160px;
     width: 100%;
     position: relative;
     background-color: var(--backgroundGrey);
@@ -51,6 +51,10 @@ const Wrapper = styled.section`
         top: 0;
         transform: translateY(-100%);
     }
+
+    @media (max-width: 1024px) {
+        padding-top: clamp(72px, 13vw, 160px);
+    }
 `
 
 const Container = styled.div`
@@ -65,6 +69,10 @@ const Content = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .textPart{
+        margin-right: 35px;
+    }
 
     div{
         max-width: 562px;
@@ -104,6 +112,36 @@ const Content = styled.div`
     img{
         border-radius: 16px;
         box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
+        margin-right: 32px;
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        padding: 0;
+
+        div{
+            width: 90%;
+            max-width: 700px;
+        }
+
+        img{
+            max-width: 668px;
+            width: 90%;
+            margin: 50px 0 32px 0;
+            display: block;
+            
+        }
+
+        .textPart{
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            padding-left: 0;
+
+            h2{
+                font-size: clamp(32px, 5.7vw, 40px); 
+            }
+        }
     }
 
  `
@@ -112,6 +150,6 @@ const FormWrapper = styled.div`
     background: #FFFFFF;
     box-shadow: 0px 20px 50px rgba(18, 17, 39, 0.08);
     border-radius: 25px;
-    padding: 50px 90px;
+    padding: clamp(20px, 2vw, 26px)  clamp(20px, 5.2vw, 90px) clamp(44px, 2vw, 50px) clamp(20px, 5.2vw, 90px);
     margin-top: 200px;
 `

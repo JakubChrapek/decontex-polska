@@ -46,7 +46,6 @@ const OrdersForm = ({ buttonText }) => {
                 <span>Wysyłając wiadomość, akceptujesz <a href="#">Politykę prywatności</a></span>
             </label>
             <button className="button" type="submit" >{buttonText}</button>
-
         </Wrapper>
     )
 }
@@ -122,4 +121,11 @@ const Wrapper = styled.form`
 
         }
     }
+
+    @media (max-width: 660px) {
+        .grid{
+            grid-template-columns: 1fr;
+        }
+    }
+    
 `

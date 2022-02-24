@@ -21,7 +21,7 @@ const LinksToPrice = ({ data }) => {
                 <Grid>
                     {data.grid.map(el => (
                         <li>
-                            <img src={el.img.url}/>
+                            <img src={el.img.url} />
                             <p>{el.text}</p>
                         </li>
                     ))}
@@ -108,6 +108,28 @@ const Flex = styled.div`
             }
         }
     }
+
+    @media (max-width: 1024px) {
+        flex-direction: column-reverse;
+
+        img{
+            max-width: 668px;
+            width: 90%;
+            margin: 50px auto 32px auto;
+            display: block;
+            
+        }
+
+        .textPart{
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 0;
+
+            h2{
+                font-size: clamp(32px, 5.7vw, 40px); 
+            }
+        }
+    }
 `
 
 const Grid = styled.ul`
@@ -120,9 +142,11 @@ const Grid = styled.ul`
     li{
         box-shadow: 0px 20px 50px rgba(18, 17, 39, 0.08);
         border-radius: 15px;
+        max-width: 360px;
 
         img{
             width: 100%;
+            max-width: 360px;
         }
 
         p{
@@ -134,5 +158,15 @@ const Grid = styled.ul`
             text-align: center;
             color: var(--superDarkText);
         }
+    }
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        margin-top: clamp(70px, 10.4vw, 160px);
+    }
+
+    @media (max-width: 660px) {
+        grid-template-columns: 1fr;
     }
 `

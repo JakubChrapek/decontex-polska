@@ -20,15 +20,19 @@ const ImageWithTextBackground = ({ data }) => {
 export default ImageWithTextBackground
 
 const Wrapper = styled.section`
-    padding-top: 160px;
+    padding-top: clamp(80px, 10.2vw, 160px);
+    padding-bottom: clamp(80px, 12vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
-    padding-bottom: 160px;
 `
 
 const Container = styled.div`
     display: flex;
     justify-content: space-between;
+
+    img{
+        margin-right: 35px;
+    }
 
     div{
         background-color: var(--backgroundGrey);
@@ -69,6 +73,20 @@ const Container = styled.div`
                     letter-spacing: 0;
                 }
             }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column-reverse;
+        img{
+            max-width: fit-content;
+            width: 100%;
+            margin: 72px auto 0;
+        }
+
+        div{
+            max-width: 700px;
+            margin: 0 auto;
         }
     }
 `

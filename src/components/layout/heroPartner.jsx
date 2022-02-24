@@ -31,6 +31,11 @@ const Wrapper = styled.section`
     margin: 0 auto;
     width: 100%;
     position: relative;
+    padding-top: 200px;
+
+    @media (max-width: 1024px){
+        padding-top: 140px;
+    }
 `
 
 const Container = styled.div`
@@ -41,7 +46,6 @@ const Container = styled.div`
  `
 
 const Content = styled.div`
-    padding-top: 240px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 16px;
@@ -67,10 +71,8 @@ const Content = styled.div`
 
     .grid{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: calc(50% - 6px) calc(50% - 6px);
         grid-gap: 12px;
-
-
 
         div{
             background-color: var(--backgroundGrey);
@@ -81,6 +83,25 @@ const Content = styled.div`
 
             :last-child{
                 background-color: var(--superDarkText);
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+        grid-row-gap: 48px;
+
+        div{
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .grid{
+            div{
+                img{
+                    width: 100%;
+                }
             }
         }
     }

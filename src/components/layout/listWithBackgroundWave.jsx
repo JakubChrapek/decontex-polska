@@ -31,6 +31,10 @@ const Wrapper = styled.section`
     padding-bottom: 100px;
     padding-top: 60px;
 
+    @media (max-width: 1024px){
+        padding-bottom: 70px;
+    }
+
 `
 
 const Container = styled.div`
@@ -42,6 +46,12 @@ const Container = styled.div`
         font-size: 48px;
         line-height: 130%;
         letter-spacing: -1px;
+    }
+
+    @media (max-width: 1024px) {
+        h2{
+            font-size: clamp(32px, 5.2vw, 48px);
+        }
     }
 `
 
@@ -67,6 +77,10 @@ const Content = styled.div`
             left: 0;
             top: 2px;
         }
+    }
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
     }
 
 `

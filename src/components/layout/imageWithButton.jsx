@@ -42,6 +42,8 @@ const Container = styled.div`
     img{
         border-radius: 16px;
         box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
+        margin-left: ${props => props.isImgRight ? '35px' : '0'};
+        margin-right: ${props => props.isImgRight ? '0' : '35px'};
     }
 
     .textPart{
@@ -110,8 +112,8 @@ const Container = styled.div`
             max-width: 668px;
             width: 90%;
             margin: 50px auto 32px auto;
-            transform: translateX(16px);
             display: block;
+            
         }
 
         .textPart{
