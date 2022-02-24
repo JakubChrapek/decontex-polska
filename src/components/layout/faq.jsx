@@ -50,6 +50,10 @@ export default Faq
 
 const Wrapper = styled.section`
     padding: 100px 0 130px;
+
+    @media (max-width: 1024px) {
+        padding-bottom: clamp(65px, 13.9vw, 130px);
+    }
 `
 
 const Container = styled.div`
@@ -65,6 +69,12 @@ const Container = styled.div`
         letter-spacing: -1px;
     }
 
+    @media (max-width: 1024px) {
+        h2{
+            font-size: clamp(24px, 5.2vw, 48px); 
+        }
+        
+    }
 `
 
 const Questions = styled.div`
@@ -103,6 +113,9 @@ const Questions = styled.div`
 
         svg{
             height: 18px;
+            width: 14px;
+            position: absolute;
+            right: 0;
             transition: all .2s linear;
             margin-right: 8px;
         }
@@ -118,6 +131,7 @@ const Questions = styled.div`
 
             p{
                 color: var(--mainDarkText);
+                padding-right: 30px;
             }
 
         }

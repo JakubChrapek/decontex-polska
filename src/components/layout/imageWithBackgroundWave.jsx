@@ -8,11 +8,11 @@ const ImageWithBackgroundWave = ({ data }) => {
         <Wrapper>
             <Container className='container'>
                 <Content>
-                    <div><StructuredText data={data.textPart} /></div>
+                    <div className='left'><StructuredText data={data.textPart} /></div>
                     <div><img src={data.img.url} /></div>
                 </Content>
             </Container>
-            <Waves/>
+            <Waves />
         </Wrapper>
     )
 }
@@ -26,6 +26,11 @@ const Wrapper = styled.section`
     max-width: 1920px;
     margin: 0 auto;
     margin-top: 320px;
+
+    @media (max-width: 1024px) {
+        margin-top: clamp(180px, 31.4vw, 320px);
+        
+    }
 `
 
 const Container = styled.div`
@@ -60,6 +65,27 @@ const Content = styled.div`
             font-size: 18px;
             line-height: 180%;
             color: var(--subLightText);
+        }
+
+        &.left{
+            padding-right: 35px;
+        }
+    }
+
+    @media (max-width: 1024px){
+        flex-direction: column;
+        div{
+            max-width: 700px;
+            width: 100%;
+            
+            h2{
+                font-size: clamp(32px, 5.7vw, 40px); 
+            }
+
+            img{
+                width: 100%;
+                margin-top: 48px;
+            }
         }
     }
 `

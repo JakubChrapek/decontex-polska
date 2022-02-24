@@ -1,10 +1,46 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { StructuredText } from "react-datocms"
 import styled from "styled-components"
 import Waves from "../vectors/stagesWithInformWaves"
 import Logo from './../img/logo.png'
+import { motion } from "framer-motion"
+import { useSwipeable } from "react-swipeable"
+import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 
 const StagesWithInform = ({ data }) => {
+    const [position, positionSet] = useState(0);
+
+    const [canRight, changeCanRight] = useState(true)
+    const [canLeft, changeCanLeft] = useState(false)
+
+    useEffect(() => {
+        if (position != 0 && position != data.inform[0].grid.length - 1) {
+            changeCanLeft(true)
+            changeCanRight(true)
+        } else if (position === data.inform[0].grid.length - 1) {
+            changeCanRight(false)
+            changeCanLeft(true)
+        } else if (position === 0) {
+            changeCanLeft(false)
+            changeCanRight(true)
+        }
+    }, [position])
+
+    const handlers = useSwipeable({
+        onSwipedLeft: () => {
+            if (canRight) {
+                positionSet(position + 1)
+            }
+        },
+        onSwipedRight: () => {
+            if (canLeft) {
+                positionSet(position - 1)
+            }
+        },
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true
+    });
+
     return (
         <Wrapper>
             <Stages>
@@ -22,16 +58,20 @@ const StagesWithInform = ({ data }) => {
             <Inform>
                 <Container className="containerExpanded">
                     <StructuredText data={data.inform[0].title} />
-                    <Grid>
+                    <Grid itemCount={data.inform[0].grid.length}>
                         {data.inform[0].grid.map(el => (
-                            <div>
+                            <motion.div {...handlers} animate={{ left: `calc(${position} * (-100% - 35px))` }}>
                                 <span>
                                     <img src={el.icon.url} />
                                 </span>
                                 <StructuredText data={el.sText} />
-                            </div>
+                            </motion.div>
                         ))}
                     </Grid>
+                    <SliderControls>
+                        <button disabled={!canLeft} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
+                        <button disabled={!canRight} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
+                    </SliderControls>
                 </Container>
                 <Waves />
             </Inform>
@@ -68,6 +108,12 @@ const Inform = styled.div`
         letter-spacing: -1px;
         color: var(--mainLightText);
     }
+
+    @media(max-width: 1024px){
+        h2{
+            font-size: clamp(32px, 4.1vw, 40px);
+        }
+    }
 `
 
 const Container = styled.div`
@@ -91,6 +137,10 @@ const Container = styled.div`
         padding: 0 45px;
         margin: 0 auto;
 
+        @media (max-width: 660px) {
+            padding: 0 35px;
+            overflow: hidden;
+        }
     }
 `
 
@@ -118,12 +168,21 @@ const Content = styled.div`
         }
     }
 
+    @media(max-width: 1024px){
+        grid-template-columns: 1fr;
+    }
+
 `
 
 const Anotation = styled.div`
     padding-bottom: 240px;
     padding-top: 56px;
     text-align: right;
+
+    @media(max-width: 1024px){
+        padding-bottom: clamp(120px, 15.7vw, 240px);
+        text-align: left;
+    }
 `
 
 const Grid = styled.div`
@@ -169,4 +228,48 @@ const Grid = styled.div`
 
         }
     }
-` 
+
+    @media(max-width: 1024px){
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 660px) {
+        grid-template-columns: repeat(${props => props.itemCount}, 100%);
+        grid-column-gap: 35px;
+
+        div{
+            position: relative;
+            user-select: none;
+        }
+    }
+`
+
+const SliderControls = styled.div`
+    @media (min-width: 661px) {
+        display: none;
+    }
+    margin-top: 40px;
+    button{
+        margin-right: 16px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 1px solid var(--backgroundMedium);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid var(--mainLightText);
+        path{
+            stroke: var(--mainLightText);
+        }
+
+        &:disabled{
+            border: 1px solid var(--divider);
+
+            path{
+                stroke: var(--divider);
+            }
+        }
+    }
+`

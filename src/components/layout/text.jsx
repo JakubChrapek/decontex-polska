@@ -32,8 +32,9 @@ const Container = styled.div`
 
     @media (max-width: 1024px) {
         p{
-        font-size: clamp(18px, 3.14vw,32px);
-
+            font-size: clamp(18px, 3.14vw,32px);
+            max-width: 700px;
+            margin: 0 auto;
         }
     }
 `

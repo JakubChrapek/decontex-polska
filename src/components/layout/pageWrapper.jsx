@@ -28,7 +28,7 @@ const PageWrapper = ({
 
     {noHeader || <Header />}
     <main>{children}</main>
-    {/* {noFooter || <Footer />} */}
+    {noFooter || <Footer />}
   </LangProvider>
 );
 

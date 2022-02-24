@@ -91,18 +91,16 @@ const Content = styled.div`
       div{
         max-width: 700px;
         width: 100%;
-        margin-right: 32px;
 
         &.left{
           padding: 0;
-          margin-right: 0;
         }
       }
 
       img{
         margin-top: 48px;
         max-width: 668px;
-        width: 100%;
+        width: 90%;
       }
     }
 

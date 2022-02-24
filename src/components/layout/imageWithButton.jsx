@@ -27,6 +27,11 @@ const Wrapper = styled.section`
     padding-top: 160px;
     max-width: 1920px;
     margin: 0 auto;
+
+    @media (max-width: 1024px){
+        padding-top: clamp(72px, 13vw, 160px);
+
+    }
 `
 
 const Container = styled.div`
@@ -42,6 +47,9 @@ const Container = styled.div`
     .textPart{
         max-width: 552px;
         width: 100%;
+        padding-left: ${props => props.isImgRight ? '0' : '35px'};
+        padding-right: ${props => props.isImgRight ? '35px' : '0'};
+
         h2{
             padding-bottom: 20px;
             font-weight: bold;
@@ -91,6 +99,28 @@ const Container = styled.div`
             }
             
             &:hover{
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column-reverse;
+
+        img{
+            max-width: 668px;
+            width: 90%;
+            margin: 50px auto 32px auto;
+            transform: translateX(16px);
+            display: block;
+        }
+
+        .textPart{
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 0;
+
+            h2{
+                font-size: clamp(32px, 5.7vw, 40px); 
             }
         }
     }
