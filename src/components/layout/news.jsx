@@ -4,8 +4,10 @@ import { StructuredText } from 'react-datocms'
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { useSwipeable } from "react-swipeable";
+import { Link } from "gatsby"
 
-const News = ({ data }) => {
+const News = ({ data, posts }) => {
+    debugger
     const [position, positionSet] = useState(0);
 
     const [canRight, changeCanRight] = useState(true);
@@ -13,7 +15,7 @@ const News = ({ data }) => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            if (position === (window.innerWidth <= 840 ? 2 : 1)) {
+            if (position === (window.innerWidth <= 660 ? 2 : 1)) {
                 changeCanRight(false)
                 changeCanLeft(true)
             } else if (position === 0) {
@@ -39,36 +41,34 @@ const News = ({ data }) => {
     });
 
     return (
-        <Wrapper>
+        <Wrapper isMainPage={data.title}>
             <Container className="container">
                 <Flex>
                     <span>
-                        <StructuredText data={data.title} />
-                        <p>{data.text}</p>
+                        {data.title
+                            ? <StructuredText data={data.title} />
+                            : <h2>{data}</h2>}
+                        {data.text
+                            ? <p>{data.text}</p>
+                            : null}
                     </span>
-                    <a href='#'>{data.buttonText}</a>
+                    {data.buttonText
+                        ? <Link to='#'>{data.buttonText}</Link>
+                        : null}
+
                 </Flex>
-                <Slider>
+                <Slider isMainPage={data.title}>
                     <div {...handlers}>
                         <div className="slider">
-                            <motion.div
-                                className="sliderItem"
-                                animate={{
-                                    left: `calc(${position} * (-100% - 36px))`,
-                                }} >
-                            </motion.div>
-                            <motion.div
-                                className="sliderItem"
-                                animate={{
-                                    left: `calc(${position} * (-100% - 36px))`,
-                                }} >
-                            </motion.div>
-                            <motion.div
-                                className="sliderItem"
-                                animate={{
-                                    left: `calc(${position} * (-100% - 36px))`,
-                                }} >
-                            </motion.div>
+                            {posts.map(el =>
+                                <motion.div
+                                    className="sliderItem"
+                                    animate={{
+                                        left: `calc(${position} * (-100% - 36px))`,
+                                    }} >
+                                        {el.title}
+                                </motion.div>
+                            )}
                         </div>
                     </div>
                 </Slider>
@@ -84,12 +84,15 @@ const News = ({ data }) => {
 export default News
 
 const Wrapper = styled.section`
-    padding: 96px 0 126px;
-    background-color: var(--backgroundGrey);
+    padding-bottom: 126px;  
+    padding-top: ${props => props.isMainPage ? '96px' : '0'};
+    background-color: ${props => props.isMainPage ? 'var(--backgroundGrey)' : null};
     overflow: hidden;
     max-width: 1920px;
     margin: 0 auto;
     margin-top: clamp(80px, 11.1vw, 160px);
+    position: relative;
+    z-index: 2;
 
     @media (max-width: 1024px) {
         padding: clamp(72px, 9.41vw, 128px) 0;
@@ -170,7 +173,7 @@ const Slider = styled.div`
         display: grid;
         grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);
         grid-column-gap: 36px;
-        margin-top: 150px;
+        margin-top: ${props => props.isMainPage ? '150px' : '48px'};
         width: 100%;
         overflow: hidden;
 
@@ -189,7 +192,7 @@ const Slider = styled.div`
             
         }
 
-        @media (max-width: 580px) {
+        @media (max-width: 660px) {
             grid-template-columns:  repeat(3, 100%);
 
         }

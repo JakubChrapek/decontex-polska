@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { StructuredText } from 'react-datocms';
 import { LangContext } from '../../context/langProvider';
 import Waves from '../vectors/footerWaves';
+import { Link } from "gatsby"
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -56,9 +57,9 @@ const Footer = () => {
             .filter(el => el.locale === currentLanguage)
             .map(el =>
               el.buttons.map((innerEl, index) => (
-                <a className={`c` + index} aria-label={innerEl.ariaLabel} href={innerEl.slug} key={el.id}>
+                <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
                   <StructuredText data={innerEl.name} />
-                </a>
+                </Link>
               ))
             )}
         </Flex>
@@ -69,9 +70,9 @@ const Footer = () => {
               .map(el =>
                 el.navigation.map((innerEl, index) => (
                   <li>
-                    <a className={`c` + index} aria-label={innerEl.ariaLabel} href={innerEl.slug} key={el.id}>
+                    <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
                       <StructuredText data={innerEl.name} />
-                    </a>
+                    </Link>
                   </li>
                 ))
               )}
@@ -84,9 +85,9 @@ const Footer = () => {
               .map(el =>
                 el.socialMedia.map((innerEl, index) => (
                   <li>
-                    <a className={`c` + index} aria-label={innerEl.ariaLabel} href={innerEl.slug} key={el.id}>
+                    <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
                       <img src={innerEl.icon.url} />
-                    </a>
+                    </Link>
                   </li>
                 ))
               )}

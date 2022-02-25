@@ -1,6 +1,7 @@
 import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
+import { Link } from "gatsby"
 
 const LinksToPrice = ({ data }) => {
     return (
@@ -14,7 +15,7 @@ const LinksToPrice = ({ data }) => {
                         <StructuredText data={data.imageWithButton[0].title} />
                         <p>{data.imageWithButton[0].text}</p>
                         {data.imageWithButton[0].button.map(el => (
-                            <a href={el.slug} aria-label={el.ariaLabel}><StructuredText data={el.name} /></a>
+                            <Link to={el.slug} aria-label={el.ariaLabel}><StructuredText data={el.name} /></Link>
                         ))}
                     </div>
                 </Flex>

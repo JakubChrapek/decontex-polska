@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import Waves from "../vectors/gridWaves"
+import { Link } from "gatsby"
 
 const Grid = ({ data }) => {
     return (
@@ -16,9 +17,9 @@ const Grid = ({ data }) => {
                         <StructuredText data={data.subTitle} />
                         <p className="subText">{data.subText}</p>
                         {data.link.map(el => (
-                            <a className="link" href={el.slug} aria-label={el.ariaLabel}>
+                            <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
                                 <StructuredText data={el.name} />
-                            </a>
+                            </Link>
                         ))}
                     </div>
                     <div className="right">
@@ -45,9 +46,9 @@ const Grid = ({ data }) => {
                             <StructuredText data={data.subTitle} />
                             <p className="subText">{data.subText}</p>
                             {data.link.map(el => (
-                                <a className="link" href={el.slug} aria-label={el.ariaLabel}>
+                                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
                                     <StructuredText data={el.name} />
-                                </a>
+                                </Link>
                             ))}
                         </div>
                         <img className="thirdImg" src={data.thirdImg.url} />

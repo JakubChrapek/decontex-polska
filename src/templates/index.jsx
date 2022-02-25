@@ -9,6 +9,7 @@ import Certificates from '../components/layout/certificates';
 import News from '../components/layout/news';
 
 const HomePageTemplate = ({ data, pageContext }) => {
+  debugger
   return (
     <PageWrapper
       pageData={pageContext}
@@ -20,7 +21,7 @@ const HomePageTemplate = ({ data, pageContext }) => {
       <Grid data={data.datoCmsHomepage.grid[0]} />
       <Advantages data={data.datoCmsHomepage.advantages[0]} />
       <Certificates data={data.datoCmsHomepage.certificates[0]} />
-      <News data={data.datoCmsHomepage.news[0]} />
+      <News data={data.datoCmsHomepage.news[0]} posts={data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)} />
     </PageWrapper>
   );
 };
@@ -29,6 +30,34 @@ export default HomePageTemplate;
 
 export const query = graphql`
 query HomePage($locale: String!) {
+  allDatoCmsBlogPost(
+      sort: { order: ASC, fields: meta___firstPublishedAt }
+      filter: { locale: { eq: $locale } }
+    ) {
+      blogPostNodes: nodes {
+        featuredInHomepage
+        id: originalId
+        meta {
+          firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
+        }
+        minutesOfReading
+        cardImage {
+          url
+          alt
+        }
+        coverImage {
+          url
+          alt
+        }
+        category {
+          name
+        }
+        subtitle
+        title
+        slug
+        reference
+      }
+    }
   datoCmsHomepage(locale: { eq: $locale }) {
     locale
     hero {

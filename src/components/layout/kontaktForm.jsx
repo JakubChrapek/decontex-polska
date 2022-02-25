@@ -1,6 +1,7 @@
 import React from "react"
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { Link } from "gatsby"
 
 const KontaktForm = ({buttonText}) => {
     const { register, handleSubmit } = useForm();
@@ -29,7 +30,7 @@ const KontaktForm = ({buttonText}) => {
             </label>
             <label className="checkbox">
                 <input type='checkbox' />
-                <span>Wysyłając wiadomość, akceptujesz <a href="#">Politykę prywatności</a></span>
+                <span>Wysyłając wiadomość, akceptujesz <Link to="#">Politykę prywatności</Link></span>
             </label>
             <button className="button" type="submit" >{buttonText }</button>
 

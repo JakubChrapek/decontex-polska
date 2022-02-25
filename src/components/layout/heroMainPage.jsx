@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Waves from "../vectors/heroMainPageWaves"
 import { StructuredText } from 'react-datocms'
+import { Link } from "gatsby"
 
 const Hero = ({ data }) => {
     return (
@@ -11,7 +12,7 @@ const Hero = ({ data }) => {
                 <Text>{data.text}</Text>
                 <div>
                     {data.buttons.map((el, index) => (
-                        <a className={'c' + index} href={el.slug} aria-label={el.ariaLabel}><StructuredText data={el.name} /></a>
+                        <Link className={'c' + index} to={el.slug} aria-label={el.ariaLabel}><StructuredText data={el.name} /></Link>
                     ))}
                 </div>
             </Container>
