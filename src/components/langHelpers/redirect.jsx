@@ -34,6 +34,7 @@ const Trigger = ({ setMounted }) => {
   useEffect(() => {
     (async () => {
       try {
+        return;
         const {
           datoCmsSite: { locales },
         } = data;

@@ -53,22 +53,31 @@ const News = ({ data, posts }) => {
                             : null}
                     </span>
                     {data.buttonText
-                        ? <Link to='#'>{data.buttonText}</Link>
+                        ? <Link to='blog'>{data.buttonText}</Link>
                         : null}
 
                 </Flex>
                 <Slider isMainPage={data.title}>
                     <div {...handlers}>
                         <div className="slider">
-                            {posts.map(el =>
-                                <motion.div
-                                    className="sliderItem"
-                                    animate={{
-                                        left: `calc(${position} * (-100% - 36px))`,
-                                    }} >
-                                        {el.title}
-                                </motion.div>
-                            )}
+                            {posts.map((el, index) => (
+                                index <= 2
+                                    ? <Link to={'blog/' + el.slug}>
+                                        <motion.div
+                                            className="sliderItem"
+                                            animate={{
+                                                left: `calc(${position} * (-100% - 36px))`,
+                                            }} >
+                                            <div>
+                                                <span>{el.category.name}</span>
+                                                <p className='title'>{el.title}</p>
+                                                <p className='date'>{el.subtitle}</p>
+                                            </div>
+                                            <img src={el.coverImage.url} />
+                                        </motion.div>
+                                    </Link>
+                                    : null
+                            ))}
                         </div>
                     </div>
                 </Slider>
@@ -178,10 +187,50 @@ const Slider = styled.div`
         overflow: hidden;
 
         .sliderItem{
-            background-color: red;
             aspect-ratio: 1.33/1;
             border-radius: 15px;
             position: relative;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+
+            div{
+                position: absolute;
+                bottom: 0;
+                padding: 60px 26px;
+
+            span{
+                background-color: var(--mainLightText);
+                color: var(--active);
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .title{
+                color: var(--mainLightText);
+                margin: 26px 0 16px 0;
+                text-align: left;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 110%;
+                letter-spacing: 0px;
+            }
+
+            .date{
+                font-size: 16px;
+                line-height: 180%;
+                color: var(--subLightText);
+                text-align: left;
+
+            }
+        }
+
+        img{
+            width: 100%;
+            height: 100%;   
+            position: absolute;
+            border-radius: 15px;
+            z-index: -1;
+        }
+
         }
         @media (max-width: 1024px){
             margin-top: 48px;
