@@ -46,18 +46,23 @@ const Footer = () => {
   const { currentLanguage } = useContext(LangContext);
   return (
     <Wrapper>
-      <Container className='container'>
+      <Container className="container">
         {data.allDatoCmsFooter.nodes
-          .filter(el => el.locale === currentLanguage)
-          .map(el =>
+          .filter((el) => el.locale === currentLanguage)
+          .map((el) => (
             <StructuredText data={el.title} />
-          )}
+          ))}
         <Flex>
           {data.allDatoCmsFooter.nodes
-            .filter(el => el.locale === currentLanguage)
-            .map(el =>
+            .filter((el) => el.locale === currentLanguage)
+            .map((el) =>
               el.buttons.map((innerEl, index) => (
-                <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
+                <Link
+                  className={`c` + index}
+                  aria-label={innerEl.ariaLabel}
+                  to={`/${innerEl.slug}`}
+                  key={el.id}
+                >
                   <StructuredText data={innerEl.name} />
                 </Link>
               ))
@@ -66,11 +71,16 @@ const Footer = () => {
         <Nav>
           <ul>
             {data.allDatoCmsFooter.nodes
-              .filter(el => el.locale === currentLanguage)
-              .map(el =>
+              .filter((el) => el.locale === currentLanguage)
+              .map((el) =>
                 el.navigation.map((innerEl, index) => (
                   <li>
-                    <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
+                    <Link
+                      className={`c` + index}
+                      aria-label={innerEl.ariaLabel}
+                      to={`/${innerEl.slug}`}
+                      key={el.id}
+                    >
                       <StructuredText data={innerEl.name} />
                     </Link>
                   </li>
@@ -81,11 +91,16 @@ const Footer = () => {
         <CopyAndSocialWrapper>
           <SocialMedia>
             {data.allDatoCmsFooter.nodes
-              .filter(el => el.locale === currentLanguage)
-              .map(el =>
+              .filter((el) => el.locale === currentLanguage)
+              .map((el) =>
                 el.socialMedia.map((innerEl, index) => (
                   <li>
-                    <Link className={`c` + index} aria-label={innerEl.ariaLabel} to={innerEl.slug} key={el.id}>
+                    <Link
+                      className={`c` + index}
+                      aria-label={innerEl.ariaLabel}
+                      to={innerEl.slug}
+                      key={el.id}
+                    >
                       <img src={innerEl.icon.url} />
                     </Link>
                   </li>
@@ -94,10 +109,10 @@ const Footer = () => {
           </SocialMedia>
           <Copyright>
             {data.allDatoCmsFooter.nodes
-              .filter(el => el.locale === currentLanguage)
-              .map(el =>
+              .filter((el) => el.locale === currentLanguage)
+              .map((el) => (
                 <>{el.copyright}</>
-              )}
+              ))}
           </Copyright>
         </CopyAndSocialWrapper>
       </Container>
