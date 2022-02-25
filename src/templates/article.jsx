@@ -72,7 +72,6 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                   }
                 }}
                 renderInlineRecord={({ record }) => {
-                  debugger
                   switch (record.__typename) {
                     case 'DatoCmsOtherPage':
                       return (

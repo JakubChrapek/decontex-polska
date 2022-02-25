@@ -7,7 +7,6 @@ import { useSwipeable } from "react-swipeable";
 import { Link } from "gatsby"
 
 const News = ({ data, posts }) => {
-    debugger
     const [position, positionSet] = useState(0);
 
     const [canRight, changeCanRight] = useState(true);
@@ -41,53 +40,65 @@ const News = ({ data, posts }) => {
     });
 
     return (
-        <Wrapper isMainPage={data.title}>
-            <Container className="container">
-                <Flex>
-                    <span>
-                        {data.title
-                            ? <StructuredText data={data.title} />
-                            : <h2>{data}</h2>}
-                        {data.text
-                            ? <p>{data.text}</p>
-                            : null}
-                    </span>
-                    {data.buttonText
-                        ? <Link to='blog'>{data.buttonText}</Link>
-                        : null}
-
-                </Flex>
-                <Slider isMainPage={data.title}>
-                    <div {...handlers}>
-                        <div className="slider">
-                            {posts.map((el, index) => (
-                                index <= 2
-                                    ? <Link to={'blog/' + el.slug}>
-                                        <motion.div
-                                            className="sliderItem"
-                                            animate={{
-                                                left: `calc(${position} * (-100% - 36px))`,
-                                            }} >
-                                            <div>
-                                                <span>{el.category.name}</span>
-                                                <p className='title'>{el.title}</p>
-                                                <p className='date'>{el.subtitle}</p>
-                                            </div>
-                                            <img src={el.coverImage.url} />
-                                        </motion.div>
-                                    </Link>
-                                    : null
-                            ))}
+      <Wrapper isMainPage={data.title}>
+        <Container className="container">
+          <Flex>
+            <span>
+              {data.title ? (
+                <StructuredText data={data.title} />
+              ) : (
+                <h2>{data}</h2>
+              )}
+              {data.text ? <p>{data.text}</p> : null}
+            </span>
+            {data.buttonText ? <Link to="blog">{data.buttonText}</Link> : null}
+          </Flex>
+          <Slider isMainPage={data.title}>
+            <div {...handlers}>
+              <div className="slider">
+                {posts.map((el, index) =>
+                  index <= 2 ? (
+                    <Link to={`/blog/${el.slug}`}>
+                      <motion.div
+                        className="sliderItem"
+                        animate={{
+                          left: `calc(${position} * (-100% - 36px))`,
+                        }}
+                      >
+                        <div>
+                          <span>{el.category.name}</span>
+                          <p className="title">{el.title}</p>
+                          <p className="date">{el.subtitle}</p>
                         </div>
-                    </div>
-                </Slider>
-                <SliderControls>
-                    <button disabled={!canLeft} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
-                    <button disabled={!canRight} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
-                </SliderControls>
-            </Container>
-        </Wrapper>
-    )
+                        <img src={el.coverImage.url} />
+                      </motion.div>
+                    </Link>
+                  ) : null
+                )}
+              </div>
+            </div>
+          </Slider>
+          <SliderControls>
+            <button
+              disabled={!canLeft}
+              onClick={() => {
+                positionSet(position - 1);
+              }}
+            >
+              <ArrowLeft />
+            </button>
+            <button
+              disabled={!canRight}
+              onClick={() => {
+                positionSet(position + 1);
+              }}
+            >
+              <ArrowRight />
+            </button>
+          </SliderControls>
+        </Container>
+      </Wrapper>
+    );
 }
 
 export default News
