@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
 import useLanguages from '../hooks/useLanguages';
@@ -6,16 +6,25 @@ import styled from 'styled-components';
 import { ArrowRight } from '../components/vectors/arrows';
 import { Link } from "gatsby"
 
-const BlogArchiveTemplate = ({ data, pageContext }) => {
+const BlogArchiveTemplate = (props) => {
+  debugger
   const { defaultLanguage, blogPath } = useLanguages();
-  const { pagesNumber, archivePageNumber, locale } = pageContext;
+  const { pagesNumber, archivePageNumber, locale } = props.pageContext;
 
-  let choosenPosts = data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)
+  let choosenPosts = props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)
 
-  const [preFiltredPosts, changePreFiltredPosts] = useState(data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
+  const [preFiltredPosts, changePreFiltredPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
   const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts)
 
+  useEffect(() => {
+    if (props.location.state != null) {
+      document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
+      document.querySelector('.' + props.location.state.category).classList.add('active')
+    }
+  }, [])
+
   function filter(type) {
+    debugger
     if (type === 'all') {
       changeFiltredPosts(preFiltredPosts)
     } else {
@@ -29,15 +38,15 @@ const BlogArchiveTemplate = ({ data, pageContext }) => {
 
   return (
     <PageWrapper
-      pageData={pageContext}
-      seoTitle={data.datoCmsArchivePage.seo.seoTitle}
-      seoDescription={data.datoCmsArchivePage.seo.seoDescription}
+      pageData={props.pageContext}
+      seoTitle={props.data.datoCmsArchivePage.seo.seoTitle}
+      seoDescription={props.data.datoCmsArchivePage.seo.seoDescription}
     >
       <Wrapper>
         <Container className="container">
           <Hero>
-            <h1>{choosenPosts[0].title}</h1>
-            <p>{choosenPosts[0].subtitle}</p>
+            <h1>{choosenPosts[0].featuredTitle}</h1>
+            <p>{choosenPosts[0].featuredText}</p>
             <div className='imageBox'>
               <div>
                 <span>{choosenPosts[0].category.name}</span>
@@ -48,11 +57,19 @@ const BlogArchiveTemplate = ({ data, pageContext }) => {
             </div>
           </Hero>
           <Controls>
-            <h2>{data.datoCmsArchivePage.locale === 'pl' ? 'Wybierz kategorie' : 'Choose category'}</h2>
+            <h2>{props.data.datoCmsArchivePage.locale === 'pl' ? 'Wybierz kategorie' : 'Choose category'}</h2>
             <ul>
-              <li onClick={() => { filter('all') }} className='active all filterItem'>{data.datoCmsArchivePage.locale === 'pl' ? 'Wszystkie' : 'All'}</li>
-              {data.allDatoCmsCategory.nodes.map(el => (
-                <li className={el.name.replace(/\s/g, '') + ' filterItem'} onClick={() => { filter(el.name) }}>{el.name}</li>
+              <li
+                onClick={() => { filter('all') }}
+                className={'all filterItem active'}>
+                {props.data.datoCmsArchivePage.locale === 'pl' ? 'Wszystkie' : 'All'}
+              </li>
+              {props.data.allDatoCmsCategory.nodes.map(el => (
+                <li
+                  className={el.name.replace(/\s/g, '') + ' filterItem'}
+                  onClick={() => { filter(el.name) }}>
+                  {el.name}
+                </li>
               ))}
             </ul>
           </Controls>
@@ -95,6 +112,8 @@ export const query = graphql`
     ) {
       blogPostNodes: nodes {
         featuredInHomepage
+        featuredTitle
+        featuredText
         id: originalId
         meta {
           firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")

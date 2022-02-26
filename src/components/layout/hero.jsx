@@ -2,6 +2,7 @@ import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import Waves from '../vectors/heroOtherPageWaves'
+import Dots from '../img/dotsSmall.png'
 
 const Hero = ({ data }) => {
   return (
@@ -14,7 +15,10 @@ const Hero = ({ data }) => {
           </div>
           <div>
             {data.img
-              ? <img src={data.img.url} />
+              ? <div className="imageWrapper">
+                <img className="dots" src={Dots} />
+                <img className="mainImage" src={data.img.url} />
+              </div>
               : null
             }
           </div>
@@ -75,14 +79,43 @@ const Content = styled.div`
         line-height: 180%;
     }
 
-    img{
-        border-radius: 16px;
-        box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
+    .imageWrapper{
+      position: relative;
+      height: fit-content;
+      width: fit-content;
+      margin: 0 auto;
+
+      .dots{
+          position: absolute;
+          max-width: 40%;
+          bottom: -8%;
+          right: -15%;
+          z-index: 10;
+      }
+
+      .mainImage{
+          border-radius: 16px;
+          box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
+      }
     }
 
     @media (max-width: 1024px) {
       flex-direction: column;
       padding-top: 140px;
+
+      .imageWrapper{
+            width: 100%;
+
+            .dots{
+            }
+
+            .mainImage{
+              margin-top: 48px;
+              max-width: 668px;
+              width: 90%;
+                
+            }
+        }
 
       h1{
             font-size: clamp(32px, 5.7vw, 48px); 
@@ -98,9 +131,6 @@ const Content = styled.div`
       }
 
       img{
-        margin-top: 48px;
-        max-width: 668px;
-        width: 90%;
       }
     }
 

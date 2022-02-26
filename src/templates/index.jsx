@@ -9,7 +9,6 @@ import Certificates from '../components/layout/certificates';
 import News from '../components/layout/news';
 
 const HomePageTemplate = ({ data, pageContext }) => {
-  debugger
   return (
     <PageWrapper
       pageData={pageContext}

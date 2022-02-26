@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Waves from '../vectors/heroOtherPageWaves'
 import OrdersForm from './ordersForm'
 import Logo from "../vectors/logo"
+import Dots from '../img/dotsBig.png'
 
 const HeroOrders = ({ data }) => {
     return (
@@ -15,8 +16,9 @@ const HeroOrders = ({ data }) => {
                         <p>{data.text}</p>
                         <h3><Logo />{data.subText}</h3>
                     </div>
-                    <div>
-                        <img src={data.img.url} />
+                    <div className="imageWrapper">
+                        <img className="dots" src={Dots} />
+                        <img className="mainImage" src={data.img.url} />
                     </div>
                 </Content>
                 <FormWrapper>
@@ -109,15 +111,44 @@ const Content = styled.div`
         line-height: 180%;
     }
 
-    img{
+    .imageWrapper{
+      position: relative;
+      height: fit-content;
+      width: fit-content;
+      margin: 0 auto;
+
+      .dots{
+          position: absolute;
+          max-width: 40%;
+          bottom: -8%;
+          right: -15%;
+          z-index: 10;
+      }
+
+      .mainImage{
         border-radius: 16px;
         box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
         margin-right: 32px;
+      }
     }
 
     @media (max-width: 1024px) {
         flex-direction: column;
         padding: 0;
+
+        .imageWrapper{
+            width: 100%;
+            margin: 50px 0 32px 0;
+
+            .dots{
+            }
+
+            .mainImage{
+              max-width: 668px;
+              width: 90%;
+                
+            }
+        }
 
         h1{
             font-size: clamp(32px, 5.2vw, 48px);
@@ -126,14 +157,6 @@ const Content = styled.div`
         div{
             width: 90%;
             max-width: 700px;
-        }
-
-        img{
-            max-width: 668px;
-            width: 90%;
-            margin: 50px 0 32px 0;
-            display: block;
-            
         }
 
         .textPart{

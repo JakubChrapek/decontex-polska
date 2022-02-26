@@ -2,13 +2,15 @@ import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import { Link } from "gatsby"
+import Dots from '../img/dotsBig.png'
 
 const ImageWithButton = ({ data }) => {
     return (
         <Wrapper>
             <Container isImgBackground={data.isImgBackground} isImgRight={data.isImgRight} className="container">
-                <div>
-                    <img src={data.img.url} />
+                <div className="imageWrapper">
+                    <img className="dots" src={Dots} />
+                    <img className="mainImage" src={data.img.url} />
                 </div>
                 <div className="textPart">
                     <StructuredText data={data.title} />
@@ -40,11 +42,28 @@ const Container = styled.div`
     justify-content: space-between;
     flex-direction: ${props => props.isImgRight ? 'row-reverse' : 'row'};
 
-    img{
-        border-radius: 16px;
-        box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
-        margin-left: ${props => props.isImgRight ? '35px' : '0'};
-        margin-right: ${props => props.isImgRight ? '0' : '35px'};
+    .imageWrapper{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        margin: 0 auto;
+
+        .dots{
+            display: ${props => props.isImgBackground ? null : 'none'};
+            position: absolute;
+            max-width: 40%;
+            bottom: -15%;
+            left: ${props => props.isImgRight ? 'unset' : '-25%'};
+            right: ${props => props.isImgRight ? '-25%' : 'unset'};
+            z-index: 10;
+        }
+
+        .mainImage{
+            border-radius: 16px;
+            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
+            margin-left: ${props => props.isImgRight ? '35px' : '0'};
+            margin-right: ${props => props.isImgRight ? '0' : '35px'};
+        }
     }
 
     .textPart{
@@ -109,14 +128,25 @@ const Container = styled.div`
     @media (max-width: 1024px) {
         flex-direction: column-reverse;
 
-        img{
-            max-width: 668px;
-            width: 90%;
-            margin: 50px auto 32px auto;
-            display: block;
-            
-        }
+        .imageWrapper{
+            width: 100%;
 
+            .dots{
+                max-width: 30%;
+                bottom: -10%;
+                left: ${props => props.isImgRight ? 'unset' : '-10%'};
+                right: ${props => props.isImgRight ? '-10%' : 'unset'};
+            }
+
+            .mainImage{
+                max-width: 668px;
+                width: 90%;
+                margin: 50px auto 32px auto;
+                display: block;
+                
+            }
+        }
+        
         .textPart{
             max-width: 700px;
             margin: 0 auto;

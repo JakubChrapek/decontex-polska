@@ -149,6 +149,7 @@ const Flex = styled.div`
             img{
                 border-radius: 15px;
                 width: 100%;
+                max-width: 180px;
                 pointer-events: none;
             }
         }

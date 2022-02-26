@@ -2,13 +2,17 @@ import React from "react"
 import { StructuredText } from "react-datocms"
 import styled from "styled-components"
 import Logo from './../img/logo_light.png'
+import Dots from '../img/dotsSmall.png'
 
 const ImageWithTextBackground = ({ data }) => {
     return (
         <Wrapper>
             <Container logo={Logo} className="container">
-                <img src={data.img.url} />
-                <div>
+                <div className="imageWrapper">
+                    <img className="dots" src={Dots} />
+                    <img className="mainImage" src={data.img.url} />
+                </div>
+                <div className="textPart">
                     <StructuredText data={data.title} />
                     <StructuredText data={data.list} />
                 </div>
@@ -30,11 +34,23 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
 
-    img{
+    .imageWrapper{
         margin-right: 35px;
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+
+        .dots{
+            position: absolute;
+            max-width: 40%;
+            bottom: -8%;
+            right: -15%;
+            z-index: 10;
+        }
+
     }
 
-    div{
+    .textPart{
         background-color: var(--backgroundGrey);
         border-radius: 20px;
         max-width: 608px;
@@ -77,12 +93,14 @@ const Container = styled.div`
     }
 
     @media (max-width: 1024px) {
-        flex-direction: column-reverse;
-        img{
-            max-width: fit-content;
-            width: 100%;
+        .imageWrapper{
             margin: 72px auto 0;
+            .mainImage{
+                width: 100%;
+            }
+
         }
+        flex-direction: column-reverse;
 
         div{
             max-width: 700px;

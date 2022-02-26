@@ -7,7 +7,6 @@ import { useSwipeable } from "react-swipeable";
 import { Link } from "gatsby"
 
 const News = ({ data, posts }) => {
-    debugger
     const [position, positionSet] = useState(0);
 
     const [canRight, changeCanRight] = useState(true);
@@ -69,7 +68,9 @@ const News = ({ data, posts }) => {
                                                 left: `calc(${position} * (-100% - 36px))`,
                                             }} >
                                             <div>
-                                                <span>{el.category.name}</span>
+                                                <Link to="/blog/" state={{ category: el.category.name }}>
+                                                    <span>{el.category.name}</span>
+                                                </Link>
                                                 <p className='title'>{el.title}</p>
                                                 <p className='date'>{el.subtitle}</p>
                                             </div>

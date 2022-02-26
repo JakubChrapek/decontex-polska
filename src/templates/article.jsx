@@ -6,6 +6,7 @@ import Navigator from '../components/langHelpers/navigator'
 import styled from 'styled-components'
 import News from '../components/layout/news'
 import Waves from '../components/vectors/heroOtherPageWaves'
+import { Link } from 'gatsby'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const { skipNext } = pageContext
@@ -19,7 +20,9 @@ const BlogPostTemplate = ({ data, pageContext }) => {
       <Wrapper>
         <Content>
           <div className='flex'>
-            <span>artukuł</span>
+            <Link to="/blog/" state={{ category: data.datoCmsBlogPost.category.name }}>
+              <span>{data.datoCmsBlogPost.category.name}</span>
+            </Link>
             <p>{data.datoCmsBlogPost.meta.firstPublishedAt}</p>
           </div>
           <h1>{data.datoCmsBlogPost.title}</h1>

@@ -84,6 +84,7 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         min-height: 100vh;
+        overflow-x: hidden;
     }
 
     h1, h2, h3, p {

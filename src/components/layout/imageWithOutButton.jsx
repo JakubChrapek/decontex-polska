@@ -2,13 +2,15 @@ import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import Logo from "../vectors/logo"
+import Dots from '../img/dotsSmall.png'
 
 const ImageWithoutButton = ({ data }) => {
     return (
         <Wrapper>
             <Container isImgBackground={data.isImgBackground} isImgRight={data.isImgRight} className="container">
-                <div>
-                    <img src={data.img.url} />
+                <div className="imageWrapper">
+                    <img className="dots" src={Dots} />
+                    <img className="mainImage" src={data.img.url} />
                 </div>
                 <div className="textPart">
                     <StructuredText data={data.title} />
@@ -34,12 +36,29 @@ const Container = styled.div`
     justify-content: space-between;
     flex-direction: ${props => props.isImgRight ? 'row-reverse' : 'row'};
 
-    img{
-        margin-left: 32px;
-        margin-bottom: 32px;
-        margin-right: 35px;
-        border-radius: 16px;
-        box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
+    .imageWrapper{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        margin: 0 auto;
+
+        .dots{
+            display: ${props => props.isImgBackground ? null : 'none'};
+            position: absolute;
+            max-width: 40%;
+            bottom: -8%;
+            left: ${props => props.isImgRight ? 'unset' : '-15%'};
+            right: ${props => props.isImgRight ? '-15%' : 'unset'};
+            z-index: 10;
+        }
+
+        .mainImage{
+            margin-left: 32px;
+            margin-bottom: 32px;
+            margin-right: 35px;
+            border-radius: 16px;
+            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
+        }
     }
 
     .textPart{
@@ -87,13 +106,22 @@ const Container = styled.div`
 
     @media (max-width: 1024px) {
         flex-direction: column-reverse;
-
-        img{
-            max-width: 600px;
+        .imageWrapper{
             width: 100%;
-            margin: 50px auto 32px auto;
-            transform: translateX(16px);
-            display: block;
+            
+            .dots{
+                max-width: 30%;
+                bottom: -10%;
+                left: -10%;
+            }
+
+            .mainImage{
+                max-width: 600px;
+                width: 100%;
+                margin: 50px auto 32px auto;
+                transform: translateX(16px);
+                display: block;
+            }
         }
 
         .textPart{
