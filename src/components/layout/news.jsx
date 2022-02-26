@@ -61,7 +61,7 @@ const News = ({ data, posts }) => {
                         <div className="slider">
                             {posts.map((el, index) => (
                                 index <= 2
-                                    ? <Link to={'blog/' + el.slug}>
+                                    ? <Link to={'/blog/' + el.slug}>
                                         <motion.div
                                             className="sliderItem"
                                             animate={{
@@ -80,15 +80,35 @@ const News = ({ data, posts }) => {
                                     : null
                             ))}
                         </div>
-                    </div>
-                </Slider>
-                <SliderControls>
-                    <button disabled={!canLeft} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
-                    <button disabled={!canRight} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
-                </SliderControls>
-            </Container>
-        </Wrapper>
-    )
+                        <img src={el.coverImage.url} />
+                      </motion.div>
+                    </Link>
+                  ) : null
+                )}
+              </div>
+            </div>
+          </Slider>
+          <SliderControls>
+            <button
+              disabled={!canLeft}
+              onClick={() => {
+                positionSet(position - 1);
+              }}
+            >
+              <ArrowLeft />
+            </button>
+            <button
+              disabled={!canRight}
+              onClick={() => {
+                positionSet(position + 1);
+              }}
+            >
+              <ArrowRight />
+            </button>
+          </SliderControls>
+        </Container>
+      </Wrapper>
+    );
 }
 
 export default News
