@@ -17,9 +17,12 @@ const BlogArchiveTemplate = (props) => {
   const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts)
 
   useEffect(() => {
+    debugger
     if (props.location.state != null) {
-      document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
-      document.querySelector('.' + props.location.state.category).classList.add('active')
+      if (props.location.state.category != null) {
+        document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
+        document.querySelector('.' + props.location.state.category).classList.add('active')
+      }
     }
   }, [])
 

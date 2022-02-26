@@ -80,34 +80,28 @@ const News = ({ data, posts }) => {
                                     : null
                             ))}
                         </div>
-                        <img src={el.coverImage.url} />
-                      </motion.div>
-                    </Link>
-                  ) : null
-                )}
-              </div>
-            </div>
-          </Slider>
-          <SliderControls>
-            <button
-              disabled={!canLeft}
-              onClick={() => {
-                positionSet(position - 1);
-              }}
-            >
-              <ArrowLeft />
-            </button>
-            <button
-              disabled={!canRight}
-              onClick={() => {
-                positionSet(position + 1);
-              }}
-            >
-              <ArrowRight />
-            </button>
-          </SliderControls>
-        </Container>
-      </Wrapper>
+                    </div>
+                </Slider >
+                <SliderControls>
+                    <button
+                        disabled={!canLeft}
+                        onClick={() => {
+                            positionSet(position - 1);
+                        }}
+                    >
+                        <ArrowLeft />
+                    </button>
+                    <button
+                        disabled={!canRight}
+                        onClick={() => {
+                            positionSet(position + 1);
+                        }}
+                    >
+                        <ArrowRight />
+                    </button>
+                </SliderControls>
+            </Container >
+        </Wrapper >
     );
 }
 
