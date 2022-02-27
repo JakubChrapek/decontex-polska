@@ -259,7 +259,8 @@ const Header = () => {
     }
   `)
 
-  const { currentLanguage } = useContext(LangContext)
+  // const { currentLanguage } = useContext(LangContext)
+  const currentLanguage = 'pl'
   const { defaultLanguage } = useLanguages()
   const { pathname } = useLocation()
 
@@ -267,6 +268,8 @@ const Header = () => {
 
   const [isMenuOpened, changeIsMenuOpened] = useState(false)
 
+  let a = data
+  debugger
   return (
     <HeaderWrapper>
       <HeaderContainer>
@@ -359,9 +362,9 @@ const Header = () => {
                 logoVariant = logo
               }
               return (
-                <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
+                <Link to="/">
                   <img src={logoVariant.url} alt={logoVariant.alt} />
-                </Navigator>
+                </Link>
               )
             }
           )}
@@ -370,7 +373,7 @@ const Header = () => {
           <div></div>
           <ul>
             {menuEdges
-              .filter(({ node: { locale } }) => locale === currentLanguage)
+              .filter(({ node: { locale } }) => locale === currentLanguage )
               .map(({ node: { links } }) =>
                 links.map(({ id, slug, locale, ariaLabel, name }) => (
                   <li key={id} className={pathname === '/' || pathname === '/en' ? '' : 'other'}>

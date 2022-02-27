@@ -44,7 +44,7 @@ const OrdersForm = ({ buttonText }) => {
             </label>
             <label className="checkbox">
                 <input type='checkbox' />
-                <span>Wysyłając wiadomość, akceptujesz <Link to="rodo">Politykę prywatności</Link></span>
+                <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link></span>
             </label>
             <button className="button" type="submit" >{buttonText}</button>
         </Wrapper>

@@ -43,7 +43,8 @@ const Footer = () => {
     }
   `);
 
-  const { currentLanguage } = useContext(LangContext);
+  // const { currentLanguage } = useContext(LangContext);
+  const currentLanguage = 'pl'
   return (
     <Wrapper>
       <Container className="container">
