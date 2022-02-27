@@ -269,7 +269,7 @@ const Header = () => {
   const [isMenuOpened, changeIsMenuOpened] = useState(false)
 
   let a = data
-  debugger
+  // debugger
   return (
     <HeaderWrapper>
       <HeaderContainer>

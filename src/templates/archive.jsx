@@ -5,9 +5,10 @@ import useLanguages from '../hooks/useLanguages';
 import styled from 'styled-components';
 import { ArrowRight } from '../components/vectors/arrows';
 import { Link } from "gatsby"
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 const BlogArchiveTemplate = (props) => {
-  debugger
+  // debugger
   const { defaultLanguage, blogPath } = useLanguages();
   const { pagesNumber, archivePageNumber, locale } = props.pageContext;
 
@@ -17,7 +18,7 @@ const BlogArchiveTemplate = (props) => {
   const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts)
 
   useEffect(() => {
-    debugger
+    // debugger
     if (props.location.state != null) {
       if (props.location.state.category != null) {
         document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
@@ -27,7 +28,7 @@ const BlogArchiveTemplate = (props) => {
   }, [])
 
   function filter(type) {
-    debugger
+    // debugger
     if (type === 'all') {
       changeFiltredPosts(preFiltredPosts)
     } else {
@@ -76,20 +77,24 @@ const BlogArchiveTemplate = (props) => {
               ))}
             </ul>
           </Controls>
-          <Grid>
-            {filtredPosts.map(
-              (el) => (
-                <li>
-                  <Link to={el.slug}>
-                    <img src={el.coverImage.url} />
-                  </Link>
-                  <span>{el.category.name}</span>
-                  <h3>{el.title}</h3>
-                  <Link to={el.slug}>Czytaj dalej <ArrowRight /></Link>
-                </li>
-              )
-            )}
-          </Grid>
+          <AnimateSharedLayout>
+            <AnimatePresence exitBeforeEnter>
+              <Grid layout>
+                  {filtredPosts.map(
+                    (el) => (
+                      <motion.li initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} key={el.title} layout>
+                        <Link to={el.slug}>
+                          <img src={el.coverImage.url} />
+                        </Link>
+                        <motion.span>{el.category.name}</motion.span>
+                        <motion.h3>{el.title}</motion.h3>
+                        <Link to={el.slug}>Czytaj dalej <ArrowRight /></Link>
+                      </motion.li>
+                    )
+                  )}
+              </Grid>
+            </AnimatePresence>
+          </AnimateSharedLayout>
         </Container>
       </Wrapper>
     </PageWrapper>
@@ -257,7 +262,7 @@ const Controls = styled.div`
 
 `
 
-const Grid = styled.ul`
+const Grid = styled(motion.ul)`
   display: grid;
   grid-gap: 40px; 
   grid-template-columns: 1fr 1fr 1fr;
