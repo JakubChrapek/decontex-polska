@@ -87,7 +87,6 @@ const LanguageSwitcher = () => {
   } = data;
 
   // Helpers
-
   const isHome = pageType === 'isHome';
   const isPage = pageType === 'isPage';
   const isArchiveRoot = pageType === 'isArchiveRoot';
