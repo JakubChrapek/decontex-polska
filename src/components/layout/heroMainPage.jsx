@@ -59,7 +59,7 @@ const Container = styled.div`
         display: flex;
 
         a{
-            padding: 14px 32px;
+            padding: 13px 32px;
             border-radius: 8px;
             margin-right: 16px;
 

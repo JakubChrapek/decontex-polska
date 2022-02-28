@@ -25,6 +25,6 @@ const Wrapper = styled.div`
     svg{
         width: 100%;
         position: absolute;
-        bottom: 0;
+        bottom: -1px;
     }
 `

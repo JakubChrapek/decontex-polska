@@ -51,7 +51,7 @@ query HomePage($locale: String!) {
         category {
           name
         }
-        subtitle
+        publicationDate
         title
         slug
         reference

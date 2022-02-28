@@ -66,7 +66,10 @@ const News = ({ data, posts }) => {
                                             className="sliderItem"
                                             animate={{
                                                 left: `calc(${position} * (-100% - 36px))`,
-                                            }} >
+                                            }}
+                                            transition={{ ease: "easeOut", duration: .25 }}
+                                        >
+
                                             <div>
                                                 <Link to="/blog/" state={{ category: el.category.name }}>
                                                     <span>{el.category.name}</span>
@@ -154,7 +157,7 @@ const Flex = styled.div`
     }
 
     a{
-        padding: 14px 32px;
+        padding: 13px 32px;
         border-radius: 8px;
         background-color: var(--blackButtonBackground);
         color: var(--mainLightText);

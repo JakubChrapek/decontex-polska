@@ -168,7 +168,7 @@ export const query = graphql`
         category {
           name
         }
-        subtitle
+        publicationDate
         title
         slug
         reference
@@ -185,7 +185,7 @@ export const query = graphql`
           seoImageUrl: url
         }
       }
-      subtitle
+      publicationDate
       cardImage {
         cardImageData: gatsbyImageData
         cardImageAlt: alt

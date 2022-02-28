@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ArrowRight } from '../components/vectors/arrows';
 import { Link } from "gatsby"
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
+import { StructuredText } from 'react-datocms';
 
 const BlogArchiveTemplate = (props) => {
   // debugger
@@ -49,8 +50,8 @@ const BlogArchiveTemplate = (props) => {
       <Wrapper>
         <Container className="container">
           <Hero>
-            <h1>{choosenPosts[0].featuredTitle}</h1>
-            <p>{choosenPosts[0].featuredText}</p>
+            <StructuredText data={props.data.datoCmsArchivePage.title}/>
+            <p>{props.data.datoCmsArchivePage.text}</p>
             <div className='imageBox'>
               <div>
                 <span>{choosenPosts[0].category.name}</span>
@@ -106,6 +107,10 @@ export default BlogArchiveTemplate;
 export const query = graphql`
   query BlogArchiveQuery($locale: String!, $skip: Int!, $limit: Int!) {
     datoCmsArchivePage(locale: { eq: $locale }) {
+      title{
+        value
+      }
+      text
       locale
       seo {
         seoTitle: title
@@ -120,8 +125,6 @@ export const query = graphql`
     ) {
       blogPostNodes: nodes {
         featuredInHomepage
-        featuredTitle
-        featuredText
         id: originalId
         meta {
           firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
@@ -138,7 +141,7 @@ export const query = graphql`
         category {
           name
         }
-        subtitle
+        publicationDate
         title
         slug
         reference
@@ -189,6 +192,8 @@ const Hero = styled.div`
   .imageBox{
     position: relative;
     margin-top: 100px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%); 
+    border-radius: 15px;
 
     div{
       position: absolute;
@@ -223,6 +228,9 @@ const Hero = styled.div`
 
     img{
       width: 100%;
+      aspect-ratio: 2.36/1;
+      position: relative;
+      z-index: -1;
       border-radius: 15px;
     }
 
@@ -234,6 +242,7 @@ const Controls = styled.div`
   h2{
     margin-top: 72px;
     margin-bottom: 28px;
+    font-size: 32px;
   }
 
   ul{
@@ -243,7 +252,7 @@ const Controls = styled.div`
     li{
       margin-right: 16px;
       margin-bottom: 16px;
-      padding: 14px 32px;
+      padding: 13px 32px;
       border-radius: 8px;
       color: var(--mainDarkText);
       font-size: 16px;
@@ -306,6 +315,7 @@ const Grid = styled(motion.ul)`
     img{
       width: 100%;
       border-radius: 15px;
+      aspect-ratio: 1.8/1;
     }
   }
 `

@@ -154,7 +154,7 @@ const Flex = styled.div`
   margin-top: 20px;
   margin-bottom: 240px;
   a{
-    padding: 14px 32px;
+    padding: 13px 32px;
     border-radius: 8px;
     margin: 0 8px;
 
@@ -189,7 +189,7 @@ const Flex = styled.div`
 
     a{
       display: block;
-      padding: 14px 32px;
+      padding: 13px 32px;
     }
   }
 `
