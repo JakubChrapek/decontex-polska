@@ -75,9 +75,9 @@ const News = ({ data, posts }) => {
                                                     <span>{el.category.name}</span>
                                                 </Link>
                                                 <p className='title'>{el.title}</p>
-                                                <p className='date'>{el.subtitle}</p>
+                                                <p className='date'>{el.publicationDate}</p>
                                             </div>
-                                            <img src={el.coverImage.url} />
+                                            <img src={el.cardImage.url} />
                                         </motion.div>
                                     </Link>
                                     : null

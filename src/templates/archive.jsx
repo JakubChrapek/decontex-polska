@@ -55,24 +55,36 @@ const BlogArchiveTemplate = (props) => {
             <div className='imageBox'>
               <div>
                 <span>{choosenPosts[0].category.name}</span>
-                <p className='title'>{choosenPosts[0].title}</p>
-                <p className='date'>{choosenPosts[0].subtitle}</p>
+                <p className="title">{choosenPosts[0].title}</p>
+                <p className="date">{choosenPosts[0].publicationDate}</p>
               </div>
-              <img src={choosenPosts[0].cardImage.url} />
+              <img src={choosenPosts[0].coverImage.url} />
             </div>
           </Hero>
           <Controls>
-            <h2>{props.data.datoCmsArchivePage.locale === 'pl' ? 'Wybierz kategorie' : 'Choose category'}</h2>
+            <h2>
+              {props.data.datoCmsArchivePage.locale === 'pl'
+                ? 'Wybierz kategorie'
+                : 'Choose category'}
+            </h2>
             <ul>
               <li
-                onClick={() => { filter('all') }}
-                className={'all filterItem active'}>
-                {props.data.datoCmsArchivePage.locale === 'pl' ? 'Wszystkie' : 'All'}
+                onClick={() => {
+                  filter('all');
+                }}
+                className={'all filterItem active'}
+              >
+                {props.data.datoCmsArchivePage.locale === 'pl'
+                  ? 'Wszystkie'
+                  : 'All'}
               </li>
-              {props.data.allDatoCmsCategory.nodes.map(el => (
+              {props.data.allDatoCmsCategory.nodes.map((el) => (
                 <li
                   className={el.name.replace(/\s/g, '') + ' filterItem'}
-                  onClick={() => { filter(el.name) }}>
+                  onClick={() => {
+                    filter(el.name);
+                  }}
+                >
                   {el.name}
                 </li>
               ))}
@@ -81,18 +93,24 @@ const BlogArchiveTemplate = (props) => {
           <AnimateSharedLayout>
             <AnimatePresence exitBeforeEnter>
               <Grid layout>
-                  {filtredPosts.map(
-                    (el) => (
-                      <motion.li initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} key={el.title} layout>
-                        <Link to={el.slug}>
-                          <img src={el.coverImage.url} />
-                        </Link>
-                        <motion.span>{el.category.name}</motion.span>
-                        <motion.h3>{el.title}</motion.h3>
-                        <Link to={el.slug}>Czytaj dalej <ArrowRight /></Link>
-                      </motion.li>
-                    )
-                  )}
+                {filtredPosts.map((el) => (
+                  <motion.li
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    key={el.title}
+                    layout
+                  >
+                    <Link to={el.slug}>
+                      <img src={el.cardImage.url} />
+                    </Link>
+                    <motion.span>{el.category.name}</motion.span>
+                    <motion.h3>{el.title}</motion.h3>
+                    <Link to={el.slug}>
+                      Czytaj dalej <ArrowRight />
+                    </Link>
+                  </motion.li>
+                ))}
               </Grid>
             </AnimatePresence>
           </AnimateSharedLayout>
@@ -141,7 +159,7 @@ export const query = graphql`
         category {
           name
         }
-        publicationDate
+        publicationDate(formatString: "DD MMMM YYYY")
         title
         slug
         reference
