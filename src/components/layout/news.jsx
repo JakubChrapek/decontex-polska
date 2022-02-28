@@ -72,7 +72,7 @@ const News = ({ data, posts }) => {
 
                                             <div>
                                                 <Link to="/blog/" state={{ category: el.category.name }}>
-                                                    <span>{el.category.name}</span>
+                                                    <Category categoryColor={el.category.color.hex}>{el.category.name}</Category>
                                                 </Link>
                                                 <p className='title'>{el.title}</p>
                                                 <p className='date'>{el.publicationDate}</p>
@@ -216,13 +216,6 @@ const Slider = styled.div`
                 bottom: 0;
                 padding: 60px 26px;
 
-            span{
-                background-color: var(--mainLightText);
-                color: var(--active);
-                padding: 10px;
-                border-radius: 8px;
-            }
-
             .title{
                 color: var(--mainLightText);
                 margin: 26px 0 16px 0;
@@ -288,4 +281,11 @@ const SliderControls = styled.div`
             }
         }
     }
+`
+
+const Category = styled.span`
+    color: ${props => props.categoryColor};
+    background-color: var(--mainLightText);
+    padding: 10px;
+    border-radius: 8px;
 `

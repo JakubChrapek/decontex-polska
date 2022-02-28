@@ -18,7 +18,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
       seoImage={data.datoCmsBlogPost.seo.seoImageUrl}
     >
       <Wrapper>
-        <Content>
+        <Content categoryColor={data.datoCmsBlogPost.category.color.hex}>
           <div className='flex'>
             <Link to="/blog/" state={{ category: data.datoCmsBlogPost.category.name }}>
               <span>{data.datoCmsBlogPost.category.name}</span>
@@ -170,6 +170,9 @@ export const query = graphql`
         }
         category {
           name
+          color{
+            hex
+          }
         }
         publicationDate(formatString: "DD MMMM YYYY")
         title
@@ -198,6 +201,9 @@ export const query = graphql`
       }
       category {
         name
+        color{
+          hex
+        }
       }
       structuredBody {
         blocks {
@@ -284,7 +290,7 @@ const Content = styled.div`
     align-items: center;
 
     span{
-      color: var(--active);
+      color: ${props => props.categoryColor};
       background: #FFFFFF;
       border-radius: 15px;
       padding: 10px;
