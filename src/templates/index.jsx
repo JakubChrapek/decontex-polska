@@ -41,12 +41,16 @@ export const query = graphql`
         }
         minutesOfReading
         cardImage {
+          gatsbyImageData
           url
           alt
+          title
         }
         coverImage {
+          gatsbyImageData
           url
           alt
+          title
         }
         category {
           name
@@ -87,6 +91,9 @@ export const query = graphql`
         text
         img {
           url
+          gatsbyImageData
+          alt
+          title
         }
         title {
           value
@@ -106,14 +113,23 @@ export const query = graphql`
         mainText
         firstImg {
           url
+          gatsbyImageData
+          alt
+          title
         }
         firstText
         secondImg {
           url
+          gatsbyImageData
+          alt
+          title
         }
         secondText
         thirdImg {
           url
+          gatsbyImageData
+          alt
+          title
         }
         subTitle {
           value
@@ -135,7 +151,9 @@ export const query = graphql`
         images {
           img {
             url
+            gatsbyImageData
             alt
+            title
           }
         }
       }

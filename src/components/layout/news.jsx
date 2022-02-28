@@ -297,6 +297,23 @@ const SliderControls = styled.div`
 const Category = styled.span`
     color: ${props => props.categoryColor};
     background-color: var(--mainLightText);
-    padding: 10px;
-    border-radius: 8px;
+    padding: 15px 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    display: inline-block;
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: ${props => `${props.categoryColor}22`};
+        border-radius: 15px;
+    }
 `

@@ -7,7 +7,9 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 const StyledHeroImage = styled(GatsbyImage)`
   --image-shift: 0px;
-  position: absolute;
+  && {
+    position: absolute;
+  }
   left: calc(-1 * var(--image-shift));
   top: 0;
   width: calc(100% + var(--image-shift));
