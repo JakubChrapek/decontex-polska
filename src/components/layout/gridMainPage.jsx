@@ -152,8 +152,19 @@ const ContentMobile = styled.div`
         width: fit-content;
         border-radius: 8px;
         background-color: var(--mainLightText);
+        border: 1px solid var(--mainLightText);
+        transition: .2s linear;
+
         p{
             color: var(--buttonText);
+        }
+
+        &:hover{
+            border: 1px solid var(--mainLightText);
+            background-color: transparent;
+            p{
+                color: var(--mainLightText);
+            }
         }
 
     }
@@ -271,8 +282,19 @@ const ContentDesctop = styled.div`
         width: fit-content;
         border-radius: 8px;
         background-color: var(--mainLightText);
+        border: 1px solid var(--mainLightText);
+        transition: .2s linear;
+
         p{
             color: var(--buttonText);
+        }
+
+        &:hover{
+            border: 1px solid var(--mainLightText);
+            background-color: transparent;
+            p{
+                color: var(--mainLightText);
+            }
         }
 
     }

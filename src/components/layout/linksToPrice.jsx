@@ -90,7 +90,9 @@ const Flex = styled.div`
                 height: 40px;
                 line-height: 40px;
                 color: var(--navHover);
+                border: 1px solid var(--active);
                 position: relative;
+                transition: .2s linear;
                 
                 mark{
                     color: var(--navHover);
@@ -101,12 +103,24 @@ const Flex = styled.div`
                     padding: 0 24px;
                     width: max-content;
                     left: 0;
+                    transition: .2s linear;
+                }            
+                    
+                &:hover{
+                    border: 1px solid var(--active);
+                    background: transparent;
+                    background-color: transparent;
+        
+                    color: var(--active);
+        
+                    mark{
+                        color: #d30000;
+                    }
                 }
 
             }
             
-            &:hover{
-            }
+
         }
     }
 

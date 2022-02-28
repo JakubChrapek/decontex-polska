@@ -50,6 +50,9 @@ export const query = graphql`
         }
         category {
           name
+          color {
+            hex
+          }
         }
         publicationDate(formatString: "DD MMMM YYYY")
         title

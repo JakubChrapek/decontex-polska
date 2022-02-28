@@ -77,8 +77,14 @@ const NavList = styled.ul`
       height: 40px;
       line-height: 40px;
       color: var(--navHover);
+      border: 1px solid var(--active);
 
       &:hover{
+        border: 1px solid var(--active);
+        background-color: transparent;
+
+        color: var(--active);
+
       }
     }
   }
@@ -208,6 +214,10 @@ const MobileNav = styled.div`
   }
 `
 
+const Logo = styled.img`
+  max-width: 158px;
+`
+
 // Main Component
 
 const Header = () => {
@@ -288,7 +298,7 @@ const Header = () => {
               }
               return (
                 <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
-                  <img src={logoVariant.url} alt={logoVariant.alt} />
+                  <Logo src={logoVariant.url} alt={logoVariant.alt} />
                 </Navigator>
               )
             }

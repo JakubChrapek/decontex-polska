@@ -102,26 +102,41 @@ const Container = styled.div`
                 background: #51B8EB;
                 border-radius: 8px;
                 display: block;
-                height: 40px;
-                line-height: 40px;
+                height: 38px;
+                line-height: 38px;
                 color: var(--navHover);
+                border: 1px solid var(--active);
                 position: relative;
+                transition: .2s linear;
                 
                 mark{
                     color: var(--navHover);
                     border-radius: 8px;
                     background-color: var(--blackButtonBackground);
+                    border: 1px solid var(--blackButtonBackground);
                     display: block;
                     position: absolute;
                     padding: 0 24px;
                     width: max-content;
                     left: 0;
+                    transition: color .2s linear;
+                    transform: translate(-2px, -2px);
+                }
+                    
+                &:hover{
+                    border: 1px solid var(--active);
+                    background-color: transparent;
+
+                    color: var(--active);
+
+                    mark{
+                        color: #d30000;
+                    }
                 }
 
             }
             
-            &:hover{
-            }
+        
         }
     }
 

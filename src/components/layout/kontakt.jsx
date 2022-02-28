@@ -60,6 +60,17 @@ const Content = styled.div`
         p{
             margin-bottom: 26px;
         }
+
+        a{
+            color: var(--active);
+            transition: .2s linear;
+            border-bottom: 1px solid #fff;
+
+            &:hover{
+                border-bottom: 1px solid var(--active);
+            }
+        }
+        
     }
 
     .text{
