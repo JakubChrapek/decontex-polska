@@ -2,7 +2,8 @@ import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import Waves from '../vectors/heroOtherPageWaves'
-import Dots from '../img/dotsSmall.png'
+import Dots from '../img/dots-right-bottom.png'
+import { DOTS_IMAGES } from '../img/dots'
 
 const Hero = ({ data }) => {
   return (
@@ -16,7 +17,7 @@ const Hero = ({ data }) => {
           <div>
             {data.img
               ? <div className="imageWrapper">
-                <img className="dots" src={Dots} />
+                <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} />
                 <img className="mainImage" src={data.img.url} />
               </div>
               : null

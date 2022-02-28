@@ -2,12 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import Logo from "../vectors/logo"
-import DotsLeftBottom from '../img/dots-left-bottom-hq.png';
 import { GatsbyImage } from 'gatsby-plugin-image'
-
-const DotsImages = {
-    LEFT_BOTTOM: DotsLeftBottom,
-}
+import {DOTS_IMAGES} from '../img/dots'
 
 const ImageWithoutButton = ({ data }) => {
     return (
@@ -18,7 +14,7 @@ const ImageWithoutButton = ({ data }) => {
           className="container"
         >
           <div className="imageWrapper">
-            <img className="dots" src={DotsImages.LEFT_BOTTOM} />
+            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="" />
             <GatsbyImage
               className="mainImage"
               image={data.img.gatsbyImageData}
