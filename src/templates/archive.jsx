@@ -19,7 +19,6 @@ const BlogArchiveTemplate = (props) => {
   const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts)
 
   useEffect(() => {
-    // debugger
     if (props.location.state != null) {
       if (props.location.state.category != null) {
         document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
@@ -29,7 +28,6 @@ const BlogArchiveTemplate = (props) => {
   }, [])
 
   function filter(type) {
-    // debugger
     if (type === 'all') {
       changeFiltredPosts(preFiltredPosts)
     } else {
@@ -50,11 +48,11 @@ const BlogArchiveTemplate = (props) => {
       <Wrapper>
         <Container className="container">
           <Hero>
-            <StructuredText data={props.data.datoCmsArchivePage.title}/>
+            <StructuredText data={props.data.datoCmsArchivePage.title} />
             <p>{props.data.datoCmsArchivePage.text}</p>
             <div className='imageBox'>
               <div>
-                <span>{choosenPosts[0].category.name}</span>
+                <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
                 <p className="title">{choosenPosts[0].title}</p>
                 <p className="date">{choosenPosts[0].publicationDate}</p>
               </div>
@@ -64,7 +62,7 @@ const BlogArchiveTemplate = (props) => {
           <Controls>
             <h2>
               {props.data.datoCmsArchivePage.locale === 'pl'
-                ? 'Wybierz kategorie'
+                ? 'Wybierz kategorię'
                 : 'Choose category'}
             </h2>
             <ul>
@@ -101,7 +99,7 @@ const BlogArchiveTemplate = (props) => {
                     key={el.title}
                     layout
                   >
-                    <Link to={el.slug}>
+                    <Link className='imgWrapp' to={el.slug}>
                       <img src={el.cardImage.url} />
                     </Link>
                     <motion.span>{el.category.name}</motion.span>
@@ -123,7 +121,7 @@ const BlogArchiveTemplate = (props) => {
 export default BlogArchiveTemplate;
 
 export const query = graphql`
-  query BlogArchiveQuery($locale: String!, $skip: Int!, $limit: Int!) {
+  query BlogArchiveQuery($locale: String!, $skip: Int!) {
     datoCmsArchivePage(locale: { eq: $locale }) {
       title{
         value
@@ -138,7 +136,6 @@ export const query = graphql`
     allDatoCmsBlogPost(
       sort: { order: ASC, fields: meta___firstPublishedAt }
       filter: { locale: { eq: $locale } }
-      limit: $limit
       skip: $skip
     ) {
       blogPostNodes: nodes {
@@ -158,6 +155,9 @@ export const query = graphql`
         }
         category {
           name
+          color{
+            hex
+          }
         }
         publicationDate(formatString: "DD MMMM YYYY")
         title
@@ -177,6 +177,14 @@ export const query = graphql`
     }
   }
 `;
+
+const Category = styled.span`
+  background-color: var(--mainLightText);
+  color: ${props => props.categoryColor};
+  padding: 10px;
+  border-radius: 8px;
+
+`
 
 const Wrapper = styled.div`
   padding-top: 192px;
@@ -218,12 +226,6 @@ const Hero = styled.div`
       bottom: 0;
       padding: 50px;
 
-      span{
-        background-color: var(--mainLightText);
-        color: var(--active);
-        padding: 10px;
-        border-radius: 8px;
-      }
 
       .title{
         color: var(--mainLightText);
@@ -330,10 +332,34 @@ const Grid = styled(motion.ul)`
       }
     }
 
+    .imgWrapp{
+      position: relative;
+
+      &:hover{
+        &::after{
+          opacity: 1;
+        }
+      }
+
+      &::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+        border-radius: 15px;
+        opacity: 0;
+        transition: .2s linear;
+      }
+    }
+
     img{
       width: 100%;
       border-radius: 15px;
       aspect-ratio: 1.8/1;
+     
     }
   }
 `
