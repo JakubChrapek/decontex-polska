@@ -84,6 +84,9 @@ export const query = graphql`
         text
         img {
           url
+          gatsbyImageData
+          alt
+          title
         }
         title {
           value

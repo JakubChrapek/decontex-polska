@@ -64,7 +64,7 @@ const Grid = ({ data }) => {
 export default Grid
 
 const Wrapper = styled.section`
-    padding-top: clamp(80px, 11.1vw, 160px);
+    padding-top: clamp(140px, 11.1vw, 161px);
     padding-bottom: clamp(80px, 9.4vw, 160px);
     position: relative;
     max-width: 1920px;
