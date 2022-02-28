@@ -28,8 +28,8 @@ const HomePageTemplate = ({ data, pageContext }) => {
 export default HomePageTemplate;
 
 export const query = graphql`
-query HomePage($locale: String!) {
-  allDatoCmsBlogPost(
+  query HomePage($locale: String!) {
+    allDatoCmsBlogPost(
       sort: { order: ASC, fields: meta___firstPublishedAt }
       filter: { locale: { eq: $locale } }
     ) {
@@ -57,101 +57,101 @@ query HomePage($locale: String!) {
         reference
       }
     }
-  datoCmsHomepage(locale: { eq: $locale }) {
-    locale
-    hero {
-      background {
-        url
-      }
-      buttons {
-        name {
-          value
+    datoCmsHomepage(locale: { eq: $locale }) {
+      locale
+      hero {
+        background {
+          alt
+          title
+          gatsbyImageData(placeholder: BLURRED)
         }
-        slug
-        ariaLabel
-      }
-      text
-      title {
-        value
-      }
-    }
-    imageFlex {
-      bottomText
-      isImgBackground
-      isImgRight
-      text
-      img{
-        url
-      }
-      title {
-        value
-      }
-    }
-    news{
-      buttonText
-      text
-      title {
-        value
-      }
-    }
-    grid {
-      mainTitle {
-        value
-      }
-      mainText
-      firstImg {
-        url
-      }
-      firstText
-      secondImg {
-        url
-      }
-      secondText
-      thirdImg {
-        url
-      }
-      subTitle {
-        value
-      }
-      subText
-      link {
-        slug
-        ariaLabel
-        name {
+        buttons {
+          name {
+            value
+          }
+          slug
+          ariaLabel
+        }
+        text
+        title {
           value
         }
       }
-    }
-    certificates {
-      title {
-        value
-      }
-      text
-      images {
+      imageFlex {
+        bottomText
+        isImgBackground
+        isImgRight
+        text
         img {
           url
-          alt
+        }
+        title {
+          value
         }
       }
-    }
-    advantages {
-      title {
-        value
-      }
-      text
-      listRight {
-        title
+      news {
+        buttonText
         text
+        title {
+          value
+        }
       }
-      listLeft {
-        title
+      grid {
+        mainTitle {
+          value
+        }
+        mainText
+        firstImg {
+          url
+        }
+        firstText
+        secondImg {
+          url
+        }
+        secondText
+        thirdImg {
+          url
+        }
+        subTitle {
+          value
+        }
+        subText
+        link {
+          slug
+          ariaLabel
+          name {
+            value
+          }
+        }
+      }
+      certificates {
+        title {
+          value
+        }
         text
+        images {
+          img {
+            url
+            alt
+          }
+        }
+      }
+      advantages {
+        title {
+          value
+        }
+        text
+        listRight {
+          title
+          text
+        }
+        listLeft {
+          title
+          text
+        }
       }
     }
   }
-  
-
-}
 `;
 
 // query HomePageTemplate($locale: String!) {

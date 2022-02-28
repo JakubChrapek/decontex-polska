@@ -3,22 +3,46 @@ import styled from "styled-components"
 import Waves from "../vectors/heroMainPageWaves"
 import { StructuredText } from 'react-datocms'
 import { Link } from "gatsby"
+import { GatsbyImage } from 'gatsby-plugin-image'
+
+const StyledHeroImage = styled(GatsbyImage)`
+  --image-shift: 0px;
+  position: absolute;
+  left: calc(-1 * var(--image-shift));
+  top: 0;
+  width: calc(100% + var(--image-shift));
+  height: 100%;
+  @media (max-width: 480px) {
+    --image-shift: 60px;
+  }
+  @media (max-width: 420px) {
+    --image-shift: 90px;
+  }
+`;
 
 const Hero = ({ data }) => {
+    const {background: {alt, title, gatsbyImageData}} = data;
     return (
-        <Wrapper bg={data.background.url}>
-            <Container className="container">
-                <StructuredText data={data.title} />
-                <Text>{data.text}</Text>
-                <div>
-                    {data.buttons.map((el, index) => (
-                        <Link className={'c' + index} to={el.slug} aria-label={el.ariaLabel}><StructuredText data={el.name} /></Link>
-                    ))}
-                </div>
-            </Container>
-            <Waves />
-        </Wrapper>
-    )
+      <Wrapper>
+        <StyledHeroImage alt={alt} title={title} image={gatsbyImageData} />
+        <Container className="container">
+          <StructuredText data={data.title} />
+          <Text>{data.text}</Text>
+          <div>
+            {data.buttons.map((el, index) => (
+              <Link
+                className={'c' + index}
+                to={el.slug}
+                aria-label={el.ariaLabel}
+              >
+                <StructuredText data={el.name} />
+              </Link>
+            ))}
+          </div>
+        </Container>
+        <Waves />
+      </Wrapper>
+    );
 }
 
 export default Hero
@@ -29,10 +53,6 @@ const Wrapper = styled.section`
     min-height: 750px;
     width: 100%;
     position: relative;
-    background-image: url(${props => props.bg});
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
     @media (max-width: 1024px){
         min-height: 680px;
