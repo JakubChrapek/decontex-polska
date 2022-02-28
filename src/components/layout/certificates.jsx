@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import { motion } from "framer-motion";
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const Certificates = ({ data }) => {
     const constraintsRef = useRef(null);
@@ -15,7 +16,8 @@ const Certificates = ({ data }) => {
                         <motion.div drag='x' dragConstraints={constraintsRef} className="slider" >
                             {data.images.map(el => (
                                 <div>
-                                    <img src={el.img.url} />
+                                    <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt} title={el.img.title} />
+                                    {/* <img src={el.img.url} /> */}
                                 </div>
                             ))}
                         </motion.div>
@@ -135,7 +137,7 @@ const Flex = styled.div`
         grid-column-gap: 30px;
         margin-top: 108px;
 
-        div{
+        > div{
             background-color: #fff;
             box-shadow: 0px 20px 50px rgba(18, 17, 39, 0.08);
             border-radius: 15px;
