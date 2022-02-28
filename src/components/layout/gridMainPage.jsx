@@ -14,7 +14,7 @@ const Grid = ({ data }) => {
                         <p className="mainText">{data.mainText}</p>
                         <img className="secondImg" src={data.secondImg.url} />
                         <p className="secondText">{data.secondText}</p>
-                        <StructuredText data={data.subTitle} />
+                        <StructuredText data={data.publicationDate} />
                         <p className="subText">{data.subText}</p>
                         {data.link.map(el => (
                             <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
@@ -43,7 +43,7 @@ const Grid = ({ data }) => {
                     </div>
                     <div className="flex flex3">
                         <div className="text">
-                            <StructuredText data={data.subTitle} />
+                            <StructuredText data={data.publicationDate} />
                             <p className="subText">{data.subText}</p>
                             {data.link.map(el => (
                                 <Link className="link" to={el.slug} aria-label={el.ariaLabel}>

@@ -51,7 +51,7 @@ export const query = graphql`
         category {
           name
         }
-        subtitle
+        publicationDate(formatString: "DD MMMM YYYY")
         title
         slug
         reference
@@ -187,7 +187,7 @@ export const query = graphql`
 //           authorImageAlt: alt
 //         }
 //       }
-//       subtitle
+//       publicationDate(formatString: "DD MMMM YYYY")
 //       title
 //       slug
 //       reference

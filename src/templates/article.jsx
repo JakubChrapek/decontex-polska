@@ -118,37 +118,40 @@ const BlogPostTemplate = ({ data, pageContext }) => {
 export default BlogPostTemplate;
 
 export const query = graphql`
-  query BlogPostTemplateQuery (
-      $id: String!
-      $locale: String!
-      $skipNext: Int!
-      $skipPrevious: Int!
-   ){
+  query BlogPostTemplateQuery(
+    $id: String!
+    $locale: String!
+    $skipNext: Int!
+    $skipPrevious: Int!
+  ) {
     next: allDatoCmsBlogPost(
-       filter: { locale: { eq: $locale } }
-       sort: { fields: meta___firstPublishedAt }
-       limit: 1
-       skip: $skipNext
-     ) {
-       nodes {
-         nextPostSlug: slug
-         nextPostTitle: title
-       }
-     }
-     previous: allDatoCmsBlogPost(
-       filter: { locale: { eq: $locale } }
-       sort: { fields: meta___firstPublishedAt }
-       skip: $skipPrevious
-       limit: 1
-     ) {
-       nodes {
-         prevPostSlug: slug
-         prevPostTitle: title
-       }
-     }
-     allDatoCmsBlogPost(
-      sort: { order: ASC, fields: meta___firstPublishedAt }
       filter: { locale: { eq: $locale } }
+      sort: { fields: meta___firstPublishedAt }
+      limit: 1
+      skip: $skipNext
+    ) {
+      nodes {
+        nextPostSlug: slug
+        nextPostTitle: title
+      }
+    }
+    previous: allDatoCmsBlogPost(
+      filter: { locale: { eq: $locale } }
+      sort: { fields: meta___firstPublishedAt }
+      skip: $skipPrevious
+      limit: 1
+    ) {
+      nodes {
+        prevPostSlug: slug
+        prevPostTitle: title
+      }
+    }
+    allDatoCmsBlogPost(
+      sort: { order: ASC, fields: meta___firstPublishedAt }
+      filter: {
+        id: { ne: "DatoCmsBlogPost-111857832-pl" }
+        locale: { eq: "pl" }
+      }
     ) {
       blogPostNodes: nodes {
         featuredInHomepage
@@ -168,7 +171,7 @@ export const query = graphql`
         category {
           name
         }
-        subtitle
+        publicationDate(formatString: "DD MMMM YYYY")
         title
         slug
         reference
@@ -185,7 +188,7 @@ export const query = graphql`
           seoImageUrl: url
         }
       }
-      subtitle
+      publicationDate(formatString: "DD MMMM YYYY")
       cardImage {
         cardImageData: gatsbyImageData
         cardImageAlt: alt
@@ -200,8 +203,8 @@ export const query = graphql`
         blocks {
           __typename
           id: originalId
-          image{
-            url,
+          image {
+            url
             alt
           }
         }
@@ -230,7 +233,7 @@ export const query = graphql`
       blogNewsTitle
     }
   }
-`
+`;
 
 
 
