@@ -3,26 +3,12 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "gatsby"
 import Yes from '../vectors/yes.svg'
-// import sendgrid from "@sendgrid/mail";
 
 const KontaktForm = ({ buttonText }) => {
-
-    // sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const Submit = (data) => {
-        debugger
-        try {
-            // sendgrid.send({
-            //     to: "shevabogdan16@gmail.com", // Your email where you'll receive emails
-            //     from: "manuarorawork@gmail.com", // your website email address here
-            //     subject: `${data} subject`,
-            //     html: `<div>You've got a mail</div>`,
-            // });
-        } catch (error) {
-            return res.status(error.statusCode || 500).json({ error: error.message });
-        }
+
     }
 
     return (

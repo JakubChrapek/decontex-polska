@@ -2,13 +2,14 @@ import { Link } from "gatsby";
 import React from "react"
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import handler from "../../api/kontaktForm";
 import Yes from '../vectors/yes.svg'
 
 const OrdersForm = ({ buttonText }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const Submit = (data) => {
-
+        handler(data)
     }
 
     return (
