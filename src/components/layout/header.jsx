@@ -7,6 +7,7 @@ import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
 import Navigator from '../langHelpers/navigator';
 import { StructuredText } from 'react-datocms';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 // Scoped styles
 
@@ -45,6 +46,10 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
 `;
+
+const LogoImage = styled(GatsbyImage)`
+  width: ${158/16}rem;
+`
 
 const NavList = styled.ul`
   display: grid;
@@ -221,11 +226,13 @@ const Header = () => {
               alt
               title
               url
+              gatsbyImageData(width: 280)
             }
             logoWhite {
               url
               title
               alt
+              gatsbyImageData(width: 280)
             }
           }
         }
@@ -287,10 +294,17 @@ const Header = () => {
                 logoVariant = logoWhite;
               }
               return (
-                <Navigator home ariaLabel={logoVariant.title} key={logoVariant.title}>
-                  <img src={logoVariant.url} alt={logoVariant.alt} />
+                <Navigator
+                  home
+                  ariaLabel={logoVariant.title}
+                  key={logoVariant.title}
+                >
+                  <LogoImage image={logoVariant.gatsbyImageData} 
+                      alt={logoVariant.alt}
+                      title={logoVariant.title}
+                  />
                 </Navigator>
-              )
+              );
             }
           )}
         <Nav>
