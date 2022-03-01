@@ -83,7 +83,7 @@ const Content = styled.div`
   h1 {
     color: var(--superDarkText);
     font-weight: bold;
-    font-size: 48px;
+    font-size: 36px;
     line-height: 1.1;
     letter-spacing: -2px;
     margin-bottom: 12px;
@@ -165,7 +165,7 @@ const Content = styled.div`
     }
 
     h1 {
-      font-size: clamp(32px, 5.7vw, 48px);
+      font-size: clamp(32px, 5.7vw, 36px);
     }
 
     div {

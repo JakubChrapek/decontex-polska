@@ -7,7 +7,7 @@ import Dots from '../img/dotsBig.png'
 const ImageWithButton = ({ data }) => {
     return (
         <Wrapper>
-            <Container isImgBackground={data.isImgBackground} isImgRight={data.isImgRight} className="container">
+            <Container backgroundColor={data.backgroundColor} isImgBackground={data.isImgBackground} isImgRight={data.isImgRight} className="container">
                 <div className="imageWrapper">
                     <img className="dots" src={Dots} />
                     <img className="mainImage" src={data.img.url} />
@@ -60,7 +60,7 @@ const Container = styled.div`
 
         .mainImage{
             border-radius: 16px;
-            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
+            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor.hex : '-32px 32px 0px 0px' + props.backgroundColor.hex : null};
             margin-left: ${props => props.isImgRight ? '35px' : '0'};
             margin-right: ${props => props.isImgRight ? '0' : '35px'};
         }
@@ -102,8 +102,8 @@ const Container = styled.div`
                 background: #51B8EB;
                 border-radius: 8px;
                 display: block;
-                height: 38px;
-                line-height: 38px;
+                height: 49px;
+                line-height: 49px;
                 color: var(--navHover);
                 border: 1px solid var(--active);
                 position: relative;

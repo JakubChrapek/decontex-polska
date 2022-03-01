@@ -23,6 +23,7 @@ const BlogArchiveTemplate = (props) => {
       if (props.location.state.category != null) {
         document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
         document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
+        filter(props.location.state.category.replace(/\s/g, ''))
       }
     }
   }, [])
@@ -183,6 +184,17 @@ const Category = styled.span`
   color: ${props => props.categoryColor};
   padding: 10px;
   border-radius: 8px;
+  position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: ${props => `${props.categoryColor}22`};
+        border-radius: 8px;
+    }
 
 `
 

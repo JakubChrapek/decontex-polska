@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { useSwipeable } from "react-swipeable";
+import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { Link } from "gatsby"
 
 const News = ({ data, posts }) => {

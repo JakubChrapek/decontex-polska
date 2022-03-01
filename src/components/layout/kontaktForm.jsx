@@ -2,37 +2,70 @@ import React from "react"
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "gatsby"
+import Yes from '../vectors/yes.svg'
+// import sendgrid from "@sendgrid/mail";
 
-const KontaktForm = ({buttonText}) => {
-    const { register, handleSubmit } = useForm();
+const KontaktForm = ({ buttonText }) => {
+
+    // sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const Submit = (data) => {
-
+        debugger
+        try {
+            // sendgrid.send({
+            //     to: "shevabogdan16@gmail.com", // Your email where you'll receive emails
+            //     from: "manuarorawork@gmail.com", // your website email address here
+            //     subject: `${data} subject`,
+            //     html: `<div>You've got a mail</div>`,
+            // });
+        } catch (error) {
+            return res.status(error.statusCode || 500).json({ error: error.message });
+        }
     }
 
     return (
-        <Wrapper onSubmit={handleSubmit((data) => Submit(data))}>
+        <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
             <label>
                 <span>Imię i nazwisko</span>
-                <input {...register("name")} placeholder="John Doe" />
+                <input {...register("name", { required: true })} placeholder="John Doe" />
+                <p className='errorText'>
+                    {errors.name && 'Proszę, wpisz imię'}
+                </p>
             </label>
             <label>
                 <span>Numer telefonu</span>
-                <input {...register("phone")} placeholder="20 111 2345 6789" />
+                <input {...register("phone", { required: true })} placeholder="20 111 2345 6789" />
+                <p className='errorText'>
+                    {errors.phone && 'Proszę, wpisz poprawny telefon'}
+                </p>
             </label>
             <label>
                 <span>Email</span>
-                <input {...register("mail")} placeholder="john@gmail.com" />
+                <input {...register("mail", {
+                    required: true, pattern:
+                        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                })} placeholder="john@gmail.com" />
+                <p className='errorText'>
+                    {errors.mail && 'Proszę, wpisz poprawny E-mail'}
+                </p>
             </label>
             <label>
                 <span>Jak możemy pomóc?</span>
-                <textarea {...register("message")} rows="6" placeholder="Pisz tutaj" />
+                <textarea {...register("message", { required: true })} rows="6" placeholder="Pisz tutaj" />
+                <p className='errorText'>
+                    {errors.message && 'Proszę, wpisz wiadomość'}
+                </p>
             </label>
             <label className="checkbox">
-                <input type='checkbox' />
+                <input type='checkbox' {...register("check", { required: true })} />
                 <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link></span>
+                <p className='errorText'>
+                    {errors.check && 'Proszę, zaakceptuj politykę prywatności'}
+                </p>
             </label>
-            <button className="button" type="submit" >{buttonText }</button>
+            <button className="button" type="submit" >{buttonText}</button>
 
         </Wrapper>
     )
@@ -68,6 +101,16 @@ const Wrapper = styled.form`
     label{
         display: grid;
         margin-top: 24px;
+        position: relative;
+
+        .errorText{
+            color: red;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(100%);
+            font-size: 10px;
+            margin-bottom: 0 !important;
+        }
 
         &.checkbox{
             display: flex;
@@ -88,7 +131,7 @@ const Wrapper = styled.form`
                 border-radius: 4px;
 
                 &::after {
-                    content: '✓';
+                    content: url(${props => props.yes});
                     transition: 120ms transform ease-in-out;
                     position: absolute;
                     left: 50%;

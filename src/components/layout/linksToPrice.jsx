@@ -87,8 +87,8 @@ const Flex = styled.div`
                 background: #51B8EB;
                 border-radius: 8px;
                 display: block;
-                height: 40px;
-                line-height: 40px;
+                height: 49px;
+                line-height: 49px;
                 color: var(--navHover);
                 border: 1px solid var(--active);
                 position: relative;

@@ -292,9 +292,20 @@ const Content = styled.div`
     span{
       color: ${props => props.categoryColor};
       background: #FFFFFF;
-      border-radius: 15px;
+      border-radius: 8px;
       padding: 10px;
       margin-right: 16px;
+      position: relative;
+      &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background-color: ${props => `${props.categoryColor}22`};
+          border-radius: 8px;
+      }
     }
 
     p{
@@ -311,6 +322,32 @@ const Content = styled.div`
   .content{
     max-width: 744px;
     margin: 0 auto;
+    
+    blockquote{
+      position: relative;
+      padding-left: 20px;
+      margin-left: 0;
+      margin-right: 0;
+
+      &::before{
+        content: '‘‘';
+        font-family: auto;
+        position: absolute;
+        left: -28px;
+        top: -24px;
+        letter-spacing: -8px;
+        font-size: 100px;
+        color: var(--active);
+      }
+
+      p{
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 110%;
+        letter-spacing: 0px;
+        color: var(--superDarkText);
+      }
+    }
 
     p{
       margin: 24px 0;
@@ -325,6 +362,11 @@ const Content = styled.div`
 
     h2{
       margin-top: 48px;
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 130%;
+      letter-spacing: -0.5px;
+      color: var(--subDarkText);
     }
 
     ul{

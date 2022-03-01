@@ -18,6 +18,7 @@ import HeroPartner from '../components/layout/heroPartner';
 import PartnersContent from '../components/layout/partnersContent';
 import Kontakt from '../components/layout/kontakt';
 import HeroOrders from '../components/layout/heroOrders';
+import Benefits from '../components/layout/benefits';
 
 const OtherPageTemplate = ({
   data: {
@@ -73,7 +74,9 @@ const OtherPageTemplate = ({
               case 'DatoCmsSectionContactInformation':
                 return <Kontakt data={record} />
               case 'DatoCmsSectionHeroOrder':
-                return <HeroOrders data={record}/>
+                return <HeroOrders data={record} />
+              case 'DatoCmsSectionBenefit':
+                return <Benefits data={record} />
               default:
                 return null
             }
@@ -171,8 +174,8 @@ export const query = graphql`
             text
             icon {
               url
+              alt
               gatsbyImageData
-              
               title
             }
           }
@@ -224,10 +227,12 @@ export const query = graphql`
           img {
             url
             gatsbyImageData
-            
             title
           }
           text
+          backgroundColor{
+            hex
+          }
         }
         ... on DatoCmsSectionImageWithTextBackground {
           __typename

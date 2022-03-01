@@ -5,10 +5,9 @@ import '@fontsource/dm-sans' // Weight 500 with all styles included.
 import "@fontsource/ibm-plex-sans"
 import "@fontsource/poppins"
 
-export const wrapPageElement = ({ element }) => (
+export const wrapRootElement = ({ element }) => (
   <>
     <GlobalStyles />
-    <Redirect />
     {element}
   </>
 );

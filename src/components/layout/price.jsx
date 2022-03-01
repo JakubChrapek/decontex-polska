@@ -1,6 +1,7 @@
 import React from "react"
 import { StructuredText } from "react-datocms"
 import styled from "styled-components"
+import Yes from '../vectors/yes.svg'
 
 const Price = ({ data }) => {
     return (
@@ -14,7 +15,7 @@ const Price = ({ data }) => {
                         <StructuredText data={data.anotation} />
                     </div>
                 </Flex>
-                <Table>
+                <Table yes={Yes}>
                     {data.table.map(el => (
                         <li>
                             <span>
@@ -44,6 +45,7 @@ const Wrapper = styled.section`
 `
 
 const Container = styled.div`
+    max-width: 1190px;
 
 `
 
@@ -144,9 +146,10 @@ const Table = styled.ul`
                 }
 
                 &::before{
-                    content: "✔";
+                    content: url(${props => props.yes});
                     position: absolute;
                     left: 0;
+                    top: 2px;
                     background-color: inherit;
                     color: var(--active);
                 }
