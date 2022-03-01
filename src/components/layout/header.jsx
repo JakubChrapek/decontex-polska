@@ -50,7 +50,7 @@ const Nav = styled.nav`
 const LogoImage = styled(GatsbyImage)`
   width: ${158 / 16}rem;
   max-width: ${158 / 16}rem;
-  && [data-placeholder-image], > div {
+  && [data-placeholder-image] {
     position: absolute;
   }
 `;
