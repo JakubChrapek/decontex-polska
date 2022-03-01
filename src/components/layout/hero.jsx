@@ -4,30 +4,41 @@ import styled from 'styled-components'
 import Waves from '../vectors/heroOtherPageWaves'
 import Dots from '../img/dots-right-bottom.png'
 import { DOTS_IMAGES } from '../img/dots'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Hero = ({ data }) => {
   return (
     <Wrapper>
       <Container className="container">
         <Content>
-          <div className='left'>
+          <div className="left">
             <StructuredText data={data.title} />
             <p>{data.text}</p>
           </div>
           <div>
-            {data.img
-              ? <div className="imageWrapper">
+            {data.img ? (
+              <div className="imageWrapper">
+                <GatsbyImage
+                  image={data.img.gatsbyImageData}
+                  alt={data.img.alt}
+                  title={data.img.title}
+                  imgClassName='mainImage'
+                />
                 <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} />
-                <img className="mainImage" src={data.img.url} />
+                {/* <img
+                  className="mainImage"
+                  src={data.img.url}
+                  alt={data.img.alt}
+                  title={data.img.title}
+                /> */}
               </div>
-              : null
-            }
+            ) : null}
           </div>
         </Content>
       </Container>
       <Waves />
     </Wrapper>
-  )
+  );
 }
 
 export default Hero
@@ -122,20 +133,28 @@ const Content = styled.div`
     grid-gap: 0;
     padding-top: 140px;
     --right-padding: clamp(43px, 9.8vw, 76px);
+    max-width: 700px;
+    margin: 0 auto;
 
     .imageWrapper {
       width: 100%;
       margin-top: 48px;
       padding-right: var(--right-padding);
+      aspect-ratio: 610/457;
       .dots {
         width: clamp(129px, 34vw, 262px);
         right: 0;
         bottom: calc(-1 * clamp(36px, 8.5vw, 66px));
       }
 
+      .gatsby-image-wrapper {
+        height: 100%;
+      }
+
       .mainImage {
         max-width: 668px;
         width: 100%;
+        height: 100%;
       }
       :before {
         max-width: 668px;
@@ -150,7 +169,6 @@ const Content = styled.div`
     }
 
     div {
-      max-width: 700px;
       width: 100%;
 
       &.left {

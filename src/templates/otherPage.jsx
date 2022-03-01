@@ -106,6 +106,9 @@ export const query = graphql`
           }
           img {
             url
+            gatsbyImageData
+            alt
+            title
           }
         }
         ... on DatoCmsSectionStagesWithInform {
@@ -135,6 +138,9 @@ export const query = graphql`
               }
               icon {
                 url
+                gatsbyImageData
+                
+                title
               }
             }
           }
@@ -165,6 +171,9 @@ export const query = graphql`
             text
             icon {
               url
+              gatsbyImageData
+              
+              title
             }
           }
         }
@@ -192,6 +201,9 @@ export const query = graphql`
           text
           img {
             url
+            gatsbyImageData
+            
+            title
           }
         }
         ... on DatoCmsSectionImageWithButton {
@@ -211,6 +223,9 @@ export const query = graphql`
           }
           img {
             url
+            gatsbyImageData
+            
+            title
           }
           text
         }
@@ -225,6 +240,9 @@ export const query = graphql`
           }
           img {
             url
+            gatsbyImageData
+            
+            title
           }
         }
         ... on DatoCmsSectionPrice {
@@ -263,6 +281,9 @@ export const query = graphql`
             }
             img {
               url
+              gatsbyImageData
+              
+              title
             }
           }
         }
@@ -280,6 +301,9 @@ export const query = graphql`
             text
             img {
               url
+              gatsbyImageData
+              
+              title
             }
           }
           imageWithButton {
@@ -296,6 +320,9 @@ export const query = graphql`
             }
             img{
               url
+              gatsbyImageData
+              
+              title
             }
             isImgRight
             isImgBackground
@@ -330,6 +357,9 @@ export const query = graphql`
           text
           images {
             url
+            gatsbyImageData
+            
+            title
           }
         }
         ... on DatoCmsSectionPartnersContent {
@@ -364,6 +394,9 @@ export const query = graphql`
           subText
           img {
             url
+            gatsbyImageData
+            
+            title
           }
           buttonText
         }
