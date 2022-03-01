@@ -22,7 +22,7 @@ const BlogArchiveTemplate = (props) => {
     if (props.location.state != null) {
       if (props.location.state.category != null) {
         document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
-        document.querySelector('.' + props.location.state.category).classList.add('active')
+        document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
       }
     }
   }, [])

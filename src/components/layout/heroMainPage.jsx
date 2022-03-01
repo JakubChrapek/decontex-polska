@@ -23,28 +23,28 @@ const StyledHeroImage = styled(GatsbyImage)`
 `;
 
 const Hero = ({ data }) => {
-    const {background: {alt, title, gatsbyImageData}} = data;
-    return (
-      <Wrapper>
-        <StyledHeroImage alt={alt} title={title} image={gatsbyImageData} />
-        <Container className="container">
-          <StructuredText data={data.title} />
-          <Text>{data.text}</Text>
-          <div>
-            {data.buttons.map((el, index) => (
-              <Link
-                className={'c' + index}
-                to={el.slug}
-                aria-label={el.ariaLabel}
-              >
-                <StructuredText data={el.name} />
-              </Link>
-            ))}
-          </div>
-        </Container>
-        <Waves />
-      </Wrapper>
-    );
+  const { background: { alt, title, gatsbyImageData } } = data;
+  return (
+    <Wrapper>
+      <StyledHeroImage alt={alt} title={title} image={gatsbyImageData} />
+      <Container className="container">
+        <StructuredText data={data.title} />
+        <Text>{data.text}</Text>
+        <div>
+          {data.buttons.map((el, index) => (
+            <Link
+              className={'c' + index}
+              to={el.slug}
+              aria-label={el.ariaLabel}
+            >
+              <StructuredText data={el.name} />
+            </Link>
+          ))}
+        </div>
+      </Container>
+      <Waves />
+    </Wrapper>
+  );
 }
 
 export default Hero
@@ -84,11 +84,16 @@ const Container = styled.div`
             padding: 13px 32px;
             border-radius: 8px;
             margin-right: 16px;
+            transition: .2s linear;
 
             &.c0{
                 background-color: var(--mainLightText);
                 p{
                     color: var(--buttonText);
+                }
+
+                &:hover{
+                  opacity: .7;
                 }
             }
 
@@ -96,6 +101,14 @@ const Container = styled.div`
                 border: 1px solid var(--mainLightText);
                 p{
                     color: var(--mainLightText);
+                }
+
+                &:hover{
+                  background-color: var(--mainLightText);
+
+                  p{
+                    color: var(--mainDarkText);
+                  }
                 }
             }
         }

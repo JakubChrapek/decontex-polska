@@ -86,8 +86,14 @@ const NavList = styled.ul`
       height: 40px;
       line-height: 40px;
       color: var(--navHover);
+      border: 1px solid var(--active);
 
       &:hover{
+        border: 1px solid var(--active);
+        background-color: transparent;
+
+        color: var(--active);
+
       }
     }
   }
@@ -215,6 +221,10 @@ const MobileNav = styled.div`
     padding: 0 16px;
     
   }
+`
+
+const Logo = styled.img`
+  max-width: 158px;
 `
 
 // Main Component

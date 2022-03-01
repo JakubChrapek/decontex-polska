@@ -157,12 +157,25 @@ const Flex = styled.div`
     padding: 13px 32px;
     border-radius: 8px;
     margin: 0 8px;
+    transition: .2s linear;
 
     &.c0{
       background-color: var(--active);
+      border: 1px solid var(--active);
       p{
         color: var(--mainLightText);
         text-align: center;
+        transition: .2s linear;
+      }
+
+      &:hover{
+        border: 1px solid var(--active);
+        background-color: transparent;
+
+        p{
+          color: var(--active);
+
+        }
       }
     }
 
@@ -171,6 +184,16 @@ const Flex = styled.div`
       p{
         color: var(--mainDarkText);
         text-align: center;
+        transition: .2s linear;
+      }
+
+      &:hover{
+        background-color: var(--active);
+        border: 1px solid var(--active);
+
+        p{
+          color: var(--mainLightText);
+        }
       }
     }
   }

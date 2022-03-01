@@ -95,6 +95,17 @@ const Questions = styled.div`
             position: absolute;
             background-color: var(--divider);
         }
+
+        
+    }
+
+    
+    details svg {
+    transform: rotateX(0deg);
+    }
+
+    details[open] svg {
+    transform: rotateX(180deg);
     }
 
 

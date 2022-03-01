@@ -160,10 +160,21 @@ const Flex = styled.div`
         padding: 13px 32px;
         border-radius: 8px;
         background-color: var(--blackButtonBackground);
+        border: 1px solid var(--blackButtonBackground);
         color: var(--mainLightText);
         font-weight: 500;
         font-size: 16px;
         line-height: 21px;
+        transition: .2s linear;
+
+        
+        
+        &:hover{
+            border: 1px solid var(--blackButtonBackground);
+            background-color: transparent;
+
+            color: var(--blackButtonBackground);
+        }
     }
 
     @media (max-width: 1024px) {
