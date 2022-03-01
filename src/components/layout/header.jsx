@@ -48,8 +48,12 @@ const Nav = styled.nav`
 `;
 
 const LogoImage = styled(GatsbyImage)`
-  width: ${158/16}rem;
-`
+  width: ${158 / 16}rem;
+  max-width: ${158 / 16}rem;
+  && [data-placeholder-image], > div {
+    position: absolute;
+  }
+`;
 
 const NavList = styled.ul`
   display: grid;
@@ -377,9 +381,13 @@ const Header = () => {
               }
               return (
                 <Link to="/">
-                  <img src={logoVariant.url} alt={logoVariant.alt} />
+                  <LogoImage
+                    image={logoVariant.gatsbyImageData}
+                    alt={logoVariant.alt}
+                    title={logoVariant.title}
+                  />
                 </Link>
-              )
+              );
             }
           )}
         <MobileButton onClick={() => { changeIsMenuOpened(!isMenuOpened) }} isMenuOpened={isMenuOpened} isWhite={pathname === '/' || pathname === '/en'}><span /></MobileButton>
