@@ -10,7 +10,7 @@ const Hero = ({ data }) => {
   return (
     <Wrapper>
       <Container className="container">
-        <Content>
+        <Content dotsOnRight={data.dotsOnRight}>
           <div className="left">
             <StructuredText data={data.title} />
             <p>{data.text}</p>
@@ -22,7 +22,7 @@ const Hero = ({ data }) => {
                   image={data.img.gatsbyImageData}
                   alt={data.img.alt}
                   title={data.img.title}
-                  imgClassName='mainImage'
+                  imgClassName="mainImage"
                 />
                 <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} />
                 {/* <img
