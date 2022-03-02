@@ -289,9 +289,9 @@ const Category = styled.span`
 `
 
 const Wrapper = styled.div`
-  padding-top: 192px;
-  padding-bottom: 160px;
-`
+  padding-top: clamp(130px, 13.33vw, 192px);
+  padding-bottom: clamp(110px, 11.11vw, 160px);
+`;
 
 const Container = styled.div`
 

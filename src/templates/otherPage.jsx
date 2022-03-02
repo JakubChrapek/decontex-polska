@@ -332,6 +332,9 @@ export const query = graphql`
             }
             isImgRight
             isImgBackground
+            backgroundColor {
+              hex
+            }
           }
         }
         ... on DatoCmsSectionListWithBackgroundWave {
