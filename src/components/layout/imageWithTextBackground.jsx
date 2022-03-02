@@ -3,22 +3,24 @@ import { StructuredText } from "react-datocms"
 import styled from "styled-components"
 import Logo from './../img/logo_light.png'
 import Dots from '../img/dotsSmall.png'
+import { DOTS_IMAGES } from '../img/dots'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const ImageWithTextBackground = ({ data }) => {
     return (
-        <Wrapper>
-            <Container logo={Logo} className="container">
-                <div className="imageWrapper">
-                    <img className="dots" src={Dots} alt='kropki dekoracyjne' />
-                    <img className="mainImage" src={data.img.url} alt={data.img.alt} />
-                </div>
-                <div className="textPart">
-                    <StructuredText data={data.title} />
-                    <StructuredText data={data.list} />
-                </div>
-            </Container>
-        </Wrapper>
-    )
+      <Wrapper>
+        <Container logo={Logo} className="container">
+          <div className="imageWrapper">
+            <img className="dots" src={DOTS_IMAGES.SMALL_DOTS} alt="" />
+            <GatsbyImage image={data.img.gatsbyImageData} alt={data.img.alt} title={data.img.title} />
+          </div>
+          <div className="textPart">
+            <StructuredText data={data.title} />
+            <StructuredText data={data.list} />
+          </div>
+        </Container>
+      </Wrapper>
+    );
 }
 
 export default ImageWithTextBackground
@@ -76,7 +78,7 @@ const Container = styled.div`
                 position: relative;
 
                 &::before{
-                    content: url(${props => props.logo});
+                    content: url(${(props) => props.logo});
                     position: absolute;
                     left: 0;
                 }
@@ -107,4 +109,9 @@ const Container = styled.div`
             margin: 0 auto;
         }
     }
-`
+    @media (max-width: 640px) {
+        .imageWrapper{
+            margin: 72px auto 0 0;
+        }
+    }
+`;

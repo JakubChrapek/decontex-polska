@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { StructuredText } from 'react-datocms';
-import Navigator from '../components/langHelpers/navigator';
 import PageWrapper from '../components/layout/pageWrapper';
 import Hero from '../components/layout/hero'
 import Text from '../components/layout/text';
@@ -208,6 +207,7 @@ export const query = graphql`
             alt
             title
           }
+          dotsOnRight
         }
         ... on DatoCmsSectionImageWithButton {
           __typename
@@ -332,6 +332,9 @@ export const query = graphql`
             }
             isImgRight
             isImgBackground
+            backgroundColor {
+              hex
+            }
           }
         }
         ... on DatoCmsSectionListWithBackgroundWave {

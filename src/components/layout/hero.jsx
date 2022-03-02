@@ -10,7 +10,7 @@ const Hero = ({ data }) => {
   return (
     <Wrapper>
       <Container className="container">
-        <Content>
+        <Content dotsOnRight={data.dotsOnRight}>
           <div className="left">
             <StructuredText data={data.title} />
             <p>{data.text}</p>
@@ -22,15 +22,9 @@ const Hero = ({ data }) => {
                   image={data.img.gatsbyImageData}
                   alt={data.img.alt}
                   title={data.img.title}
-                  imgClassName='mainImage'
+                  imgClassName="mainImage"
                 />
-                <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} alt='kropki dekoracyjne' />
-                {/* <img
-                  className="mainImage"
-                  src={data.img.url}
-                  alt={data.img.alt}
-                  title={data.img.title}
-                /> */}
+                <img className="dots" src={data.dotsOnRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM} alt='' />
               </div>
             ) : null}
           </div>
@@ -99,30 +93,33 @@ const Content = styled.div`
     height: fit-content;
     width: fit-content;
     margin-left: auto;
-    padding-right: 56px;
+    padding-right: ${({ dotsOnRight }) => (dotsOnRight ? '56px' : '0')};
     padding-bottom: 14px;
 
     .dots {
       position: absolute;
       max-width: 40%;
       bottom: -40px;
-      right: -10px;
+      right: ${({ dotsOnRight }) => (dotsOnRight ? '-10px' : 'unset')};
+      left: ${({ dotsOnRight }) => (dotsOnRight ? 'unset' : '-56px')};
+
       z-index: 10;
     }
 
     .mainImage {
       border-radius: 16px;
-      /* box-shadow: 28px 28px 0px 0px var(--backgroundMedium); */
     }
     position: relative;
     &:before {
       content: '';
       position: absolute;
       background-color: var(--backgroundMedium);
-      width: calc(100% - 56px);
+      width: ${({ dotsOnRight }) =>
+        dotsOnRight ? 'calc(100% - 56px)' : '100%'};
       height: calc(100% - 14px);
       bottom: -14px;
-      right: 28px;
+      right: ${({ dotsOnRight }) => (dotsOnRight ? '28px' : '0')};
+      left: ${({ dotsOnRight }) => (dotsOnRight ? 'unset' : '-28px')};
       border-radius: 16px;
       z-index: -1;
     }
@@ -132,18 +129,22 @@ const Content = styled.div`
     grid-template-columns: 1fr;
     grid-gap: 0;
     padding-top: 140px;
-    --right-padding: clamp(43px, 9.8vw, 76px);
+    --padding-value: clamp(43px, 9.8vw, 76px);
     max-width: 700px;
     margin: 0 auto;
 
     .imageWrapper {
       width: 100%;
       margin-top: 48px;
-      padding-right: var(--right-padding);
+      padding-right: ${({ dotsOnRight }) =>
+        dotsOnRight ? 'var(--padding-value)' : '0'};
+      padding-left: ${({ dotsOnRight }) =>
+        dotsOnRight ? '0' : 'var(--padding-value)'};
       aspect-ratio: 610/457;
       .dots {
         width: clamp(129px, 34vw, 262px);
-        right: 0;
+        right: ${({ dotsOnRight }) => (dotsOnRight ? '0' : 'unset')};
+        left: ${({ dotsOnRight }) => (dotsOnRight ? 'unset' : '0')};
         bottom: calc(-1 * clamp(36px, 8.5vw, 66px));
       }
 
@@ -158,9 +159,12 @@ const Content = styled.div`
       }
       :before {
         max-width: 668px;
-        width: calc(100% - var(--right-padding));
-        bottom: calc(-1 * var(--right-padding) / 4);
-        right: calc(var(--right-padding) / 2);
+        width: calc(100% - var(--padding-value));
+        bottom: calc(-1 * var(--padding-value) / 4);
+        right: ${({ dotsOnRight }) =>
+          dotsOnRight ? 'calc(var(--padding-value) / 2)' : 'unset'};
+        left: ${({ dotsOnRight }) =>
+          dotsOnRight ? 'unset' : 'calc(var(--padding-value) / 2)'};
       }
     }
 
@@ -177,6 +181,6 @@ const Content = styled.div`
     }
   }
   @media (max-width: 375px) {
-    --right-padding: 32px;
+    --padding-value: 32px;
   }
 `;
