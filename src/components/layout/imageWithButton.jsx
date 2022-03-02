@@ -63,6 +63,7 @@ const Container = styled.div`
             box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor.hex : '-32px 32px 0px 0px' + props.backgroundColor.hex : null};
             margin-left: ${props => props.isImgRight ? '35px' : '0'};
             margin-right: ${props => props.isImgRight ? '0' : '35px'};
+            max-width: 400px;
         }
     }
 

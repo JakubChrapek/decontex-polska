@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
-import useLanguages from '../hooks/useLanguages';
 import styled from 'styled-components';
-import { ArrowRight } from '../components/vectors/arrows';
 import { Link } from "gatsby"
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { StructuredText } from 'react-datocms';
+import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
 
 const BlogArchiveTemplate = (props) => {
-  // debugger
-  const { defaultLanguage, blogPath } = useLanguages();
-  const { pagesNumber, archivePageNumber, locale } = props.pageContext;
 
   let choosenPosts = props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)
 
+  const [canRight, changeCanRight] = useState(true)
+  const [canLeft, changeCanLeft] = useState(false)
   const [preFiltredPosts, changePreFiltredPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
-  const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts)
+  const [currentPage, changeCurrentPage] = useState(1)
+  const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(Math.ceil(preFiltredPosts.length / 9))
+  const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts.filter((el, id) => id < 9 * currentPage))
+  const [filtredType, changeFiltredType] = useState('all')
 
   useEffect(() => {
     if (props.location.state != null) {
@@ -24,19 +25,62 @@ const BlogArchiveTemplate = (props) => {
         document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
         document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
         filter(props.location.state.category.replace(/\s/g, ''))
+        changeFiltredType(props.location.state.category.replace(/\s/g, ''))
       }
     }
   }, [])
 
-  function filter(type) {
-    if (type === 'all') {
-      changeFiltredPosts(preFiltredPosts)
+  useEffect(() => {
+
+    if (filtredType !== 'all') {
+      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === filtredType).filter((el, id) => id < 9))
+      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === filtredType).length / 9))
     } else {
-      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === type))
+      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < 9 * currentPage && id >= 9 * (currentPage - 1)))
+      canPaginate(preFiltredPagesCount)
+    }
+
+  }, [currentPage])
+
+  function filter(type) {
+    changeFiltredType(type)
+
+    if (type === 'all') {
+      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < 9))
+      canPaginate(preFiltredPagesCount)
+      changeCurrentPage(1)
+    } else {
+      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === type).length / 9))
+      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === type).filter((el, id) => id < 9))
+      changeCurrentPage(1)
     }
 
     document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
     document.querySelector('.' + type.replace(/\s/g, '')).classList.add('active')
+  }
+
+  function pagination(direct) {
+    if (direct === 'left' && canLeft) {
+      changeCurrentPage(currentPage - 1)
+    } else if (direct === 'right' && canRight) {
+      changeCurrentPage(currentPage + 1)
+    }
+  }
+
+  function canPaginate(currentPagesCount) {
+    if (currentPagesCount === 1) {
+      changeCanRight(false)
+      changeCanLeft(false)
+    } else if (currentPage === 1) {
+      changeCanRight(true)
+      changeCanLeft(false)
+    } else if (currentPage === currentPagesCount) {
+      changeCanRight(false)
+      changeCanLeft(true)
+    } else {
+      changeCanRight(true)
+      changeCanLeft(true)
+    }
   }
 
 
@@ -113,6 +157,27 @@ const BlogArchiveTemplate = (props) => {
               </Grid>
             </AnimatePresence>
           </AnimateSharedLayout>
+          <Pagination>
+            <button
+              disabled={!canLeft}
+              onClick={() => {
+                pagination('left')
+              }}
+            >
+              <ArrowLeft />
+            </button>
+            <p>
+              {currentPage}
+            </p>
+            <button
+              disabled={!canRight}
+              onClick={() => {
+                pagination('right')
+              }}
+            >
+              <ArrowRight />
+            </button>
+          </Pagination>
         </Container>
       </Wrapper>
     </PageWrapper>
@@ -178,6 +243,34 @@ export const query = graphql`
     }
   }
 `;
+
+const Pagination = styled.div`
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  p{
+    margin: 0 20px;
+  }
+  button{
+      margin-right: 16px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--backgroundMedium);
+      justify-content: center;
+      align-items: center;
+      display: inline-flex;
+
+      &:disabled{
+          border: 1px solid var(--divider);
+
+          path{
+              stroke: var(--divider);
+          }
+      }
+  }
+
+`
 
 const Category = styled.span`
   background-color: var(--mainLightText);
