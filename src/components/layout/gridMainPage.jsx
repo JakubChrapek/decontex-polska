@@ -7,87 +7,87 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Grid = ({ data }) => {
     return (
-      <Wrapper>
-        <Container className="container">
-          <ContentDesctop>
-            <div className="left">
-              <StructuredText data={data.mainTitle} />
-              <p className="mainText">{data.mainText}</p>
-              <GatsbyImage
-                image={data.secondImg.gatsbyImageData}
-                className="secondImg"
-                alt={data.secondImg.alt}
-                title={data.secondImg.title}
-              />
-              <p className="secondText">{data.secondText}</p>
-              <StructuredText data={data.publicationDate} />
-              <p className="subText">{data.subText}</p>
-              {data.link.map((el) => (
-                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
-                  <StructuredText data={el.name} />
-                </Link>
-              ))}
-            </div>
-            <div className="right">
-              <GatsbyImage
-                image={data.firstImg.gatsbyImageData}
-                className="firstImg"
-                alt={data.firstImg.alt}
-                title={data.firstImg.title}
-              />
-              <p className="firstText">{data.firstText}</p>
-              <GatsbyImage
-                image={data.thirdImg.gatsbyImageData}
-                className="thirdImg"
-                alt={data.thirdImg.alt}
-                title={data.thirdImg.title}
-              />
-            </div>
-          </ContentDesctop>
-          <ContentMobile>
-            <span className="title">
-              <StructuredText data={data.mainTitle} />
-            </span>
-            <p className="mainText">{data.mainText}</p>
-            <div className="flex flex1">
-              <p className="firstText text">{data.firstText}</p>
-              <GatsbyImage
-                image={data.firstImg.gatsbyImageData}
-                className="firstImg"
-                alt={data.firstImg.alt}
-                title={data.firstImg.title}
-              />
-            </div>
-            <div className="flex flex2">
-              <p className="secondText text">{data.secondText}</p>
-              <GatsbyImage
-                image={data.secondImg.gatsbyImageData}
-                className="secondImg"
-                alt={data.secondImg.alt}
-                title={data.secondImg.title}
-              />
-            </div>
-            <div className="flex flex3">
-              <div className="text">
-                <StructuredText data={data.publicationDate} />
-                <p className="subText">{data.subText}</p>
-                {data.link.map((el) => (
-                  <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
-                    <StructuredText data={el.name} />
-                  </Link>
-                ))}
-              </div>
-              <GatsbyImage
-                image={data.thirdImg.gatsbyImageData}
-                className="thirdImg"
-                alt={data.thirdImg.alt}
-                title={data.thirdImg.title}
-              />
-            </div>
-          </ContentMobile>
-        </Container>
-        <Waves />
-      </Wrapper>
+        <Wrapper>
+            <Container className="container">
+                <ContentDesctop>
+                    <div className="left">
+                        <StructuredText data={data.mainTitle} />
+                        <p className="mainText">{data.mainText}</p>
+                        <GatsbyImage
+                            image={data.secondImg.gatsbyImageData}
+                            className="secondImg"
+                            alt={data.secondImg.alt}
+                            title={data.secondImg.title}
+                        />
+                        <p className="secondText">{data.secondText}</p>
+                        <StructuredText data={data.publicationDate} />
+                        <p className="subText">{data.subText}</p>
+                        {data.link.map((el) => (
+                            <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+                                <StructuredText data={el.name} />
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="right">
+                        <GatsbyImage
+                            image={data.firstImg.gatsbyImageData}
+                            className="firstImg"
+                            alt={data.firstImg.alt}
+                            title={data.firstImg.title}
+                        />
+                        <p className="firstText">{data.firstText}</p>
+                        <GatsbyImage
+                            image={data.thirdImg.gatsbyImageData}
+                            className="thirdImg"
+                            alt={data.thirdImg.alt}
+                            title={data.thirdImg.title}
+                        />
+                    </div>
+                </ContentDesctop>
+                <ContentMobile>
+                    <span className="title">
+                        <StructuredText data={data.mainTitle} />
+                    </span>
+                    <p className="mainText">{data.mainText}</p>
+                    <div className="flex flex1">
+                        <p className="firstText text">{data.firstText}</p>
+                        <GatsbyImage
+                            image={data.firstImg.gatsbyImageData}
+                            className="firstImg"
+                            alt={data.firstImg.alt}
+                            title={data.firstImg.title}
+                        />
+                    </div>
+                    <div className="flex flex2">
+                        <p className="secondText text">{data.secondText}</p>
+                        <GatsbyImage
+                            image={data.secondImg.gatsbyImageData}
+                            className="secondImg"
+                            alt={data.secondImg.alt}
+                            title={data.secondImg.title}
+                        />
+                    </div>
+                    <div className="flex flex3">
+                        <div className="text">
+                            <StructuredText data={data.publicationDate} />
+                            <p className="subText">{data.subText}</p>
+                            {data.link.map((el) => (
+                                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+                                    <StructuredText data={el.name} />
+                                </Link>
+                            ))}
+                        </div>
+                        <GatsbyImage
+                            image={data.thirdImg.gatsbyImageData}
+                            className="thirdImg"
+                            alt={data.thirdImg.alt}
+                            title={data.thirdImg.title}
+                        />
+                    </div>
+                </ContentMobile>
+            </Container>
+            <Waves />
+        </Wrapper>
     );
 }
 
@@ -190,8 +190,8 @@ const ContentMobile = styled.div`
         }
 
         &:hover{
-            border: 1px solid var(--mainLightText);
-            background-color: transparent;
+            border: 1px solid var(--backgroundLight);
+            background-color: var(--backgroundLight);
             p{
                 color: var(--mainLightText);
             }
@@ -320,8 +320,8 @@ const ContentDesctop = styled.div`
         }
 
         &:hover{
-            border: 1px solid var(--mainLightText);
-            background-color: transparent;
+            border: 1px solid var(--backgroundLight);
+            background-color: var(--backgroundLight);
             p{
                 color: var(--mainLightText);
             }

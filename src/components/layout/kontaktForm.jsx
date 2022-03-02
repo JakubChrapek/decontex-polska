@@ -15,21 +15,21 @@ const KontaktForm = ({ buttonText }) => {
 
     return (
         <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
-            <label>
+            <label className={errors.name && 'error'}>
                 <span>Imię i nazwisko</span>
                 <input {...register("name", { required: true })} placeholder="John Doe" />
                 <p className='errorText'>
                     {errors.name && 'Proszę, wpisz imię'}
                 </p>
             </label>
-            <label>
+            <label className={errors.phone && 'error'}>
                 <span>Numer telefonu</span>
                 <input {...register("phone", { required: true })} placeholder="20 111 2345 6789" />
                 <p className='errorText'>
                     {errors.phone && 'Proszę, wpisz poprawny telefon'}
                 </p>
             </label>
-            <label>
+            <label className={errors.mail && 'error'}>
                 <span>Email</span>
                 <input {...register("mail", {
                     required: true, pattern:
@@ -39,14 +39,14 @@ const KontaktForm = ({ buttonText }) => {
                     {errors.mail && 'Proszę, wpisz poprawny E-mail'}
                 </p>
             </label>
-            <label>
+            <label className={errors.message && 'error'}>
                 <span>Jak możemy pomóc?</span>
                 <textarea {...register("message", { required: true })} rows="6" placeholder="Pisz tutaj" />
                 <p className='errorText'>
                     {errors.message && 'Proszę, wpisz wiadomość'}
                 </p>
             </label>
-            <label className="checkbox">
+            <label className={(errors.check && 'error') + " checkbox"}>
                 <input type='checkbox' {...register("check", { required: true })} />
                 <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link></span>
                 <p className='errorText'>
@@ -79,10 +79,8 @@ const Wrapper = styled.form`
         border: 1px solid var(--active);
 
         &:hover{
-            border: 1px solid var(--active);
-            background-color: transparent;
-
-            color: var(--active);
+            border: 1px solid var(--backgroundLight);
+            background-color: var(--backgroundLight);
         }
     }
 
@@ -126,7 +124,6 @@ const Wrapper = styled.form`
                     top: 50%;
                     transform: translateX(-50%) translateY(-50%) scale(0);
                     border-radius: 3px;
-                    color: #2c8cda;
                     font-weight: 900;
                     z-index: 3;
                 }
@@ -134,6 +131,7 @@ const Wrapper = styled.form`
                 &:checked{
                     &::after{
                         transform: translateX(-50%) translateY(-50%) scale(0.8);
+                        
                     }
                 }
 
@@ -173,6 +171,11 @@ const Wrapper = styled.form`
             padding: 14px 16px;
             border-radius: 8px;
             border: 1px solid var(--divider);
+            transition: .2s linear;
+
+            &:active{
+                border-color: var(--formDarkText) !important;
+            }
 
             &::placeholder{
                 font-size: 14px;
@@ -180,6 +183,18 @@ const Wrapper = styled.form`
                 color: var(--formDarkText);
             }
 
+        }
+        
+        &.error{
+            input{
+                border-color: var(--error);
+            }
+        }
+
+        &:hover{
+            input, textarea {
+                border-color: var(--formDarkText);
+            }
         }
     }
 `

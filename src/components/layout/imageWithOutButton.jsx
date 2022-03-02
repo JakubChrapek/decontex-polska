@@ -3,37 +3,38 @@ import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import Logo from "../vectors/logo"
 import { GatsbyImage } from 'gatsby-plugin-image'
-import {DOTS_IMAGES} from '../img/dots'
+import { DOTS_IMAGES } from '../img/dots'
+import { motion } from "framer-motion"
 
 const ImageWithoutButton = ({ data }) => {
-    return (
-      <Wrapper>
-        <Container
-          isImgBackground={data.isImgBackground}
-          isImgRight={data.isImgRight}
-          className="container"
-        >
-          <div className="imageWrapper">
-            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="kropki dekoracyjne" />
-            <GatsbyImage
-              className="mainImage"
-              image={data.img.gatsbyImageData}
-              alt={data.img.alt}
-              title={data.img.title}
-            />
-          </div>
-          <div className="textPart">
-            <StructuredText data={data.title} />
-            <p>{data.text}</p>
+  return (
+    <Wrapper>
+      <Container
+        isImgBackground={data.isImgBackground}
+        isImgRight={data.isImgRight}
+        className="container"
+      >
+        <div className="imageWrapper">
+          <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="kropki dekoracyjne" />
+          <GatsbyImage
+            className="mainImage"
+            image={data.img.gatsbyImageData}
+            alt={data.img.alt}
+            title={data.img.title}
+          />
+        </div>
+        <motion.div className="textPart">
+          <StructuredText data={data.title} />
+          <p>{data.text}</p>
 
-            <h3>
-              <Logo />
-              {data.bottomText}
-            </h3>
-          </div>
-        </Container>
-      </Wrapper>
-    );
+          <h3>
+            <Logo />
+            {data.bottomText}
+          </h3>
+        </motion.div>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default ImageWithoutButton
@@ -79,11 +80,11 @@ const Container = styled.div`
         border-radius: 16px;
       }
       /* box-shadow: ${(props) =>
-        props.isImgBackground
-          ? props.isImgRight
-            ? '28px 28px 0px 0px var(--backgroundMedium)'
-            : '-28px 28px 0px 0px var(--backgroundMedium)'
-          : null}; */
+    props.isImgBackground
+      ? props.isImgRight
+        ? '28px 28px 0px 0px var(--backgroundMedium)'
+        : '-28px 28px 0px 0px var(--backgroundMedium)'
+      : null}; */
       &:before {
         content: '';
         position: absolute;

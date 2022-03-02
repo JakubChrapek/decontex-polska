@@ -51,6 +51,7 @@ const Flex = styled.div`
 
     img{
         border-radius: 16px;
+        max-width: 400px;
         box-shadow: ${props => props.isImgBackground ? props.isImgRight ? '32px 32px 0px 0px var(--backgroundMedium)' : '-32px 32px 0px 0px var(--backgroundMedium)' : null};
     }
 
@@ -107,14 +108,12 @@ const Flex = styled.div`
                 }            
                     
                 &:hover{
-                    border: 1px solid var(--active);
-                    background: transparent;
-                    background-color: transparent;
-        
-                    color: var(--active);
+                    border: 1px solid var(--backgroundLight);
+                    background-color: var(--backgroundLight);
         
                     mark{
-                        color: #d30000;
+                        border: 1px solid var(--backgroundMedium);
+                        background-color: var(--backgroundMedium);
                     }
                 }
 

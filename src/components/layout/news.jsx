@@ -168,14 +168,10 @@ const Flex = styled.div`
         font-size: 16px;
         line-height: 21px;
         transition: .2s linear;
-
-        
         
         &:hover{
-            border: 1px solid var(--blackButtonBackground);
-            background-color: transparent;
-
-            color: var(--blackButtonBackground);
+            border: 1px solid var(--backgroundMedium);
+            background-color:  var(--backgroundMedium);
         }
     }
 
@@ -285,9 +281,19 @@ const SliderControls = styled.div`
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        transition: .2s linear;
+
+        &:hover{
+        background-color: var(--backgroundMedium);
+
+            path{
+                stroke: var(--mainLightText);
+            }
+        }
 
         &:disabled{
             border: 1px solid var(--divider);
+            background-color: var(--mainLightText);
 
             path{
                 stroke: var(--divider);
@@ -308,7 +314,9 @@ const Category = styled.span`
     line-height: 1;
     display: inline-block;
     position: relative;
-    &:before {
+    transition: .2s linear;
+
+    &::before {
         content: '';
         position: absolute;
         left: 0;
@@ -317,5 +325,15 @@ const Category = styled.span`
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
         border-radius: 15px;
+        transition: .2s linear;
+    }
+
+    &:hover{
+        color: var(--mainLightText);
+        background-color:  ${props => props.categoryColor};
+
+        &::before{
+            opacity: 0;
+        }
     }
 `

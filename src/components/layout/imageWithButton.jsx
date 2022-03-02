@@ -157,18 +157,17 @@ const Container = styled.div`
           padding: 0 24px;
           width: max-content;
           left: 0;
-          transition: color 0.2s linear;
+          transition: 0.2s linear;
           transform: translate(-2px, -2px);
         }
 
         &:hover {
-          border: 1px solid var(--active);
-          background-color: transparent;
-
-          color: var(--active);
+          border: 1px solid var(--backgroundLight);
+          background-color: var(--backgroundLight);
 
           mark {
-            color: #d30000;
+            border: 1px solid var(--backgroundMedium);
+            background-color: var(--backgroundMedium);
           }
         }
       }
