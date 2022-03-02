@@ -190,6 +190,7 @@ const Container = styled.div`
 
       .mainImage {
         max-width: 605px;
+        aspect-ratio: 4/3;
         width: 87%;
         margin: ${({ isImgRight }) => isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;

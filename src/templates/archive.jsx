@@ -289,6 +289,8 @@ const Category = styled.span`
   position: relative;
   cursor: pointer;
   transition: .2s linear;
+  font-size: 14px;
+  line-height: 170%;
 
     &:before {
         content: '';
@@ -314,7 +316,12 @@ const Category = styled.span`
 
 const Wrapper = styled.div`
   padding-top: 192px;
-  padding-bottom: 160px;
+  padding-bottom: 110px;
+
+  @media (max-width: 1024px){
+    padding-top: clamp(140px, 18.2vw, 192px);
+    padding-bottom: clamp(45px, 8.4vw, 110px);
+  }
 `
 
 const Container = styled.div`
@@ -350,7 +357,7 @@ const Hero = styled.div`
     div{
       position: absolute;
       bottom: 0;
-      padding: 50px;
+      padding: clamp(18px, 4.5vw, 50px);
 
 
       .title{
@@ -381,6 +388,15 @@ const Hero = styled.div`
     }
 
   }
+
+  @media (max-width: 1024px) {
+    font-size: clamp(36px, 5.2vw, 48px);
+
+    .imageBox div .title{
+      margin: 10px 0 4px;
+      font-size: 18px;
+    }
+  }
 `
 
 const Controls = styled.div`
@@ -393,6 +409,7 @@ const Controls = styled.div`
 
   div{
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 40px;
     
     button{
@@ -406,6 +423,7 @@ const Controls = styled.div`
       border: 1px solid var(--divider);
       cursor: pointer;
       transition: .2s ease-in-out;
+      min-width: fit-content;
 
       &:hover{
         background-color: var(--divider);
@@ -419,6 +437,14 @@ const Controls = styled.div`
       }
 
     }
+  }
+
+  
+  @media (max-width: 880px) {
+  }
+  
+  @media (max-width: 560px) {
+      padding: 5px 20px;
   }
 
 `
@@ -494,5 +520,14 @@ const Grid = styled(motion.ul)`
       transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
      
     }
+  }
+
+  @media (max-width: 880px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+    
   }
 `

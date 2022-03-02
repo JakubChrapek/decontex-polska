@@ -247,6 +247,15 @@ const Nav = styled.nav`
   @media (max-width: 480px){
     ul{
       grid-template-columns: 1fr;
+
+      li a p {
+        padding: 0;
+
+        &:hover{
+          color: var(--mainLightText);
+          background-color: unset;
+        }
+      }
     }
   }
 `
