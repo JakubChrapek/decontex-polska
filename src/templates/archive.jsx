@@ -9,29 +9,28 @@ import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
 
 const BlogArchiveTemplate = (props) => {
 
-  let choosenPosts = props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)
+  debugger
 
+  const [choosenPosts, changeChoosenPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage))
   const [canRight, changeCanRight] = useState(true)
   const [canLeft, changeCanLeft] = useState(false)
   const [preFiltredPosts, changePreFiltredPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
   const [currentPage, changeCurrentPage] = useState(1)
   const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(Math.ceil(preFiltredPosts.length / 9))
+  const [filtredPagesCount, changeFiltredPagesCount] = useState(null)
   const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts.filter((el, id) => id < 9 * currentPage))
-  const [filtredType, changeFiltredType] = useState('all')
+  const [filtredType, changeFiltredType] = useState(props.location.state?.category ? props.location.state?.category : 'all')
 
   useEffect(() => {
-    if (props.location.state != null) {
-      if (props.location.state.category != null) {
-        document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
-        document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
-        filter(props.location.state.category.replace(/\s/g, ''))
-        changeFiltredType(props.location.state.category.replace(/\s/g, ''))
-      }
+    if (props.location.state?.category != null) {
+      document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
+      document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
+      filter(props.location.state.category.replace(/\s/g, ''))
+      changeFiltredType(props.location.state.category.replace(/\s/g, ''))
     }
   }, [])
 
   useEffect(() => {
-
     if (filtredType !== 'all') {
       changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === filtredType).filter((el, id) => id < 9))
       canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === filtredType).length / 9))
@@ -39,7 +38,6 @@ const BlogArchiveTemplate = (props) => {
       changeFiltredPosts(preFiltredPosts.filter((el, id) => id < 9 * currentPage && id >= 9 * (currentPage - 1)))
       canPaginate(preFiltredPagesCount)
     }
-
   }, [currentPage])
 
   function filter(type) {
@@ -68,6 +66,7 @@ const BlogArchiveTemplate = (props) => {
   }
 
   function canPaginate(currentPagesCount) {
+    changeFiltredPagesCount(currentPagesCount)
     if (currentPagesCount === 1) {
       changeCanRight(false)
       changeCanLeft(false)
@@ -83,7 +82,7 @@ const BlogArchiveTemplate = (props) => {
     }
   }
 
-
+  debugger
   return (
     <PageWrapper
       pageData={props.pageContext}
@@ -167,7 +166,7 @@ const BlogArchiveTemplate = (props) => {
               <ArrowLeft />
             </button>
             <p>
-              {currentPage}
+              {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
             </p>
             <button
               disabled={!canRight}
@@ -250,9 +249,9 @@ const Pagination = styled.div`
   align-items: center;
   p{
     margin: 0 20px;
+    font-size: 24px;
   }
   button{
-      margin-right: 16px;
       width: 56px;
       height: 56px;
       border-radius: 50%;
