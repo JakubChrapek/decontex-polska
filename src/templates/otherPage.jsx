@@ -228,6 +228,7 @@ export const query = graphql`
             url
             gatsbyImageData
             title
+            alt
           }
           text
           backgroundColor{
