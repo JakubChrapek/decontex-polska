@@ -95,15 +95,13 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.socialMedia.map((innerEl, index) => (
-                  <li>
-                    <Link
+                  <li>  
+                    <a
                       className={`c` + index}
-                      aria-label={innerEl.ariaLabel}
-                      to={innerEl.slug}
-                      key={el.id}
+                      href={innerEl.slug}
                     >
                       <img src={innerEl.icon.url} />
-                    </Link>
+                    </a>
                   </li>
                 ))
               )}
@@ -259,6 +257,11 @@ const Nav = styled.nav`
 const SocialMedia = styled.ul`
   width: fit-content;
   margin: 32px auto 0;
+
+  img{
+    width: 24px;
+    height: 24px;
+  }
   
   li{
     display: inline;

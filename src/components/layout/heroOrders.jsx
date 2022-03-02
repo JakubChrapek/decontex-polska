@@ -17,8 +17,8 @@ const HeroOrders = ({ data }) => {
                         <h3><Logo />{data.subText}</h3>
                     </div>
                     <div className="imageWrapper">
-                        <img className="dots" src={Dots} />
-                        <img className="mainImage" src={data.img.url} />
+                        <img className="dots" src={Dots} alt="kropki dekoracyjne" />
+                        <img className="mainImage" src={data.img.url} alt={data.img.alt} />
                     </div>
                 </Content>
                 <FormWrapper>

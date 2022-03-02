@@ -9,8 +9,6 @@ import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
 
 const BlogArchiveTemplate = (props) => {
 
-  debugger
-
   const [choosenPosts, changeChoosenPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage))
   const [canRight, changeCanRight] = useState(true)
   const [canLeft, changeCanLeft] = useState(false)

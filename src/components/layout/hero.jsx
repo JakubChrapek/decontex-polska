@@ -24,7 +24,7 @@ const Hero = ({ data }) => {
                   title={data.img.title}
                   imgClassName='mainImage'
                 />
-                <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} />
+                <img className="dots" src={DOTS_IMAGES.RIGHT_BOTTOM} alt='kropki dekoracyjne' />
                 {/* <img
                   className="mainImage"
                   src={data.img.url}

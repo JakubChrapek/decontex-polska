@@ -205,7 +205,7 @@ export const query = graphql`
           img {
             url
             gatsbyImageData
-            
+            alt
             title
           }
         }
@@ -247,7 +247,7 @@ export const query = graphql`
           img {
             url
             gatsbyImageData
-            
+            alt
             title
           }
         }
@@ -288,7 +288,7 @@ export const query = graphql`
             img {
               url
               gatsbyImageData
-              
+              alt
               title
             }
           }
@@ -308,7 +308,7 @@ export const query = graphql`
             img {
               url
               gatsbyImageData
-              
+              alt
               title
             }
           }
@@ -327,7 +327,7 @@ export const query = graphql`
             img{
               url
               gatsbyImageData
-              
+              alt
               title
             }
             isImgRight
@@ -401,7 +401,7 @@ export const query = graphql`
           img {
             url
             gatsbyImageData
-            
+            alt
             title
           }
           buttonText

@@ -14,7 +14,7 @@ const ImageWithoutButton = ({ data }) => {
           className="container"
         >
           <div className="imageWrapper">
-            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="" />
+            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="kropki dekoracyjne" />
             <GatsbyImage
               className="mainImage"
               image={data.img.gatsbyImageData}
