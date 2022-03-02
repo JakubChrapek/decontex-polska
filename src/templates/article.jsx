@@ -292,10 +292,12 @@ const Content = styled.div`
     span{
       color: ${props => props.categoryColor};
       background: #FFFFFF;
-      border-radius: 8px;
+      border-radius: 15px;
       padding: 10px;
       margin-right: 16px;
       position: relative;
+      transition: .2s linear;
+
       &:before {
           content: '';
           position: absolute;
@@ -305,6 +307,16 @@ const Content = styled.div`
           bottom: 0;
           background-color: ${props => `${props.categoryColor}22`};
           border-radius: 8px;
+          transition: .2s linear;
+      }
+
+      &:hover{
+          color: var(--mainLightText);
+          background-color:  ${props => props.categoryColor};
+
+          &::before{
+              opacity: 0;
+          }
       }
     }
 

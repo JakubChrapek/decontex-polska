@@ -168,14 +168,10 @@ const Flex = styled.div`
         font-size: 16px;
         line-height: 21px;
         transition: .2s linear;
-
-        
         
         &:hover{
-            border: 1px solid var(--blackButtonBackground);
-            background-color: transparent;
-
-            color: var(--blackButtonBackground);
+            border: 1px solid var(--backgroundMedium);
+            background-color:  var(--backgroundMedium);
         }
     }
 
@@ -223,40 +219,53 @@ const Slider = styled.div`
             border-radius: 15px;
             position: relative;
             background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+            overflow: hidden;
 
             div{
                 position: absolute;
                 bottom: 0;
-                padding: 60px 26px;
+                padding: clamp(20px, 4vw, 60px) 26px;
 
-            .title{
-                color: var(--mainLightText);
-                margin: 26px 0 16px 0;
-                text-align: left;
-                font-weight: bold;
-                font-size: 24px;
-                line-height: 110%;
-                letter-spacing: 0px;
+                .title{
+                    color: var(--mainLightText);
+                    margin: 26px 0 16px 0;
+                    text-align: left;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 110%;
+                    letter-spacing: 0px;
+                }
+
+                .date{
+                    font-size: 16px;
+                    line-height: 180%;
+                    color: var(--subLightText);
+                    text-align: left;
+
+                }
             }
 
-            .date{
-                font-size: 16px;
-                line-height: 180%;
-                color: var(--subLightText);
-                text-align: left;
+            img{
+                width: 100%;
+                height: 100%;   
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                border-radius: 15px;
+                z-index: -1;
+                transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+            }
 
+            &:hover{
+                img{
+                    width: 110%;
+                    height: 110%;
+                }
             }
         }
 
-        img{
-            width: 100%;
-            height: 100%;   
-            position: absolute;
-            border-radius: 15px;
-            z-index: -1;
-        }
-
-        }
+        
         @media (max-width: 1024px){
             margin-top: 48px;
         }
@@ -271,7 +280,6 @@ const Slider = styled.div`
 
         }
     }
-
 `
 
 const SliderControls = styled.div`
@@ -285,9 +293,19 @@ const SliderControls = styled.div`
         display: inline-flex;
         justify-content: center;
         align-items: center;
+        transition: .2s linear;
+
+        &:hover{
+        background-color: var(--backgroundMedium);
+
+            path{
+                stroke: var(--mainLightText);
+            }
+        }
 
         &:disabled{
             border: 1px solid var(--divider);
+            background-color: var(--mainLightText);
 
             path{
                 stroke: var(--divider);
@@ -308,7 +326,9 @@ const Category = styled.span`
     line-height: 1;
     display: inline-block;
     position: relative;
-    &:before {
+    transition: .2s linear;
+
+    &::before {
         content: '';
         position: absolute;
         left: 0;
@@ -317,5 +337,15 @@ const Category = styled.span`
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
         border-radius: 15px;
+        transition: .2s linear;
+    }
+
+    &:hover{
+        color: var(--mainLightText);
+        background-color:  ${props => props.categoryColor};
+
+        &::before{
+            opacity: 0;
+        }
     }
 `

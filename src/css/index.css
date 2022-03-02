@@ -8,8 +8,8 @@
   --subLightText: rgba(255, 255, 255, 0.72);
 
   --backgroundDark: #142033;
-  --backgroundMedium: #1b355e;
-  --backgroundLight: #335180;
+  --backgroundMedium: rgba(27, 53, 94, 1);
+  --backgroundLight: rgba(51, 81, 128, 1);
   --backgroundBlue: #d5ebf4;
   --backgroundGrey: #f4f6fb;
 
@@ -18,9 +18,11 @@
   --navHover: rgba(255, 255, 255, 1);
 
   --blackButtonBackground: #0a101a;
+  --whiteButtonBackground: rgba(18, 17, 39, 0.04);
 
   --active: rgba(81, 184, 235, 1);
   --divider: rgba(18, 17, 39, 0.16);
+  --error: rgba(239, 68, 68, 1);
 }
 
 h1 {
@@ -136,4 +138,14 @@ time {
   .container {
     padding: 0 16px;
   }
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--active);
 }

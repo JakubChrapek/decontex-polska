@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import styled from 'styled-components';
 import { useLocation } from '@reach/router';
-import { LangContext } from '../../context/langProvider';
-import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
 import Navigator from '../langHelpers/navigator';
 import { StructuredText } from 'react-datocms';
@@ -58,29 +56,40 @@ const LogoImage = styled(GatsbyImage)`
 const NavList = styled.ul`
   display: grid;
   grid-auto-flow: column;
-  column-gap: clamp(24px, 3.3vw, 48px);
-  .other{
+  column-gap: clamp(4px, 1vw, 16px);
+  .other {
     a p {
       color: var(--subDarkText);
-      &:hover{
+      &:hover {
         color: var(--mainDarkText);
+        background-color: var(--mainLightText);
       }
+    }
+    .activeClassLink p {
+      color: var(--mainDarkText);
+      background-color: var(--mainLightText);
     }
   }
   & li a p {
     color: var(--navText);
-    transition: all 0.1s linear; 
+    transition: all 0.1s linear;
+    padding: 8px clamp(4px, 1vw, 16px);
+    border-radius: 50px;
 
-    
     &:hover {
       color: var(--navHover);
+      background-color: var(--backgroundMedium);
+    }
+    & li .activeClassLink p {
+      color: var(--navHover);
+      background-color: var(--backgroundMedium);
     }
   }
 
-  &.right{
+  &.right {
     li a p {
       padding: 0 24px;
-      background: #51B8EB;
+      background: #51b8eb;
       border-radius: 6px;
       display: block;
       height: 40px;
@@ -88,12 +97,9 @@ const NavList = styled.ul`
       color: var(--navHover);
       border: 1px solid var(--active);
 
-      &:hover{
-        border: 1px solid var(--active);
-        background-color: transparent;
-
-        color: var(--active);
-
+      &:hover {
+        border: 1px solid var(--backgroundLight);
+        background-color: var(--backgroundLight);
       }
     }
   }
@@ -313,9 +319,9 @@ const Header = () => {
                   ariaLabel={logoVariant.title}
                   key={logoVariant.title}
                 >
-                  <LogoImage image={logoVariant.gatsbyImageData} 
-                      alt={logoVariant.alt}
-                      title={logoVariant.title}
+                  <LogoImage image={logoVariant.gatsbyImageData}
+                    alt={logoVariant.alt}
+                    title={logoVariant.title}
                   />
                 </Navigator>
               );
@@ -405,7 +411,7 @@ const Header = () => {
           <div></div>
           <ul>
             {menuEdges
-              .filter(({ node: { locale } }) => locale === currentLanguage )
+              .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
                 links.map(({ id, slug, locale, ariaLabel, name }) => (
                   <li key={id} className={pathname === '/' || pathname === '/en' ? '' : 'other'}>

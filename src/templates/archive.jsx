@@ -80,7 +80,6 @@ const BlogArchiveTemplate = (props) => {
     }
   }
 
-  debugger
   return (
     <PageWrapper
       pageData={props.pageContext}
@@ -107,8 +106,8 @@ const BlogArchiveTemplate = (props) => {
                 ? 'Wybierz kategorię'
                 : 'Choose category'}
             </h2>
-            <ul>
-              <li
+            <div>
+              <button
                 onClick={() => {
                   filter('all');
                 }}
@@ -117,18 +116,18 @@ const BlogArchiveTemplate = (props) => {
                 {props.data.datoCmsArchivePage.locale === 'pl'
                   ? 'Wszystkie'
                   : 'All'}
-              </li>
+              </button>
               {props.data.allDatoCmsCategory.nodes.map((el) => (
-                <li
+                <button
                   className={el.name.replace(/\s/g, '') + ' filterItem'}
                   onClick={() => {
                     filter(el.name);
                   }}
                 >
                   {el.name}
-                </li>
+                </button>
               ))}
-            </ul>
+            </div>
           </Controls>
           <AnimateSharedLayout>
             <AnimatePresence exitBeforeEnter>
@@ -257,9 +256,22 @@ const Pagination = styled.div`
       justify-content: center;
       align-items: center;
       display: inline-flex;
+      transition: .2s linear;
+
+      path{
+        transition: .2s linear;
+      }
+
+      &:hover{
+        background-color: var(--backgroundMedium);
+        path{
+          stroke: var(--mainLightText);
+        }
+      }
 
       &:disabled{
           border: 1px solid var(--divider);
+          background-color: var(--mainLightText);
 
           path{
               stroke: var(--divider);
@@ -275,6 +287,9 @@ const Category = styled.span`
   padding: 10px;
   border-radius: 8px;
   position: relative;
+  cursor: pointer;
+  transition: .2s linear;
+
     &:before {
         content: '';
         position: absolute;
@@ -284,8 +299,17 @@ const Category = styled.span`
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
         border-radius: 8px;
+        transition: .2s linear;
     }
 
+    &:hover{
+        color: var(--mainLightText);
+        background-color:  ${props => props.categoryColor};
+
+        &::before{
+            opacity: 0;
+        }
+    }
 `
 
 const Wrapper = styled.div`
@@ -367,11 +391,11 @@ const Controls = styled.div`
     font-size: 32px;
   }
 
-  ul{
+  div{
     display: flex;
     margin-bottom: 40px;
     
-    li{
+    button{
       margin-right: 16px;
       margin-bottom: 16px;
       padding: 13px 32px;
@@ -383,11 +407,17 @@ const Controls = styled.div`
       cursor: pointer;
       transition: .2s ease-in-out;
 
+      &:hover{
+        background-color: var(--divider);
+        
+      }
+
       &.active{
         color: var(--mainLightText);
         border: 1px solid var(--active);
         background-color: var(--active);
       }
+
     }
   }
 
@@ -428,39 +458,40 @@ const Grid = styled(motion.ul)`
 
       svg{
         margin-left: 10px;
+        transition: .2s linear;
         path{
           stroke: var(--active);
+        }
+      }
+
+      &:hover{
+        svg{
+          margin-left: 16px;
         }
       }
     }
 
     .imgWrapp{
       position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1.8/1;
+      border-radius: 15px;
 
       &:hover{
-        &::after{
-          opacity: 1;
+        img{
+          width: 110%;
         }
-      }
-
-      &::after{
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-        border-radius: 15px;
-        opacity: 0;
-        transition: .2s linear;
       }
     }
 
     img{
       width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       border-radius: 15px;
-      aspect-ratio: 1.8/1;
+      position: absolute;
+      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
      
     }
   }

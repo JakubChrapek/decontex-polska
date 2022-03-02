@@ -71,8 +71,8 @@ const Container = styled.div`
       position: absolute;
       width: clamp(142px, 40%, 172px);
       bottom: -20%;
-      left: ${(props) => (props.isImgRight ? 'unset' : '0')};
-      right: ${(props) => (props.isImgRight ? '-14%' : 'unset')};
+      left: ${(props) => (props.isImgRight ? '0' : 'unset')};
+      right: ${(props) => (props.isImgRight ? 'unset' : '-14%')};
       z-index: 10;
     }
 
@@ -142,22 +142,35 @@ const Container = styled.div`
         background-color: var(--blackButtonBackground);
         border: 1px solid var(--blackButtonBackground);
         display: block;
-        position: absolute;
-        padding: 0 24px;
-        width: max-content;
-        left: 0;
-        transition: color 0.2s linear;
-        transform: translate(-2px, -2px);
-      }
-
-      &:hover {
+        height: 49px;
+        line-height: 49px;
+        color: var(--navHover);
         border: 1px solid var(--active);
-        background-color: transparent;
-
-        color: var(--active);
+        position: relative;
+        transition: 0.2s linear;
 
         mark {
-          color: #d30000;
+          color: var(--navHover);
+          border-radius: 8px;
+          background-color: var(--blackButtonBackground);
+          border: 1px solid var(--blackButtonBackground);
+          display: block;
+          position: absolute;
+          padding: 0 24px;
+          width: max-content;
+          left: 0;
+          transition: 0.2s linear;
+          transform: translate(-2px, -2px);
+        }
+
+        &:hover {
+          border: 1px solid var(--backgroundLight);
+          background-color: var(--backgroundLight);
+
+          mark {
+            border: 1px solid var(--backgroundMedium);
+            background-color: var(--backgroundMedium);
+          }
         }
       }
     }

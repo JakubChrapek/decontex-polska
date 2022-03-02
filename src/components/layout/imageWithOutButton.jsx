@@ -3,37 +3,38 @@ import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
 import Logo from "../vectors/logo"
 import { GatsbyImage } from 'gatsby-plugin-image'
-import {DOTS_IMAGES} from '../img/dots'
+import { DOTS_IMAGES } from '../img/dots'
+import { motion } from "framer-motion"
 
 const ImageWithoutButton = ({ data }) => {
-    return (
-      <Wrapper>
-        <Container
-          isImgBackground={data.isImgBackground}
-          isImgRight={data.isImgRight}
-          className="container"
-        >
-          <div className="imageWrapper">
-            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="kropki dekoracyjne" />
-            <GatsbyImage
-              className="mainImage"
-              image={data.img.gatsbyImageData}
-              alt={data.img.alt}
-              title={data.img.title}
-            />
-          </div>
-          <div className="textPart">
-            <StructuredText data={data.title} />
-            <p>{data.text}</p>
+  return (
+    <Wrapper>
+      <Container
+        isImgBackground={data.isImgBackground}
+        isImgRight={data.isImgRight}
+        className="container"
+      >
+        <div className="imageWrapper">
+          <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM} alt="kropki dekoracyjne" />
+          <GatsbyImage
+            className="mainImage"
+            image={data.img.gatsbyImageData}
+            alt={data.img.alt}
+            title={data.img.title}
+          />
+        </div>
+        <motion.div className="textPart">
+          <StructuredText data={data.title} />
+          <p>{data.text}</p>
 
-            <h3>
-              <Logo />
-              {data.bottomText}
-            </h3>
-          </div>
-        </Container>
-      </Wrapper>
-    );
+          <h3>
+            <Logo />
+            {data.bottomText}
+          </h3>
+        </motion.div>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default ImageWithoutButton
@@ -79,11 +80,11 @@ const Container = styled.div`
         border-radius: 16px;
       }
       /* box-shadow: ${(props) =>
-        props.isImgBackground
-          ? props.isImgRight
-            ? '28px 28px 0px 0px var(--backgroundMedium)'
-            : '-28px 28px 0px 0px var(--backgroundMedium)'
-          : null}; */
+    props.isImgBackground
+      ? props.isImgRight
+        ? '28px 28px 0px 0px var(--backgroundMedium)'
+        : '-28px 28px 0px 0px var(--backgroundMedium)'
+      : null}; */
       &:before {
         content: '';
         position: absolute;
@@ -102,6 +103,7 @@ const Container = styled.div`
     max-width: 552px;
     width: 100%;
     flex: 1 1 50%;
+    margin: 0 auto;
     h2 {
       padding-bottom: 20px;
       font-weight: bold;
@@ -151,8 +153,11 @@ const Container = styled.div`
     .imageWrapper {
       align-self: flex-end;
       width: 100%;
+      max-width: 607px;
+      margin: 0 auto;
       aspect-ratio: 607/455;
       width: 90%;
+      margin: 50px auto 0;
       .dots {
         width: clamp(221px, 30%, 261px);
         bottom: calc(-50px - 15%);
@@ -163,8 +168,7 @@ const Container = styled.div`
           width: 100%;
           max-width: unset;
           aspect-ratio: 400/300;
-        margin: 50px 0 0 0;
-        display: block;
+          display: block;
         &:before {
             left: -42px;
             bottom: -42px;

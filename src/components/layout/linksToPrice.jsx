@@ -167,10 +167,47 @@ const Flex = styled.div`
           transition: 0.2s linear;
         }
 
-        &:hover {
-          border: 1px solid var(--active);
-          background: transparent;
-          background-color: transparent;
+        a{
+            display: block;
+            margin-top: 20px;
+            width: fit-content;
+            border-radius: 8px;
+
+
+            p{
+                width: fit-content;
+                padding: 0 24px;
+                background: #51B8EB;
+                border-radius: 8px;
+                display: block;
+                height: 49px;
+                line-height: 49px;
+                color: var(--navHover);
+                border: 1px solid var(--active);
+                position: relative;
+                transition: .2s linear;
+                
+                mark{
+                    color: var(--navHover);
+                    border-radius: 8px;
+                    background-color: var(--blackButtonBackground);
+                    display: block;
+                    position: absolute;
+                    padding: 0 24px;
+                    width: max-content;
+                    left: 0;
+                    transition: .2s linear;
+                }            
+                    
+                &:hover{
+                    border: 1px solid var(--backgroundLight);
+                    background-color: var(--backgroundLight);
+        
+                    mark{
+                        border: 1px solid var(--backgroundMedium);
+                        background-color: var(--backgroundMedium);
+                    }
+                }
 
           color: var(--active);
 
@@ -181,6 +218,7 @@ const Flex = styled.div`
       }
     }
   }
+}
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;

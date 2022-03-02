@@ -95,12 +95,12 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.socialMedia.map((innerEl, index) => (
-                  <li>  
+                  <li>
                     <a
                       className={`c` + index}
-                      href={innerEl.slug}
+                      href={innerEl.link}
                     >
-                      <img src={innerEl.icon.url} />
+                      <img src={innerEl.icon.url} alt={innerEl.icon.alt} />
                     </a>
                   </li>
                 ))
@@ -167,13 +167,9 @@ const Flex = styled.div`
       }
 
       &:hover{
-        border: 1px solid var(--active);
-        background-color: transparent;
+        border: 1px solid var(--backgroundLight);
+        background-color: var(--backgroundLight);
 
-        p{
-          color: var(--active);
-
-        }
       }
     }
 
@@ -186,12 +182,8 @@ const Flex = styled.div`
       }
 
       &:hover{
-        background-color: var(--active);
-        border: 1px solid var(--active);
+        background-color: var(--whiteButtonBackground);
 
-        p{
-          color: var(--mainLightText);
-        }
       }
     }
   }
@@ -221,22 +213,23 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
 
-    li{
-      a{
-        p{
-          color: var(--navText);
-          line-height: 180%;
-          transition: all 0.1s linear; 
-          &:hover {
-            color: var(--navHover);
-          }
-          strong{
-            font-weight: 400;
-          }
-        }
-      }
+    li a p{
+            color: var(--subLightText);
+            line-height: 180%;
+            transition: all 0.1s linear; 
+            padding: 8px clamp(4px, 1vw, 16px);
+            border-radius: 50px;
+            width: fit-content;
+
+            &:hover {
+              color: var(--mainLightText);
+              background-color: var(--backgroundMedium);
+            }
+            strong{
+              font-weight: 400;
+            }
     }
-  }
+}
 
   
   @media (max-width: 1024px) {
@@ -244,6 +237,10 @@ const Nav = styled.nav`
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-row-gap: 8px;
+
+      li a p {
+          padding: 8px 16px;
+      }
     }
   }
 

@@ -248,7 +248,7 @@ const Grid = styled.div`
 `
 
 const SliderControls = styled.div`
-    @media (min-width: 721) {
+    @media (min-width: 721px) {
         display: none;
     }
     margin-top: 40px;
@@ -261,14 +261,23 @@ const SliderControls = styled.div`
         display: inline-flex;
         justify-content: center;
         align-items: center;
-
+        transition: .2s linear;
         border: 1px solid var(--mainLightText);
+
         path{
             stroke: var(--mainLightText);
         }
 
+        &:hover{
+        background-color: var(--mainLightText);
+            path{
+                stroke: var(--backgroundMedium);
+            }
+        }
+
         &:disabled{
             border: 1px solid var(--divider);
+            background-color: transparent;
 
             path{
                 stroke: var(--divider);

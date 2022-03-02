@@ -15,14 +15,14 @@ const OrdersForm = ({ buttonText }) => {
     return (
         <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
             <div className="grid">
-                <label>
+                <label className={errors.name && 'error'}>
                     <span>Imię i nazwisko</span>
                     <input {...register("name", { required: true })} placeholder="John Doe" />
                     <p className='errorText'>
-                        {errors.name && 'Proszę, wpisz imię'}
+                        {errors?.name && 'Proszę, wpisz imię'}
                     </p>
                 </label>
-                <label>
+                <label className={errors.mail && 'error'}>
                     <span>Email</span>
                     <input {...register("mail", {
                         required: true, pattern:
@@ -32,28 +32,28 @@ const OrdersForm = ({ buttonText }) => {
                         {errors.mail && 'Proszę, wpisz poprawny E-mail'}
                     </p>
                 </label>
-                <label>
+                <label className={errors.phone && 'error'}>
                     <span>Numer telefonu</span>
                     <input {...register("phone", { required: true })} placeholder="20 111 2345 6789" />
                     <p className='errorText'>
                         {errors.phone && 'Proszę, wpisz poprawny telefon'}
                     </p>
                 </label>
-                <label>
+                <label className={errors.title && 'error'}>
                     <span>Nazwa jednostki</span>
                     <input {...register("title", { required: true })} placeholder="Pisz tutaj" />
                     <p className='errorText'>
                         {errors.title && 'Proszę, wpisz nazwę jednostki'}
                     </p>
                 </label>
-                <label>
+                <label className={errors.adress && 'error'}>
                     <span>Adres adbioru</span>
                     <input {...register("adress", { required: true })} placeholder="101 Warszawiaków, Warszawa" />
                     <p className='errorText'>
                         {errors.adress && 'Proszę, wpisz adres'}
                     </p>
                 </label>
-                <label>
+                <label className={errors.postCode && 'error'}>
                     <span>Kod pocztowy</span>
                     <input {...register("postCode", { required: true })} placeholder="16-030" />
                     <p className='errorText'>
@@ -61,14 +61,14 @@ const OrdersForm = ({ buttonText }) => {
                     </p>
                 </label>
             </div>
-            <label>
+            <label className={errors.message && 'error'}>
                 <span>Twoje zamówienie</span>
                 <textarea {...register("message", { required: true })} rows="6" placeholder="Pisz tutaj" />
                 <p className='errorText'>
                     {errors.message && 'Proszę, wpisz wiadomość'}
                 </p>
             </label>
-            <label className="checkbox">
+            <label className={(errors.check && 'error') + " checkbox"}>
                 <input type='checkbox' {...register("check", { required: true })} />
                 <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link></span>
                 <p className='errorText'>
@@ -107,10 +107,8 @@ const Wrapper = styled.form`
         margin-bottom: 12px;
 
         &:hover{
-            border: 1px solid var(--active);
-            background-color: transparent;
-
-            color: var(--active);
+            border: 1px solid var(--backgroundLight);
+            background-color: var(--backgroundLight);
         }
     }
 
@@ -120,7 +118,7 @@ const Wrapper = styled.form`
         position: relative;
 
         .errorText{
-            color: red;
+            color: var(--error);
             position: absolute;
             bottom: 0;
             transform: translateY(100%);
@@ -201,13 +199,25 @@ const Wrapper = styled.form`
             padding: 14px 16px;
             border-radius: 8px;
             border: 1px solid var(--divider);
+            transition: .2s linear;
 
             &::placeholder{
                 font-size: 14px;
                 line-height: 180%;
                 color: var(--formDarkText);
             }
+        }
 
+        &.error{
+            input{
+                border-color: var(--error);
+            }
+        }
+
+        &:hover{
+            input, textarea {
+                border-color: var(--formDarkText);
+            }
         }
     }
 
