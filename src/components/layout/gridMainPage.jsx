@@ -146,6 +146,7 @@ const ContentMobile = styled.div`
     .text{
         margin-right: 9.1vw;
         max-width: 440px;
+        width: 100%;
     }
 
     .secondText {
@@ -168,6 +169,11 @@ const ContentMobile = styled.div`
 
     p{
         line-height: 180%;
+    }
+
+    .firstImg, .secondImg, .thirdImg{
+        
+        min-width: 300px;
     }
 
     img{

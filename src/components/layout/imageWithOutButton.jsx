@@ -103,6 +103,7 @@ const Container = styled.div`
     max-width: 552px;
     width: 100%;
     flex: 1 1 50%;
+    margin: 0 auto;
     h2 {
       padding-bottom: 20px;
       font-weight: bold;
@@ -152,8 +153,11 @@ const Container = styled.div`
     .imageWrapper {
       align-self: flex-end;
       width: 100%;
+      max-width: 607px;
+      margin: 0 auto;
       aspect-ratio: 607/455;
       width: 90%;
+      margin: 50px auto 0;
       .dots {
         width: clamp(221px, 30%, 261px);
         bottom: calc(-50px - 15%);
@@ -164,8 +168,7 @@ const Container = styled.div`
           width: 100%;
           max-width: unset;
           aspect-ratio: 400/300;
-        margin: 50px 0 0 0;
-        display: block;
+          display: block;
         &:before {
             left: -42px;
             bottom: -42px;

@@ -80,7 +80,6 @@ const BlogArchiveTemplate = (props) => {
     }
   }
 
-  debugger
   return (
     <PageWrapper
       pageData={props.pageContext}
@@ -459,39 +458,40 @@ const Grid = styled(motion.ul)`
 
       svg{
         margin-left: 10px;
+        transition: .2s linear;
         path{
           stroke: var(--active);
+        }
+      }
+
+      &:hover{
+        svg{
+          margin-left: 16px;
         }
       }
     }
 
     .imgWrapp{
       position: relative;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1.8/1;
+      border-radius: 15px;
 
       &:hover{
-        &::after{
-          opacity: 1;
+        img{
+          width: 110%;
         }
-      }
-
-      &::after{
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-        border-radius: 15px;
-        opacity: 0;
-        transition: .2s linear;
       }
     }
 
     img{
       width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
       border-radius: 15px;
-      aspect-ratio: 1.8/1;
+      position: absolute;
+      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
      
     }
   }
