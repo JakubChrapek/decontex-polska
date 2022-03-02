@@ -117,32 +117,35 @@ const Inform = styled.div`
 `
 
 const Container = styled.div`
-    position: relative;
-    z-index: 10;
+  position: relative;
+  z-index: 10;
 
-    h2{
-        padding-bottom: 32px;
-        font-weight: bold;
-        font-size: 40px;
-        line-height: 110%;
+  h2 {
+    padding-bottom: 32px;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 110%;
 
-        mark{
-            background: inherit;
-            color: red;
-        }
+    mark {
+      background: inherit;
+      color: red;
     }
+  }
+  @media (max-width: 1024px) {
+    max-width: 697px;
+  }
 
-    &.containerExpanded{
-        max-width: 1410px;
-        padding: 0 45px;
-        margin: 0 auto;
+  &.containerExpanded {
+    max-width: 1410px;
+    padding: 0 45px;
+    margin: 0 auto;
 
-        @media (max-width: 660px) {
-            padding: 0 35px;
-            overflow: hidden;
-        }
+    @media (max-width: 660px) {
+      padding: 0 35px;
+      overflow: hidden;
     }
-`
+  }
+`;
 
 const Content = styled.div`
     display: grid;
@@ -233,7 +236,7 @@ const Grid = styled.div`
         grid-template-columns: 1fr 1fr;
     }
 
-    @media (max-width: 660px) {
+    @media (max-width: 720px) {
         grid-template-columns: repeat(${props => props.itemCount}, 100%);
         grid-column-gap: 35px;
 
@@ -245,7 +248,7 @@ const Grid = styled.div`
 `
 
 const SliderControls = styled.div`
-    @media (min-width: 661px) {
+    @media (min-width: 721) {
         display: none;
     }
     margin-top: 40px;

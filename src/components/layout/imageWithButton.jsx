@@ -15,7 +15,10 @@ const ImageWithButton = ({ data }) => {
           className="container"
         >
           <div className="imageWrapper">
-            <img className="dots" src={DOTS_IMAGES.LEFT_BOTTOM_BIGGER} />
+            <img
+              className="dots"
+              src={data.isImgRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM_BIGGER}
+            />
             <GatsbyImage
               className="mainImage"
               image={data.img.gatsbyImageData}
@@ -59,7 +62,8 @@ const Container = styled.div`
     position: relative;
     height: fit-content;
     width: fit-content;
-    margin: 0 auto 0 56px;
+    margin: 0 auto 0 0;
+    padding-left: clamp(24px, 3.88vw, 56px);
 
     .dots {
       display: ${(props) => (props.isImgBackground ? null : 'none')};
@@ -73,8 +77,8 @@ const Container = styled.div`
 
     .mainImage {
       border-radius: 16px;
-      margin-left: ${(props) => (props.isImgRight ? '35px' : '0')};
-      margin-right: ${(props) => (props.isImgRight ? '0' : '35px')};
+      /* margin-left: ${(props) => (props.isImgRight ? '35px' : '0')};
+      margin-right: ${(props) => (props.isImgRight ? '0' : '35px')}; */
       border-radius: 16px;
       position: relative;
       overflow: visible;
@@ -85,8 +89,8 @@ const Container = styled.div`
       &:before {
         content: '';
         position: absolute;
-        left: -28px;
-        bottom: -28px;
+        left: ${(props) => (props.isImgRight ? '28px' : '-28px')};
+        bottom: ${(props) => (props.isImgRight ? '-28px' : '-28px')};
         width: 100%;
         height: 100%;
         background-color: ${(props) => props.backgroundColor.hex};
@@ -184,7 +188,7 @@ const Container = styled.div`
       .mainImage {
         max-width: 605px;
         width: 87%;
-        margin: 0 0 0 auto;
+        margin: ${({isImgRight}) => isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }
