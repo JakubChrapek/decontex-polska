@@ -9,8 +9,8 @@ const ImageWithTextBackground = ({ data }) => {
         <Wrapper>
             <Container logo={Logo} className="container">
                 <div className="imageWrapper">
-                    <img className="dots" src={Dots} />
-                    <img className="mainImage" src={data.img.url} />
+                    <img className="dots" src={Dots} alt='kropki dekoracyjne' />
+                    <img className="mainImage" src={data.img.url} alt={data.img.alt} />
                 </div>
                 <div className="textPart">
                     <StructuredText data={data.title} />

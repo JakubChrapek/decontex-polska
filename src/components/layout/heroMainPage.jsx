@@ -71,6 +71,7 @@ const Container = styled.div`
 
     h1{
         padding-top: 240px;
+        max-width: 700px;
 
         @media (max-width: 1024px){
             font-size: clamp(36px, 8.3vw, 72px);

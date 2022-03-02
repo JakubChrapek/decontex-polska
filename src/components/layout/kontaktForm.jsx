@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "gatsby"
 import Yes from '../vectors/yes.svg'
+import handler from "../../api/kontaktForm";
 
 const KontaktForm = ({ buttonText }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const Submit = (data) => {
-
+        handler(data)
+        reset()
     }
 
     return (

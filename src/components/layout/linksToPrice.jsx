@@ -9,7 +9,7 @@ const LinksToPrice = ({ data }) => {
             <Container className="container">
                 <Flex isImgRight={data.imageWithButton[0].isImgRight} isImgBackground={data.imageWithButton[0].isImgBackground}>
                     <div>
-                        <img src={data.imageWithButton[0].img.url} />
+                        <img src={data.imageWithButton[0].img.url}  alt={data.imageWithButton[0].img.alt}/>
                     </div>
                     <div className='textPart'>
                         <StructuredText data={data.imageWithButton[0].title} />
@@ -22,7 +22,7 @@ const LinksToPrice = ({ data }) => {
                 <Grid>
                     {data.grid.map(el => (
                         <li>
-                            <img src={el.img.url} />
+                            <img src={el.img.url} alt={el.img.alt} />
                             <p>{el.text}</p>
                         </li>
                     ))}

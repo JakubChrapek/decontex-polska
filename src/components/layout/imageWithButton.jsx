@@ -6,38 +6,39 @@ import { Link } from "gatsby"
 import { DOTS_IMAGES } from '../img/dots'
 
 const ImageWithButton = ({ data }) => {
-    return (
-      <Wrapper>
-        <Container
-          backgroundColor={data.backgroundColor}
-          isImgBackground={data.isImgBackground}
-          isImgRight={data.isImgRight}
-          className="container"
-        >
-          <div className="imageWrapper">
-            <img
-              className="dots"
-              src={data.isImgRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM_BIGGER}
-            />
-            <GatsbyImage
-              className="mainImage"
-              image={data.img.gatsbyImageData}
-              alt={data.img.alt}
-              title={data.img.title}
-            />
-          </div>
-          <div className="textPart">
-            <StructuredText data={data.title} />
-            <p>{data.text}</p>
-            {data.button.map((el) => (
-              <Link to={el.slug} aria-label={el.ariaLabel}>
-                <StructuredText data={el.name} />
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <Container
+        backgroundColor={data.backgroundColor}
+        isImgBackground={data.isImgBackground}
+        isImgRight={data.isImgRight}
+        className="container"
+      >
+        <div className="imageWrapper">
+          <img
+            className="dots"
+            src={data.isImgRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM_BIGGER}
+            alt="kropki dekoracyjne"
+          />
+          <GatsbyImage
+            className="mainImage"
+            image={data.img.gatsbyImageData}
+            alt={data.img.alt}
+            title={data.img.title}
+          />
+        </div>
+        <div className="textPart">
+          <StructuredText data={data.title} />
+          <p>{data.text}</p>
+          {data.button.map((el) => (
+            <Link to={el.slug} aria-label={el.ariaLabel}>
+              <StructuredText data={el.name} />
+            </Link>
+          ))}
+        </div>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default ImageWithButton
@@ -118,9 +119,13 @@ const Container = styled.div`
       }
     }
 
-    p {
-      font-size: 18px;
-      line-height: 180%;
+        .mainImage{
+            border-radius: 16px;
+            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor.hex : '-32px 32px 0px 0px' + props.backgroundColor.hex : null};
+            margin-left: ${props => props.isImgRight ? '35px' : '0'};
+            margin-right: ${props => props.isImgRight ? '0' : '35px'};
+            max-width: 400px;
+        }
     }
 
     a {
@@ -168,7 +173,6 @@ const Container = styled.div`
         }
       }
     }
-  }
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
@@ -188,7 +192,7 @@ const Container = styled.div`
       .mainImage {
         max-width: 605px;
         width: 87%;
-        margin: ${({isImgRight}) => isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
+        margin: ${({ isImgRight }) => isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }

@@ -14,7 +14,7 @@ const HeroPartner = ({ data }) => {
                     <div className='grid'>
                         {data.images.map(el => (
                             <div>
-                                <img src={el.url} />
+                                <img src={el.url}  alt={el.alt}/>
                             </div>
                         ))}
                     </div>

@@ -62,7 +62,7 @@ const StagesWithInform = ({ data }) => {
                         {data.inform[0].grid.map(el => (
                             <motion.div {...handlers} animate={{ left: `calc(${position} * (-100% - 35px))` }}>
                                 <span>
-                                    <img src={el.icon.url} />
+                                    <img src={el.icon.url} alt={el.icon.alt} />
                                 </span>
                                 <StructuredText data={el.sText} />
                             </motion.div>

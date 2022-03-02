@@ -16,8 +16,8 @@ const Benefits = ({ data }) => {
                         {data.benefits.map(el => (
                             <motion.li>
                                 {/* <GatsbyImage alt={el.icon.alt} title={el.icon.title} image={el.icon.gatsbyImageData} /> */}
-                                <img src={el.icon.url}/>
-                                <StructuredText data={el.title}/>
+                                <img src={el.icon.url} alt={el.icon.alt} />
+                                <StructuredText data={el.title} />
                                 <p>{el.text}</p>
                             </motion.li>
                         ))}

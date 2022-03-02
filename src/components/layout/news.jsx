@@ -77,7 +77,7 @@ const News = ({ data, posts }) => {
                                                 <p className='title'>{el.title}</p>
                                                 <p className='date'>{el.publicationDate}</p>
                                             </div>
-                                            <img src={el.cardImage.url} />
+                                            <img src={el.cardImage.url} alt={el.cardImage.alt} />
                                         </motion.div>
                                     </Link>
                                     : null
@@ -87,6 +87,7 @@ const News = ({ data, posts }) => {
                 </Slider >
                 <SliderControls>
                     <button
+                        name="scroll w lewo"
                         disabled={!canLeft}
                         onClick={() => {
                             positionSet(position - 1);
@@ -95,6 +96,7 @@ const News = ({ data, posts }) => {
                         <ArrowLeft />
                     </button>
                     <button
+                        name="scroll w prawo"
                         disabled={!canRight}
                         onClick={() => {
                             positionSet(position + 1);
