@@ -1,27 +1,30 @@
+import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 
 const HeroPartner = ({ data }) => {
     return (
-        <Wrapper>
-            <Container className="container">
-                <Content>
-                    <div>
-                        <StructuredText data={data.title} />
-                        <p>{data.text}</p>
-                    </div>
-                    <div className='grid'>
-                        {data.images.map(el => (
-                            <div>
-                                <img src={el.url}  alt={el.alt}/>
-                            </div>
-                        ))}
-                    </div>
-                </Content>
-            </Container>
-        </Wrapper>
-    )
+      <Wrapper>
+        <Container className="container">
+          <Content>
+            <div>
+              <StructuredText data={data.title} />
+              <p>{data.text}</p>
+            </div>
+            <div className="grid">
+              {data.images.map((el) => (
+                <GatsbyImage
+                  image={el.gatsbyImageData}
+                  alt={el.alt}
+                  title={el.title}
+                />
+              ))}
+            </div>
+          </Content>
+        </Container>
+      </Wrapper>
+    );
 }
 
 export default HeroPartner
@@ -74,7 +77,16 @@ const Content = styled.div`
         grid-template-columns: calc(50% - 6px) calc(50% - 6px);
         grid-gap: 12px;
 
-        div{
+        .gatsby-image-wrapper {
+            img {
+                object-fit: contain !important;
+            }
+            @media (max-width: 1024px) {
+                aspect-ratio: 169/104;
+            }
+        }
+
+        > div{
             background-color: var(--backgroundGrey);
             display: flex;
             justify-content: center;

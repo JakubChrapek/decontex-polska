@@ -6,6 +6,7 @@ import Logo from './../img/logo.png'
 import { motion } from "framer-motion"
 import { useSwipeable } from "react-swipeable"
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const StagesWithInform = ({ data }) => {
     const [position, positionSet] = useState(0);
@@ -42,41 +43,66 @@ const StagesWithInform = ({ data }) => {
     });
 
     return (
-        <Wrapper>
-            <Stages>
-                <Container className="container">
-                    <StructuredText data={data.stages[0].title} />
-                    <Content logo={Logo}>
-                        <div><StructuredText data={data.stages[0].listLeft} /></div>
-                        <div><StructuredText data={data.stages[0].listRight} /></div>
-                    </Content>
-                    <Anotation>
-                        <StructuredText data={data.stages[0].subText} />
-                    </Anotation>
-                </Container>
-            </Stages>
-            <Inform>
-                <Container className="containerExpanded">
-                    <StructuredText data={data.inform[0].title} />
-                    <Grid itemCount={data.inform[0].grid.length}>
-                        {data.inform[0].grid.map(el => (
-                            <motion.div {...handlers} animate={{ left: `calc(${position} * (-100% - 35px))` }}>
-                                <span>
-                                    <img src={el.icon.url} alt={el.icon.alt} />
-                                </span>
-                                <StructuredText data={el.sText} />
-                            </motion.div>
-                        ))}
-                    </Grid>
-                    <SliderControls>
-                        <button disabled={!canLeft} onClick={() => { positionSet(position - 1) }} ><ArrowLeft /></button>
-                        <button disabled={!canRight} onClick={() => { positionSet(position + 1) }} ><ArrowRight /></button>
-                    </SliderControls>
-                </Container>
-                <Waves />
-            </Inform>
-        </Wrapper>
-    )
+      <Wrapper>
+        <Stages>
+          <Container className="container">
+            <StructuredText data={data.stages[0].title} />
+            <Content logo={Logo}>
+              <div>
+                <StructuredText data={data.stages[0].listLeft} />
+              </div>
+              <div>
+                <StructuredText data={data.stages[0].listRight} />
+              </div>
+            </Content>
+            <Anotation>
+              <StructuredText data={data.stages[0].subText} />
+            </Anotation>
+          </Container>
+        </Stages>
+        <Inform>
+          <Container className="containerExpanded">
+            <StructuredText data={data.inform[0].title} />
+            <Grid itemCount={data.inform[0].grid.length}>
+              {data.inform[0].grid.map((el) => (
+                <motion.div
+                  {...handlers}
+                  animate={{ left: `calc(${position} * (-100% - 35px))` }}
+                >
+                  <span>
+                    <img
+                      src={el.icon.url}
+                      alt={el.icon.alt}
+                      title={el.icon.title}
+                    />
+                  </span>
+                  <StructuredText data={el.sText} />
+                </motion.div>
+              ))}
+            </Grid>
+            <SliderControls>
+              <button
+                disabled={!canLeft}
+                onClick={() => {
+                  positionSet(position - 1);
+                }}
+              >
+                <ArrowLeft />
+              </button>
+              <button
+                disabled={!canRight}
+                onClick={() => {
+                  positionSet(position + 1);
+                }}
+              >
+                <ArrowRight />
+              </button>
+            </SliderControls>
+          </Container>
+          <Waves />
+        </Inform>
+      </Wrapper>
+    );
 }
 
 export default StagesWithInform

@@ -17,7 +17,6 @@ const Certificates = ({ data }) => {
                             {data.images.map(el => (
                                 <div>
                                     <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt} title={el.img.title} />
-                                    {/* <img src={el.img.url} /> */}
                                 </div>
                             ))}
                         </motion.div>

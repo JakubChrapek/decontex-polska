@@ -141,7 +141,7 @@ export const query = graphql`
               icon {
                 url
                 gatsbyImageData
-                
+                alt
                 title
               }
             }
@@ -367,7 +367,7 @@ export const query = graphql`
           images {
             url
             gatsbyImageData
-            
+            alt
             title
           }
         }
