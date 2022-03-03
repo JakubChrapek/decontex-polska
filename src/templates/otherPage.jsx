@@ -234,6 +234,9 @@ export const query = graphql`
           backgroundColor{
             hex
           }
+          buttonColor{
+            hex
+          }
         }
         ... on DatoCmsSectionImageWithTextBackground {
           __typename

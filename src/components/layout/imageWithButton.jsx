@@ -9,7 +9,8 @@ const ImageWithButton = ({ data }) => {
   return (
     <Wrapper>
       <Container
-        backgroundColor={data.backgroundColor}
+        backgroundColor={data.backgroundColor.hex}
+        buttonColor={data.buttonColor?.hex}
         isImgBackground={data.isImgBackground}
         isImgRight={data.isImgRight}
         className="container"
@@ -94,7 +95,7 @@ const Container = styled.div`
         bottom: ${(props) => (props.isImgRight ? '-28px' : '-28px')};
         width: 100%;
         height: 100%;
-        background-color: ${(props) => props.backgroundColor.hex};
+        background-color: ${(props) => props.backgroundColor};
         z-index: -1;
         border-radius: 16px;
       }
@@ -121,7 +122,7 @@ const Container = styled.div`
 
         .mainImage{
             border-radius: 16px;
-            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor.hex : '-32px 32px 0px 0px' + props.backgroundColor.hex : null};
+            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor : '-32px 32px 0px 0px' + props.backgroundColor : null};
             margin-left: ${props => props.isImgRight ? '35px' : '0'};
             margin-right: ${props => props.isImgRight ? '0' : '35px'};
             max-width: 400px;
@@ -136,39 +137,18 @@ const Container = styled.div`
 
       p {
         width: fit-content;
-        padding: 0 24px;
-        background: #51b8eb;
+        padding: 13px 24px;
+        border: 1px solid ${props => props.buttonColor ? props.buttonColor : 'var(--active)'};
+        background: ${props => props.buttonColor ? props.buttonColor : 'var(--active)'};
         border-radius: 8px;
         display: block;
-        height: 49px;
-        line-height: 49px;
         color: var(--navHover);
-        border: 1px solid var(--active);
         position: relative;
         transition: 0.2s linear;
 
-        mark {
-          color: var(--navHover);
-          border-radius: 8px;
-          background-color: var(--blackButtonBackground);
-          border: 1px solid var(--blackButtonBackground);
-          display: block;
-          position: absolute;
-          padding: 0 24px;
-          width: max-content;
-          left: 0;
-          transition: 0.2s linear;
-          transform: translate(-2px, -2px);
-        }
-
         &:hover {
-          border: 1px solid var(--backgroundLight);
-          background-color: var(--backgroundLight);
-
-          mark {
-            border: 1px solid var(--backgroundMedium);
-            background-color: var(--backgroundMedium);
-          }
+          border: 1px solid ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
+          background-color: ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
         }
       }
     }

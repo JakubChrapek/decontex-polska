@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import { StructuredText } from 'react-datocms';
 import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
 
 const BlogArchiveTemplate = (props) => {
+  const constraintsRef = useRef(null);
 
   const [choosenPosts, changeChoosenPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage))
   const [canRight, changeCanRight] = useState(true)
@@ -91,27 +92,29 @@ const BlogArchiveTemplate = (props) => {
           <Hero>
             <StructuredText data={props.data.datoCmsArchivePage.title} />
             <p>{props.data.datoCmsArchivePage.text}</p>
-            <div className='imageBox'>
-              <div>
-                <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
-                <p className="title">{choosenPosts[0].title}</p>
-                <p className="date">{choosenPosts[0].publicationDate}</p>
+            <Link to={choosenPosts[0].slug}>
+              <div className='imageBox'>
+                <div>
+                  <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
+                  <p className="title">{choosenPosts[0].title}</p>
+                  <p className="date">{choosenPosts[0].publicationDate}</p>
+                </div>
+                <img src={choosenPosts[0].coverImage.url} />
               </div>
-              <img src={choosenPosts[0].coverImage.url} />
-            </div>
+            </Link>
           </Hero>
-          <Controls>
+          <Controls ref={constraintsRef}>
             <h2>
               {props.data.datoCmsArchivePage.locale === 'pl'
                 ? 'Wybierz kategorię'
                 : 'Choose category'}
             </h2>
-            <div>
+            <motion.div drag="x" dragConstraints={constraintsRef}>
               <button
+                className={'all filterItem active'}
                 onClick={() => {
                   filter('all');
                 }}
-                className={'all filterItem active'}
               >
                 {props.data.datoCmsArchivePage.locale === 'pl'
                   ? 'Wszystkie'
@@ -127,7 +130,7 @@ const BlogArchiveTemplate = (props) => {
                   {el.name}
                 </button>
               ))}
-            </div>
+            </motion.div>
           </Controls>
           <AnimateSharedLayout>
             <AnimatePresence exitBeforeEnter>
@@ -353,6 +356,9 @@ const Hero = styled.div`
     margin-top: 100px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%); 
     border-radius: 15px;
+    aspect-ratio: 2.36/1;
+    width: 100%;
+    overflow: hidden;
 
     div{
       position: absolute;
@@ -381,10 +387,22 @@ const Hero = styled.div`
 
     img{
       width: 100%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       aspect-ratio: 2.36/1;
-      position: relative;
+      position: absolute;
       z-index: -1;
       border-radius: 15px;
+      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+    
+    }
+
+    &:hover{
+      img{
+        width: 110%;
+      }
     }
 
   }
@@ -409,7 +427,7 @@ const Controls = styled.div`
 
   div{
     display: flex;
-    flex-wrap: wrap;
+    min-width: max-content;
     margin-bottom: 40px;
     
     button{

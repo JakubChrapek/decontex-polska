@@ -183,7 +183,7 @@ const ContentMobile = styled.div`
     }
 
     .link{
-        padding: 13px 32px;
+        padding: 9px 32px;
         display: block;
         width: fit-content;
         border-radius: 8px;
@@ -313,7 +313,7 @@ const ContentDesctop = styled.div`
     }
 
     .link{
-        padding: 13px 32px;
+        padding: 9px 32px;
         display: block;
         width: fit-content;
         border-radius: 8px;

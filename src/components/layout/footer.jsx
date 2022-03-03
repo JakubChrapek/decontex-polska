@@ -194,7 +194,7 @@ const Flex = styled.div`
     }
   }
 
-  @media (max-width: 480px){
+  @media (max-width: 540px){
     margin-bottom: 160px;
     display: grid;
     grid-template-columns: 100%;
@@ -212,6 +212,11 @@ const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    li a {
+      border-radius: 50px;
+      display: block;
+    }
 
     li a p{
             color: var(--subLightText);
@@ -244,7 +249,7 @@ const Nav = styled.nav`
     }
   }
 
-  @media (max-width: 480px){
+  @media (max-width: 540px){
     ul{
       grid-template-columns: 1fr;
 
@@ -270,7 +275,7 @@ const SocialMedia = styled.ul`
   }
   
   li{
-    display: inline;
+    display: inline-block;
     margin: 0 24px;
     opacity: 0.56;
     transition: .1s linear;
@@ -278,6 +283,11 @@ const SocialMedia = styled.ul`
     &:hover{
       opacity: 1;
     }
+  }
+
+  li a{
+    display: flex;
+    border-radius: 50px;
   }
 
   @media (max-width: 1024px) {
@@ -288,7 +298,7 @@ const SocialMedia = styled.ul`
     }
   }
 
-  @media (max-width: 480px){
+  @media (max-width: 540px){
     margin-bottom: 16px;
     
     li{
@@ -306,7 +316,7 @@ const Copyright = styled.p`
     margin: 0;
   }
 
-  @media (max-width: 480px){
+  @media (max-width: 540px){
     text-align: left;
   }
 `
@@ -321,7 +331,7 @@ const CopyAndSocialWrapper = styled.div`
     margin-top: 75px;
   }
 
-  @media (max-width: 480px){
+  @media (max-width: 540px){
     margin-top: 56px;
     flex-direction: column;
   }

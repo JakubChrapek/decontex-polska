@@ -131,8 +131,6 @@
         max-width: 1220px;
         padding: 0 35px;
         margin: 0 auto;
-
-
     }
 
     @media (max-width: 480px) {
@@ -142,11 +140,21 @@
     }
     
     
-    input:focus, textarea:focus{
+    *:focus{
         outline: none;
-        
+    }
+
+    *:focus-visible{
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
     }
                             
     input:focus-visible, textarea:focus-visible {
         outline: 2px solid var(--active);
     }
+
+    input:focus-visible, textarea:focus-visible{
+        border-color: var(--active);
+        outline-offset: -1px;
+    }
+

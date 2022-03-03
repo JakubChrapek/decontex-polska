@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Link } from "gatsby";
 import React from "react"
 import { useForm } from "react-hook-form";
@@ -6,10 +7,11 @@ import handler from "../../api/kontaktForm";
 import Yes from '../vectors/yes.svg'
 
 const OrdersForm = ({ buttonText }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onBlur' });
 
     const Submit = (data) => {
         handler(data)
+        reset()
     }
 
     return (
@@ -17,10 +19,16 @@ const OrdersForm = ({ buttonText }) => {
             <div className="grid">
                 <label className={errors.name && 'error'}>
                     <span>Imię i nazwisko</span>
-                    <input {...register("name", { required: true })} placeholder="John Doe" />
-                    <p className='errorText'>
-                        {errors?.name && 'Proszę, wpisz imię'}
-                    </p>
+                    <input {...register("name", { required: true, pattern: /^[a-z ,.'-]+$/i })} placeholder="John Doe" />
+                    {errors?.name &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz imię'
+                        </motion.p>
+                    }
                 </label>
                 <label className={errors.mail && 'error'}>
                     <span>Email</span>
@@ -28,52 +36,94 @@ const OrdersForm = ({ buttonText }) => {
                         required: true, pattern:
                             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                     })} placeholder="john@gmail.com" />
-                    <p className='errorText'>
-                        {errors.mail && 'Proszę, wpisz poprawny E-mail'}
-                    </p>
+                    {errors.mail &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz poprawny E-mail'
+                        </motion.p>
+                    }
                 </label>
                 <label className={errors.phone && 'error'}>
                     <span>Numer telefonu</span>
-                    <input {...register("phone", { required: true })} placeholder="20 111 2345 6789" />
-                    <p className='errorText'>
-                        {errors.phone && 'Proszę, wpisz poprawny telefon'}
-                    </p>
+                    <input {...register("phone", { required: true, pattern: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g })} placeholder="20 111 2345 6789" />
+                    {errors.phone &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz poprawny telefon'
+                        </motion.p>
+                    }
                 </label>
                 <label className={errors.title && 'error'}>
                     <span>Nazwa jednostki</span>
                     <input {...register("title", { required: true })} placeholder="Pisz tutaj" />
-                    <p className='errorText'>
-                        {errors.title && 'Proszę, wpisz nazwę jednostki'}
-                    </p>
+                    {errors.title &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz nazwę jednostki'
+                        </motion.p>
+                    }
                 </label>
                 <label className={errors.adress && 'error'}>
                     <span>Adres adbioru</span>
                     <input {...register("adress", { required: true })} placeholder="101 Warszawiaków, Warszawa" />
-                    <p className='errorText'>
-                        {errors.adress && 'Proszę, wpisz adres'}
-                    </p>
+                    {errors.adress &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz adres'
+                        </motion.p>
+                    }
                 </label>
                 <label className={errors.postCode && 'error'}>
                     <span>Kod pocztowy</span>
                     <input {...register("postCode", { required: true })} placeholder="16-030" />
-                    <p className='errorText'>
-                        {errors.postCode && 'Proszę, wpisz kod pocztowy'}
-                    </p>
+                    {errors.postCode &&
+                        <motion.p
+                            initial={{ opacity: 0, bottom: 10 }}
+                            animate={{ opacity: 1, bottom: 0 }}
+                            transition={{ type: 'spring', duration: .8 }}
+                            className='errorText'>
+                            'Proszę wpisz kod pocztowy'
+                        </motion.p>
+                    }
                 </label>
             </div>
             <label className={errors.message && 'error'}>
                 <span>Twoje zamówienie</span>
                 <textarea {...register("message", { required: true })} rows="6" placeholder="Pisz tutaj" />
-                <p className='errorText'>
-                    {errors.message && 'Proszę, wpisz wiadomość'}
-                </p>
+                {errors.message &&
+                    <motion.p
+                        initial={{ opacity: 0, bottom: 10 }}
+                        animate={{ opacity: 1, bottom: 0 }}
+                        transition={{ type: 'spring', duration: .8 }}
+                        className='errorText'>
+                        'Proszę wpisz wiadomość'
+                    </motion.p>
+                }
             </label>
             <label className={(errors.check && 'error') + " checkbox"}>
                 <input type='checkbox' {...register("check", { required: true })} />
                 <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link></span>
-                <p className='errorText'>
-                    {errors.check && 'Proszę, zaakceptuj politykę prywatności'}
-                </p>
+                {errors.check &&
+                    <motion.p
+                        initial={{ opacity: 0, bottom: 10 }}
+                        animate={{ opacity: 1, bottom: 0 }}
+                        transition={{ type: 'spring', duration: .8 }}
+                        className='errorText'>
+                        'Proszę zaakceptuj politykę prywatności'
+                    </motion.p>
+                }
             </label>
             <button className="button" type="submit" >{buttonText}</button>
         </Wrapper>
@@ -120,9 +170,10 @@ const Wrapper = styled.form`
         .errorText{
             color: var(--error);
             position: absolute;
+            margin-bottom: -2px;
+            font-size: 11px;
             bottom: 0;
             transform: translateY(100%);
-            font-size: 10px;
         }
 
         &.checkbox{
@@ -209,7 +260,7 @@ const Wrapper = styled.form`
         }
 
         &.error{
-            input{
+            input, textarea{
                 border-color: var(--error);
             }
         }

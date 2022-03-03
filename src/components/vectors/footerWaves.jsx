@@ -23,6 +23,7 @@ const Wrapper = styled.div`
     max-width: 1920px;
     width: 100%;
     transform: translateX(-50%);
+    height: 60px;
     background-color: var(--backgroundDark);
     
     @media (min-width: 1440px) {
@@ -30,11 +31,11 @@ const Wrapper = styled.div`
     }
 
     @media (max-width: 1024px) {
-        height: 120px;
+        height: 200px;
     }
 
-    @media (max-width: 480px) {
-        height: 240px;
+    @media (max-width: 540px) {
+        height: 250px;
     }
 
     svg{

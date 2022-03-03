@@ -205,7 +205,7 @@ const Flex = styled.div`
 `
 
 const Slider = styled.div`
-    cursor: e-resize;
+    cursor: move;
     .slider{
         display: grid;
         grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);

@@ -68,6 +68,10 @@ const NavList = styled.ul`
       }
     }
   }
+  & li a{
+    display: block;
+    border-radius: 50px;
+  }
   & li a p {
     color: var(--navText);
     transition: all 0.1s linear; 
@@ -82,13 +86,14 @@ const NavList = styled.ul`
   }
 
   &.right{
+    li a {
+      border-radius: 6px;
+    }
     li a p {
-      padding: 0 24px;
+      padding: 8.5px 24px;
       background: #51B8EB;
       border-radius: 6px;
       display: block;
-      height: 40px;
-      line-height: 40px;
       color: var(--navHover);
       border: 1px solid var(--active);
 
@@ -203,16 +208,14 @@ const MobileNav = styled.div`
     }
 
     .right{
-      padding: 0 24px;
+      padding: 9.5px 24px;
       background: #51B8EB;
       border-radius: 6px;
       display: block;
-      height: 40px;
       max-width: 332px;
 
       p{
         color: var(--mainLightText);
-        line-height: 40px;
         text-align: center;
       }
     }
