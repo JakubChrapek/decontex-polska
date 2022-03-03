@@ -6,6 +6,7 @@ import { Link } from "gatsby"
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { StructuredText } from 'react-datocms';
 import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 const BlogArchiveTemplate = (props) => {
 
@@ -97,7 +98,7 @@ const BlogArchiveTemplate = (props) => {
                 <p className="title">{choosenPosts[0].title}</p>
                 <p className="date">{choosenPosts[0].publicationDate}</p>
               </div>
-              <img src={choosenPosts[0].coverImage.url} />
+              <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
             </div>
           </Hero>
           <Controls>
@@ -141,7 +142,7 @@ const BlogArchiveTemplate = (props) => {
                     layout
                   >
                     <Link className='imgWrapp' to={el.slug}>
-                      <img src={el.cardImage.url} />
+                      <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
                     </Link>
                     <motion.span>{el.category.name}</motion.span>
                     <motion.h3>{el.title}</motion.h3>
@@ -209,10 +210,14 @@ export const query = graphql`
         minutesOfReading
         cardImage {
           url
+          gatsbyImageData
+          title
           alt
         }
         coverImage {
           url
+          gatsbyImageData
+          title
           alt
         }
         category {
@@ -379,7 +384,7 @@ const Hero = styled.div`
       }
     }
 
-    img{
+    .gatsby-image-wrapper {
       width: 100%;
       aspect-ratio: 2.36/1;
       position: relative;
@@ -444,7 +449,7 @@ const Controls = styled.div`
   }
   
   @media (max-width: 560px) {
-      padding: 5px 20px;
+      padding: 5px 0;
   }
 
 `
@@ -501,25 +506,24 @@ const Grid = styled(motion.ul)`
       position: relative;
       overflow: hidden;
       width: 100%;
-      aspect-ratio: 1.8/1;
       border-radius: 15px;
+      .gatsby-image-wrapper {
+        border-radius: 15px;
+        width: 100%;
+        aspect-ratio: 1.8/1;
+        img {
+          transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transform-origin: center center;
+        }
+      }
 
       &:hover{
         img{
-          width: 110%;
+          transform: scale(1.075);
         }
       }
     }
 
-    img{
-      width: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 15px;
-      position: absolute;
-      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
-     
-    }
   }
 
   @media (max-width: 880px) {
@@ -530,4 +534,4 @@ const Grid = styled(motion.ul)`
     grid-template-columns: 1fr;
     
   }
-`
+`;
