@@ -1,28 +1,28 @@
 :root {
   /* Colors */
   --superDarkText: #0a101a;
-  --mainDarkText: rgba(20, 32, 51, 1);
-  --subDarkText: rgba(18, 17, 39, 0.72);
-  --formDarkText: rgba(18, 17, 39, 0.4);
-  --mainLightText: rgba(255, 255, 255, 1);
-  --subLightText: rgba(255, 255, 255, 0.72);
+  --mainDarkText: #142033;
+  --subDarkText: #121127b8;
+  --formDarkText: #12112766;
+  --mainLightText: #ffffff;
+  --subLightText: #ffffffb8;
 
   --backgroundDark: #142033;
-  --backgroundMedium: rgba(27, 53, 94, 1);
-  --backgroundLight: rgba(51, 81, 128, 1);
+  --backgroundMedium: #1b355e;
+  --backgroundLight: #335180;
   --backgroundBlue: #d5ebf4;
   --backgroundGrey: #f4f6fb;
 
-  --buttonText: rgba(51, 81, 128, 1);
-  --navText: rgba(255, 255, 255, 0.72);
-  --navHover: rgba(255, 255, 255, 1);
+  --buttonText: #335180;
+  --navText: #ffffffb8;
+  --navHover: #ffffff;
 
   --blackButtonBackground: #0a101a;
-  --whiteButtonBackground: rgba(18, 17, 39, 0.04);
+  --whiteButtonBackground: #1211270a;
 
-  --active: rgba(81, 184, 235, 1);
-  --divider: rgba(18, 17, 39, 0.16);
-  --error: rgba(239, 68, 68, 1);
+  --active: #51b8eb;
+  --divider: #12112729;
+  --error: #ef4444;
 }
 
 h1 {

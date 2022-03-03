@@ -87,7 +87,7 @@ const News = ({ data, posts }) => {
                 </Slider >
                 <SliderControls>
                     <button
-                        name="scroll w lewo"
+                        name="poprzedni artykuł"
                         disabled={!canLeft}
                         onClick={() => {
                             positionSet(position - 1);
@@ -96,7 +96,7 @@ const News = ({ data, posts }) => {
                         <ArrowLeft />
                     </button>
                     <button
-                        name="scroll w prawo"
+                        name="następny artykuł"
                         disabled={!canRight}
                         onClick={() => {
                             positionSet(position + 1);
