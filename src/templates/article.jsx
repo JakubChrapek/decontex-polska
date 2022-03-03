@@ -7,9 +7,11 @@ import styled from 'styled-components'
 import News from '../components/layout/news'
 import Waves from '../components/vectors/heroOtherPageWaves'
 import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-  const { skipNext } = pageContext
+  const {datoCmsBlogPost: {coverImage}} = data;
+  console.log(coverImage);
   return (
     <PageWrapper
       pageData={pageContext}
@@ -26,7 +28,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             <p>{data.datoCmsBlogPost.meta.firstPublishedAt}</p>
           </div>
           <h1>{data.datoCmsBlogPost.title}</h1>
-          <img className='coverImg' src={data.datoCmsBlogPost.cardImage.cardImageData.images.fallback.src} />
+          <GatsbyImage image={coverImage.gatsbyImageData} alt={coverImage.alt} title={coverImage.title} />
           <div className='content'>
             {data.datoCmsBlogPost.structuredBody?.value && (
               <StructuredText
@@ -35,7 +37,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                 renderBlock={({ record }) => {
                   switch (record.__typename) {
                     case "DatoCmsBlogImage":
-                      return <img src={record.image.url} alt={record.image.alt} />
+                      return <GatsbyImage image={record.image.gatsbyImageData} alt={record.image.alt} title={record.image.title} />
                     default:
                       return null
                   }
@@ -108,7 +110,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             )}
           </div>
         </Content>
-        <News data={data.datoCmsBlogPost.blogNewsTitle} posts={data.allDatoCmsBlogPost.blogPostNodes} />
+        <News data='Podobne artykuły' posts={data.allDatoCmsBlogPost.blogPostNodes} />
         <Waves />
       </Wrapper>
     </PageWrapper>
@@ -161,16 +163,20 @@ export const query = graphql`
         }
         minutesOfReading
         cardImage {
+          gatsbyImageData
+          title
           url
           alt
         }
         coverImage {
+          gatsbyImageData
+          title
           url
           alt
         }
         category {
           name
-          color{
+          color {
             hex
           }
         }
@@ -193,15 +199,21 @@ export const query = graphql`
       }
       publicationDate(formatString: "DD MMMM YYYY")
       cardImage {
-        cardImageData: gatsbyImageData
-        cardImageAlt: alt
+        gatsbyImageData
+        alt
+        title
+      }
+      coverImage {
+        gatsbyImageData
+        alt
+        title
       }
       meta {
         firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
       }
       category {
         name
-        color{
+        color {
           hex
         }
       }
@@ -210,6 +222,8 @@ export const query = graphql`
           __typename
           id: originalId
           image {
+            gatsbyImageData
+            title
             url
             alt
           }
@@ -277,7 +291,7 @@ const Content = styled.div`
   position: relative;
   z-index: 2;
 
-  h1{
+  h1 {
     color: var(--superBlackText);
     margin-bottom: 68px;
     margin-top: 36px;
@@ -285,63 +299,77 @@ const Content = styled.div`
     letter-spacing: -1px;
   }
 
-  .flex{
+  .gatsby-image-wrapper {
+    border-radius: 16px;
+    margin: 0 auto 24px;
+    + p {
+      margin-top: 72px;
+    }
+  }
+  p + .gatsby-image-wrapper {
+    margin-top: 42px;
+  }
+
+  .flex {
     display: flex;
     align-items: center;
 
-    span{
-      color: ${props => props.categoryColor};
-      background: #FFFFFF;
+    span {
+      color: ${(props) => props.categoryColor};
+      background: #ffffff;
       border-radius: 15px;
       padding: 10px;
       margin-right: 16px;
       position: relative;
-      transition: .2s linear;
+      transition: 0.2s linear;
 
       &:before {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          background-color: ${props => `${props.categoryColor}22`};
-          border-radius: 8px;
-          transition: .2s linear;
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: ${(props) => `${props.categoryColor}22`};
+        border-radius: 15px;
+        transition: 0.2s linear;
       }
 
-      &:hover{
-          color: var(--mainLightText);
-          background-color:  ${props => props.categoryColor};
+      &:hover {
+        color: var(--mainLightText);
+        background-color: ${(props) => props.categoryColor};
 
-          &::before{
-              opacity: 0;
-          }
+        &::before {
+          opacity: 0;
+        }
       }
     }
 
-    p{
+    p {
       color: var(--subDarkText);
     }
   }
 
-  .coverImg{
+  .coverImg {
     width: 100%;
     border-radius: 15px;
     margin-bottom: 48px;
   }
 
-  .content{
+  .content {
     max-width: 744px;
     margin: 0 auto;
-    
-    blockquote{
+    display: flex;
+    flex-direction: column;
+
+    blockquote {
       position: relative;
+      margin: 48px 0;
       padding-left: 20px;
       margin-left: 0;
       margin-right: 0;
 
-      &::before{
+      &::before {
         content: '‘‘';
         font-family: auto;
         position: absolute;
@@ -352,7 +380,7 @@ const Content = styled.div`
         color: var(--active);
       }
 
-      p{
+      p {
         font-weight: bold;
         font-size: 24px;
         line-height: 110%;
@@ -361,54 +389,54 @@ const Content = styled.div`
       }
     }
 
-    p{
-      margin: 24px 0;
+    p {
       font-size: 20px;
       line-height: 180%;
       color: var(--subDarkText);
 
-      &:last-child{
+      &:last-child {
         margin-bottom: 0;
+      }
+
+      + p {
+        margin-top: 24px;
       }
     }
 
-    h2{
+    h2 {
       margin-top: 48px;
       font-weight: bold;
       font-size: 32px;
       line-height: 130%;
       letter-spacing: -0.5px;
-      color: var(--subDarkText);
+      color: var(--superDarkText);
+      + p {
+        margin-top: 24px;
+      }
     }
 
-    ul{
+    ul {
       display: grid;
       grid-row-gap: 16px;
       margin: 42px 0;
 
-      li{
-        padding-left: 28px; 
+      li {
+        padding-left: 28px;
         position: relative;
 
-        &::before{
-            content: "●";
-            position: absolute;
-            left: 0;
-            color: #F4EEE6;
-            font-size: 20px;
-            line-height: 180%;
+        &::before {
+          content: '●';
+          position: absolute;
+          left: 0;
+          color: #f4eee6;
+          font-size: 20px;
+          line-height: 180%;
         }
 
-        p{
+        p {
           margin: 0;
         }
       }
-
-    }
-
-    img{
-      width: 100%;
-      margin: 42px 0;
     }
   }
-`
+`;

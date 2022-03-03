@@ -6,6 +6,8 @@ import { Link } from "gatsby"
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { StructuredText } from 'react-datocms';
 import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { parseDateFromEnglishMonth } from '../utils/misc';
 
 const BlogArchiveTemplate = (props) => {
   const constraintsRef = useRef(null);
@@ -144,7 +146,7 @@ const BlogArchiveTemplate = (props) => {
                     layout
                   >
                     <Link className='imgWrapp' to={el.slug}>
-                      <img src={el.cardImage.url} />
+                      <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
                     </Link>
                     <motion.span>{el.category.name}</motion.span>
                     <motion.h3>{el.title}</motion.h3>
@@ -212,10 +214,14 @@ export const query = graphql`
         minutesOfReading
         cardImage {
           url
+          gatsbyImageData
+          title
           alt
         }
         coverImage {
           url
+          gatsbyImageData
+          title
           alt
         }
         category {
@@ -385,7 +391,7 @@ const Hero = styled.div`
       }
     }
 
-    img{
+    .gatsby-image-wrapper {
       width: 100%;
       left: 50%;
       top: 50%;
@@ -462,7 +468,7 @@ const Controls = styled.div`
   }
   
   @media (max-width: 560px) {
-      padding: 5px 20px;
+      padding: 5px 0;
   }
 
 `
@@ -519,25 +525,24 @@ const Grid = styled(motion.ul)`
       position: relative;
       overflow: hidden;
       width: 100%;
-      aspect-ratio: 1.8/1;
       border-radius: 15px;
+      .gatsby-image-wrapper {
+        border-radius: 15px;
+        width: 100%;
+        aspect-ratio: 1.8/1;
+        img {
+          transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transform-origin: center center;
+        }
+      }
 
       &:hover{
         img{
-          width: 110%;
+          transform: scale(1.075);
         }
       }
     }
 
-    img{
-      width: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 15px;
-      position: absolute;
-      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
-     
-    }
   }
 
   @media (max-width: 880px) {
@@ -548,4 +553,4 @@ const Grid = styled(motion.ul)`
     grid-template-columns: 1fr;
     
   }
-`
+`;

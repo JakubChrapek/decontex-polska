@@ -19,7 +19,7 @@ const ImageWithButton = ({ data }) => {
           <img
             className="dots"
             src={data.isImgRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM_BIGGER}
-            alt="kropki dekoracyjne"
+            alt=""
           />
           <GatsbyImage
             className="mainImage"
@@ -45,7 +45,7 @@ const ImageWithButton = ({ data }) => {
 export default ImageWithButton
 
 const Wrapper = styled.section`
-    padding-top: 160px;
+    padding-top: clamp(110px, 11.11vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 
@@ -64,7 +64,7 @@ const Container = styled.div`
     position: relative;
     height: fit-content;
     width: fit-content;
-    margin: 0 auto 0 0;
+    margin: ${(props) => (props.isImgRight ? '0 0 0 auto' : '0 auto 0 0')};
     padding-left: clamp(24px, 3.88vw, 56px);
 
     .dots {
@@ -72,15 +72,12 @@ const Container = styled.div`
       position: absolute;
       width: clamp(142px, 40%, 172px);
       bottom: -20%;
-      left: ${(props) => (props.isImgRight ? 'unset' : '-14%')};
-      right: ${(props) => (props.isImgRight ? '-14%' : 'unset')};
+      left: ${(props) => (props.isImgRight ? '0' : 'unset')};
+      right: ${(props) => (props.isImgRight ? 'unset' : '-14%')};
       z-index: 10;
     }
 
     .mainImage {
-      border-radius: 16px;
-      /* margin-left: ${(props) => (props.isImgRight ? '35px' : '0')};
-      margin-right: ${(props) => (props.isImgRight ? '0' : '35px')}; */
       border-radius: 16px;
       position: relative;
       overflow: visible;
@@ -91,8 +88,8 @@ const Container = styled.div`
       &:before {
         content: '';
         position: absolute;
-        left: ${(props) => (props.isImgRight ? '28px' : '-28px')};
-        bottom: ${(props) => (props.isImgRight ? '-28px' : '-28px')};
+        left: ${(props) => (props.isImgRight ? '-28px' : '28px')};
+        bottom: -28px;
         width: 100%;
         height: 100%;
         background-color: ${(props) => props.backgroundColor};
@@ -119,23 +116,16 @@ const Container = styled.div`
         color: red;
       }
     }
+  }
 
-        .mainImage{
-            border-radius: 16px;
-            box-shadow: ${props => props.isImgBackground ? props.isImgRight ? `32px 32px 0px 0px` + props.backgroundColor : '-32px 32px 0px 0px' + props.backgroundColor : null};
-            margin-left: ${props => props.isImgRight ? '35px' : '0'};
-            margin-right: ${props => props.isImgRight ? '0' : '35px'};
-            max-width: 400px;
-        }
-    }
+  a {
+    display: block;
+    margin-top: 20px;
+    width: fit-content;
+    border-radius: 8px;
 
-    a {
-      display: block;
-      margin-top: 20px;
-      width: fit-content;
-      border-radius: 8px;
 
-      p {
+    p {
         width: fit-content;
         padding: 13px 24px;
         border: 1px solid ${props => props.buttonColor ? props.buttonColor : 'var(--active)'};
@@ -146,33 +136,38 @@ const Container = styled.div`
         position: relative;
         transition: 0.2s linear;
 
-        &:hover {
+      &:hover {
           border: 1px solid ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
           background-color: ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
-        }
       }
     }
+  }
 
   @media (max-width: 1024px) {
-    flex-direction: column-reverse;
-    max-width: 697px;
-    display: flex;
-    justify-content: flex-end;
+    && {
+      flex-direction: column-reverse;
+      max-width: 697px;
+      display: flex;
+      justify-content: flex-end;
+    }
     .imageWrapper {
       width: 100%;
       margin: 72px 0 0 auto;
+      padding-left: ${(props) => props.isImgRight && '0'};
+
       .dots {
         width: clamp(130px, 30%, 261px);
         bottom: -18.5%;
-        left: ${(props) => (props.isImgRight ? 'unset' : '2.5%')};
-        right: ${(props) => (props.isImgRight ? '2.5%' : 'unset')};
+        left: ${(props) => (props.isImgRight ? '-2.5%' : 'unset')};
+        right: ${(props) => (props.isImgRight ? 'unset' : '-2.5%')};
       }
 
       .mainImage {
         max-width: 605px;
         aspect-ratio: 4/3;
         width: 87%;
-        margin: ${({ isImgRight }) => isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
+        margin: ${({ isImgRight }) =>
+    isImgRight ? '0 0 0 auto' : '0 auto 0 0'};
         display: block;
       }
     }
@@ -189,10 +184,13 @@ const Container = styled.div`
   }
 
   @media (max-width: 640px) {
-    .imageWrapper .mainImage {
-      :before {
-        left: -22px;
-        bottom: -22px;
+    .imageWrapper {
+      padding-left: 0;
+      .mainImage {
+        :before {
+          left: ${(props) => (props.isImgRight ? '22px' : '-22px')};
+          bottom: -22px;
+        }
       }
     }
   }

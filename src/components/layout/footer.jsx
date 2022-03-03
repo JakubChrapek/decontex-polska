@@ -252,7 +252,9 @@ const Nav = styled.nav`
   @media (max-width: 540px){
     ul{
       grid-template-columns: 1fr;
-
+      li a {
+        width: fit-content;
+      }
       li a p {
         padding: 0;
 

@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import styled from 'styled-components';
 import { useLocation } from '@reach/router';
-import { LangContext } from '../../context/langProvider';
-import LanguageSwitcher from '../langHelpers/languageSwitcher';
 import useLanguages from '../../hooks/useLanguages';
 import Navigator from '../langHelpers/navigator';
 import { StructuredText } from 'react-datocms';
@@ -59,13 +57,17 @@ const NavList = styled.ul`
   display: grid;
   grid-auto-flow: column;
   column-gap: clamp(4px, 1vw, 16px);
-  .other{
+  .other {
     a p {
       color: var(--subDarkText);
-      &:hover{
+      &:hover {
         color: var(--mainDarkText);
         background-color: var(--mainLightText);
       }
+    }
+    .activeClassLink p {
+      color: var(--mainDarkText);
+      background-color: var(--mainLightText);
     }
   }
   & li a{
@@ -74,12 +76,15 @@ const NavList = styled.ul`
   }
   & li a p {
     color: var(--navText);
-    transition: all 0.1s linear; 
+    transition: all 0.1s linear;
     padding: 8px clamp(4px, 1vw, 16px);
     border-radius: 50px;
 
-    
     &:hover {
+      color: var(--navHover);
+      background-color: var(--backgroundMedium);
+    }
+    & li .activeClassLink p {
       color: var(--navHover);
       background-color: var(--backgroundMedium);
     }
@@ -97,7 +102,7 @@ const NavList = styled.ul`
       color: var(--navHover);
       border: 1px solid var(--active);
 
-      &:hover{
+      &:hover {
         border: 1px solid var(--backgroundLight);
         background-color: var(--backgroundLight);
       }

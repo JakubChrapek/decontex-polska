@@ -27,7 +27,7 @@ const Container = styled.div`
         line-height: 130%;
         color: var(--mainDarkText);
 
-        letter-spacing: -1.5px;
+        letter-spacing: -0.5px;
     }
 
     @media (max-width: 1024px) {

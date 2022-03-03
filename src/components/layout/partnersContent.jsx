@@ -27,11 +27,11 @@ const PartnersContent = ({ data }) => {
 export default PartnersContent
 
 const Wrapper = styled.section`
-    padding-top: 160px;
-    max-width: 1920px;
-    margin: 0 auto;
-    margin-bottom: clamp(72px, 9.3vw, 100px);
-`
+  padding-top: clamp(110px, 11.11vw, 160px);
+  max-width: 1920px;
+  margin: 0 auto;
+  margin-bottom: clamp(72px, 9.3vw, 100px);
+`;
 
 const Container = styled.div`
     ul{

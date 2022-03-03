@@ -2,30 +2,28 @@ import React, { useRef } from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import { motion } from "framer-motion";
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Benefits = ({ data }) => {
     const constraintsRef = useRef(null);
 
     return (
-        <Wrapper>
-            <Container className='container'>
-                <StructuredText data={data.title} />
-                <Grid ref={constraintsRef} >
-                    <motion.ul drag="x" dragConstraints={constraintsRef}>
-                        {data.benefits.map(el => (
-                            <motion.li>
-                                {/* <GatsbyImage alt={el.icon.alt} title={el.icon.title} image={el.icon.gatsbyImageData} /> */}
-                                <img src={el.icon.url} alt={el.icon.alt} />
-                                <StructuredText data={el.title} />
-                                <p>{el.text}</p>
-                            </motion.li>
-                        ))}
-                    </motion.ul>
-                </Grid>
-            </Container>
-        </Wrapper>
-    )
+      <Wrapper>
+        <Container className="container">
+          <StructuredText data={data.title} />
+          <Grid ref={constraintsRef}>
+            <motion.ul drag="x" dragConstraints={constraintsRef}>
+              {data.benefits.map((el) => (
+                <motion.li>
+                  <img src={el.icon.url} alt={el.icon.alt} title={el.icon.title} />
+                  <StructuredText data={el.title} />
+                  <p>{el.text}</p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </Grid>
+        </Container>
+      </Wrapper>
+    );
 }
 
 export default Benefits
