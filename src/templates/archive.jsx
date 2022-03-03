@@ -7,6 +7,7 @@ import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { StructuredText } from 'react-datocms';
 import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { parseDateFromEnglishMonth } from '../utils/misc';
 
 const BlogArchiveTemplate = (props) => {
 
@@ -96,7 +97,7 @@ const BlogArchiveTemplate = (props) => {
               <div>
                 <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
                 <p className="title">{choosenPosts[0].title}</p>
-                <p className="date">{choosenPosts[0].publicationDate}</p>
+                <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
               </div>
               <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
             </div>

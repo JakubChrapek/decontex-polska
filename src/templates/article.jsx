@@ -331,7 +331,7 @@ const Content = styled.div`
         top: 0;
         bottom: 0;
         background-color: ${(props) => `${props.categoryColor}22`};
-        border-radius: 8px;
+        border-radius: 15px;
         transition: 0.2s linear;
       }
 

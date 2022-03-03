@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { Link } from "gatsby"
+import { GatsbyImage } from 'gatsby-plugin-image';
+import { parseDateFromEnglishMonth } from '../../utils/misc';
 
 const News = ({ data, posts }) => {
     const [position, positionSet] = useState(0);
@@ -59,29 +61,44 @@ const News = ({ data, posts }) => {
                 <Slider isMainPage={data.title}>
                     <div {...handlers}>
                         <div className="slider">
-                            {posts.map((el, index) => (
-                                index <= 2
-                                    ? <Link to={'/blog/' + el.slug}>
-                                        <motion.div
-                                            className="sliderItem"
-                                            animate={{
-                                                left: `calc(${position} * (-100% - 36px))`,
-                                            }}
-                                            transition={{ ease: "easeOut", duration: .25 }}
+                            {posts.map((el, index) => {
+                                const polishDate = parseDateFromEnglishMonth(el.publicationDate)
+                                return index <= 2 ? (
+                                  <Link to={'/blog/' + el.slug}>
+                                    <motion.div
+                                      className="sliderItem"
+                                      animate={{
+                                        left: `calc(${position} * (-100% - 36px))`,
+                                      }}
+                                      transition={{
+                                        ease: 'easeOut',
+                                        duration: 0.25,
+                                      }}
+                                    >
+                                      <div>
+                                        <Link
+                                          to="/blog/"
+                                          state={{ category: el.category.name }}
                                         >
-
-                                            <div>
-                                                <Link to="/blog/" state={{ category: el.category.name }}>
-                                                    <Category categoryColor={el.category.color.hex}>{el.category.name}</Category>
-                                                </Link>
-                                                <p className='title'>{el.title}</p>
-                                                <p className='date'>{el.publicationDate}</p>
-                                            </div>
-                                            <img src={el.cardImage.url} alt={el.cardImage.alt} />
-                                        </motion.div>
-                                    </Link>
-                                    : null
-                            ))}
+                                          <Category
+                                            categoryColor={
+                                              el.category.color.hex
+                                            }
+                                          >
+                                            {el.category.name}
+                                          </Category>
+                                        </Link>
+                                        <p className="title">{el.title}</p>
+                                        <p className="date">{polishDate}</p>
+                                      </div>
+                                      <GatsbyImage
+                                        image={el.cardImage.gatsbyImageData}
+                                        alt={el.cardImage.alt}
+                                        title={el.cardImage.title}
+                                      />
+                                    </motion.div>
+                                  </Link>
+                                ) : null;})}
                         </div>
                     </div>
                 </Slider >
@@ -205,82 +222,80 @@ const Flex = styled.div`
 `
 
 const Slider = styled.div`
-    cursor: e-resize;
-    .slider{
-        display: grid;
-        grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);
-        grid-column-gap: 36px;
-        margin-top: ${props => props.isMainPage ? '150px' : '48px'};
+  cursor: e-resize;
+  .slider {
+    display: grid;
+    grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);
+    grid-column-gap: 36px;
+    margin-top: ${(props) => (props.isMainPage ? '150px' : '48px')};
+    width: 100%;
+    overflow: hidden;
+
+    .sliderItem {
+      aspect-ratio: 1.33/1;
+      border-radius: 15px;
+      position: relative;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      overflow: hidden;
+
+      div {
+        position: absolute;
+        bottom: 0;
+        padding: clamp(20px, 4vw, 60px) 26px;
+
+        .title {
+          color: var(--mainLightText);
+          margin: 26px 0 16px 0;
+          text-align: left;
+          font-weight: bold;
+          font-size: 24px;
+          line-height: 110%;
+          letter-spacing: 0px;
+        }
+
+        .date {
+          font-size: 16px;
+          line-height: 180%;
+          color: var(--subLightText);
+          text-align: left;
+        }
+      }
+
+      .gatsby-image-wrapper {
         width: 100%;
-        overflow: hidden;
+        height: 100%;
+        padding: 0;
+        position: relative;
+        border-radius: 15px;
+        bottom: unset;
+        z-index: -1;
 
-        .sliderItem{
-            aspect-ratio: 1.33/1;
-            border-radius: 15px;
-            position: relative;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-            overflow: hidden;
-
-            div{
-                position: absolute;
-                bottom: 0;
-                padding: clamp(20px, 4vw, 60px) 26px;
-
-                .title{
-                    color: var(--mainLightText);
-                    margin: 26px 0 16px 0;
-                    text-align: left;
-                    font-weight: bold;
-                    font-size: 24px;
-                    line-height: 110%;
-                    letter-spacing: 0px;
-                }
-
-                .date{
-                    font-size: 16px;
-                    line-height: 180%;
-                    color: var(--subLightText);
-                    text-align: left;
-
-                }
-            }
-
-            img{
-                width: 100%;
-                height: 100%;   
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                position: absolute;
-                border-radius: 15px;
-                z-index: -1;
-                transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95)
-            }
-
-            &:hover{
-                img{
-                    width: 110%;
-                    height: 110%;
-                }
-            }
+        img {
+          transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          border-radius: 15px;
         }
+      }
 
-        
-        @media (max-width: 1024px){
-            margin-top: 48px;
+      &:hover {
+        img {
+          transform: scale(1.075);
         }
-        
-        @media (max-wdith: 840px) {
-            grid-template-columns:  repeat(3, minmax(320px, 62.8vw));
-            
-        }
-
-        @media (max-width: 660px) {
-            grid-template-columns:  repeat(3, 100%);
-
-        }
+      }
     }
-`
+
+    @media (max-width: 1024px) {
+      margin-top: 48px;
+    }
+
+    @media (max-wdith: 840px) {
+      grid-template-columns: repeat(3, minmax(320px, 62.8vw));
+    }
+
+    @media (max-width: 660px) {
+      grid-template-columns: repeat(3, 100%);
+    }
+  }
+`;
 
 const SliderControls = styled.div`
     margin-top: 40px;
