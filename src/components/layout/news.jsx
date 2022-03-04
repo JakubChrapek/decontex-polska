@@ -231,37 +231,6 @@ const Slider = styled.div`
         width: 100%;
         overflow: hidden;
 
-        .sliderItem{
-            aspect-ratio: 1.33/1;
-            border-radius: 15px;
-            position: relative;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-            overflow: hidden;
-
-            div{
-                position: absolute;
-                bottom: 0;
-                padding: clamp(20px, 4vw, 60px) 26px;
-
-                .title{
-                    color: var(--mainLightText);
-                    margin: 26px 0 16px 0;
-                    text-align: left;
-                    font-weight: bold;
-                    font-size: 24px;
-                    line-height: 110%;
-                    letter-spacing: 0px;
-                }
-
-                .date{
-                    font-size: 16px;
-                    line-height: 180%;
-                    color: var(--subLightText);
-                    text-align: left;
-
-                }
-            }
-
     .sliderItem {
       aspect-ratio: 1.33/1;
       border-radius: 15px;
@@ -269,7 +238,7 @@ const Slider = styled.div`
       background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
       overflow: hidden;
 
-      div {
+      > div {
         position: absolute;
         bottom: 0;
         padding: clamp(20px, 4vw, 60px) 26px;
@@ -295,7 +264,7 @@ const Slider = styled.div`
       .gatsby-image-wrapper {
         width: 100%;
         height: 100%;
-        padding: 0;
+        padding: 0 !important;
         position: relative;
         border-radius: 15px;
         bottom: unset;
@@ -326,7 +295,6 @@ const Slider = styled.div`
       grid-template-columns: repeat(3, 100%);
     }
   }
-}
 `;
 
 const SliderControls = styled.div`
