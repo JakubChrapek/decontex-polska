@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import React from "react"
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import handler from "../../api/kontaktForm";
+import handler from "../../api/contactForm";
 import Yes from '../vectors/yes.svg'
 
 const OrdersForm = ({ buttonText }) => {

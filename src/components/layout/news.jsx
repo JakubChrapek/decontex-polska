@@ -245,7 +245,7 @@ const Slider = styled.div`
 
         .title {
           color: var(--mainLightText);
-          margin: 26px 0 16px 0;
+          margin: 22px 0 16px 0;
           text-align: left;
           font-weight: bold;
           font-size: 24px;

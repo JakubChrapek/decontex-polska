@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link } from "gatsby"
 import Yes from '../vectors/yes.svg'
-import handler from "../../api/kontaktForm";
+import handler from "../../api/contactForm";
 import { motion } from "framer-motion";
 
 const KontaktForm = ({ buttonText }) => {

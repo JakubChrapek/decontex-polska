@@ -99,7 +99,7 @@ const BlogArchiveTemplate = (props) => {
                 <div>
                   <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
                   <p className="title">{choosenPosts[0].title}</p>
-                  <p className="date">{choosenPosts[0].publicationDate}</p>
+                  <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
                 </div>
                 <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
               </div>
@@ -294,7 +294,7 @@ const Category = styled.span`
   background-color: var(--mainLightText);
   color: ${props => props.categoryColor};
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 15px;
   position: relative;
   cursor: pointer;
   transition: .2s linear;
@@ -309,7 +309,7 @@ const Category = styled.span`
         top: 0;
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
-        border-radius: 8px;
+        border-radius: 15px;
         transition: .2s linear;
     }
 
@@ -373,7 +373,7 @@ const Hero = styled.div`
 
       .title {
         color: var(--mainLightText);
-        margin: 26px 0 16px 0;
+        margin: 22px 0 16px 0;
         text-align: left;
         font-weight: bold;
         font-size: 24px;
