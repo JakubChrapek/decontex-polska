@@ -79,12 +79,6 @@ const Container = styled.div`
       img {
         border-radius: 16px;
       }
-      /* box-shadow: ${(props) =>
-    props.isImgBackground
-      ? props.isImgRight
-        ? '28px 28px 0px 0px var(--backgroundMedium)'
-        : '-28px 28px 0px 0px var(--backgroundMedium)'
-      : null}; */
       &:before {
         content: '';
         position: absolute;
@@ -154,10 +148,9 @@ const Container = styled.div`
       align-self: flex-end;
       width: 100%;
       max-width: 607px;
-      margin: 0 auto;
       aspect-ratio: 607/455;
       width: 90%;
-      margin: 50px auto 0;
+      margin: 50px 0 0 auto;
       .dots {
         width: clamp(221px, 30%, 261px);
         bottom: calc(-50px - 15%);
@@ -165,57 +158,59 @@ const Container = styled.div`
       }
 
       .mainImage {
-          width: 100%;
-          max-width: unset;
-          aspect-ratio: 400/300;
-          display: block;
+        width: 100%;
+        max-width: unset;
+        aspect-ratio: 400/300;
+        display: block;
+        margin-right: 0;
+        margin-left: 0;
         &:before {
-            left: -42px;
-            bottom: -42px;
+          left: -42px;
+          bottom: -42px;
         }
-    }
+      }
 
-    .textPart {
-      margin: 0 auto;
-      max-width: 100%;
+      .textPart {
+        margin: 0 auto;
+        max-width: 100%;
 
-      h3 {
-        margin-top: clamp(28px, 4.7vw, 48px);
-        padding-top: clamp(28px, 4.7vw, 48px);
+        h3 {
+          margin-top: clamp(28px, 4.7vw, 48px);
+          padding-top: clamp(28px, 4.7vw, 48px);
+        }
       }
     }
-  }
-  @media (max-width: 767px) {
+    @media (max-width: 767px) {
       .imageWrapper {
-          .mainImage {
-              height: unset;
-            &:before {
-                left: -22px;
-                bottom: -22px;
-            }
+        .mainImage {
+          height: unset;
+          &:before {
+            left: -22px;
+            bottom: -22px;
+          }
         }
         .dots {
-            width: clamp(121px, 30%, 151px);
-            bottom: calc(-15%);
-            left: -11%;
+          width: clamp(121px, 30%, 151px);
+          bottom: -16px;
+          left: -16px;
         }
       }
-  }
+    }
 
-  @media (max-width: 480px) {
-    .textPart {
-      h2 {
-        font-size: 32px;
-      }
+    @media (max-width: 480px) {
+      .textPart {
+        h2 {
+          font-size: 32px;
+        }
 
-      p {
-        font-size: 16px;
-      }
+        p {
+          font-size: 16px;
+        }
 
-      h3 {
-        font-size: 14px;
+        h3 {
+          font-size: 14px;
+        }
       }
     }
   }
-}
-`
+`;

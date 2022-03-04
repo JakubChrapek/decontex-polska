@@ -99,9 +99,9 @@ const BlogArchiveTemplate = (props) => {
                 <div>
                   <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
                   <p className="title">{choosenPosts[0].title}</p>
-                  <p className="date">{choosenPosts[0].publicationDate}</p>
+                  <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
                 </div>
-                <img src={choosenPosts[0].coverImage.url} />
+                <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
               </div>
             </Link>
           </Hero>
@@ -294,7 +294,7 @@ const Category = styled.span`
   background-color: var(--mainLightText);
   color: ${props => props.categoryColor};
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 15px;
   position: relative;
   cursor: pointer;
   transition: .2s linear;
@@ -309,7 +309,7 @@ const Category = styled.span`
         top: 0;
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
-        border-radius: 8px;
+        border-radius: 15px;
         transition: .2s linear;
     }
 
@@ -338,7 +338,7 @@ const Container = styled.div`
 `
 
 const Hero = styled.div`
-  h1{
+  h1 {
     color: var(--superBlackText);
     max-width: 726px;
     margin: 0 auto;
@@ -348,8 +348,8 @@ const Hero = styled.div`
     line-height: 130%;
     letter-spacing: -1px;
   }
-  
-  p{
+
+  p {
     max-width: 726px;
     margin: 0 auto;
     text-align: center;
@@ -357,24 +357,23 @@ const Hero = styled.div`
     line-height: 180%;
   }
 
-  .imageBox{
+  .imageBox {
     position: relative;
     margin-top: 100px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%); 
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
     border-radius: 15px;
     aspect-ratio: 2.36/1;
     width: 100%;
     overflow: hidden;
 
-    div{
+    div {
       position: absolute;
       bottom: 0;
       padding: clamp(18px, 4.5vw, 50px);
 
-
-      .title{
+      .title {
         color: var(--mainLightText);
-        margin: 26px 0 16px 0;
+        margin: 22px 0 16px 0;
         text-align: left;
         font-weight: bold;
         font-size: 24px;
@@ -382,12 +381,11 @@ const Hero = styled.div`
         letter-spacing: 0px;
       }
 
-      .date{
+      .date {
         font-size: 16px;
         line-height: 180%;
         color: var(--subLightText);
         text-align: left;
-
       }
     }
 
@@ -400,28 +398,28 @@ const Hero = styled.div`
       position: absolute;
       z-index: -1;
       border-radius: 15px;
-      transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-
-    
+       img {
+         transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+         transform-origin: center center;
+       }
     }
 
-    &:hover{
-      img{
-        width: 110%;
+    &:hover {
+      img {
+        transform: scale(1.075);
       }
     }
-
   }
 
   @media (max-width: 1024px) {
     font-size: clamp(36px, 5.2vw, 48px);
 
-    .imageBox div .title{
+    .imageBox div .title {
       margin: 10px 0 4px;
       font-size: 18px;
     }
   }
-`
+`;
 
 const Controls = styled.div`
 
