@@ -349,13 +349,13 @@ const Header = () => {
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
                 links.map(({ id, slug, locale, ariaLabel, name }) =>
-                  <li key={id} className={(pathname === '/' || pathname === '/en') ? '' : (pathname === '/blog' || pathname === '/partnerzy') ? 'other-grey' : 'other'}>
+                  <li key={id} className={(pathname === '/' || pathname === '/en') ? '' : (pathname === '/blog/' || pathname === '/partnerzy/') ? 'other-grey' : 'other'}>
                     <Link
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}`
-                          : `/${locale}/${slug}`
+                          ? `/${slug}/`
+                          : `/${locale}/${slug}/`
                       }
                       aria-label={ariaLabel}
                     >
@@ -381,8 +381,8 @@ const Header = () => {
                         activeClassName="activeClassLink"
                         to={
                           locale === defaultLanguage
-                            ? `/${slug}`
-                            : `/${locale}/${slug}`
+                            ? `/${slug}/`
+                            : `/${locale}/${slug}/`
                         }
                         aria-label={ariaLabel}
                       >
@@ -436,8 +436,8 @@ const Header = () => {
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}`
-                          : `/${locale}/${slug}`
+                          ? `/${slug}/`
+                          : `/${locale}/${slug}/`
                       }
                       aria-label={ariaLabel}
                     >
@@ -455,8 +455,8 @@ const Header = () => {
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}`
-                          : `/${locale}/${slug}`
+                          ? `/${slug}/`
+                          : `/${locale}/${slug}/`
                       }
                       aria-label={ariaLabel}
                     >

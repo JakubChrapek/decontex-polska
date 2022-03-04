@@ -61,7 +61,7 @@ const Footer = () => {
                 <Link
                   className={`c` + index}
                   aria-label={innerEl.ariaLabel}
-                  to={`/${innerEl.slug}`}
+                  to={`/${innerEl.slug}/`}
                   key={el.id}
                 >
                   <StructuredText data={innerEl.name} />
@@ -79,7 +79,7 @@ const Footer = () => {
                     <Link
                       className={`c` + index}
                       aria-label={innerEl.ariaLabel}
-                      to={`/${innerEl.slug}`}
+                      to={`/${innerEl.slug}/`}
                       key={el.id}
                     >
                       <StructuredText data={innerEl.name} />
