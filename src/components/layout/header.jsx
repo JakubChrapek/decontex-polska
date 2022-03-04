@@ -70,6 +70,19 @@ const NavList = styled.ul`
       background-color: var(--mainLightText);
     }
   }
+  .other-grey{
+    a p {
+      color: var(--subDarkText);
+      &:hover {
+        color: var(--mainDarkText);
+        background-color: var(--backgroundGrey);
+      }
+    }
+    .activeClassLink p {
+      color: var(--mainDarkText);
+      background-color: var(--backgroundGrey);
+    }
+  }
   & li a{
     display: block;
     border-radius: 50px;
@@ -335,8 +348,8 @@ const Header = () => {
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
-                links.map(({ id, slug, locale, ariaLabel, name }) => (
-                  <li key={id} className={pathname === '/' || pathname === '/en' ? '' : 'other'}>
+                links.map(({ id, slug, locale, ariaLabel, name }) =>
+                  <li key={id} className={(pathname === '/' || pathname === '/en') ? '' : (pathname === '/blog' || pathname === '/partnerzy') ? 'other-grey' : 'other'}>
                     <Link
                       activeClassName="activeClassLink"
                       to={
@@ -349,8 +362,9 @@ const Header = () => {
                       <StructuredText data={name} />
                     </Link>
                   </li>
-                ))
-              )}
+                )
+              )
+            }
           </NavList>
         </Nav>
         <HeaderRight>

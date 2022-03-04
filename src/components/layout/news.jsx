@@ -64,46 +64,48 @@ const News = ({ data, posts }) => {
                             {posts.map((el, index) => {
                                 const polishDate = parseDateFromEnglishMonth(el.publicationDate)
                                 return index <= 2 ? (
-                                  <Link to={'/blog/' + el.slug}>
-                                    <motion.div
-                                      className="sliderItem"
-                                      animate={{
-                                        left: `calc(${position} * (-100% - 36px))`,
-                                      }}
-                                      transition={{
-                                        ease: 'easeOut',
-                                        duration: 0.25,
-                                      }}
-                                    >
-                                      <div>
-                                        <Link
-                                          to="/blog/"
-                                          state={{ category: el.category.name }}
+                                    <Link to={'/blog/' + el.slug}>
+                                        <motion.div
+                                            className="sliderItem"
+                                            animate={{
+                                                left: `calc(${position} * (-100% - 36px))`,
+                                            }}
+                                            transition={{
+                                                ease: 'easeOut',
+                                                duration: 0.25,
+                                            }}
                                         >
-                                          <Category
-                                            categoryColor={
-                                              el.category.color.hex
-                                            }
-                                          >
-                                            {el.category.name}
-                                          </Category>
-                                        </Link>
-                                        <p className="title">{el.title}</p>
-                                        <p className="date">{polishDate}</p>
-                                      </div>
-                                      <GatsbyImage
-                                        image={el.cardImage.gatsbyImageData}
-                                        alt={el.cardImage.alt}
-                                        title={el.cardImage.title}
-                                      />
-                                    </motion.div>
-                                  </Link>
-                                ) : null;})}
+                                            <div>
+                                                <Link
+                                                    to="/blog/"
+                                                    state={{ category: el.category.name }}
+                                                >
+                                                    <Category
+                                                        categoryColor={
+                                                            el.category.color.hex
+                                                        }
+                                                    >
+                                                        {el.category.name}
+                                                    </Category>
+                                                </Link>
+                                                <p className="title">{el.title}</p>
+                                                <p className="date">{polishDate}</p>
+                                            </div>
+                                            <GatsbyImage
+                                                image={el.cardImage.gatsbyImageData}
+                                                alt={el.cardImage.alt}
+                                                title={el.cardImage.title}
+                                            />
+                                        </motion.div>
+                                    </Link>
+                                ) : null;
+                            })}
                         </div>
                     </div>
                 </Slider >
                 <SliderControls>
                     <button
+                        aria-label="slider scroll left"
                         name="poprzedni artykuł"
                         disabled={!canLeft}
                         onClick={() => {
@@ -113,6 +115,7 @@ const News = ({ data, posts }) => {
                         <ArrowLeft />
                     </button>
                     <button
+                        aria-label="slider scroll right"
                         name="następny artykuł"
                         disabled={!canRight}
                         onClick={() => {
