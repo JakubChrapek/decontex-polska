@@ -72,8 +72,8 @@ const Container = styled.div`
       position: absolute;
       width: clamp(142px, 40%, 172px);
       bottom: -20%;
-      left: ${(props) => (props.isImgRight ? '0' : 'unset')};
-      right: ${(props) => (props.isImgRight ? 'unset' : '-14%')};
+      left: ${(props) => (props.isImgRight ? 'unset' : '0')};
+      right: ${(props) => (props.isImgRight ? '-14%' : '0')};
       z-index: 10;
     }
 
@@ -88,7 +88,7 @@ const Container = styled.div`
       &:before {
         content: '';
         position: absolute;
-        left: ${(props) => (props.isImgRight ? '-28px' : '28px')};
+        left: ${(props) => (props.isImgRight ? '28px' : '-28px')};
         bottom: -28px;
         width: 100%;
         height: 100%;
@@ -124,21 +124,33 @@ const Container = styled.div`
     width: fit-content;
     border-radius: 8px;
 
-
     p {
-        width: fit-content;
-        padding: 13px 24px;
-        border: 1px solid ${props => props.buttonColor ? props.buttonColor : 'var(--active)'};
-        background: ${props => props.buttonColor ? props.buttonColor : 'var(--active)'};
-        border-radius: 8px;
-        display: block;
-        color: var(--navHover);
-        position: relative;
-        transition: 0.2s linear;
+      width: fit-content;
+      padding: 13px 24px;
+      border: 1px solid
+        ${(props) => (props.buttonColor ? props.buttonColor : 'var(--active)')};
+      background: ${(props) =>
+        props.buttonColor ? props.buttonColor : 'var(--active)'};
+      border-radius: 8px;
+      display: block;
+      color: var(--navHover);
+      position: relative;
+      transition: 0.2s linear;
 
       &:hover {
-          border: 1px solid ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
-          background-color: ${props => props.buttonColor ? props.buttonColor === '#51B8EB' ? 'var(--backgroundLight)' : 'var(--backgroundMedium)' : 'var(--backgroundLight)'};
+        border: 1px solid
+          ${(props) =>
+            props.buttonColor
+              ? props.buttonColor === '#51B8EB'
+                ? 'var(--backgroundLight)'
+                : 'var(--backgroundMedium)'
+              : 'var(--backgroundLight)'};
+        background-color: ${(props) =>
+          props.buttonColor
+            ? props.buttonColor === '#51B8EB'
+              ? 'var(--backgroundLight)'
+              : 'var(--backgroundMedium)'
+            : 'var(--backgroundLight)'};
       }
     }
   }
@@ -157,9 +169,9 @@ const Container = styled.div`
 
       .dots {
         width: clamp(130px, 30%, 261px);
-        bottom: -18.5%;
-        left: ${(props) => (props.isImgRight ? '-2.5%' : 'unset')};
-        right: ${(props) => (props.isImgRight ? 'unset' : '-2.5%')};
+        bottom: -64px;
+        left: ${(props) => (props.isImgRight ? 'unset' : '7.5%')};
+        right: ${(props) => (props.isImgRight ? '-2.5%' : 'unset')};
       }
 
       .mainImage {
@@ -167,7 +179,7 @@ const Container = styled.div`
         aspect-ratio: 4/3;
         width: 87%;
         margin: ${({ isImgRight }) =>
-    isImgRight ? '0 0 0 auto' : '0 auto 0 0'};
+          isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }
@@ -191,6 +203,12 @@ const Container = styled.div`
           left: ${(props) => (props.isImgRight ? '22px' : '-22px')};
           bottom: -22px;
         }
+      }
+
+      .dots {
+        bottom: -56px;
+        left: ${(props) => (props.isImgRight ? 'unset' : '2.5%')};
+        right: ${(props) => (props.isImgRight ? '-2.5%' : 'unset')};
       }
     }
   }
