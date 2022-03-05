@@ -439,4 +439,8 @@ const Content = styled.div`
       }
     }
   }
+
+  @media (max-width: 1024px ) {
+    padding-top: 140px;
+  }
 `;
