@@ -111,12 +111,20 @@ const Wrapper = styled.section`
     max-width: 1920px;
     margin: 0 auto;
     margin-top: 160px;
+
+    @media (max-width: 1024px) {
+      margin-top: clamp(90px, 15.2vw, 160px);
+      
+    }
 `
 
 const Stages = styled.div`
     padding-top: 120px;
     background-color: #FEF2F2;
 
+    @media (max-width: 1024px) {
+      padding-top: clamp(72px, 9.1vw, 120px);
+    }
 `
 
 const Inform = styled.div`

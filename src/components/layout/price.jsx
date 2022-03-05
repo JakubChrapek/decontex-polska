@@ -38,7 +38,7 @@ const Price = ({ data }) => {
 export default Price
 
 const Wrapper = styled.section`
-    padding-top: clamp(80px, 20vw, 160px);
+    padding-top: clamp(120px, 20vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 

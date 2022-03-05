@@ -41,7 +41,7 @@ const Wrapper = styled.div`
     svg{
         position: absolute;
         top: 0;
-        transform: translateY(-100%);
+        transform: translateY(-99%);
         width: 100%;
 
         path{

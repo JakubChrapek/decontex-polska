@@ -33,6 +33,7 @@ const Wrapper = styled.section`
 
     @media (max-width: 1024px){
         padding-bottom: 70px;
+        margin-top: clamp(180px, 20vw, 280px);
     }
 
 `

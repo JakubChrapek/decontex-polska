@@ -19,6 +19,9 @@ const News = ({ data, posts }) => {
             if (position === (window.innerWidth <= 660 ? 2 : 1)) {
                 changeCanRight(false)
                 changeCanLeft(true)
+            } else if (position !== 0 && position !== (window.innerWidth <= 660 ? 2 : 1)) {
+                changeCanLeft(true)
+                changeCanRight(true)
             } else if (position === 0) {
                 changeCanLeft(false)
                 changeCanRight(true)

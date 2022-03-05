@@ -326,6 +326,7 @@ const Category = styled.span`
 const Wrapper = styled.div`
   padding-top: 192px;
   padding-bottom: 110px;
+  overflow-x: hidden ;
 
   @media (max-width: 1024px){
     padding-top: clamp(140px, 18.2vw, 192px);

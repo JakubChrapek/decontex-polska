@@ -279,7 +279,8 @@ const Flex = styled.div`
             }
         }
     }
-`;
+  }
+`
 
 const Grid = styled.ul`
   margin-top: 160px;

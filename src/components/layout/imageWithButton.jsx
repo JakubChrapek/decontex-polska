@@ -188,6 +188,7 @@ const Container = styled.div`
       max-width: 700px;
       margin: 0 auto;
       padding-left: 0;
+      padding-right: 0;
 
       h2 {
         font-size: clamp(32px, 5.7vw, 40px);
