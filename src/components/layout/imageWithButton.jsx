@@ -50,14 +50,14 @@ const Wrapper = styled.section`
     margin: 0 auto;
 
     @media (max-width: 1024px){
-        padding-top: clamp(72px, 13vw, 160px);
-
+        padding-top: clamp(96px, 13vw, 160px);
     }
 `
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: ${(props) => (props.isImgRight ? 'row-reverse' : 'row')};
 
   .imageWrapper {
@@ -105,11 +105,16 @@ const Container = styled.div`
     padding-left: ${(props) => (props.isImgRight ? '0' : '35px')};
     padding-right: ${(props) => (props.isImgRight ? '35px' : '0')};
 
+    > p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--subGreyText);
+    }
     h2 {
-      padding-bottom: 20px;
+      padding-bottom: 32px;
       font-weight: bold;
-      font-size: 40px;
-      line-height: 110%;
+      font-size: clamp(32px, 2.77vw, 40px);
+      line-height: 1.3;
 
       mark {
         background: inherit;
@@ -120,7 +125,7 @@ const Container = styled.div`
 
   a {
     display: block;
-    margin-top: 20px;
+    margin-top: 32px;
     width: fit-content;
     border-radius: 8px;
 
@@ -136,6 +141,7 @@ const Container = styled.div`
       color: var(--navHover);
       position: relative;
       transition: 0.2s linear;
+      text-align: center;
 
       &:hover {
         border: 1px solid
@@ -158,7 +164,7 @@ const Container = styled.div`
   @media (max-width: 1024px) {
     && {
       flex-direction: column-reverse;
-      max-width: 697px;
+      max-width: 767px;
       display: flex;
       justify-content: flex-end;
     }
@@ -199,6 +205,7 @@ const Container = styled.div`
   @media (max-width: 640px) {
     .imageWrapper {
       padding-left: 0;
+      margin: 48px 0 0 auto;
       .mainImage {
         :before {
           left: ${(props) => (props.isImgRight ? '22px' : '-22px')};

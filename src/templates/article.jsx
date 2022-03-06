@@ -383,7 +383,7 @@ const Content = styled.div`
       p {
         font-weight: bold;
         font-size: 24px;
-        line-height: 110%;
+        line-height: 1.3;
         letter-spacing: 0px;
         color: var(--superDarkText);
       }

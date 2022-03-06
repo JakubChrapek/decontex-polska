@@ -123,7 +123,7 @@ const Flex = styled.div`
       padding-bottom: 20px;
       font-weight: bold;
       font-size: 40px;
-      line-height: 110%;
+      line-height: 1.3;
 
       mark {
         background: inherit;
@@ -154,6 +154,7 @@ const Flex = styled.div`
         border: 1px solid var(--active);
         position: relative;
         transition: 0.2s linear;
+        text-align: center;
 
         mark {
           color: var(--navHover);
@@ -167,62 +168,61 @@ const Flex = styled.div`
           transition: 0.2s linear;
         }
 
-        a{
-            display: block;
-            margin-top: 20px;
+        a {
+          display: block;
+          margin-top: 20px;
+          width: fit-content;
+          border-radius: 8px;
+
+          p {
             width: fit-content;
+            padding: 0 24px;
+            background: #51b8eb;
             border-radius: 8px;
+            display: block;
+            height: 49px;
+            line-height: 49px;
+            color: var(--navHover);
+            border: 1px solid var(--active);
+            position: relative;
+            transition: 0.2s linear;
 
+            mark {
+              color: var(--navHover);
+              border-radius: 8px;
+              background-color: var(--blackButtonBackground);
+              display: block;
+              position: absolute;
+              padding: 0 24px;
+              width: max-content;
+              left: 0;
+              transition: 0.2s linear;
+            }
 
-            p{
-                width: fit-content;
-                padding: 0 24px;
-                background: #51B8EB;
-                border-radius: 8px;
-                display: block;
-                height: 49px;
-                line-height: 49px;
-                color: var(--navHover);
-                border: 1px solid var(--active);
-                position: relative;
-                transition: .2s linear;
-                
-                mark{
-                    color: var(--navHover);
-                    border-radius: 8px;
-                    background-color: var(--blackButtonBackground);
-                    display: block;
-                    position: absolute;
-                    padding: 0 24px;
-                    width: max-content;
-                    left: 0;
-                    transition: .2s linear;
-                }            
-                    
-                &:hover{
-                    border: 1px solid var(--backgroundLight);
-                    background-color: var(--backgroundLight);
-        
-                    mark{
-                        border: 1px solid var(--backgroundMedium);
-                        background-color: var(--backgroundMedium);
-                    }
-                }
+            &:hover {
+              border: 1px solid var(--backgroundLight);
+              background-color: var(--backgroundLight);
 
-          color: var(--active);
+              mark {
+                border: 1px solid var(--backgroundMedium);
+                background-color: var(--backgroundMedium);
+              }
+            }
 
-          mark {
-            color: #d30000;
+            color: var(--active);
+
+            mark {
+              color: #d30000;
+            }
           }
         }
       }
     }
   }
-}
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
-    max-width: 697px;
+    max-width: 767px;
     justify-content: flex-end;
     margin: 0 auto;
 
@@ -262,25 +262,23 @@ const Flex = styled.div`
 
   @media (max-width: 767px) {
     .imageWrapper {
-        .dots {
-            bottom: -44px;
-            left: ${({ isImgRight }) =>
-          isImgRight ? 'unset' : '-2.5%'};
-            right: ${({ isImgRight }) =>
-          isImgRight ? '-2.5%' : 'unset'};
-        }
-        .mainImage {
+      .dots {
+        bottom: -44px;
+        left: ${({ isImgRight }) => (isImgRight ? 'unset' : '-2.5%')};
+        right: ${({ isImgRight }) => (isImgRight ? '-2.5%' : 'unset')};
+      }
+      .mainImage {
         width: 90%;
-            &:before {
-                content: '';
-                position: absolute;
-                left: ${(props) => (props.isImgRight ? '22px' : '-22px')};
-                bottom: ${(props) => (props.isImgRight ? '-22px' : '-22px')};
-            }
+        &:before {
+          content: '';
+          position: absolute;
+          left: ${(props) => (props.isImgRight ? '22px' : '-22px')};
+          bottom: ${(props) => (props.isImgRight ? '-22px' : '-22px')};
         }
+      }
     }
   }
-`
+`;
 
 const Grid = styled.ul`
   margin-top: 160px;
@@ -304,7 +302,7 @@ const Grid = styled.ul`
       padding: 24px 0 30px;
       font-weight: bold;
       font-size: 24px;
-      line-height: 110%;
+      line-height: 1.3;
       text-align: center;
       color: var(--superDarkText);
     }

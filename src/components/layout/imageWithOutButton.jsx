@@ -40,7 +40,7 @@ const ImageWithoutButton = ({ data }) => {
 export default ImageWithoutButton
 
 const Wrapper = styled.section`
-    padding-top: clamp(80px, 11.1vw, 160px);
+    padding-top: clamp(72px, 11.1vw, 160px);
     max-width: 1920px;
     margin: 0 auto;
 `
@@ -95,6 +95,9 @@ const Container = styled.div`
 
   .textPart {
     max-width: 552px;
+    @media (max-width: 1024px) {
+      max-width: 767px;
+    }
     width: 100%;
     flex: 1 1 50%;
     margin: 0 auto;
@@ -102,7 +105,7 @@ const Container = styled.div`
       padding-bottom: 20px;
       font-weight: bold;
       font-size: 40px;
-      line-height: 110%;
+      line-height: 1.3;
     }
 
     p {
@@ -140,7 +143,7 @@ const Container = styled.div`
 
   @media (max-width: 1024px) {
     flex-direction: column-reverse;
-    max-width: 697px;
+    max-width: 767px;
     display: flex;
     justify-content: flex-end;
     padding-bottom: 50px;
@@ -150,7 +153,7 @@ const Container = styled.div`
       max-width: 607px;
       aspect-ratio: 607/455;
       width: 90%;
-      margin: 50px 0 0 auto;
+      margin: 50px 0 64px auto;
       .dots {
         width: clamp(221px, 30%, 261px);
         bottom: calc(-50px - 15%);

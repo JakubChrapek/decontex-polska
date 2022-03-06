@@ -78,87 +78,82 @@ const Container = styled.div`
 `
 
 const Questions = styled.div`
+  details {
+    list-style: none;
+    list-style-type: none;
+    margin-top: 32px;
+    padding-bottom: 16px;
+    position: relative;
 
-    details{
-        list-style: none;
-        list-style-type: none;
-        margin-top: 32px;
-        padding-bottom: 16px;
-        position: relative;
-
-        &::after{
-            content: "";
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            position: absolute;
-            background-color: var(--divider);
-        }
-
-        
+    &::after {
+      content: '';
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      position: absolute;
+      background-color: var(--divider);
     }
+}
+@media (max-width: 767px) {
+  margin-top: 58px;
+}
 
-    
-    details svg {
+  details svg {
     transform: rotateX(0deg);
-    }
+  }
 
-    details[open] svg {
+  details[open] svg {
     transform: rotateX(180deg);
+  }
+
+  summary {
+    list-style: none;
+    list-style-type: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
     }
 
-
-    summary{
-        list-style: none;
-        list-style-type: none;
-        cursor: pointer;
-
-        &::-webkit-details-marker{
-            display:none;
-        }
-
-        &::marker{
-            display: none;
-        }
-
-        svg{
-            height: 18px;
-            width: 14px;
-            position: absolute;
-            right: 0;
-            transition: all .2s linear;
-            margin-right: 8px;
-        }
-
-        span{
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 130%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-
-            p{
-                color: var(--mainDarkText);
-                padding-right: 30px;
-            }
-
-        }
+    &::marker {
+      display: none;
     }
 
-    p{
-
-        span{
-            font-size: 14px;
-            line-height: 180%;
-
-            p{
-                margin-bottom: 16px;
-                color: var(--subDarkText);
-            }
-        }
-
+    svg {
+      height: 18px;
+      width: 14px;
+      position: absolute;
+      right: 0;
+      transition: all 0.2s linear;
+      margin-right: 8px;
     }
-`
+
+    span {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 130%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      p {
+        color: var(--mainDarkText);
+        padding-right: 30px;
+      }
+    }
+  }
+
+  p {
+    span {
+      font-size: 14px;
+      line-height: 180%;
+
+      p {
+        margin-bottom: 16px;
+        color: var(--subDarkText);
+      }
+    }
+  }
+`;

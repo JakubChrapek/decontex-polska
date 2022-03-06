@@ -62,7 +62,7 @@ const Content = styled.div`
         color: var(--superDarkText);
         font-weight: bold;
         font-size: 36px;
-        line-height: 110%;
+        line-height: 1.3;
         letter-spacing: -1px;
         margin-bottom: 24px;
     }

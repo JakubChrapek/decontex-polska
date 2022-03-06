@@ -45,6 +45,8 @@ const Wrapper = styled.section`
     position: relative;
     background-color: var(--backgroundGrey);
 
+
+
     @media (max-width: 1024px){
       padding-bottom: 0;
     }
@@ -78,7 +80,7 @@ const Content = styled.div`
     color: var(--superDarkText);
     font-weight: bold;
     font-size: 36px;
-    line-height: 1.1;
+    line-height: 1.3;
     letter-spacing: -2px;
     margin-bottom: 12px;
   }

@@ -17,14 +17,14 @@ const Waves = () => {
 export default Waves
 
 const Wrapper = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
 
-    svg{
-        width: 100%;
-        position: absolute;
-        bottom: -1px;
-    }
-`
+  svg {
+    width: 100%;
+    position: absolute;
+    bottom: -1px;
+  }
+`;

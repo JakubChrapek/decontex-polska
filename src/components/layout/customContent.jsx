@@ -28,7 +28,7 @@ const Container = styled.div`
         color: var(--mainDarkText);
         font-weight: bold;
         font-size: 40px;
-        line-height: 110%;
+        line-height: 1.3;
         letter-spacing: -1px;
     }
 

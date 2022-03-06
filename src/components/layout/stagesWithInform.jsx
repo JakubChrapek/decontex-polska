@@ -128,27 +128,28 @@ const Stages = styled.div`
 `
 
 const Inform = styled.div`
-    background-color: var(--backgroundLight);
-    position: relative;
-    padding-bottom: 100px;
+  background-color: var(--backgroundLight);
+  position: relative;
+  padding-bottom: 100px;
 
-    h2{
-        padding-top: 80px;
-        padding-bottom: 100px !important;
-        font-weight: bold;
-        font-size: 40px;
-        line-height: 110%;
-        text-align: center;
-        letter-spacing: -1px;
-        color: var(--mainLightText);
-    }
+  h2 {
+    padding-top: 80px;
+    padding-bottom: 100px !important;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: -1px;
+    color: var(--mainLightText);
+  }
 
-    @media(max-width: 1024px){
-        h2{
-            font-size: clamp(32px, 4.1vw, 40px);
-        }
+  @media (max-width: 1024px) {
+    h2 {
+      font-size: clamp(32px, 4.1vw, 40px);
+      padding-top: 60px !important;
     }
-`
+  }
+`;
 
 const Container = styled.div`
   position: relative;
@@ -158,7 +159,7 @@ const Container = styled.div`
     padding-bottom: 32px;
     font-weight: bold;
     font-size: 40px;
-    line-height: 110%;
+    line-height: 1.3;
 
     mark {
       background: inherit;
@@ -166,7 +167,10 @@ const Container = styled.div`
     }
   }
   @media (max-width: 1024px) {
-    max-width: 697px;
+    max-width: 767px;
+    h2 {
+        font-size: 32px;
+    }
   }
 
   &.containerExpanded {
@@ -212,15 +216,16 @@ const Content = styled.div`
 `
 
 const Anotation = styled.div`
-    padding-bottom: 240px;
-    padding-top: 56px;
-    text-align: right;
+  padding-bottom: 240px;
+  padding-top: 56px;
+  text-align: right;
 
-    @media(max-width: 1024px){
-        padding-bottom: clamp(120px, 15.7vw, 240px);
-        text-align: left;
-    }
-`
+  @media (max-width: 1024px) {
+    padding-top: 24px;
+    padding-bottom: clamp(80px, 12.7vw, 160px);
+    text-align: left;
+  }
+`;
 
 const Grid = styled.div`
     display: grid;

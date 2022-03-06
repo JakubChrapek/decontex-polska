@@ -14,27 +14,28 @@ const Waves = () => {
 export default Waves
 
 const Wrapper = styled.div`
-    position: absolute;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+
+  > svg {
     width: 100%;
-    height: 100%;
-    top: 0;
+    position: absolute;
+    bottom: -1px;
+    transform: scaleX(-1);
+  }
 
-    svg{
-        width: 100%;
-        position: absolute;
-        bottom: -1px;
+  @media (max-width: 1024px) {
+    top: unset;
+    bottom: 0;
+    height: 30%;
+    background-color: #fff;
+
+    svg {
+      bottom: unset;
+      top: 0;
+      transform: translateY(-100%);
     }
-
-    @media (max-width: 1024px) {
-        top: unset;
-        bottom: 0;
-        height: 30%;
-        background-color: #fff;
-
-        svg{
-            bottom: unset;
-            top: 0;
-            transform: translateY(-100%);
-        }
-    }
-`
+  }
+`;

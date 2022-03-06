@@ -134,6 +134,9 @@ const Flex = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-column-gap: 30px;
+        @media (max-width: 767px) {
+            grid-column-gap: 24px;
+        }
         margin-top: 108px;
 
         > div{

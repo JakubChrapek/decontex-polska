@@ -207,6 +207,7 @@ const Flex = styled.div`
                 margin-bottom: 16px;
                 max-width: 700px;
                 font-size: clamp(32px, 5.2vw, 48px);
+                line-height: 1.3;
             }
 
             p{
@@ -255,7 +256,7 @@ const Slider = styled.div`
           text-align: left;
           font-weight: bold;
           font-size: 24px;
-          line-height: 110%;
+          line-height: 1.3;
           letter-spacing: 0px;
         }
 

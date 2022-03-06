@@ -7,100 +7,105 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Grid = ({ data }) => {
     return (
-        <Wrapper>
-            <Container className="container">
-                <ContentDesctop>
-                    <div className="left">
-                        <StructuredText data={data.mainTitle} />
-                        <p className="mainText">{data.mainText}</p>
-                        <GatsbyImage
-                            image={data.secondImg.gatsbyImageData}
-                            className="secondImg"
-                            alt={data.secondImg.alt}
-                            title={data.secondImg.title}
-                        />
-                        <p className="secondText">{data.secondText}</p>
-                        <StructuredText data={data.publicationDate} />
-                        <p className="subText">{data.subText}</p>
-                        {data.link.map((el) => (
-                            <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
-                                <StructuredText data={el.name} />
-                            </Link>
-                        ))}
-                    </div>
-                    <div className="right">
-                        <GatsbyImage
-                            image={data.firstImg.gatsbyImageData}
-                            className="firstImg"
-                            alt={data.firstImg.alt}
-                            title={data.firstImg.title}
-                        />
-                        <p className="firstText">{data.firstText}</p>
-                        <GatsbyImage
-                            image={data.thirdImg.gatsbyImageData}
-                            className="thirdImg"
-                            alt={data.thirdImg.alt}
-                            title={data.thirdImg.title}
-                        />
-                    </div>
-                </ContentDesctop>
-                <ContentMobile>
-                    <span className="title">
-                        <StructuredText data={data.mainTitle} />
-                    </span>
-                    <p className="mainText">{data.mainText}</p>
-                    <div className="flex flex1">
-                        <p className="firstText text">{data.firstText}</p>
-                        <GatsbyImage
-                            image={data.firstImg.gatsbyImageData}
-                            className="firstImg"
-                            alt={data.firstImg.alt}
-                            title={data.firstImg.title}
-                        />
-                    </div>
-                    <div className="flex flex2">
-                        <p className="secondText text">{data.secondText}</p>
-                        <GatsbyImage
-                            image={data.secondImg.gatsbyImageData}
-                            className="secondImg"
-                            alt={data.secondImg.alt}
-                            title={data.secondImg.title}
-                        />
-                    </div>
-                    <div className="flex flex3">
-                        <div className="text">
-                            <StructuredText data={data.publicationDate} />
-                            <p className="subText">{data.subText}</p>
-                            {data.link.map((el) => (
-                                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
-                                    <StructuredText data={el.name} />
-                                </Link>
-                            ))}
-                        </div>
-                        <GatsbyImage
-                            image={data.thirdImg.gatsbyImageData}
-                            className="thirdImg"
-                            alt={data.thirdImg.alt}
-                            title={data.thirdImg.title}
-                        />
-                    </div>
-                </ContentMobile>
-            </Container>
-            <Waves />
-        </Wrapper>
+      <Wrapper>
+        <Container className="container">
+          <ContentDesctop>
+            <div className="left">
+              <StructuredText data={data.mainTitle} />
+              <p className="mainText">{data.mainText}</p>
+              <GatsbyImage
+                image={data.secondImg.gatsbyImageData}
+                className="secondImg"
+                alt={data.secondImg.alt}
+                title={data.secondImg.title}
+              />
+              <p className="secondText">{data.secondText}</p>
+              <StructuredText data={data.publicationDate} />
+              <StructuredText className="subTitle" data={data.subTitle} />
+              <p className="subText">{data.subText}</p>
+              {data.link.map((el) => (
+                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+                  <StructuredText data={el.name} />
+                </Link>
+              ))}
+            </div>
+            <div className="right">
+              <GatsbyImage
+                image={data.firstImg.gatsbyImageData}
+                className="firstImg"
+                alt={data.firstImg.alt}
+                title={data.firstImg.title}
+              />
+              <p className="firstText">{data.firstText}</p>
+              <GatsbyImage
+                image={data.thirdImg.gatsbyImageData}
+                className="thirdImg"
+                alt={data.thirdImg.alt}
+                title={data.thirdImg.title}
+              />
+            </div>
+          </ContentDesctop>
+          <ContentMobile>
+            <span className="title">
+              <StructuredText data={data.mainTitle} />
+            </span>
+            <p className="mainText">{data.mainText}</p>
+            <div className="flex flex1">
+              <p className="firstText text">{data.firstText}</p>
+              <GatsbyImage
+                image={data.firstImg.gatsbyImageData}
+                className="firstImg"
+                alt={data.firstImg.alt}
+                title={data.firstImg.title}
+              />
+            </div>
+            <div className="flex flex2">
+              <p className="secondText text">{data.secondText}</p>
+              <GatsbyImage
+                image={data.secondImg.gatsbyImageData}
+                className="secondImg"
+                alt={data.secondImg.alt}
+                title={data.secondImg.title}
+              />
+            </div>
+            <div className="flex flex3">
+              <div className="text">
+                <StructuredText data={data.publicationDate} />
+                <StructuredText className="subTitle" data={data.subTitle} />
+                <p className="subText">{data.subText}</p>
+                {data.link.map((el) => (
+                  <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+                    <StructuredText data={el.name} />
+                  </Link>
+                ))}
+              </div>
+              <GatsbyImage
+                image={data.thirdImg.gatsbyImageData}
+                className="thirdImg"
+                alt={data.thirdImg.alt}
+                title={data.thirdImg.title}
+              />
+            </div>
+          </ContentMobile>
+        </Container>
+        <Waves />
+      </Wrapper>
     );
 }
 
 export default Grid
 
 const Wrapper = styled.section`
-    padding-top: clamp(140px, 11.1vw, 161px);
-    padding-bottom: clamp(80px, 9.4vw, 160px);
-    position: relative;
-    max-width: 1920px;
-    margin: 0 auto;
-    overflow: hidden;
-`
+  padding-top: clamp(140px, 11.1vw, 161px);
+  @media (max-width: 767px) {
+    padding-top: 16px;
+  }
+  padding-bottom: clamp(72px, 9.4vw, 160px);
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow: hidden;
+`;
 
 const Container = styled.div`
     display: flex;
@@ -108,129 +113,141 @@ const Container = styled.div`
 `
 
 const ContentMobile = styled.div`
-    @media (min-width: 1025px) {
-        display: none;
+  @media (min-width: 1025px) {
+    display: none;
+  }
+  width: 100%;
+
+  .title {
+    h2 {
+      max-width: 470px;
+      color: var(--mainDarkText);
     }
+  }
+
+  .mainText {
+    max-width: 470px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .gatsby-image-wrapper {
+      width: 100%;
+    }
+    &.flex1 {
+      margin-top: 48px;
+    }
+
+    &.flex2 {
+      margin-top: 200px;
+    }
+
+    &.flex3 {
+      margin-top: 120px;
+    }
+  }
+
+  .text {
+    margin-right: 9.1vw;
+    max-width: 440px;
     width: 100%;
+  }
 
-    .title{
-        h2{
-            max-width: 470px;
-            color: var(--mainDarkText);
-        }
-    }
+  .secondText {
+    color: var(--subLightText);
+  }
 
-    .mainText{
-        max-width: 470px;
-    }
+  .subText {
+    margin-bottom: 48px;
+    color: var(--subLightText);
+  }
 
-    .flex{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  h2 {
+    color: var(--mainLightText);
+    font-size: clamp(32px, 5.2vw, 64px);
+    line-height: 1.3;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
 
-        &.flex1{
-            margin-top: 48px;
-        }
+  p {
+    line-height: 180%;
+  }
 
-        &.flex2{
-            margin-top: 200px;
-        }
+  .firstImg,
+  .secondImg,
+  .thirdImg {
+    min-width: 300px;
+  }
 
-        &.flex3{
-            margin-top: 120px;
-        }
-    }
-    
+  img {
+    max-width: clamp(200px, 39.2vw, 400px);
+    width: 100%;
+    border-radius: 16px;
+  }
 
-    .text{
-        margin-right: 9.1vw;
-        max-width: 440px;
+  @media (max-width: 1024px) {
+    .firstImg,
+    .secondImg,
+    .thirdImg {
+      min-width: unset;
+      width: clamp(300px, 39vw, 360px);
+      img {
         width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  .link {
+    padding: 9px 32px;
+    display: block;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: var(--mainLightText);
+    border: 1px solid var(--mainLightText);
+    transition: 0.2s linear;
+
+    p {
+      color: var(--buttonText);
     }
 
-    .secondText {
-        color: var(--subLightText);
-
-    }
-
-    .subText{
-        margin-bottom: 48px;
-        color: var(--subLightText);
-    }
-
-    h2{
+    &:hover {
+      border: 1px solid var(--backgroundLight);
+      background-color: var(--backgroundLight);
+      p {
         color: var(--mainLightText);
-        font-size: clamp(32px, 5.2vw, 64px);
-        line-height: 110%;
-        letter-spacing: -1px;
-        margin-bottom: 24px;
+      }
+    }
+  }
+
+  @media (max-width: 660px) {
+    .flex {
+      flex-direction: column-reverse;
+
+      &.flex2 {
+        margin-top: 36px;
+      }
+
+      &.flex3 {
+        margin-top: 48px;
+      }
     }
 
-    p{
-        line-height: 180%;
+    img {
+      max-width: 100%;
+      margin-bottom: 36px;
     }
 
-    .firstImg, .secondImg, .thirdImg{
-        
-        min-width: 300px;
+    .text {
+      margin: 36px 0 0;
+      max-width: 100%;
     }
-
-    img{
-        max-width: clamp(200px, 39.2vw, 400px);
-        width: 100%;
-        border-radius: 16px;
-    }
-
-    .link{
-        padding: 9px 32px;
-        display: block;
-        width: fit-content;
-        border-radius: 8px;
-        background-color: var(--mainLightText);
-        border: 1px solid var(--mainLightText);
-        transition: .2s linear;
-
-        p{
-            color: var(--buttonText);
-        }
-
-        &:hover{
-            border: 1px solid var(--backgroundLight);
-            background-color: var(--backgroundLight);
-            p{
-                color: var(--mainLightText);
-            }
-        }
-
-    }
-
-    @media (max-width: 660px) {
-        .flex{
-            flex-direction: column-reverse;
-
-            &.flex2{
-                margin-top: 36px;
-            }
-
-            &.flex3{
-                margin-top: 48px;
-            }
-
-        }
-
-        img{
-            max-width: 100%;
-            margin-bottom: 36px;
-        }
-
-        .text{
-            margin: 0;
-            max-width: 100%;
-        }
-        
-    }
-`
+  }
+`;
 
 const ContentDesctop = styled.div`
     @media (max-width: 1024px) {

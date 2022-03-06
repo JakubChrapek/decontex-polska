@@ -57,7 +57,7 @@ const Flex = styled.div`
     h2{
     font-weight: bold;
     font-size: 40px;
-    line-height: 110%;
+    line-height: 1.3;
     letter-spacing: -1px;
         mark{
             color: var(--active);
@@ -115,7 +115,7 @@ const Table = styled.ul`
             .name{            
                 font-weight: bold;
                 font-size: 24px;
-                line-height: 110%;
+                line-height: 1.3;
                 letter-spacing: -1px;
                 color: var(--superDarkText);
                 padding-right: 8px;
@@ -124,7 +124,7 @@ const Table = styled.ul`
             .price{
                 font-weight: bold;
                 font-size: 40px;
-                line-height: 110%;
+                line-height: 1.3;
                 letter-spacing: -1px;
                 color: var(--superDarkText);
             }

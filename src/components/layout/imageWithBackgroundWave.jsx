@@ -29,18 +29,20 @@ const ImageWithBackgroundWave = ({ data }) => {
 export default ImageWithBackgroundWave
 
 const Wrapper = styled.section`
-    background-color: var(--backgroundMedium);
-    position: relative;
-    z-index: 3;
-    max-width: 1920px;
-    margin: 0 auto;
-    margin-top: 320px;
+  background-color: var(--backgroundMedium);
+  position: relative;
+  z-index: 3;
+  max-width: 1920px;
+  margin: 0 auto;
+  margin-top: 320px;
 
-    @media (max-width: 1024px) {
-        margin-top: clamp(180px, 31.4vw, 320px);
-        
-    }
-`
+  @media (max-width: 1024px) {
+    margin-top: clamp(180px, 31.4vw, 320px);
+  }
+  @media (max-width: 767px) {
+    margin-top: clamp(132px, 16.4vw, 180px);
+  }
+`;
 
 const Container = styled.div`
 
@@ -65,7 +67,7 @@ const Content = styled.div`
       color: var(--mainLightText);
       font-weight: bold;
       font-size: 40px;
-      line-height: 110%;
+      line-height: 1.3;
       letter-spacing: -1px;
     }
 
