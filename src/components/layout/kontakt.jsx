@@ -63,7 +63,7 @@ const Content = styled.div`
 
         a{
             color: var(--active);
-            transition: .2s linear;
+            transition: border .2s linear;
             border-bottom: 1px solid #fff;
 
             &:hover{

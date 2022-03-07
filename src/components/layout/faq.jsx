@@ -139,7 +139,7 @@ const Questions = styled.div`
       width: 14px;
       position: absolute;
       right: 0;
-      transition: all 0.2s linear;
+      transition: transform 0.2s linear;
       margin: 2px 8px 0 0;
     }
 

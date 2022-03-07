@@ -10,15 +10,26 @@ const StyledHeroImage = styled(GatsbyImage)`
   && {
     position: absolute;
   }
+
+  &::after{
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
   left: calc(-1 * var(--image-shift));
   top: 0;
   width: calc(100% + var(--image-shift));
   height: 100%;
-  @media (max-width: 480px) {
-    --image-shift: 60px;
+  @media (max-width: 720px) {
+    --image-shift: 50%;
   }
-  @media (max-width: 420px) {
-    --image-shift: 90px;
+  @media (max-width: 520px) {
+    --image-shift: 75%;
   }
 `;
 
@@ -85,7 +96,7 @@ const Container = styled.div`
             padding: 13px 32px;
             border-radius: 8px;
             margin-right: 16px;
-            transition: .2s linear;
+            transition: background-color .2s linear, opacity .2s linear;
 
             &.c0{
                 background-color: var(--mainLightText);
@@ -102,6 +113,7 @@ const Container = styled.div`
                 border: 1px solid var(--mainLightText);
                 p{
                     color: var(--mainLightText);
+                    transition: color .2s linear;
                 }
 
                 &:hover{
