@@ -44,7 +44,7 @@ const LinksToPrice = ({ data }) => {
           <Grid>
             {data.grid.map((el) => (
               <li>
-                <img src={el.img.url} alt={el.img.alt} />
+                <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt}/>
                 <p>{el.text}</p>
               </li>
             ))}
@@ -186,7 +186,6 @@ const Flex = styled.div`
             border: 1px solid var(--active);
             position: relative;
             transition: 0.2s linear;
-
             mark {
               color: var(--navHover);
               border-radius: 8px;
@@ -255,7 +254,7 @@ const Flex = styled.div`
       padding-left: 0;
 
       h2 {
-        font-size: clamp(32px, 5.7vw, 40px);
+        font-size: 32px;
       }
     }
   }
@@ -292,6 +291,14 @@ const Grid = styled.ul`
     border-radius: 15px;
     max-width: 360px;
 
+    .gatsby-image-wrapper {
+      border-radius: 16px 16px 0 0;
+      max-width: 100%;
+      width: 100%;
+      img {
+        border-radius: 16px 16px 0 0;
+      }
+    }
     img {
       width: 100%;
       max-width: 360px;
@@ -300,6 +307,12 @@ const Grid = styled.ul`
     p {
       text-align: center;
       padding: 24px 0 30px;
+      @media (max-width: 1024px) {
+        padding: 24px 0;
+      }
+      @media (max-width: 640px) {
+        padding: 20px 0 18px;
+      }
       font-weight: bold;
       font-size: 24px;
       line-height: 1.3;
@@ -311,7 +324,7 @@ const Grid = styled.ul`
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    margin-top: clamp(130px, 10.4vw, 160px);
+    margin-top: clamp(150px, 10.4vw, 180px);
   }
 
   @media (max-width: 660px) {

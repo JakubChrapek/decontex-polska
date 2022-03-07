@@ -22,21 +22,23 @@ const ListWithBackgroundWave = ({data}) => {
 export default ListWithBackgroundWave
 
 const Wrapper = styled.section`
-    background-color: var(--backgroundMedium);
-    position: relative;
-    z-index: 3;
-    max-width: 1920px;
-    margin: 0 auto;
-    margin-top: 280px;
-    padding-bottom: 100px;
-    padding-top: 60px;
+  background-color: var(--backgroundMedium);
+  position: relative;
+  z-index: 3;
+  max-width: 1920px;
+  margin: 0 auto;
+  margin-top: 280px;
+  padding-bottom: 100px;
+  padding-top: 60px;
 
-    @media (max-width: 1024px){
-        padding-bottom: 70px;
-        margin-top: clamp(180px, 20vw, 280px);
-    }
-
-`
+  @media (max-width: 1024px) {
+    padding-bottom: 70px;
+    margin-top: clamp(180px, 20vw, 280px);
+  }
+  @media (max-width: 767px) {
+    margin-top: clamp(70px, 26.66vw, 100px);
+  }
+`;
 
 const Container = styled.div`
     h2{

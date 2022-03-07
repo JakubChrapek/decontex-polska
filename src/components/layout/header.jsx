@@ -108,10 +108,11 @@ const NavList = styled.ul`
       border-radius: 6px;
     }
     li a p {
-      padding: 8.5px 24px;
+      padding: 10px 24px;
       background: #51B8EB;
       border-radius: 6px;
       display: block;
+      line-height: 1;
       color: var(--navHover);
       border: 1px solid var(--active);
 
