@@ -2,7 +2,6 @@ import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import Waves from '../vectors/heroOtherPageWaves'
-import Dots from '../img/dots-right-bottom.png'
 import { DOTS_IMAGES } from '../img/dots'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
@@ -45,8 +44,6 @@ const Wrapper = styled.section`
     position: relative;
     background-color: var(--backgroundGrey);
 
-
-
     @media (max-width: 1024px){
       padding-bottom: 0;
     }
@@ -55,8 +52,6 @@ const Wrapper = styled.section`
 const Container = styled.div`
     position: relative;
     z-index: 100;
- 
-
  `
 
 const Content = styled.div`
@@ -107,7 +102,6 @@ const Content = styled.div`
       bottom: -40px;
       right: ${({ dotsOnRight }) => (dotsOnRight ? '-10px' : 'unset')};
       left: ${({ dotsOnRight }) => (dotsOnRight ? 'unset' : '-56px')};
-
       z-index: 10;
     }
 

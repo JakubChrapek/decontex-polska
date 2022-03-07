@@ -57,27 +57,41 @@ const Wrapper = styled.section`
 `
 
 const Container = styled.div`
-    max-width: 1030px;
-    padding: 0 45px;
-    margin: 0 auto;
+  max-width: 1030px;
+  padding: 0 45px;
+  margin: 0 auto;
 
-    h2{
-        font-weight: bold;
-        font-size: 48px;
-        line-height: 130%;
-        text-align: center;
-        letter-spacing: -1px;
-    }
+  h2 {
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: -1px;
+  }
 
-    @media (max-width: 1024px) {
-        h2{
-            font-size: clamp(24px, 5.2vw, 48px); 
-        }
-        
+  @media (max-width: 1024px) {
+    padding: 0 37px;
+    h2 {
+      font-size: clamp(24px, 5.2vw, 40px);
+      text-align: left;
     }
-`
+  }
+  @media (max-width: 640px) {
+    padding: 0 18px;
+    h2 {
+      text-align: center;
+    }
+  }
+`;
 
 const Questions = styled.div`
+  margin-top: 48px;
+  @media (max-width: 1024px) {
+    margin-top: 64px;
+  }
+  @media (max-width: 767px) {
+    margin-top: 56px;
+  }
   details {
     list-style: none;
     list-style-type: none;
@@ -94,10 +108,10 @@ const Questions = styled.div`
       position: absolute;
       background-color: var(--divider);
     }
-}
-@media (max-width: 767px) {
-  margin-top: 58px;
-}
+  }
+  @media (max-width: 767px) {
+    margin-top: 58px;
+  }
 
   details svg {
     transform: rotateX(0deg);
@@ -126,7 +140,7 @@ const Questions = styled.div`
       position: absolute;
       right: 0;
       transition: all 0.2s linear;
-      margin-right: 8px;
+      margin: 2px 8px 0 0;
     }
 
     span {
@@ -135,7 +149,7 @@ const Questions = styled.div`
       line-height: 130%;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       margin-bottom: 16px;
 
       p {

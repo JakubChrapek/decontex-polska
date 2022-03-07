@@ -89,38 +89,68 @@ export default OtherPageTemplate;
 
 export const query = graphql`
   query OtherPageQuery($locale: String!, $id: String!) {
-  datoCmsOtherPage(locale: {eq: $locale}, originalId: {eq: $id}) {
-    seo {
-      seoTitle: title
-      seoDescription: description
-      image {
-        seoImageUrl: url
-      }
-    }
-    structuredBody {
-      value
-      blocks {
-        ... on DatoCmsSectionImageWithBackgroundWave {
-          __typename
-          id: originalId
-          textPart {
-            value
-          }
-          img {
-            url
-            gatsbyImageData
-            alt
-            title
-          }
+    datoCmsOtherPage(locale: { eq: $locale }, originalId: { eq: $id }) {
+      seo {
+        seoTitle: title
+        seoDescription: description
+        image {
+          seoImageUrl: url
         }
-        ... on DatoCmsSectionStagesWithInform {
-          __typename
-          id: originalId
-          stages {
-            title {
+      }
+      structuredBody {
+        value
+        blocks {
+          ... on DatoCmsSectionImageWithBackgroundWave {
+            __typename
+            id: originalId
+            textPart {
               value
             }
-            subText {
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+          }
+          ... on DatoCmsSectionStagesWithInform {
+            __typename
+            id: originalId
+            stages {
+              title {
+                value
+              }
+              subText {
+                value
+              }
+              listRight {
+                value
+              }
+              listLeft {
+                value
+              }
+            }
+            inform {
+              title {
+                value
+              }
+              grid {
+                sText {
+                  value
+                }
+                icon {
+                  url
+                  gatsbyImageData
+                  alt
+                  title
+                }
+              }
+            }
+          }
+          ... on DatoCmsSectionAdvantage {
+            __typename
+            id: originalId
+            title {
               value
             }
             listRight {
@@ -130,15 +160,135 @@ export const query = graphql`
               value
             }
           }
-          inform {
+          ... on DatoCmsSectionBenefit {
+            __typename
+            id: originalId
             title {
               value
             }
-            grid {
-              sText {
+            benefits {
+              title {
                 value
               }
+              text
               icon {
+                url
+                alt
+                gatsbyImageData
+                title
+              }
+            }
+          }
+          ... on DatoCmsSectionFaq {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            questions {
+              answer {
+                value
+              }
+              question {
+                value
+              }
+            }
+          }
+          ... on DatoCmsSectionHero {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            text
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+            dotsOnRight
+          }
+          ... on DatoCmsSectionImageWithButton {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            isImgRight
+            isImgBackground
+            button {
+              ariaLabel
+              name {
+                value
+              }
+              slug
+            }
+            img {
+              url
+              gatsbyImageData
+              title
+              alt
+            }
+            text
+            backgroundColor {
+              hex
+            }
+            buttonColor {
+              hex
+            }
+          }
+          ... on DatoCmsSectionImageWithTextBackground {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            list {
+              value
+            }
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+          }
+          ... on DatoCmsSectionPrice {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            anotation {
+              value
+            }
+            table {
+              price
+              name
+              itemList {
+                value
+              }
+            }
+          }
+          ... on DatoCmsSectionService {
+            __typename
+            id: originalId
+            sectionImageWithButton {
+              title {
+                value
+              }
+              text
+              isImgRight
+              isImgBackground
+              button {
+                slug
+                ariaLabel
+                name {
+                  value
+                }
+              }
+              img {
                 url
                 gatsbyImageData
                 alt
@@ -146,274 +296,124 @@ export const query = graphql`
               }
             }
           }
-        }
-        ... on DatoCmsSectionAdvantage {
-          __typename
-          id: originalId
-          title {
-            value
+          ... on DatoCmsSectionText {
+            __typename
+            id: originalId
+            sText {
+              value
+            }
           }
-          listRight {
-            value
+          ... on DatoCmsSectionLinksToPrice {
+            __typename
+            id: originalId
+            grid {
+              text
+              img {
+                url
+                gatsbyImageData
+                alt
+                title
+              }
+            }
+            imageWithButton {
+              text
+              title {
+                value
+              }
+              button {
+                slug
+                ariaLabel
+                name {
+                  value
+                }
+              }
+              img {
+                url
+                gatsbyImageData
+                alt
+                title
+              }
+              isImgRight
+              isImgBackground
+              backgroundColor {
+                hex
+              }
+            }
           }
-          listLeft {
-            value
+          ... on DatoCmsSectionListWithBackgroundWave {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            listRight {
+              value
+            }
+            listLeft {
+              value
+            }
           }
-        }
-        ... on DatoCmsSectionBenefit {
-          __typename
-          id: originalId
-          title {
-            value
+          ... on DatoCmsSectionCustomContent {
+            __typename
+            id: originalId
+            content {
+              value
+            }
           }
-          benefits {
+          ... on DatoCmsSectionHeroPartner {
+            __typename
+            id: originalId
             title {
               value
             }
             text
-            icon {
+            images {
               url
-              alt
               gatsbyImageData
+              alt
               title
             }
           }
-        }
-        ... on DatoCmsSectionFaq {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          questions {
-            answer {
-              value
-            }
-            question {
-              value
+          ... on DatoCmsSectionPartnersContent {
+            __typename
+            id: originalId
+            grid {
+              text
+              unsTitle
+              otherInform {
+                value
+              }
             }
           }
-        }
-        ... on DatoCmsSectionHero {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          text
-          img {
-            url
-            gatsbyImageData
-            alt
-            title
-          }
-          dotsOnRight
-        }
-        ... on DatoCmsSectionImageWithButton {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          isImgRight
-          isImgBackground
-          button {
-            ariaLabel
-            name {
+          ... on DatoCmsSectionContactInformation {
+            __typename
+            id: originalId
+            tableInform {
               value
             }
-            slug
-          }
-          img {
-            url
-            gatsbyImageData
-            title
-            alt
-          }
-          text
-          backgroundColor{
-            hex
-          }
-          buttonColor{
-            hex
-          }
-        }
-        ... on DatoCmsSectionImageWithTextBackground {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          list {
-            value
-          }
-          img {
-            url
-            gatsbyImageData
-            alt
-            title
-          }
-        }
-        ... on DatoCmsSectionPrice {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          anotation{
-            value
-          }
-          table {
-            price
-            name
-            itemList {
+            leftInform {
               value
             }
+            buttonText
           }
-        }
-        ... on DatoCmsSectionService {
-          __typename
-          id: originalId
-          sectionImageWithButton {
+          ... on DatoCmsSectionHeroOrder {
+            __typename
+            id: originalId
             title {
               value
             }
             text
-            isImgRight
-            isImgBackground
-            button {
-              slug
-              ariaLabel
-              name {
-                value
-              }
-            }
+            subText
             img {
               url
               gatsbyImageData
               alt
               title
             }
+            buttonText
           }
-        }
-        ... on DatoCmsSectionText {
-          __typename
-          id: originalId
-          sText {
-            value
-          }
-        }
-        ... on DatoCmsSectionLinksToPrice {
-          __typename
-          id: originalId
-          grid {
-            text
-            img {
-              url
-              gatsbyImageData
-              alt
-              title
-            }
-          }
-          imageWithButton {
-            text
-            title {
-              value
-            }
-            button {
-              slug
-              ariaLabel
-              name {
-                value
-              }
-            }
-            img{
-              url
-              gatsbyImageData
-              alt
-              title
-            }
-            isImgRight
-            isImgBackground
-            backgroundColor {
-              hex
-            }
-          }
-        }
-        ... on DatoCmsSectionListWithBackgroundWave {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          listRight {
-            value
-          }
-          listLeft {
-            value
-          }
-        }
-        ... on DatoCmsSectionCustomContent {
-          __typename
-          id: originalId
-          content {
-            value
-          }
-        }
-        ... on DatoCmsSectionHeroPartner {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          text
-          images {
-            url
-            gatsbyImageData
-            alt
-            title
-          }
-        }
-        ... on DatoCmsSectionPartnersContent {
-          __typename
-          id: originalId
-          grid {
-            text
-            unsTitle
-            otherInform {
-              value
-            }
-          }
-        }
-        ... on DatoCmsSectionContactInformation {
-          __typename
-          id: originalId
-          tableInform {
-            value
-          }
-          leftInform {
-            value
-          }
-          buttonText
-        }
-        ... on DatoCmsSectionHeroOrder {
-          __typename
-          id: originalId
-          title {
-            value
-          }
-          text
-          subText
-          img {
-            url
-            gatsbyImageData
-            alt
-            title
-          }
-          buttonText
         }
       }
     }
   }
-}
 `;
