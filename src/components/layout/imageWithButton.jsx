@@ -32,7 +32,7 @@ const ImageWithButton = ({ data }) => {
           <StructuredText data={data.title} />
           <p>{data.text}</p>
           {data.button.map((el) => (
-            <Link to={el.slug} aria-label={el.ariaLabel}>
+            <Link to={`/${el.slug}`} aria-label={el.ariaLabel}>
               <StructuredText data={el.name} />
             </Link>
           ))}

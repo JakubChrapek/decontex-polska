@@ -35,7 +35,8 @@ const LinksToPrice = ({ data }) => {
               <StructuredText data={data.imageWithButton[0].title} />
               <p>{data.imageWithButton[0].text}</p>
               {data.imageWithButton[0].button.map((el) => (
-                <Link to={el.slug} aria-label={el.ariaLabel}>
+                // ScrollTo do wykorzystania i scroll do sekcji z cenami niżej
+                <Link to={`/${el.slug}`} aria-label={el.ariaLabel}>
                   <StructuredText data={el.name} />
                 </Link>
               ))}

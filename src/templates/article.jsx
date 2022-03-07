@@ -250,7 +250,6 @@ export const query = graphql`
         }
         value
       }
-      blogNewsTitle
     }
   }
 `;
