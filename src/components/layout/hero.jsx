@@ -86,8 +86,11 @@ const Content = styled.div`
   }
 
   p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 180%;
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
   }
 
   .imageWrapper {
