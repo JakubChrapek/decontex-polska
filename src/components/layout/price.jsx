@@ -5,7 +5,7 @@ import Yes from '../vectors/yes.svg'
 
 const Price = ({ data }) => {
     return (
-        <Wrapper>
+        <Wrapper id="price">
             <Container className="container">
                 <Flex>
                     <div>

@@ -6,52 +6,52 @@ import { Link } from 'gatsby';
 import { DOTS_IMAGES } from '../img/dots';
 
 const LinksToPrice = ({ data }) => {
-    return (
-      <Wrapper>
-        <Container className="container">
-          <Flex
-            isImgRight={data.imageWithButton[0].isImgRight}
-            isImgBackground={data.imageWithButton[0].isImgBackground}
-            backgroundColor={data.imageWithButton[0].backgroundColor.hex}
-          >
-            <div className="imageWrapper">
-              <img
-                className="dots"
-                src={
-                  data.imageWithButton[0].isImgRight
-                    ? DOTS_IMAGES.RIGHT_BOTTOM
-                    : DOTS_IMAGES.LEFT_BOTTOM_BIGGER
-                }
-                alt=""
-              />
-              <GatsbyImage
-                className="mainImage"
-                image={data.imageWithButton[0].img.gatsbyImageData}
-                alt={data.imageWithButton[0].img.alt}
-                title={data.imageWithButton[0].img.title}
-              />
-            </div>
-            <div className="textPart">
-              <StructuredText data={data.imageWithButton[0].title} />
-              <p>{data.imageWithButton[0].text}</p>
-              {data.imageWithButton[0].button.map((el) => (
-                <Link to={el.slug} aria-label={el.ariaLabel}>
-                  <StructuredText data={el.name} />
-                </Link>
-              ))}
-            </div>
-          </Flex>
-          <Grid>
-            {data.grid.map((el) => (
-              <li>
-                <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt}/>
-                <p>{el.text}</p>
-              </li>
+  return (
+    <Wrapper>
+      <Container className="container">
+        <Flex
+          isImgRight={data.imageWithButton[0].isImgRight}
+          isImgBackground={data.imageWithButton[0].isImgBackground}
+          backgroundColor={data.imageWithButton[0].backgroundColor.hex}
+        >
+          <div className="imageWrapper">
+            <img
+              className="dots"
+              src={
+                data.imageWithButton[0].isImgRight
+                  ? DOTS_IMAGES.RIGHT_BOTTOM
+                  : DOTS_IMAGES.LEFT_BOTTOM_BIGGER
+              }
+              alt=""
+            />
+            <GatsbyImage
+              className="mainImage"
+              image={data.imageWithButton[0].img.gatsbyImageData}
+              alt={data.imageWithButton[0].img.alt}
+              title={data.imageWithButton[0].img.title}
+            />
+          </div>
+          <div className="textPart">
+            <StructuredText data={data.imageWithButton[0].title} />
+            <p>{data.imageWithButton[0].text}</p>
+            {data.imageWithButton[0].button.map((el) => (
+              <a href='#price' aria-label={el.ariaLabel}>
+                <StructuredText data={el.name} />
+              </a>
             ))}
-          </Grid>
-        </Container>
-      </Wrapper>
-    );
+          </div>
+        </Flex>
+        <Grid>
+          {data.grid.map((el) => (
+            <li>
+              <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt} />
+              <p>{el.text}</p>
+            </li>
+          ))}
+        </Grid>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default LinksToPrice
@@ -80,9 +80,9 @@ const Flex = styled.div`
     width: fit-content;
     margin: ${(props) => (props.isImgRight ? '0 0 0 auto' : '0 auto 0 0')};
     padding-left: ${(props) =>
-      props.isImgRight ? '0' : 'clamp(24px, 3.88vw, 56px)'};
+    props.isImgRight ? '0' : 'clamp(24px, 3.88vw, 56px)'};
     padding-right: ${(props) =>
-      props.isImgRight ? 'clamp(24px, 3.88vw, 56px)' : '24px'};
+    props.isImgRight ? 'clamp(24px, 3.88vw, 56px)' : '24px'};
 
     .dots {
       display: ${(props) => (props.isImgBackground ? null : 'none')};
@@ -141,6 +141,7 @@ const Flex = styled.div`
       margin-top: 20px;
       width: fit-content;
       border-radius: 8px;
+      
 
       p {
         width: fit-content;
@@ -153,67 +154,16 @@ const Flex = styled.div`
         color: var(--navHover);
         border: 1px solid var(--active);
         position: relative;
-        transition: 0.2s linear;
+      transition: background-color .2s linear, border .2s linear;
         text-align: center;
+      }
 
-        mark {
-          color: var(--navHover);
-          border-radius: 8px;
-          background-color: var(--blackButtonBackground);
-          display: block;
-          position: absolute;
-          padding: 0 24px;
-          width: max-content;
-          left: 0;
-          transition: 0.2s linear;
-        }
+      
 
-        a {
-          display: block;
-          margin-top: 20px;
-          width: fit-content;
-          border-radius: 8px;
-
-          p {
-            width: fit-content;
-            padding: 0 24px;
-            background: #51b8eb;
-            border-radius: 8px;
-            display: block;
-            height: 49px;
-            line-height: 49px;
-            color: var(--navHover);
-            border: 1px solid var(--active);
-            position: relative;
-            transition: 0.2s linear;
-            mark {
-              color: var(--navHover);
-              border-radius: 8px;
-              background-color: var(--blackButtonBackground);
-              display: block;
-              position: absolute;
-              padding: 0 24px;
-              width: max-content;
-              left: 0;
-              transition: 0.2s linear;
-            }
-
-            &:hover {
-              border: 1px solid var(--backgroundLight);
-              background-color: var(--backgroundLight);
-
-              mark {
-                border: 1px solid var(--backgroundMedium);
-                background-color: var(--backgroundMedium);
-              }
-            }
-
-            color: var(--active);
-
-            mark {
-              color: #d30000;
-            }
-          }
+      &:hover {
+        p{
+          border: 1px solid var(--backgroundLight);
+          background-color: var(--backgroundLight);
         }
       }
     }
@@ -228,7 +178,7 @@ const Flex = styled.div`
     .imageWrapper {
       width: 100%;
       margin: ${(props) =>
-        props.isImgRight ? '72px auto 0 0' : '72px 0 0 auto'};
+    props.isImgRight ? '72px auto 0 0' : '72px 0 0 auto'};
       padding-left: 0;
       padding-right: 0;
 
@@ -243,7 +193,7 @@ const Flex = styled.div`
         max-width: 605px;
         width: 87%;
         margin: ${({ isImgRight }) =>
-          isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
+    isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }

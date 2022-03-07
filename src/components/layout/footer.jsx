@@ -165,7 +165,7 @@ const Flex = styled.div`
     padding: 13px 32px;
     border-radius: 8px;
     margin: 0 8px;
-    transition: .2s linear;
+    transition: background-color .2s linear, border .2s linear;
 
     &.c0{
       background-color: var(--active);
@@ -173,7 +173,6 @@ const Flex = styled.div`
       p{
         color: var(--mainLightText);
         text-align: center;
-        transition: .2s linear;
       }
 
       &:hover{
@@ -188,7 +187,6 @@ const Flex = styled.div`
       p{
         color: var(--mainDarkText);
         text-align: center;
-        transition: .2s linear;
       }
 
       &:hover{
@@ -226,6 +224,7 @@ const Nav = styled.nav`
     li a {
       border-radius: 50px;
       display: block;
+      width: fit-content;
     }
 
     li a p{
@@ -299,7 +298,7 @@ const SocialMedia = styled.ul`
     display: inline-block;
     margin: 0 24px;
     opacity: 0.56;
-    transition: .1s linear;
+    transition: opacity .1s linear;
 
     &:hover{
       opacity: 1;

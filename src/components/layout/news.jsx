@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { Link } from "gatsby"
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, Placeholder } from 'gatsby-plugin-image';
 import { parseDateFromEnglishMonth } from '../../utils/misc';
 
 const News = ({ data, posts }) => {
@@ -45,95 +45,107 @@ const News = ({ data, posts }) => {
     });
 
     return (
-        <Wrapper isMainPage={data.title}>
-            <Container className="container">
-                <Flex>
-                    <span>
-                        {data.title
-                            ? <StructuredText data={data.title} />
-                            : <h2>{data}</h2>}
-                        {data.text
-                            ? <p>{data.text}</p>
-                            : null}
-                    </span>
-                    {data.buttonText
-                        ? <Link to='blog'>{data.buttonText}</Link>
-                        : null}
+        <>
+            {posts.length > 0
+                ? <Wrapper isMainPage={data.title}>
+                    <Container className="container">
+                        <Flex>
+                            <span>
+                                {data.title
+                                    ? <StructuredText data={data.title} />
+                                    : <h2>{data}</h2>}
+                                {data.text
+                                    ? <p>{data.text}</p>
+                                    : null}
+                            </span>
+                            {data.buttonText
+                                ? <Link to='blog'>{data.buttonText}</Link>
+                                : null}
 
-                </Flex>
-                <Slider isMainPage={data.title}>
-                    <div {...handlers}>
-                        <div className="slider">
-                            {posts.map((el, index) => {
-                                const polishDate = parseDateFromEnglishMonth(el.publicationDate)
-                                return index <= 2 ? (
-                                    <Link to={'/blog/' + el.slug}>
-                                        <motion.div
-                                            className="sliderItem"
-                                            animate={{
-                                                left: `calc(${position} * (-100% - 36px))`,
-                                            }}
-                                            transition={{
-                                                ease: 'easeOut',
-                                                duration: 0.25,
-                                            }}
-                                        >
-                                            <div>
-                                                <Link
-                                                    to="/blog/"
-                                                    state={{ category: el.category.name }}
+                        </Flex>
+                        <Slider isMainPage={data.title}>
+                            <div {...handlers}>
+                                <div className="slider">
+                                    {posts.map((el, index) => {
+                                        const polishDate = parseDateFromEnglishMonth(el.publicationDate)
+                                        return index <= 2 ? (
+                                            <Link className="wrapLink" to={'/blog/' + el.slug}>
+                                                <motion.div
+                                                    className="sliderItem"
+                                                    animate={{
+                                                        left: `calc(${position} * (-100% - 36px))`,
+                                                    }}
+                                                    transition={{
+                                                        ease: 'easeOut',
+                                                        duration: 0.25,
+                                                    }}
                                                 >
-                                                    <Category
-                                                        categoryColor={
-                                                            el.category.color.hex
-                                                        }
-                                                    >
-                                                        {el.category.name}
-                                                    </Category>
-                                                </Link>
-                                                <p className="title">{el.title}</p>
-                                                <p className="date">{polishDate}</p>
-                                            </div>
-                                            <GatsbyImage
-                                                image={el.cardImage.gatsbyImageData}
-                                                alt={el.cardImage.alt}
-                                                title={el.cardImage.title}
-                                            />
-                                        </motion.div>
-                                    </Link>
-                                ) : null;
-                            })}
-                        </div>
-                    </div>
-                </Slider >
-                <SliderControls>
-                    <button
-                        aria-label="slider scroll left"
-                        name="poprzedni artykuł"
-                        disabled={!canLeft}
-                        onClick={() => {
-                            positionSet(position - 1);
-                        }}
-                    >
-                        <ArrowLeft />
-                    </button>
-                    <button
-                        aria-label="slider scroll right"
-                        name="następny artykuł"
-                        disabled={!canRight}
-                        onClick={() => {
-                            positionSet(position + 1);
-                        }}
-                    >
-                        <ArrowRight />
-                    </button>
-                </SliderControls>
-            </Container >
-        </Wrapper >
+                                                    <div>
+                                                        <Link
+                                                            to="/blog/"
+                                                            state={{ category: el.category.name }}
+                                                        >
+                                                            <Category
+                                                                categoryColor={
+                                                                    el.category.color.hex
+                                                                }
+                                                            >
+                                                                {el.category.name}
+                                                            </Category>
+                                                        </Link>
+                                                        <p className="title">{el.title}</p>
+                                                        <p className="date">{polishDate}</p>
+                                                    </div>
+                                                    <GatsbyImage
+                                                        image={el.cardImage.gatsbyImageData}
+                                                        alt={el.cardImage.alt}
+                                                        title={el.cardImage.title}
+                                                    />
+                                                </motion.div>
+                                            </Link>
+                                        ) : null;
+                                    })}
+                                </div>
+                            </div>
+                        </Slider >
+                        {posts.length < 3
+                            ? null
+                            : <SliderControls>
+                                <button
+                                    aria-label="slider scroll left"
+                                    name="poprzedni artykuł"
+                                    disabled={!canLeft}
+                                    onClick={() => {
+                                        positionSet(position - 1);
+                                    }}
+                                >
+                                    <ArrowLeft />
+                                </button>
+                                <button
+                                    aria-label="slider scroll right"
+                                    name="następny artykuł"
+                                    disabled={!canRight}
+                                    onClick={() => {
+                                        positionSet(position + 1);
+                                    }}
+                                >
+                                    <ArrowRight />
+                                </button>
+                            </SliderControls>
+                        }
+                    </Container >
+                </Wrapper >
+                : <PlaceholderNews />
+            }
+        </>
     );
 }
 
 export default News
+
+const PlaceholderNews = styled.div`
+    margin-top: 100px;
+`
 
 const Wrapper = styled.section`
     padding-bottom: 126px;  
@@ -193,7 +205,7 @@ const Flex = styled.div`
         font-weight: 500;
         font-size: 16px;
         line-height: 21px;
-        transition: .2s linear;
+        transition: background-color .2s linear, border .2s linear;
         
         &:hover{
             border: 1px solid var(--backgroundMedium);
@@ -232,7 +244,16 @@ const Flex = styled.div`
 `
 
 const Slider = styled.div`
-    cursor: move;
+    cursor: grab;
+
+    .wrapLink{
+        border-radius: 15px;
+        &:focus-visible {
+            outline: 3px solid var(--active);
+            outline-offset: -3px;
+        }
+    }
+
     .slider{
         display: grid;
         grid-template-columns: calc(50% - 18px) calc(50% - 18px) calc(50% - 18px);
@@ -242,6 +263,7 @@ const Slider = styled.div`
         overflow: hidden;
 
     .sliderItem {
+        margin: 2px;
       aspect-ratio: 1.33/1;
       border-radius: 15px;
       position: relative;
@@ -271,6 +293,10 @@ const Slider = styled.div`
         }
       }
 
+      a{
+          border-radius: 15px;
+      }
+
       .gatsby-image-wrapper {
         width: 100%;
         height: 100%;
@@ -281,7 +307,7 @@ const Slider = styled.div`
         z-index: -1;
 
         img {
-          transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
           border-radius: 15px;
         }
       }
@@ -318,7 +344,7 @@ const SliderControls = styled.div`
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        transition: .2s linear;
+        transition: background-color .2s linear, border .2s linear;
 
         &:hover{
         background-color: var(--backgroundMedium);
@@ -351,7 +377,7 @@ const Category = styled.span`
     line-height: 1;
     display: inline-block;
     position: relative;
-    transition: .2s linear;
+    transition: background-color .2s linear, color .2s linear;
 
     &::before {
         content: '';
@@ -362,7 +388,7 @@ const Category = styled.span`
         bottom: 0;
         background-color: ${props => `${props.categoryColor}22`};
         border-radius: 15px;
-        transition: .2s linear;
+    transition: opacity .2s linear;
     }
 
     &:hover{

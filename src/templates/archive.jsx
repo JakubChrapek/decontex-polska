@@ -94,91 +94,99 @@ const BlogArchiveTemplate = (props) => {
           <Hero>
             <StructuredText data={props.data.datoCmsArchivePage.title} />
             <p>{props.data.datoCmsArchivePage.text}</p>
-            <Link to={choosenPosts[0].slug}>
               <div className='imageBox'>
+            <Link className='wrapLink' to={choosenPosts[0].slug}/>
                 <div>
-                  <Category categoryColor={choosenPosts[0].category.color.hex} onClick={() => { filter(choosenPosts[0].category.name); }}>{choosenPosts[0].category.name}</Category>
+                  <Category categoryColor={choosenPosts[0].category.color.hex}>{choosenPosts[0].category.name}</Category>
                   <p className="title">{choosenPosts[0].title}</p>
                   <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
                 </div>
                 <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
               </div>
-            </Link>
           </Hero>
-          <Controls ref={constraintsRef}>
-            <h2>
-              {props.data.datoCmsArchivePage.locale === 'pl'
-                ? 'Wybierz kategorię'
-                : 'Choose category'}
-            </h2>
-            <motion.div drag="x" dragConstraints={constraintsRef}>
-              <button
-                className={'all filterItem active'}
-                onClick={() => {
-                  filter('all');
-                }}
-              >
-                {props.data.datoCmsArchivePage.locale === 'pl'
-                  ? 'Wszystkie'
-                  : 'All'}
-              </button>
-              {props.data.allDatoCmsCategory.nodes.map((el) => (
+          {preFiltredPosts.length === 0
+            ? null
+            : <>
+              <Controls ref={constraintsRef}>
+                <h2>
+                  {props.data.datoCmsArchivePage.locale === 'pl'
+                    ? 'Wybierz kategorię'
+                    : 'Choose category'}
+                </h2>
+                <motion.div drag="x" dragConstraints={constraintsRef}>
+                  <button
+                    className={'all filterItem active'}
+                    onClick={() => {
+                      filter('all');
+                    }}
+                  >
+                    {props.data.datoCmsArchivePage.locale === 'pl'
+                      ? 'Wszystkie'
+                      : 'All'}
+                  </button>
+                  {props.data.allDatoCmsCategory.nodes.map((el) => (
+                    <>
+                      {preFiltredPosts.filter(innerEl => innerEl.category.name === el.name).length > 0
+                        ? <button
+                          className={el.name.replace(/\s/g, '') + ' filterItem'}
+                          onClick={() => {
+                            filter(el.name);
+                          }}
+                        >
+                          {el.name}
+                        </button>
+                        : null}
+                    </>
+                  ))}
+                </motion.div>
+              </Controls>
+              <AnimateSharedLayout>
+                <AnimatePresence exitBeforeEnter>
+                  <Grid layout>
+                    {filtredPosts.map((el) => (
+                      <motion.li
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        key={el.title}
+                        layout
+                      >
+                        <Link className='imgWrapp wrapLink' to={el.slug}>
+                          <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
+                        </Link>
+                        <motion.span>{el.category.name}</motion.span>
+                        <motion.h3>{el.title}</motion.h3>
+                        <Link to={el.slug}>
+                          Czytaj dalej <ArrowRight />
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </Grid>
+                </AnimatePresence>
+              </AnimateSharedLayout>
+              <Pagination>
                 <button
-                  className={el.name.replace(/\s/g, '') + ' filterItem'}
+                  disabled={!canLeft}
                   onClick={() => {
-                    filter(el.name);
+                    pagination('left')
                   }}
                 >
-                  {el.name}
+                  <ArrowLeft />
                 </button>
-              ))}
-            </motion.div>
-          </Controls>
-          <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
-              <Grid layout>
-                {filtredPosts.map((el) => (
-                  <motion.li
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    key={el.title}
-                    layout
-                  >
-                    <Link className='imgWrapp' to={el.slug}>
-                      <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
-                    </Link>
-                    <motion.span>{el.category.name}</motion.span>
-                    <motion.h3>{el.title}</motion.h3>
-                    <Link to={el.slug}>
-                      Czytaj dalej <ArrowRight />
-                    </Link>
-                  </motion.li>
-                ))}
-              </Grid>
-            </AnimatePresence>
-          </AnimateSharedLayout>
-          <Pagination>
-            <button
-              disabled={!canLeft}
-              onClick={() => {
-                pagination('left')
-              }}
-            >
-              <ArrowLeft />
-            </button>
-            <p>
-              {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
-            </p>
-            <button
-              disabled={!canRight}
-              onClick={() => {
-                pagination('right')
-              }}
-            >
-              <ArrowRight />
-            </button>
-          </Pagination>
+                <p>
+                  {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
+                </p>
+                <button
+                  disabled={!canRight}
+                  onClick={() => {
+                    pagination('right')
+                  }}
+                >
+                  <ArrowRight />
+                </button>
+              </Pagination>
+            </>
+          }
         </Container>
       </Wrapper>
     </PageWrapper>
@@ -268,7 +276,7 @@ const Pagination = styled.div`
       transition: background-color .2s linear, border .2s linear, color .2s linear;
 
       path{
-        transition: .2s linear;
+        transition: stroke .2s linear;
       }
 
       &:hover{
@@ -316,14 +324,7 @@ const Category = styled.span`
       color 0.2s linear;
   }
 
-  &:hover {
-    color: var(--mainLightText);
-    background-color: ${(props) => props.categoryColor};
-
-    &::before {
-      opacity: 0;
-    }
-  }
+  
 `;
 
 const Wrapper = styled.div`
@@ -334,6 +335,22 @@ const Wrapper = styled.div`
   @media (max-width: 1024px){
     padding-top: clamp(140px, 18.2vw, 192px);
     padding-bottom: clamp(45px, 8.4vw, 110px);
+  }
+
+  .wrapLink{
+      border-radius: 15px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      &:focus-visible {
+          outline: 3px solid var(--active);
+          outline-offset: -3px;
+      }
+
+      img{
+      }
   }
 `
 
@@ -423,7 +440,7 @@ const Hero = styled.div`
       z-index: -1;
       border-radius: 15px;
       img {
-        transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
         transform-origin: center center;
       }
     }
@@ -501,6 +518,8 @@ const Grid = styled(motion.ul)`
   grid-template-columns: 1fr 1fr 1fr;
 
   li {
+    position: relative;
+    
     filter: drop-shadow(0px 20px 50px rgba(0,0,0,0.18));
     
     span {
@@ -531,7 +550,7 @@ const Grid = styled(motion.ul)`
 
       svg {
         margin-left: 10px;
-        transition: 0.2s linear;
+        transition: margin 0.2s cubic-bezier(0.445, 0.05, 0.55, 0.95);
         path {
           stroke: var(--active);
         }
@@ -554,9 +573,14 @@ const Grid = styled(motion.ul)`
         width: 100%;
         aspect-ratio: 329/201;
         img {
-          transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
           transform-origin: center center;
         }
+      }
+
+      &:focus-visible {
+          outline: 3px solid var(--active);
+          outline-offset: -3px;
       }
 
       &:hover {

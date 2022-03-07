@@ -300,11 +300,12 @@ const SliderControls = styled.div`
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        transition: .2s linear;
+        transition: background-color .2s linear;
         border: 1px solid var(--mainLightText);
 
         path{
             stroke: var(--mainLightText);
+            transition: stroke .2s linear;
         }
 
         &:hover{

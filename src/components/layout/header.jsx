@@ -48,6 +48,10 @@ const Nav = styled.nav`
 const LogoImage = styled(GatsbyImage)`
   width: ${158 / 16}rem;
   max-width: ${158 / 16}rem;
+
+  &.light{
+    filter: brightness(0) invert(1);
+  }
   && [data-placeholder-image] {
     position: absolute;
   }
@@ -89,7 +93,7 @@ const NavList = styled.ul`
   }
   & li a p {
     color: var(--navText);
-    transition: all 0.1s linear;
+    transition: color 0.1s linear, background-color 0.1s linear;
     padding: 8px clamp(4px, 1vw, 16px);
     border-radius: 50px;
 
@@ -143,6 +147,12 @@ const MobileContainer = styled.div`
     padding: 0 35px;
     width: 100%;
 
+    .gatsby-image-wrapper{
+      div{
+        display: none !important;
+      }
+    }
+
     img{
       position: relative;
       z-index: 2;
@@ -168,7 +178,7 @@ const MobileButton = styled.button`
     height: 2px;
     background-color: ${props => props.isWhite ? props.isMenuOpened ? '#000' : '#FFF' : '#000'};
     border-radius: 2px;
-    transition: .2s linear;
+    transition: background-color .2s linear, opacity .2s linear, transform .2s linear;
     transform: ${props => props.isMenuOpened ? 'translateX(100%)' : null};
     opacity: ${props => props.isMenuOpened ? '0' : '1'};
     
@@ -183,7 +193,7 @@ const MobileButton = styled.button`
     background-color: ${props => props.isWhite ? props.isMenuOpened ? '#000' : '#FFF' : '#000'};
     transform: ${props => props.isMenuOpened ? 'rotateZ(-45deg)' : 'translateY(6px)'};;
     border-radius: 2px;
-    transition: .2s linear;
+    transition: background-color .2s linear, transform .2s linear;
 
   }
 
@@ -196,7 +206,7 @@ const MobileButton = styled.button`
     background-color: ${props => props.isWhite ? props.isMenuOpened ? '#000' : '#FFF' : '#000'};
     transform: ${props => props.isMenuOpened ? 'rotateZ(45deg)' : 'translateY(-6px)'};;
     border-radius: 2px;
-    transition: .2s linear;
+    transition: background-color .2s linear, transform .2s linear;
   }
 `
 
@@ -209,8 +219,9 @@ const MobileNav = styled.div`
   left: 0;
   right: 0;
   padding: 0 35px;
-  transition: all .2s linear;
-  transform: ${props => props.isMenuOpened ? 'unset' : 'translateY(-100%)'};
+  transition: opacity .2s linear, transform .2s linear;
+  opacity: ${props => props.isMenuOpened ? '1' : '.4'};
+  transform: ${props => props.isMenuOpened ? 'unset' : 'translateX(100%)'};
 
   div{
     padding-top: 102px;
@@ -219,6 +230,7 @@ const MobileNav = styled.div`
     list-style: none;
     display: grid;
     grid-row-gap: 24px;
+    margin-top: 100px;
 
     p{
       font-weight: 500;
@@ -327,9 +339,7 @@ const Header = () => {
             }) => {
               let logoVariant = logo;
               // TODO: get all locale root pathnames from DatoCMS and check if it is homepage
-              if (pathname === '/' || pathname === '/en') {
-                logoVariant = logoWhite;
-              }
+
               return (
                 <Navigator
                   home
@@ -339,6 +349,7 @@ const Header = () => {
                   <LogoImage image={logoVariant.gatsbyImageData}
                     alt={logoVariant.alt}
                     title={logoVariant.title}
+                    className={pathname === '/' ? 'light' : ''}
                   />
                 </Navigator>
               );
@@ -405,28 +416,24 @@ const Header = () => {
                 logo, logoWhite
               },
             }) => {
-              let logoVariant = logo
-              // TODO: get all locale root pathnames from DatoCMS and check if it is homepage
-              if (pathname === '/' || pathname === '/en') {
-                logoVariant = logoWhite
-              }
-              if (isMenuOpened) {
-                logoVariant = logo
-              }
+              let logoVariant = logo;
               return (
-                <Link to="/">
-                  <LogoImage
-                    image={logoVariant.gatsbyImageData}
+                <Navigator
+                  home
+                  ariaLabel={logoVariant.title}
+                  key={logoVariant.title}
+                >
+                  <LogoImage image={logoVariant.gatsbyImageData}
                     alt={logoVariant.alt}
                     title={logoVariant.title}
+                    className={pathname === '/' && !isMenuOpened ? 'light' : ''}
                   />
-                </Link>
+                </Navigator>
               );
             }
           )}
         <MobileButton onClick={() => { changeIsMenuOpened(!isMenuOpened) }} isMenuOpened={isMenuOpened} isWhite={pathname === '/' || pathname === '/en'}><span /></MobileButton>
         <MobileNav isMenuOpened={isMenuOpened}>
-          <div></div>
           <ul>
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)

@@ -339,14 +339,20 @@ const Content = styled.div`
     display: flex;
     align-items: center;
 
+    a{
+      border-radius: 15px;
+      padding: 10px;
+
+    }
+
     span {
       color: ${(props) => props.categoryColor};
       background: #ffffff;
       border-radius: 15px;
       padding: 10px;
       margin-right: 16px;
+      transition: background-color .2s linear, color .2s linear;
       position: relative;
-      transition: 0.2s linear;
 
       &:before {
         content: '';
@@ -357,7 +363,7 @@ const Content = styled.div`
         bottom: 0;
         background-color: ${(props) => `${props.categoryColor}22`};
         border-radius: 15px;
-        transition: 0.2s linear;
+        transition: opacity 0.2s linear;
       }
 
       &:hover {
