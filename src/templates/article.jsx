@@ -286,6 +286,9 @@ const Content = styled.div`
   max-width: 1158px;
   width: 100%;
   padding: 0 35px;
+  @media (max-width: 640px) {
+    padding: 0 16px;
+  }
   padding-top: 180px;
   margin: 0 auto;
   position: relative;
@@ -296,14 +299,29 @@ const Content = styled.div`
     margin-bottom: 68px;
     margin-top: 36px;
     font-size: clamp(32px, 5.2vw, 40px);
+    line-height: 1.1;
     letter-spacing: -1px;
+  }
+  
+  @media (max-width: 767px) {
+    h1 {
+      margin-bottom: 54px;
+    }
+    .gatsby-image-wrapper {
+    aspect-ratio: 1.8/1;
+    margin: 0 auto 64px;
+
+  }
   }
 
   .gatsby-image-wrapper {
     border-radius: 16px;
-    margin: 0 auto 24px;
+    margin: 0 auto 48px;
+    @media (max-width: 767px) {
+      margin-bottom: 32px;
+    }
     + p {
-      margin-top: 72px;
+      margin-top: 24px;
     }
   }
   p + .gatsby-image-wrapper {
@@ -365,7 +383,7 @@ const Content = styled.div`
     blockquote {
       position: relative;
       margin: 48px 0;
-      padding-left: 20px;
+      padding-left: 21px;
       margin-left: 0;
       margin-right: 0;
 
@@ -373,11 +391,19 @@ const Content = styled.div`
         content: '‘‘';
         font-family: auto;
         position: absolute;
-        left: -28px;
-        top: -24px;
+        left: -27px;
+        top: -17px;
         letter-spacing: -8px;
         font-size: 100px;
         color: var(--active);
+      }
+      @media (max-width: 640px) {
+        padding-left: 36px;
+        &::before {
+          left: -8px;
+          top: -14px;
+          font-size: 88px;
+        }
       }
 
       p {
@@ -440,7 +466,7 @@ const Content = styled.div`
     }
   }
 
-  @media (max-width: 1024px ) {
+  @media (max-width: 1024px) {
     padding-top: 140px;
   }
 `;

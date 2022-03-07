@@ -168,10 +168,13 @@ const Flex = styled.div`
 
         h2{
             font-weight: bold;
-            font-size: 48px;
+            font-size: 36px;
             line-height: 100%;
             letter-spacing: -2px;
             margin-right: 62px;
+            @media (max-width: 767px) {
+                margin-right: 0;
+            }
         }
 
         p{
@@ -206,7 +209,7 @@ const Flex = styled.div`
             h2{
                 margin-bottom: 16px;
                 max-width: 700px;
-                font-size: clamp(32px, 5.2vw, 48px);
+                font-size: clamp(32px, 5.2vw, 36px);
                 line-height: 1.3;
             }
 

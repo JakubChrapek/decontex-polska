@@ -49,73 +49,80 @@ const Container = styled.div`
  `
 
 const Content = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
+
+  div {
+    max-width: 562px;
+  }
+
+  h1 {
+    color: var(--superDarkText);
+    font-weight: bold;
+    font-size: 36px;
+    @media (max-width: 767px) {
+      font-size: 32px;
+    }
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 180%;
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
+  }
+
+  .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 16px;
+    grid-template-columns: calc(50% - 6px) calc(50% - 6px);
+    grid-gap: 12px;
 
-    div{
-        max-width: 562px;
-    }
-    
-
-    h1{
-        color: var(--superDarkText);
-        font-weight: bold;
-        font-size: 36px;
-        line-height: 1.3;
-        letter-spacing: -1px;
-        margin-bottom: 24px;
+    .gatsby-image-wrapper {
+      img {
+        object-fit: contain !important;
+      }
+      @media (max-width: 1024px) {
+        aspect-ratio: 342/104;
+      }
+      @media (max-width: 640px) {
+        aspect-ratio: 169/104;
+      }
     }
 
-    p{
-        font-size: 18px;
-        line-height: 180%;
+    > div {
+      background-color: var(--backgroundGrey);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+
+      :last-child {
+        background-color: var(--superDarkText);
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-row-gap: 48px;
+
+    div {
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto;
     }
 
-    .grid{
-        display: grid;
-        grid-template-columns: calc(50% - 6px) calc(50% - 6px);
-        grid-gap: 12px;
-
-        .gatsby-image-wrapper {
-            img {
-                object-fit: contain !important;
-            }
-            @media (max-width: 1024px) {
-                aspect-ratio: 169/104;
-            }
+    .grid {
+      div {
+        img {
+          width: 100%;
         }
-
-        > div{
-            background-color: var(--backgroundGrey);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 16px;
-
-            :last-child{
-                background-color: var(--superDarkText);
-            }
-        }
+      }
     }
-
-    @media (max-width: 1024px) {
-        grid-template-columns: 1fr;
-        grid-row-gap: 48px;
-
-        div{
-            max-width: 700px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .grid{
-            div{
-                img{
-                    width: 100%;
-                }
-            }
-        }
-    }
-
- `
+  }
+`;
