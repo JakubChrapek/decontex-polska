@@ -19,23 +19,20 @@ const Wrapper = styled.div`
     position: absolute;
     bottom: 0;
     left: 50%;
-    min-width: 1440px;
-    max-width: 1920px;
-    width: 100%;
-    transform: translateX(-50%);
+    width: 1920px;
+    transform: translateX(-50%) translateY(150px);
     height: 60px;
     background-color: var(--backgroundDark);
     
-    @media (min-width: 1440px) {
-        transform: translateX(-50%) translateY(2vw);
-    }
 
     @media (max-width: 1024px) {
         height: 200px;
+        transform: translateX(-50%) translateY(120px);
     }
 
     @media (max-width: 540px) {
         height: 250px;
+        transform: translateX(-50%) translateY(100px);
     }
 
     svg{
