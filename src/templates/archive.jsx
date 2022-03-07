@@ -151,7 +151,7 @@ const BlogArchiveTemplate = (props) => {
                         key={el.title}
                         layout
                       >
-                        <Link className='imgWrapp wrapLink' to={el.slug}>
+                        <Link className='imgWrapp' to={el.slug}>
                           <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
                         </Link>
                         <motion.span>{el.category.name}</motion.span>
@@ -565,9 +565,9 @@ const Grid = styled(motion.ul)`
 
     .imgWrapp {
       position: relative;
-      overflow: hidden;
       width: 100%;
       border-radius: 15px;
+
       .gatsby-image-wrapper {
         border-radius: 15px;
         width: 100%;
@@ -576,11 +576,6 @@ const Grid = styled(motion.ul)`
           transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
           transform-origin: center center;
         }
-      }
-
-      &:focus-visible {
-          outline: 3px solid var(--active);
-          outline-offset: -3px;
       }
 
       &:hover {
