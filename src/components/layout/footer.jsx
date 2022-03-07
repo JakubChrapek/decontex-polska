@@ -75,6 +75,7 @@ const Footer = () => {
                 el.navigation.map((innerEl, index) => (
                   <li>
                     <Link
+                      activeClassName="activeClassLink"
                       className={`c` + index}
                       aria-label={innerEl.ariaLabel}
                       to={`/${innerEl.slug}/`}
@@ -243,6 +244,10 @@ const Nav = styled.nav`
               font-weight: 400;
             }
     }
+    li .activeClassLink p {
+      color: var(--navHover);
+      background-color: var(--backgroundMedium);
+    }
 }
 
   
@@ -271,7 +276,12 @@ const Nav = styled.nav`
           color: var(--mainLightText);
           background-color: unset;
         }
+    
       }
+      li .activeClassLink p {
+          color: var(--mainLightText);
+          background-color: unset;
+    }
     }
   }
 `

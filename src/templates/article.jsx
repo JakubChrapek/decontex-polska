@@ -8,10 +8,11 @@ import News from '../components/layout/news'
 import Waves from '../components/vectors/heroOtherPageWaves'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { useState } from 'react'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-  const {datoCmsBlogPost: {coverImage}} = data;
-  console.log(coverImage);
+  const { datoCmsBlogPost: { coverImage } } = data;
+
   return (
     <PageWrapper
       pageData={pageContext}
@@ -110,7 +111,14 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             )}
           </div>
         </Content>
-        <News data='Podobne artykuły' posts={data.allDatoCmsBlogPost.blogPostNodes} />
+        {data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title !== data.datoCmsBlogPost.title && el.category.name === data.datoCmsBlogPost.category.name).length >= 3
+          ? <News data='Podobne artykuły' posts={data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title !== data.datoCmsBlogPost.title && el.category.name === data.datoCmsBlogPost.category.name)} />
+          : <News data='Podobne artykuły'
+            posts={[...data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title !== data.datoCmsBlogPost.title && el.category.name === data.datoCmsBlogPost.category.name),
+            ...data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title !== data.datoCmsBlogPost.title && el.category.name !== data.datoCmsBlogPost.category.name)
+            ]} />
+        }
+
         <Waves />
       </Wrapper>
     </PageWrapper>
@@ -250,7 +258,6 @@ export const query = graphql`
         }
         value
       }
-      blogNewsTitle
     }
   }
 `;
