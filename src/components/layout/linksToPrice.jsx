@@ -327,7 +327,7 @@ const Grid = styled.ul`
     margin-top: clamp(150px, 10.4vw, 180px);
   }
 
-  @media (max-width: 660px) {
+  @media (max-width: 540px) {
     grid-template-columns: 1fr;
     margin-top: clamp(110px, 10.4vw, 160px);
   }

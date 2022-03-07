@@ -1,8 +1,7 @@
-import React, { Fragment, useContext } from 'react';
+import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { StructuredText } from 'react-datocms';
-import { LangContext } from '../../context/langProvider';
 import Waves from '../vectors/footerWaves';
 import { Link } from "gatsby"
 
@@ -43,7 +42,6 @@ const Footer = () => {
     }
   `);
 
-  // const { currentLanguage } = useContext(LangContext);
   const currentLanguage = 'pl'
   return (
     <Wrapper>
@@ -135,16 +133,27 @@ const Wrapper = styled.footer`
 const Container = styled.div`
   position: relative;
   z-index: 10;
-  h2{
+  h2 {
     text-align: center;
+    max-width: 634px;
+    margin: 0 auto;
+    line-height: 1.3;
   }
 
-  @media (max-width: 1024px){
-    h2{
-      font-size: clamp(24px, 5.2vw , 48px);
+  @media (max-width: 1024px) {
+    h2 {
+      font-size: clamp(24px, 5.2vw, 40px);
+      max-width: clamp(400px, 72vw, 560px);
+      line-height: 1.1;
     }
   }
-`
+  @media (max-width: 767px) {
+    h2 {
+      font-size: clamp(24px, 5.2vw, 40px);
+      max-width: clamp(400px, 72vw, 560px);
+    }
+  }
+`;
 
 const Flex = styled.div`
   display: flex;
