@@ -18,27 +18,27 @@ const KontaktForm = ({ buttonText }) => {
         <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
             <label className={errors.name && 'error'}>
                 <span>Imię i nazwisko</span>
-                <input {...register("name", { required: true, pattern: /^[a-z ,.'-]+$/i })} placeholder="John Doe" />
+                <input {...register("name", { required: true, pattern: /^[a-z ,.'-]+$/i })} placeholder="Jan Nowak" />
                 {errors.name &&
                     <motion.p
                         initial={{ opacity: 0, bottom: 10 }}
                         animate={{ opacity: 1, bottom: 0 }}
                         transition={{ type: 'spring', duration: .8 }}
                         className='errorText'>
-                        'Proszę wpisz imię'
+                        Podaj imię i nazwisko
                     </motion.p>
                 }
             </label>
             <label className={errors.phone && 'error'}>
                 <span>Numer telefonu</span>
-                <input {...register("phone", { required: true, pattern: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g })} placeholder="20 111 2345 6789" />
+                <input {...register("phone", { required: true, pattern: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g })} placeholder="np. 505 505 505" />
                 {errors.phone &&
                     <motion.p
                         initial={{ opacity: 0, bottom: 10 }}
                         animate={{ opacity: 1, bottom: 0 }}
                         transition={{ type: 'spring', duration: .8 }}
                         className='errorText'>
-                        'Proszę wpisz poprawny telefon'
+                        Wpisz poprawny nr telefonu
                     </motion.p>
                 }
             </label>
@@ -47,27 +47,27 @@ const KontaktForm = ({ buttonText }) => {
                 <input {...register("mail", {
                     required: true, pattern:
                         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                })} placeholder="john@gmail.com" />
+                })} placeholder="jan@gmail.com" />
                 {errors.mail &&
                     <motion.p
                         initial={{ opacity: 0, bottom: 10 }}
                         animate={{ opacity: 1, bottom: 0 }}
                         transition={{ type: 'spring', duration: .8 }}
                         className='errorText'>
-                        'Proszę wpisz poprawny E-mail'
+                        Wprisz poprawny e-mail
                     </motion.p>
                 }
             </label>
             <label className={errors.message && 'error'}>
                 <span>Jak możemy pomóc?</span>
-                <textarea {...register("message", { required: true })} rows="6" placeholder="Pisz tutaj" />
+                <textarea {...register("message", { required: true })} rows="6" placeholder="Jak możemy Ci pomóc?" />
                 {errors.message &&
                     <motion.p
                         initial={{ opacity: 0, bottom: 10 }}
                         animate={{ opacity: 1, bottom: 0 }}
                         transition={{ type: 'spring', duration: .8 }}
                         className='errorText'>
-                        'Proszę wpisz wiadomość'
+                        Wpisz wiadomość
                     </motion.p>
                 }
             </label>
@@ -80,7 +80,7 @@ const KontaktForm = ({ buttonText }) => {
                         animate={{ opacity: 1, bottom: 0 }}
                         transition={{ type: 'spring', duration: .8 }}
                         className='errorText'>
-                        'Proszę zaakceptuj politykę prywatności'
+                        Zaakceptuj politykę prywatności
                     </motion.p>
                 }
             </label>

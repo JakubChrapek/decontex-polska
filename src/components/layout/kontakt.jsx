@@ -93,7 +93,7 @@ const Content = styled.div`
         }
     }
 
-    @media (max-width: 660px) {
+    @media (max-width: 767px) {
         display: flex;
         flex-direction: column-reverse;
 
