@@ -265,7 +265,7 @@ const Pagination = styled.div`
       justify-content: center;
       align-items: center;
       display: inline-flex;
-      transition: .2s linear;
+      transition: background-color .2s linear, border .2s linear, color .2s linear;
 
       path{
         transition: .2s linear;
@@ -292,36 +292,39 @@ const Pagination = styled.div`
 
 const Category = styled.span`
   background-color: var(--mainLightText);
-  color: ${props => props.categoryColor};
+  color: ${(props) => props.categoryColor};
   padding: 10px;
   border-radius: 15px;
   position: relative;
   cursor: pointer;
-  transition: .2s linear;
+  transition: background-color 0.2s linear, border 0.2s linear,
+    color 0.2s linear;
+
   font-size: 14px;
   line-height: 170%;
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        background-color: ${props => `${props.categoryColor}22`};
-        border-radius: 15px;
-        transition: .2s linear;
-    }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: ${(props) => `${props.categoryColor}22`};
+    border-radius: 15px;
+    transition: background-color 0.2s linear, border 0.2s linear,
+      color 0.2s linear;
+  }
 
-    &:hover{
-        color: var(--mainLightText);
-        background-color:  ${props => props.categoryColor};
+  &:hover {
+    color: var(--mainLightText);
+    background-color: ${(props) => props.categoryColor};
 
-        &::before{
-            opacity: 0;
-        }
+    &::before {
+      opacity: 0;
     }
-`
+  }
+`;
 
 const Wrapper = styled.div`
   padding-top: 192px;
@@ -347,6 +350,10 @@ const Hero = styled.div`
     margin-bottom: 12px;
     font-size: 48px;
     line-height: 130%;
+    @media (max-width: 1024px) {
+      font-size: clamp(32px, 5.2vw, 40px);
+      line-height: 1.1;
+    }
     letter-spacing: -1px;
   }
 
@@ -355,6 +362,12 @@ const Hero = styled.div`
     margin: 0 auto;
     text-align: center;
     font-size: 18px;
+    @media (max-width: 1024px) {
+      font-size: 16px;
+    }
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
     line-height: 180%;
   }
 
@@ -364,6 +377,13 @@ const Hero = styled.div`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
     border-radius: 15px;
     aspect-ratio: 2.36/1;
+    @media (max-width: 1024px) {
+      margin-top: 68px;
+      aspect-ratio: 1.8/1;
+    }
+    @media (max-width: 767px) {
+      margin-top: 44px;
+    }
     width: 100%;
     overflow: hidden;
 
@@ -396,13 +416,16 @@ const Hero = styled.div`
       top: 50%;
       transform: translate(-50%, -50%);
       aspect-ratio: 2.36/1;
+      @media (max-width: 1024px) {
+        aspect-ratio: 1.8/1;
+      }
       position: absolute;
       z-index: -1;
       border-radius: 15px;
-       img {
-         transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-         transform-origin: center center;
-       }
+      img {
+        transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        transform-origin: center center;
+      }
     }
 
     &:hover {
@@ -412,7 +435,7 @@ const Hero = styled.div`
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 767px) {
     font-size: clamp(36px, 5.2vw, 48px);
 
     .imageBox div .title {
@@ -423,63 +446,64 @@ const Hero = styled.div`
 `;
 
 const Controls = styled.div`
-
-  h2{
+  h2 {
     margin-top: 72px;
     margin-bottom: 28px;
     font-size: 32px;
   }
 
-  div{
+  div {
     display: flex;
     min-width: max-content;
     margin-bottom: 40px;
-    
-    button{
+
+    button {
       margin-right: 16px;
       margin-bottom: 16px;
       padding: 13px 32px;
       border-radius: 8px;
       color: var(--mainDarkText);
       font-size: 16px;
+      @media (max-width: 767px) {
+        font-size: 14px;
+        padding: 7px 20px;
+      }
       line-height: 21px;
       border: 1px solid var(--divider);
       cursor: pointer;
-      transition: .2s ease-in-out;
+      transition: background-color 0.2s linear, border 0.2s linear,
+        color 0.2s linear;
       min-width: fit-content;
 
-      &:hover{
+      &:hover {
         background-color: var(--divider);
-        
       }
 
-      &.active{
+      &.active {
         color: var(--mainLightText);
         border: 1px solid var(--active);
         background-color: var(--active);
       }
-
     }
   }
 
-  
   @media (max-width: 880px) {
   }
-  
-  @media (max-width: 560px) {
-      padding: 5px 0;
-  }
 
-`
+  @media (max-width: 560px) {
+    padding: 5px 0;
+  }
+`;
 
 const Grid = styled(motion.ul)`
   display: grid;
-  grid-gap: 40px; 
+  grid-gap: 40px;
   grid-template-columns: 1fr 1fr 1fr;
 
-  li{
-
-    span{
+  li {
+    filter: drop-shadow(0px 20px 50px rgba(0,0,0,0.18));
+    
+    span {
       margin-top: 32px;
       margin-bottom: 8px;
       letter-spacing: 0.8px;
@@ -491,7 +515,7 @@ const Grid = styled(motion.ul)`
       display: block;
     }
 
-    h3{
+    h3 {
       color: var(--superDarkText);
       font-weight: bold;
       font-size: 24px;
@@ -499,28 +523,28 @@ const Grid = styled(motion.ul)`
       letter-spacing: 0px;
     }
 
-    a{
+    a {
       color: var(--active);
       margin-top: 20px;
       display: flex;
       align-items: center;
 
-      svg{
+      svg {
         margin-left: 10px;
-        transition: .2s linear;
-        path{
+        transition: 0.2s linear;
+        path {
           stroke: var(--active);
         }
       }
 
-      &:hover{
-        svg{
+      &:hover {
+        svg {
           margin-left: 16px;
         }
       }
     }
 
-    .imgWrapp{
+    .imgWrapp {
       position: relative;
       overflow: hidden;
       width: 100%;
@@ -528,28 +552,26 @@ const Grid = styled(motion.ul)`
       .gatsby-image-wrapper {
         border-radius: 15px;
         width: 100%;
-        aspect-ratio: 1.8/1;
+        aspect-ratio: 329/201;
         img {
-          transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+          transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
           transform-origin: center center;
         }
       }
 
-      &:hover{
-        img{
+      &:hover {
+        img {
           transform: scale(1.075);
         }
       }
     }
-
   }
 
   @media (max-width: 880px) {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   @media (max-width: 560px) {
     grid-template-columns: 1fr;
-    
   }
 `;
