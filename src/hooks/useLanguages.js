@@ -18,18 +18,8 @@ const useLanguages = () => {
     `
   );
 
-  const {
-    allDatoCmsSite: {
-      edges: [
-        {
-          node: { locale: defaultLanguage },
-        },
-      ],
-    },
-
-    datoCmsWebsiteSetting: { blogPath },
-  } = data;
-
+  let defaultLanguage = 'pl'
+  let blogPath = 'blog'
   return {
     defaultLanguage,
     blogPath,

@@ -1,9 +1,11 @@
 import React from 'react';
-import GlobalStyles from './src/components/layout/globalStyles';
+import './src/css/index.css'
+import "@fontsource/ibm-plex-sans"
+import "@fontsource/poppins"
 
-export const wrapPageElement = ({ element }) => (
+
+export const wrapRootElement = ({ element }) => (
   <>
-    <GlobalStyles />
     {element}
   </>
 );

@@ -1,110 +1,26 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
-import Navigator from '../components/langHelpers/navigator';
-import Hero from '../components/layout/hero';
-import {
-  SectionContainerGridThreeCols,
-  SectionWrapper,
-  SectionTitleContainer,
-  TextBox,
-} from '../components/layout/sectionStyles';
-import { HeadingSmall, SectionTitle } from '../components/layout/headingStyles';
-import { Paragraph } from '../components/layout/paragraphStyles';
-import ArticleCard, { CardImgArtDir } from '../components/ui/articleCard';
+import Hero from '../components/layout/heroMainPage';
+import ImageWithoutButton from '../components/layout/imageWithOutButton';
+import Grid from '../components/layout/gridMainPage';
+import Advantages from '../components/layout/advantages';
+import Certificates from '../components/layout/certificates';
+import News from '../components/layout/news';
 
-const HomePageTemplate = ({
-  data: {
-    datoCmsHomepage: {
-      seo: { seoTitle, seoDescription },
-      hero: [heroEntry],
-      features,
-      featuredPostsTitle,
-    },
-    datoCmsOtherPage: { guidePageSlug },
-    allDatoCmsBlogPost: { postNodes },
-    datoCmsWebsiteSetting: { seeTheGuideButton, seeAllButton, minsReadSuffix },
-  },
-  pageContext,
-}) => {
-  const { heroAlt, heroTitle, heroSubtitle } = heroEntry;
-
+const HomePageTemplate = ({ data, pageContext }) => {
   return (
     <PageWrapper
       pageData={pageContext}
-      seoTitle={seoTitle}
-      seoDescription={seoDescription}
+      seoTitle={data.seoTitle}
+      seoDescription={data.seoDescription}
     >
-      <Hero
-        hasDivider
-        alt={heroAlt}
-        title={heroTitle}
-        subtitle={heroSubtitle}
-        button={
-          <Navigator
-            className="classicButton classicButtonOutline"
-            page
-            to={guidePageSlug}
-          >
-            {seeTheGuideButton}
-          </Navigator>
-        }
-        sectionChildren={
-          <SectionContainerGridThreeCols>
-            {features.map(({ id, title, description }) => (
-              <TextBox small key={id}>
-                <HeadingSmall hasTip>{title}</HeadingSmall>
-                <Paragraph>{description}</Paragraph>
-              </TextBox>
-            ))}
-          </SectionContainerGridThreeCols>
-        }
-      />
-      <SectionWrapper>
-        <SectionTitleContainer hasButton>
-          <SectionTitle>{featuredPostsTitle}</SectionTitle>
-          <Navigator className="classicButton classicButtonOutline" archive>
-            {seeAllButton}
-          </Navigator>
-        </SectionTitleContainer>
-        <SectionContainerGridThreeCols>
-          {postNodes.map(
-            ({
-              id,
-              meta: { firstPublishedAt },
-              minutesOfReading,
-              cardImage,
-              title,
-              subtitle,
-              author: {
-                authorName,
-                picture: { authorImageData, authorImageAlt },
-              },
-              slug,
-            }) => (
-              <ArticleCard
-                key={id}
-                date={firstPublishedAt}
-                time={`${minutesOfReading} ${minsReadSuffix}`}
-                cardImg={
-                  cardImage &&
-                  CardImgArtDir(
-                    cardImage.gatsbyImageData,
-                    cardImage.squaredImage,
-                    cardImage.alt
-                  )
-                }
-                title={title}
-                excerpt={subtitle}
-                authorImg={authorImageData}
-                authorAltImg={authorImageAlt}
-                authorName={authorName}
-                slug={slug}
-              />
-            )
-          )}
-        </SectionContainerGridThreeCols>
-      </SectionWrapper>
+      <Hero data={data.datoCmsHomepage.hero[0]} />
+      <ImageWithoutButton data={data.datoCmsHomepage.imageFlex[0]} />
+      <Grid data={data.datoCmsHomepage.grid[0]} />
+      <Advantages data={data.datoCmsHomepage.advantages[0]} />
+      <Certificates data={data.datoCmsHomepage.certificates[0]} />
+      <News data={data.datoCmsHomepage.news[0]} posts={data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)} />
     </PageWrapper>
   );
 };
@@ -112,70 +28,195 @@ const HomePageTemplate = ({
 export default HomePageTemplate;
 
 export const query = graphql`
-  query HomePageTemplate($locale: String!) {
-    datoCmsHomepage(locale: { eq: $locale }) {
-      locale
-      seo {
-        seoTitle: title
-        seoDescription: description
-      }
-      hero {
-        heroAlt
-        heroTitle
-        heroSubtitle
-      }
-      features {
-        id: originalId
-        title
-        description
-      }
-      featuredPostsTitle
-    }
-    datoCmsOtherPage(locale: { eq: $locale }, reference: { eq: "guide" }) {
-      guidePageSlug: slug
-    }
+  query HomePage($locale: String!) {
     allDatoCmsBlogPost(
       sort: { order: ASC, fields: meta___firstPublishedAt }
-      filter: { locale: { eq: $locale }, featuredInHomepage: { eq: true } }
-      limit: 6
+      filter: { locale: { eq: $locale } }
     ) {
-      postNodes: nodes {
+      blogPostNodes: nodes {
+        featuredInHomepage
         id: originalId
         meta {
           firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
         }
         minutesOfReading
         cardImage {
-          gatsbyImageData(
-            width: 280
-            height: 100
-            placeholder: NONE
-            forceBlurhash: false
-          )
-          squaredImage: gatsbyImageData(
-            width: 100
-            height: 100
-            imgixParams: { ar: "1", fit: "crop" }
-          )
+          gatsbyImageData
+          url
           alt
+          title
         }
-        author {
-          authorName: name
-          picture {
-            authorImageData: gatsbyImageData(height: 30, width: 30)
-            authorImageAlt: alt
+        coverImage {
+          gatsbyImageData
+          url
+          alt
+          title
+        }
+        category {
+          name
+          color {
+            hex
           }
         }
-        subtitle
+        publicationDate(formatString: "DD MMMM YYYY")
         title
         slug
         reference
       }
     }
-    datoCmsWebsiteSetting(locale: { eq: $locale }) {
-      minsReadSuffix
-      seeTheGuideButton
-      seeAllButton
+    datoCmsHomepage(locale: { eq: $locale }) {
+      locale
+      hero {
+        background {
+          alt
+          title
+          gatsbyImageData(placeholder: BLURRED)
+        }
+        buttons {
+          name {
+            value
+          }
+          slug
+          ariaLabel
+        }
+        text
+        title {
+          value
+        }
+      }
+      imageFlex {
+        bottomText
+        isImgBackground
+        isImgRight
+        text
+        img {
+          url
+          gatsbyImageData
+          alt
+          title
+        }
+        title {
+          value
+        }
+      }
+      news {
+        buttonText
+        text
+        title {
+          value
+        }
+      }
+      grid {
+        mainTitle {
+          value
+        }
+        mainText
+        firstImg {
+          url
+          gatsbyImageData
+          alt
+          title
+        }
+        firstText
+        secondImg {
+          url
+          gatsbyImageData
+          alt
+          title
+        }
+        secondText
+        thirdImg {
+          url
+          gatsbyImageData
+          alt
+          title
+        }
+        subTitle {
+          value
+        }
+        subText
+        link {
+          slug
+          ariaLabel
+          name {
+            value
+          }
+        }
+      }
+      certificates {
+        title {
+          value
+        }
+        text
+        images {
+          img {
+            url
+            gatsbyImageData
+            alt
+            title
+          }
+        }
+      }
+      advantages {
+        title {
+          value
+        }
+        text
+        listRight {
+          title
+          text
+        }
+        listLeft {
+          title
+          text
+        }
+      }
     }
   }
 `;
+
+// query HomePageTemplate($locale: String!) {
+//   allDatoCmsBlogPost(
+//     sort: { order: ASC, fields: meta___firstPublishedAt }
+//     filter: { locale: { eq: $locale }, featuredInHomepage: { eq: true } }
+//     limit: 6
+//   ) {
+//     postNodes: nodes {
+//       id: originalId
+//       meta {
+//         firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
+//       }
+//       minutesOfReading
+//       cardImage {
+//         gatsbyImageData(
+//           width: 280
+//           height: 100
+//           placeholder: NONE
+//           forceBlurhash: false
+//         )
+//         squaredImage: gatsbyImageData(
+//           width: 100
+//           height: 100
+//           imgixParams: { ar: "1", fit: "crop" }
+//         )
+//         alt
+//       }
+//       author {
+//         authorName: name
+//         picture {
+//           authorImageData: gatsbyImageData(height: 30, width: 30)
+//           authorImageAlt: alt
+//         }
+//       }
+//       publicationDate(formatString: "DD MMMM YYYY")
+//       title
+//       slug
+//       reference
+//     }
+//   }
+//   datoCmsWebsiteSetting(locale: { eq: $locale }) {
+//     minsReadSuffix
+//     seeTheGuideButton
+//     seeAllButton
+//   }
+// }

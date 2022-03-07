@@ -1,4 +1,4 @@
-import { STORAGE_LANG_KEY } from '../constants';
+import { MONTH_MAP, STORAGE_LANG_KEY } from '../constants';
 
 export const isSSR = typeof window === 'undefined';
 
@@ -41,4 +41,11 @@ export const isSecondaryStored = (array, storageItem, defaultLanguage) => {
     (lang) => lang === storageItem && lang !== defaultLanguage
   );
   return isStored;
+};
+
+export const parseDateFromEnglishMonth = (date) => {
+  const dateInParts = date.split(' ');
+  const newMonth = MONTH_MAP[dateInParts[1]];
+  dateInParts[1] = newMonth;
+  return dateInParts.join(' ');
 };

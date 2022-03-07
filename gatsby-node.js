@@ -13,67 +13,6 @@ exports.createPages = async ({ graphql, actions }) => {
    * and simplify the customization.
    */
 
-  // Colors - Begin
-
-  const {
-    data: { datoCmsWebsiteSetting: colorNodes },
-  } = await graphql(`
-    query {
-      datoCmsWebsiteSetting {
-        primaryColor {
-          hex
-        }
-        primaryDark {
-          hex
-        }
-        primaryLight {
-          hex
-        }
-        headingsColor {
-          hex
-        }
-        baseTextColor {
-          hex
-        }
-        baseTextColorDark {
-          hex
-        }
-        disabledColor {
-          hex
-        }
-        dividerColor {
-          hex
-        }
-        markColor {
-          hex
-        }
-      }
-    }
-  `);
-
-  // Query the settings model on DatoCMS and define a path to export the queried settings
-  const settingsPath = 'src/static';
-
-  // Create the path if it doesn't exist
-  if (!fs.existsSync(settingsPath)) fs.mkdirSync(settingsPath);
-
-  // Manipulate the final object
-  const objArr = Object.keys(colorNodes);
-  const colors = {};
-  objArr.forEach((color) => {
-    Object.defineProperty(colors, `${color}`, {
-      value: colorNodes[color].hex,
-      enumerable: true,
-    });
-  });
-
-  // Save the JSON file with css color variables
-  fs.writeFileSync(
-    `${settingsPath}/colors.json`,
-    JSON.stringify(colors, undefined, 2)
-  );
-
-  // Colors - End
 
   // Blog and pages generation
 
@@ -177,7 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
     let pageCounter = 0;
 
     /**
-     * Iterate trought all available locales, and increase
+     * Iterate trough all available locales, and increase
      * the counter when an article is generated,
      * since the query results are sorted with with the same criteria for any locale
      * we can export a skipNext variable which we will use to skip all the previous posts.
@@ -308,8 +247,8 @@ exports.createPages = async ({ graphql, actions }) => {
           backgroundColor {
             backgroundColorHex: hex
           }
-          primaryColor {
-            primaryColorHex: hex
+          themeColor {
+            themeColorHex: hex
           }
         }
       }
@@ -325,7 +264,7 @@ exports.createPages = async ({ graphql, actions }) => {
       description,
       settingsLocale,
       backgroundColor: { backgroundColorHex },
-      primaryColor: { primaryColorHex },
+      themeColor: { themeColorHex },
     },
   ] = settingsNodes;
 
@@ -358,7 +297,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const commonManifestData = {
     background_color: backgroundColorHex,
-    theme_color: primaryColorHex,
+    theme_color: themeColorHex,
     display: 'standalone',
     icons: [
       {

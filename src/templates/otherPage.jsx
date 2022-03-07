@@ -1,22 +1,23 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { StructuredText } from 'react-datocms';
-import Navigator from '../components/langHelpers/navigator';
 import PageWrapper from '../components/layout/pageWrapper';
-import Hero from '../components/layout/hero';
-import {
-  SectionContainerGridThreeCols,
-  SectionContainerFlexTwoCols,
-  SectionWrapper,
-  SectionContainerFlexTwoColsReverse,
-  ColumnFlexTwoCols,
-  TextBox,
-} from '../components/layout/sectionStyles';
-import {
-  HeadingMedium,
-  HeadingSmall,
-} from '../components/layout/headingStyles';
-import { Paragraph } from '../components/layout/paragraphStyles';
+import Hero from '../components/layout/hero'
+import Text from '../components/layout/text';
+import ImageWithButton from '../components/layout/imageWithButton';
+import ImageWithBackgroundWave from '../components/layout/imageWithBackgroundWave';
+import StagesWithInform from '../components/layout/stagesWithInform';
+import Faq from '../components/layout/faq';
+import ListWithBackgroundWave from '../components/layout/listWithBackgroundWave';
+import LinksToPrice from '../components/layout/linksToPrice';
+import Price from '../components/layout/price';
+import ImageWithTextBackground from '../components/layout/imageWithTextBackground';
+import CustomContent from '../components/layout/customContent';
+import HeroPartner from '../components/layout/heroPartner';
+import PartnersContent from '../components/layout/partnersContent';
+import Kontakt from '../components/layout/kontakt';
+import HeroOrders from '../components/layout/heroOrders';
+import Benefits from '../components/layout/benefits';
 
 const OtherPageTemplate = ({
   data: {
@@ -41,146 +42,42 @@ const OtherPageTemplate = ({
       {structuredBody?.value && (
         <StructuredText
           data={structuredBody}
-          renderBlock={({
-            record: {
-              __typename,
-              heroAlt,
-              heroTitle,
-              heroSubtitle,
-              image,
-              title,
-              text,
-              slug,
-              firstFeatureTitle,
-              firstFeatureDescription,
-              secondFeatureTitle,
-              secondFeatureDescription,
-              thirdFeatureTitle,
-              thirdFeatureDescription,
-            },
-          }) => {
-            switch (__typename) {
-              case 'DatoCmsHero':
-                return (
-                  <Hero
-                    alt={heroAlt}
-                    title={heroTitle}
-                    subtitle={heroSubtitle}
-                  />
-                );
-              case 'DatoCmsSectionImageLeft':
-                return (
-                  <SectionWrapper>
-                    <SectionContainerFlexTwoCols>
-                      <ColumnFlexTwoCols hasImg>
-                        <img src={image.url} alt={image.alt} />
-                      </ColumnFlexTwoCols>
-                      <ColumnFlexTwoCols>
-                        <TextBox as="div">
-                          <HeadingMedium>{title}</HeadingMedium>
-                          <Paragraph as="div">
-                            <StructuredText
-                              data={text}
-                              renderLinkToRecord={({
-                                children,
-                                transformedMeta,
-                              }) => {
-                                switch (__typename) {
-                                  case 'page':
-                                    return (
-                                      <Navigator
-                                        {...transformedMeta}
-                                        page
-                                        to={slug}
-                                      >
-                                        {children}
-                                      </Navigator>
-                                    );
-                                  case 'home':
-                                    return (
-                                      <Navigator {...transformedMeta} home>
-                                        {children}
-                                      </Navigator>
-                                    );
-
-                                  default:
-                                    return null;
-                                }
-                              }}
-                            />
-                          </Paragraph>
-                        </TextBox>
-                      </ColumnFlexTwoCols>
-                    </SectionContainerFlexTwoCols>
-                  </SectionWrapper>
-                );
-              case 'DatoCmsSectionImageRight':
-                return (
-                  <SectionWrapper>
-                    <SectionContainerFlexTwoColsReverse>
-                      <ColumnFlexTwoCols>
-                        <TextBox as="div">
-                          <HeadingMedium>{title}</HeadingMedium>
-                          <Paragraph as="div">
-                            <StructuredText
-                              data={text}
-                              renderLinkToRecord={({
-                                children,
-                                transformedMeta,
-                              }) => {
-                                switch (__typename) {
-                                  case 'DatoCmsOtherPage':
-                                    return (
-                                      <Navigator
-                                        {...transformedMeta}
-                                        page
-                                        to={slug}
-                                      >
-                                        {children}
-                                      </Navigator>
-                                    );
-                                  case 'DatoCmsHomepage':
-                                    return (
-                                      <Navigator {...transformedMeta} home>
-                                        {children}
-                                      </Navigator>
-                                    );
-
-                                  default:
-                                    return null;
-                                }
-                              }}
-                            />
-                          </Paragraph>
-                        </TextBox>
-                      </ColumnFlexTwoCols>
-                      <ColumnFlexTwoCols hasImg>
-                        <img src={image.url} alt={image.alt} />
-                      </ColumnFlexTwoCols>
-                    </SectionContainerFlexTwoColsReverse>
-                  </SectionWrapper>
-                );
-              case 'DatoCmsThreeFeaturesSet':
-                return (
-                  <SectionWrapper>
-                    <SectionContainerGridThreeCols>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{firstFeatureTitle}</HeadingSmall>
-                        <Paragraph>{firstFeatureDescription}</Paragraph>
-                      </TextBox>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{secondFeatureTitle}</HeadingSmall>
-                        <Paragraph>{secondFeatureDescription}</Paragraph>
-                      </TextBox>
-                      <TextBox small>
-                        <HeadingSmall hasTip>{thirdFeatureTitle}</HeadingSmall>
-                        <Paragraph>{thirdFeatureDescription}</Paragraph>
-                      </TextBox>
-                    </SectionContainerGridThreeCols>
-                  </SectionWrapper>
-                );
+          renderBlock={({ record }) => {
+            switch (record.__typename) {
+              case 'DatoCmsSectionHero':
+                return <Hero data={record} />
+              case 'DatoCmsSectionText':
+                return <Text data={record} />
+              case 'DatoCmsSectionImageWithButton':
+                return <ImageWithButton data={record} />
+              case 'DatoCmsSectionImageWithBackgroundWave':
+                return <ImageWithBackgroundWave data={record} />
+              case 'DatoCmsSectionStagesWithInform':
+                return <StagesWithInform data={record} />
+              case 'DatoCmsSectionFaq':
+                return <Faq data={record} />
+              case 'DatoCmsSectionListWithBackgroundWave':
+                return <ListWithBackgroundWave data={record} />
+              case 'DatoCmsSectionLinksToPrice':
+                return <LinksToPrice data={record} />
+              case 'DatoCmsSectionPrice':
+                return <Price data={record} />
+              case 'DatoCmsSectionImageWithTextBackground':
+                return <ImageWithTextBackground data={record} />
+              case 'DatoCmsSectionCustomContent':
+                return <CustomContent data={record} />
+              case 'DatoCmsSectionHeroPartner':
+                return <HeroPartner data={record} />
+              case 'DatoCmsSectionPartnersContent':
+                return <PartnersContent data={record} />
+              case 'DatoCmsSectionContactInformation':
+                return <Kontakt data={record} />
+              case 'DatoCmsSectionHeroOrder':
+                return <HeroOrders data={record} />
+              case 'DatoCmsSectionBenefit':
+                return <Benefits data={record} />
               default:
-                return null;
+                return null
             }
           }}
         />
@@ -203,70 +100,317 @@ export const query = graphql`
       structuredBody {
         value
         blocks {
-          ... on DatoCmsHero {
-            id: originalId
-            __typename
-            heroTitle
-            heroSubtitle
-            heroAlt
-          }
-          ... on DatoCmsSectionImageLeft {
+          ... on DatoCmsSectionImageWithBackgroundWave {
             __typename
             id: originalId
-            title
-            image {
+            textPart {
+              value
+            }
+            img {
               url
               gatsbyImageData
               alt
+              title
             }
-            text {
-              value
-              links {
-                ... on DatoCmsOtherPage {
-                  __typename
-                  id: originalId
-                  slug
+          }
+          ... on DatoCmsSectionStagesWithInform {
+            __typename
+            id: originalId
+            stages {
+              title {
+                value
+              }
+              subText {
+                value
+              }
+              listRight {
+                value
+              }
+              listLeft {
+                value
+              }
+            }
+            inform {
+              title {
+                value
+              }
+              grid {
+                sText {
+                  value
                 }
-                ... on DatoCmsHomepage {
-                  __typename
-                  id: originalId
+                icon {
+                  url
+                  gatsbyImageData
+                  alt
+                  title
                 }
               }
             }
           }
-          ... on DatoCmsSectionImageRight {
+          ... on DatoCmsSectionAdvantage {
             __typename
             id: originalId
-            title
-            image {
-              url
-              gatsbyImageData
-              alt
-            }
-            text {
+            title {
               value
-              links {
-                ... on DatoCmsOtherPage {
-                  __typename
-                  id: originalId
-                  slug
-                }
-                ... on DatoCmsHomepage {
-                  __typename
-                  id: originalId
-                }
+            }
+            listRight {
+              value
+            }
+            listLeft {
+              value
+            }
+          }
+          ... on DatoCmsSectionBenefit {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            benefits {
+              title {
+                value
+              }
+              text
+              icon {
+                url
+                alt
+                gatsbyImageData
+                title
               }
             }
           }
-          ... on DatoCmsThreeFeaturesSet {
+          ... on DatoCmsSectionFaq {
             __typename
             id: originalId
-            firstFeatureTitle
-            firstFeatureDescription
-            secondFeatureTitle
-            secondFeatureDescription
-            thirdFeatureTitle
-            thirdFeatureDescription
+            title {
+              value
+            }
+            questions {
+              answer {
+                value
+              }
+              question {
+                value
+              }
+            }
+          }
+          ... on DatoCmsSectionHero {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            text
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+            dotsOnRight
+          }
+          ... on DatoCmsSectionImageWithButton {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            isImgRight
+            isImgBackground
+            button {
+              ariaLabel
+              name {
+                value
+              }
+              slug
+            }
+            img {
+              url
+              gatsbyImageData
+              title
+              alt
+            }
+            text
+            backgroundColor {
+              hex
+            }
+            buttonColor {
+              hex
+            }
+          }
+          ... on DatoCmsSectionImageWithTextBackground {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            list {
+              value
+            }
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+          }
+          ... on DatoCmsSectionPrice {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            anotation {
+              value
+            }
+            table {
+              price
+              name
+              itemList {
+                value
+              }
+            }
+          }
+          ... on DatoCmsSectionService {
+            __typename
+            id: originalId
+            sectionImageWithButton {
+              title {
+                value
+              }
+              text
+              isImgRight
+              isImgBackground
+              button {
+                slug
+                ariaLabel
+                name {
+                  value
+                }
+              }
+              img {
+                url
+                gatsbyImageData
+                alt
+                title
+              }
+            }
+          }
+          ... on DatoCmsSectionText {
+            __typename
+            id: originalId
+            sText {
+              value
+            }
+          }
+          ... on DatoCmsSectionLinksToPrice {
+            __typename
+            id: originalId
+            grid {
+              text
+              img {
+                url
+                gatsbyImageData
+                alt
+                title
+              }
+            }
+            imageWithButton {
+              text
+              title {
+                value
+              }
+              button {
+                slug
+                ariaLabel
+                name {
+                  value
+                }
+              }
+              img {
+                url
+                gatsbyImageData
+                alt
+                title
+              }
+              isImgRight
+              isImgBackground
+              backgroundColor {
+                hex
+              }
+            }
+          }
+          ... on DatoCmsSectionListWithBackgroundWave {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            listRight {
+              value
+            }
+            listLeft {
+              value
+            }
+          }
+          ... on DatoCmsSectionCustomContent {
+            __typename
+            id: originalId
+            content {
+              value
+            }
+          }
+          ... on DatoCmsSectionHeroPartner {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            text
+            images {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+          }
+          ... on DatoCmsSectionPartnersContent {
+            __typename
+            id: originalId
+            grid {
+              text
+              unsTitle
+              otherInform {
+                value
+              }
+            }
+          }
+          ... on DatoCmsSectionContactInformation {
+            __typename
+            id: originalId
+            tableInform {
+              value
+            }
+            leftInform {
+              value
+            }
+            buttonText
+          }
+          ... on DatoCmsSectionHeroOrder {
+            __typename
+            id: originalId
+            title {
+              value
+            }
+            text
+            subText
+            img {
+              url
+              gatsbyImageData
+              alt
+              title
+            }
+            buttonText
           }
         }
       }

@@ -1,11 +1,10 @@
-import React from 'react';
-import Redirect from './src/components/langHelpers/redirect';
-import GlobalStyles from './src/components/layout/globalStyles';
+import React from 'react'
+import './src/css/index.css'
+import "@fontsource/ibm-plex-sans"
+import "@fontsource/poppins"
 
-export const wrapPageElement = ({ element }) => (
+export const wrapRootElement = ({ element }) => (
   <>
-    <GlobalStyles />
-    <Redirect />
     {element}
   </>
 );

@@ -1,19 +1,9 @@
-import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import useLanguages from '../hooks/useLanguages';
-import PageWrapper from '../components/layout/pageWrapper';
-import Hero from '../components/layout/hero';
-import Navigator from '../components/langHelpers/navigator';
-import {
-  storeLocale,
-  getStoredLocale,
-  isSSR,
-  getSecondaryLangs,
-  findSecondaryLang,
-  isDefaultStored,
-  isSecondaryStored,
-} from '../utils/misc';
-import preferredLang from '../utils/preferredLang';
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import PageWrapper from '../components/layout/pageWrapper'
+import styled from 'styled-components'
+import Dots from '../components/img/dotsSmall.png'
+import { Link } from 'gatsby'
 
 const NotFoundPage = () => {
   const data = useStaticQuery(graphql`
@@ -21,153 +11,166 @@ const NotFoundPage = () => {
       datoCmsSite {
         locales
       }
-      allDatoCmsNotFoundPage {
-        nodes {
-          seo {
-            seoTitle: title
-            seoDescription: description
-          }
-          title
-          subtitle
-          backToHomeText
-          locale
+      datoCmsNotFoundPage {
+        backToHomeText
+        title
+        subtitle
+        img {
+          url
+          alt
         }
       }
     }
   `);
-  const { defaultLanguage } = useLanguages();
-  const {
-    datoCmsSite: { locales },
-  } = data;
-  const appLangCodes = [...locales];
-  const storedLocale = getStoredLocale();
 
-  if (!isSSR) {
-    const browserLangCodes = navigator.languages;
-    const {
-      allDatoCmsNotFoundPage: { nodes: propsNodes },
-    } = data;
-
-    const [defaultLangPropsNode] = propsNodes;
-
-    const {
-      seo: { seoTitle, seoDescription },
-      title,
-      subtitle,
-      backToHomeText,
-    } = defaultLangPropsNode;
-
-    const defaultLangProps = {
-      pageWrapper: {
-        seoTitle,
-        seoDescription,
-        notFoundPageLocale: defaultLanguage,
-        notFoundPageManifest: '/manifest.webmanifest',
-      },
-      hero: {
-        title,
-        subtitle,
-      },
-      navigator: {
-        children: backToHomeText,
-        to: '/',
-      },
-    };
-
-    const getProps = () => {
-      const isDefaultLangStored = isDefaultStored(
-        appLangCodes,
-        storedLocale,
-        defaultLanguage
-      );
-      if (isDefaultLangStored) return { ...defaultLangProps };
-
-      const isSecondaryLangStored = isSecondaryStored(
-        appLangCodes,
-        storedLocale,
-        defaultLanguage
-      );
-      if (isSecondaryLangStored) {
-        const [storedLangProps] = propsNodes.filter(
-          ({ locale }) => locale === storedLocale
-        );
-
-        return {
-          pageWrapper: {
-            seoTitle: storedLangProps.seo.seoTitle,
-            seoDescription: storedLangProps.seo.seoDescription,
-            notFoundPageLocale: storedLocale,
-            notFoundPageManifest: `/manifest_${storedLocale}.webmanifest`,
-          },
-          hero: {
-            title: storedLangProps.title,
-            subtitle: storedLangProps.subtitle,
-          },
-          navigator: {
-            children: storedLangProps.backToHomeText,
-            notFoundPage: `/${storedLocale}`,
-          },
-        };
-      }
-
-      const matchingLangCode = preferredLang(browserLangCodes, appLangCodes);
-
-      const defaultLanguageMatch = matchingLangCode === defaultLanguage;
-
-      if (!storedLocale && defaultLanguageMatch) {
-        storeLocale(defaultLanguage);
-        return { ...defaultLangProps };
-      }
-
-      const secondaryLanguages = getSecondaryLangs(appLangCodes);
-      const secondaryLanguageMatch = findSecondaryLang(
-        secondaryLanguages,
-        matchingLangCode
-      );
-      if (!storedLocale && secondaryLanguageMatch) {
-        storeLocale(secondaryLanguageMatch);
-        const [secondaryLangProps] = propsNodes.filter(
-          ({ locale }) => locale === secondaryLanguageMatch
-        );
-        return {
-          pageWrapper: {
-            seoTitle: secondaryLangProps.seo.seotitle,
-            seoDescription: secondaryLangProps.seo.seoDescription,
-            notFoundPageLocale: secondaryLanguageMatch,
-            notFoundPageManifest: `/manifest_${secondaryLanguageMatch}.webmanifest`,
-          },
-          hero: {
-            title: secondaryLangProps.title,
-            subtitle: secondaryLangProps.subtitle,
-          },
-          navigator: {
-            children: secondaryLangProps.backToHomeText,
-            notFoundPage: `/${secondaryLanguageMatch}`,
-          },
-        };
-      }
-      return { ...defaultLangProps };
-    };
-
-    const { pageWrapper, hero, navigator: navigatorProps } = getProps();
-
-    return (
-      <PageWrapper {...pageWrapper} notFoundPage noHeader noFooter>
-        <Hero
-          {...hero}
-          fullView
-          centered
-          button={
-            <Navigator
-              {...navigatorProps}
-              className="classicButton classicButtonOutline"
-            />
-          }
-        />
-      </PageWrapper>
-    );
-  }
-  return null;
+  return (
+    <PageWrapper notFoundPage>
+      <Wrapper>
+        <Container className='container'>
+          <div className="imageWrapper">
+            <img className="dots" src={Dots} />
+            <img className="mainImage" src={data.datoCmsNotFoundPage.img.url} />
+          </div>
+          <div className="textPart">
+            <h1>{data.datoCmsNotFoundPage.title}</h1>
+            <p>{data.datoCmsNotFoundPage.subtitle}</p>
+            <Link to='/'><p>{data.datoCmsNotFoundPage.backToHomeText}</p></Link>
+          </div>
+        </Container>
+      </Wrapper>
+    </PageWrapper>
+  );
 };
 
 export default NotFoundPage;
+
+const Wrapper = styled.div`
+  padding-bottom: 200px;
+  padding-top: 200px;
+
+  @media (max-width: 1024px) {
+    padding-top: 140px;
+    padding-bottom: clamp(120px, 20.8vw, 200px);
+  }
+`
+
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    .imageWrapper{
+        position: relative;
+        height: fit-content;
+        width: fit-content;
+        margin: 0 auto;
+
+        .dots{
+            position: absolute;
+            max-width: 40%;
+            bottom: -15%;
+            right: -25%;
+            z-index: 10;
+        }
+
+        .mainImage{
+            border-radius: 16px;
+            box-shadow: 32px 32px 0px 0px var(--backgroundMedium);
+            margin-right: 35px;
+        }
+    }
+
+    .textPart{
+        max-width: 552px;
+        width: 100%;
+        padding-right: 35px;
+
+        h1{
+            color: var(--superBlackText);
+            padding-bottom: 20px;
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 130%;
+            letter-spacing: -1px;
+
+            mark{
+                background: inherit;
+                color: red;
+            }
+        }
+
+        p{
+            font-size: 18px;
+            line-height: 180%;
+        }
+
+        a{
+            display: block;
+            margin-top: 20px;
+            width: fit-content;
+            border-radius: 8px;
+
+
+            p{
+                width: fit-content;
+                padding: 0 24px;
+                background: #51B8EB;
+                border-radius: 8px;
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                color: var(--navHover);
+                position: relative;
+                
+                mark{
+                    color: var(--navHover);
+                    border-radius: 8px;
+                    background-color: var(--blackButtonBackground);
+                    display: block;
+                    position: absolute;
+                    padding: 0 24px;
+                    width: max-content;
+                    left: 0;
+                }
+
+            }
+            
+            &:hover{
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column-reverse;
+
+        .imageWrapper{
+            width: 100%;
+
+            .dots{
+                max-width: 30%;
+                bottom: -10%;
+                left: ${props => props.isImgRight ? 'unset' : '-10%'};
+                right: ${props => props.isImgRight ? '-10%' : 'unset'};
+            }
+
+            .mainImage{
+                max-width: 668px;
+                width: 90%;
+                margin: 50px auto 32px auto;
+                display: block;
+                
+            }
+        }
+        
+        .textPart{
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 0;
+
+            h2{
+                font-size: clamp(32px, 5.7vw, 40px); 
+            }
+        }
+    }
+`
