@@ -454,6 +454,18 @@ const Content = styled.div`
       }
     }
 
+    h3 {
+      margin-top: 40px;
+      font-weight: bold;
+      font-size: 26px;
+      line-height: 1.3;
+      letter-spacing: -0.4px;
+      color: var(--superDarkText);
+      + p {
+        margin-top: 20px;
+      }
+    }
+
     ul {
       display: grid;
       grid-row-gap: 16px;
@@ -462,6 +474,11 @@ const Content = styled.div`
       li {
         padding-left: 28px;
         position: relative;
+
+        > ul {
+          margin-top: 16px;
+          margin-bottom: 8px;
+        }
 
         &::before {
           content: '●';
