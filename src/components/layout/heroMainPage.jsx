@@ -96,17 +96,23 @@ const Container = styled.div`
             padding: 13px 32px;
             border-radius: 8px;
             margin-right: 16px;
-            transition: background-color .2s linear, opacity .2s linear;
+            transition: background-color .2s linear, border .2s linear;
 
             &.c0{
                 background-color: var(--mainLightText);
+                border: 1px solid var(--mainLightText);
+                
                 p{
                     color: var(--buttonText);
                 }
 
-                &:hover{
-                  opacity: .7;
-                }
+              &:hover{
+                  border: 1px solid var(--backgroundLight);
+                  background-color: var(--backgroundLight);
+                  p{
+                      color: var(--mainLightText);
+                  }
+              }
             }
 
             &.c1{

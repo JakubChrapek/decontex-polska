@@ -21,7 +21,6 @@
     "@fontsource/ibm-plex-sans": "^4.5.3",
     "@fontsource/poppins": "^4.5.2",
     "@netlify/plugin-gatsby": "^2.0.4",
-    "@sendgrid/mail": "^7.6.1",
     "axios": "^0.26.0",
     "babel-plugin-styled-components": "^2.0.2",
     "datocms-structured-text-utils": "^2.0.0",

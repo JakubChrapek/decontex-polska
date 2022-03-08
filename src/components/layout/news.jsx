@@ -31,12 +31,12 @@ const News = ({ data, posts }) => {
 
     const handlers = useSwipeable({
         onSwipedLeft: () => {
-            if (canRight) {
+            if (canRight && posts.length > 2) {
                 positionSet(position + 1)
             }
         },
         onSwipedRight: () => {
-            if (canLeft) {
+            if (canLeft && posts.length > 2) {
                 positionSet(position - 1)
             }
         },

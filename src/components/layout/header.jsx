@@ -147,11 +147,6 @@ const MobileContainer = styled.div`
     padding: 0 35px;
     width: 100%;
 
-    .gatsby-image-wrapper{
-      div{
-        display: none !important;
-      }
-    }
 
     img{
       position: relative;
