@@ -101,9 +101,9 @@ const Content = styled.div`
       align-items: center;
       border-radius: 16px;
 
-      :last-child {
+      /* :last-child {
         background-color: var(--superDarkText);
-      }
+      } */
     }
   }
 

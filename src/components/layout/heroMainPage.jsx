@@ -25,11 +25,11 @@ const StyledHeroImage = styled(GatsbyImage)`
   top: 0;
   width: calc(100% + var(--image-shift));
   height: 100%;
-  @media (max-width: 480px) {
-    --image-shift: 60px;
+  @media (max-width: 720px) {
+    --image-shift: 50%;
   }
-  @media (max-width: 420px) {
-    --image-shift: 90px;
+  @media (max-width: 520px) {
+    --image-shift: 75%;
   }
 `;
 

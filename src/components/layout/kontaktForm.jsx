@@ -29,42 +29,58 @@ const KontaktForm = ({ buttonText }) => {
     <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
       <label className={errors.name && 'error'}>
         <span>Imię i nazwisko*</span>
-        <input {...register("name", { required: true, pattern: /^[a-z ,.'-]+$/i })} placeholder="Jan Nowak" />
-        {errors.name &&
+        <input
+          {...register('name', { required: true, pattern: /^[a-z ,.'-]+$/i })}
+          placeholder="Jan Nowak"
+        />
+        {errors.name && (
           <motion.p
-            initial={{ opacity: 0, bottom: 10 }}
+            initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            transition={{ type: 'spring', duration: .8 }}
-            className='errorText'>
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
+            className="errorText"
+          >
             Podaj imię i nazwisko
           </motion.p>
-        }
+        )}
       </label>
       <label className={errors.phone && 'error'}>
         <span>Numer telefonu</span>
-        <input {...register("phone", { pattern: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g })} placeholder="np. 505 505 505" />
-        {errors.phone &&
+        <input
+          {...register('phone', {
+            pattern: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g,
+          })}
+          placeholder="np. 505 505 505"
+        />
+        {errors.phone && (
           <motion.p
-            initial={{ opacity: 0, bottom: 10 }}
+            initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            transition={{ type: 'spring', duration: .8 }}
-            className='errorText'>
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
+            className="errorText"
+          >
             Wpisz poprawny nr telefonu
           </motion.p>
-        }
+        )}
       </label>
       <label className={errors.mail && 'error'}>
         <span>Email*</span>
-        <input {...register("mail", {
-          required: true, pattern:
-            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        })} placeholder="jan@gmail.com" />
+        <input
+          {...register('mail', {
+            required: true,
+            pattern:
+              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          })}
+          placeholder="jan@gmail.com"
+        />
         {errors.mail?.type === 'required' && (
           <motion.p
             initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            exit={{ opacity: 0, bottom: -6 }}
-            transition={{ type: 'spring', duration: 0.8 }}
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
             className="errorText"
           >
             Podaj adres e-mail
@@ -74,8 +90,8 @@ const KontaktForm = ({ buttonText }) => {
           <motion.p
             initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            exit={{ opacity: 0, bottom: -6 }}
-            transition={{ type: 'spring', duration: 0.8 }}
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
             className="errorText"
           >
             Podaj poprawny adres e-mail
@@ -84,29 +100,40 @@ const KontaktForm = ({ buttonText }) => {
       </label>
       <label className={errors.message && 'error'}>
         <span>Jak możemy pomóc?*</span>
-        <textarea {...register("message", { required: true })} rows="6" placeholder="Jak możemy Ci pomóc?" />
-        {errors.message &&
+        <textarea
+          {...register('message', { required: true })}
+          rows="6"
+          placeholder="Jak możemy Ci pomóc?"
+        />
+        {errors.message && (
           <motion.p
-            initial={{ opacity: 0, bottom: 10 }}
+            initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            transition={{ type: 'spring', duration: .8 }}
-            className='errorText'>
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
+            className="errorText"
+          >
             Wpisz wiadomość
           </motion.p>
-        }
+        )}
       </label>
-      <label className={(errors.check && 'error') + " checkbox"}>
-        <input type='checkbox' {...register("check", { required: true })} />
-        <span>Wysyłając wiadomość, akceptujesz <Link to="/rodo">Politykę prywatności</Link>*</span>
-        {errors.check &&
+      <label className={(errors.check && 'error') + ' checkbox'}>
+        <input type="checkbox" {...register('check', { required: true })} />
+        <span>
+          Wysyłając wiadomość, akceptujesz{' '}
+          <Link to="/rodo">Politykę prywatności</Link>*
+        </span>
+        {errors.check && (
           <motion.p
-            initial={{ opacity: 0, bottom: 10 }}
+            initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            transition={{ type: 'spring', duration: .8 }}
-            className='errorText'>
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
+            className="errorText"
+          >
             Zaakceptuj politykę prywatności
           </motion.p>
-        }
+        )}
       </label>
       <div className="buttonWrapper">
         <button disabled={sendedCount === 3} type="submit">
@@ -116,24 +143,22 @@ const KontaktForm = ({ buttonText }) => {
           <motion.p
             initial={{ opacity: 0, bottom: -6 }}
             animate={{ opacity: 1, bottom: 0 }}
-            exit={{ opacity: 0, bottom: -6 }}
-            transition={{ type: 'spring', duration: 0.8 }}
+            exit={{ opacity: 1, bottom: -6 }}
+            transition={{ type: 'spring', duration: 0.4 }}
             className={isSended === 'error' ? 'errorText' : 'successText'}
           >
             {isSended !== 'error'
               ? sendedCount !== 3
                 ? 'Wiadomość pomyślnie wysłana.'
-                : 'Wiadomość pomyślnie wysłana. Wyswałeś już za dużo wiadomości nie za długo z tobą skontaktujemy się.'
+                : 'Wiadomość pomyślnie wysłana. Wysłano za dużo wiadomości, wkrótce się odezwiemy.'
               : sendedCount !== 3
-                ? 'Coś poszło nie tak, spróbuj jeszcze raz.'
-                : 'Za dużo prób wysłania, spróbuj póżniej'
-            }
+              ? 'Coś poszło nie tak, spróbuj jeszcze raz.'
+              : 'Za dużo prób wysłania, spróbuj póżniej'}
           </motion.p>
         )}
       </div>
-
     </Wrapper>
-  )
+  );
 }
 
 export default KontaktForm
