@@ -310,7 +310,6 @@ const Header = () => {
     }
   `)
 
-  // const { currentLanguage } = useContext(LangContext)
   const currentLanguage = 'pl'
   const { defaultLanguage } = useLanguages()
   const { pathname } = useLocation()
@@ -319,66 +318,65 @@ const Header = () => {
 
   const [isMenuOpened, changeIsMenuOpened] = useState(false)
 
-  let a = data
-  // debugger
   return (
     <HeaderWrapper>
       <HeaderContainer>
         {settingsEdges
           .filter(({ node: { locale } }) => locale === currentLanguage)
-          .map(
-            ({
-              node: {
-                logo, logoWhite
-              },
-            }) => {
-              let logoVariant = logo;
-              // TODO: get all locale root pathnames from DatoCMS and check if it is homepage
-
-              return (
-                <Navigator
-                  home
-                  ariaLabel={logoVariant.title}
-                  key={logoVariant.title}
-                >
-                  <LogoImage image={logoVariant.gatsbyImageData}
-                    alt={logoVariant.alt}
-                    title={logoVariant.title}
-                    className={pathname === '/' ? 'light' : ''}
-                  />
-                </Navigator>
-              );
-            }
-          )}
+          .map(({ node: { logo, logoWhite } }) => {
+            let logoVariant = logo;
+            return (
+              <Navigator
+                home
+                ariaLabel={logoVariant.title}
+                key={logoVariant.title}
+              >
+                <LogoImage
+                  image={logoVariant.gatsbyImageData}
+                  alt={logoVariant.alt}
+                  title={logoVariant.title}
+                  className={pathname === '/' ? 'light' : ''}
+                />
+              </Navigator>
+            );
+          })}
         <Nav>
           <NavList>
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
-                links.map(({ id, slug, locale, ariaLabel, name }) =>
-                  <li key={id} className={(pathname === '/' || pathname === '/en') ? '' : (pathname === '/blog/' || pathname === '/partnerzy/') ? 'other-grey' : 'other'}>
+                links.map(({ id, slug, locale, ariaLabel, name }) => (
+                  <li
+                    key={id}
+                    className={
+                      pathname === '/' || pathname === '/en'
+                        ? ''
+                        : pathname === '/blog' || pathname === '/partnerzy'
+                        ? 'other-grey'
+                        : 'other'
+                    }
+                  >
                     <Link
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}/`
-                          : `/${locale}/${slug}/`
+                          ? `/${slug}`
+                          : `/${locale}/${slug}`
                       }
                       aria-label={ariaLabel}
                     >
                       <StructuredText data={name} />
                     </Link>
                   </li>
-                )
-              )
-            }
+                ))
+              )}
           </NavList>
         </Nav>
         <HeaderRight>
           {/* <LanguageSwitcher /> */}
 
-          <Nav as='div'>
-            <NavList className='right'>
+          <Nav as="div">
+            <NavList className="right">
               {menuEdges
                 .filter(({ node: { locale } }) => locale === currentLanguage)
                 .map(({ node: { linksRight } }) =>
@@ -388,8 +386,8 @@ const Header = () => {
                         activeClassName="activeClassLink"
                         to={
                           locale === defaultLanguage
-                            ? `/${slug}/`
-                            : `/${locale}/${slug}/`
+                            ? `/${slug}`
+                            : `/${locale}/${slug}`
                         }
                         aria-label={ariaLabel}
                       >
@@ -405,42 +403,54 @@ const Header = () => {
       <MobileContainer>
         {settingsEdges
           .filter(({ node: { locale } }) => locale === currentLanguage)
-          .map(
-            ({
-              node: {
-                logo, logoWhite
-              },
-            }) => {
-              let logoVariant = logo;
-              return (
-                <Navigator
-                  home
-                  ariaLabel={logoVariant.title}
-                  key={logoVariant.title}
-                >
-                  <LogoImage image={logoVariant.gatsbyImageData}
-                    alt={logoVariant.alt}
-                    title={logoVariant.title}
-                    className={pathname === '/' && !isMenuOpened ? 'light' : ''}
-                  />
-                </Navigator>
-              );
-            }
-          )}
-        <MobileButton onClick={() => { changeIsMenuOpened(!isMenuOpened) }} isMenuOpened={isMenuOpened} isWhite={pathname === '/' || pathname === '/en'}><span /></MobileButton>
+          .map(({ node: { logo } }) => {
+            let logoVariant = logo;
+            return (
+              <Navigator
+                home
+                ariaLabel={logoVariant.title}
+                key={logoVariant.title}
+              >
+                <LogoImage
+                  image={logoVariant.gatsbyImageData}
+                  alt={logoVariant.alt}
+                  title={logoVariant.title}
+                  className={pathname === '/' && !isMenuOpened ? 'light' : ''}
+                />
+              </Navigator>
+            );
+          })}
+        <MobileButton
+          onClick={() => {
+            changeIsMenuOpened(!isMenuOpened);
+          }}
+          isMenuOpened={isMenuOpened}
+          isWhite={pathname === '/' || pathname === '/en'}
+        >
+          <span />
+        </MobileButton>
         <MobileNav isMenuOpened={isMenuOpened}>
           <ul>
             {menuEdges
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { links } }) =>
                 links.map(({ id, slug, locale, ariaLabel, name }) => (
-                  <li key={id} className={pathname === '/' || pathname === '/en' ? '' : 'other'}>
+                  <li
+                    key={id}
+                    className={
+                      pathname === '/' || pathname === '/en'
+                        ? ''
+                        : pathname === '/blog' || pathname === '/partnerzy'
+                        ? 'other-grey'
+                        : 'other'
+                    }
+                  >
                     <Link
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}/`
-                          : `/${locale}/${slug}/`
+                          ? `/${slug}`
+                          : `/${locale}/${slug}`
                       }
                       aria-label={ariaLabel}
                     >
@@ -453,13 +463,22 @@ const Header = () => {
               .filter(({ node: { locale } }) => locale === currentLanguage)
               .map(({ node: { linksRight } }) =>
                 linksRight.map(({ id, slug, locale, ariaLabel, name }) => (
-                  <li className='right' key={id}>
+                  <li
+                    key={id}
+                    className={
+                      pathname === '/' || pathname === '/en'
+                        ? ''
+                        : pathname === '/blog' || pathname === '/partnerzy'
+                        ? 'other-grey'
+                        : 'other'
+                    }
+                  >
                     <Link
                       activeClassName="activeClassLink"
                       to={
                         locale === defaultLanguage
-                          ? `/${slug}/`
-                          : `/${locale}/${slug}/`
+                          ? `/${slug}`
+                          : `/${locale}/${slug}`
                       }
                       aria-label={ariaLabel}
                     >

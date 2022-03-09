@@ -338,11 +338,12 @@ const Content = styled.div`
   .flex {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     a{
       border-radius: 15px;
       padding: 10px;
-
+      margin-left: -10px;
     }
 
     span {

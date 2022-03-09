@@ -243,7 +243,7 @@ const Nav = styled.nav`
               font-weight: 400;
             }
     }
-    li .activeClassLink p {
+    li a.activeClassLink p {
       color: var(--navHover);
       background-color: var(--backgroundMedium);
     }
@@ -356,15 +356,3 @@ const CopyAndSocialWrapper = styled.div`
     flex-direction: column;
   }
 `
-
-// {
-//   data.allDatoCmsFooter.nodes
-//     .filter(el => el.locale === currentLanguage)
-//     .map(el =>
-//       el.navigation.map(el => (
-//         <Fragment key={el.id}>
-
-//         </Fragment>
-//       ))
-//     )
-// }
