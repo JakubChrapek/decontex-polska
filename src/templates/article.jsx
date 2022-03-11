@@ -309,16 +309,15 @@ const Content = styled.div`
     line-height: 1.1;
     letter-spacing: -1px;
   }
-  
+
   @media (max-width: 767px) {
     h1 {
       margin-bottom: 54px;
     }
     .gatsby-image-wrapper {
-    aspect-ratio: 1.8/1;
-    margin: 0 auto 64px;
-
-  }
+      aspect-ratio: 1.8/1;
+      margin: 0 auto 64px;
+    }
   }
 
   .gatsby-image-wrapper {
@@ -340,7 +339,7 @@ const Content = styled.div`
     align-items: center;
     flex-wrap: wrap;
 
-    a{
+    a {
       border-radius: 15px;
       padding: 10px;
       margin-left: -10px;
@@ -352,7 +351,7 @@ const Content = styled.div`
       border-radius: 15px;
       padding: 10px;
       margin-right: 16px;
-      transition: background-color .2s linear, color .2s linear;
+      transition: background-color 0.2s linear, color 0.2s linear;
       position: relative;
 
       &:before {
@@ -393,6 +392,18 @@ const Content = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+
+    a {
+      color: var(--active);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      border-radius: 4px;
+      &:focus-visible {
+        outline: 2px solid var(--active);
+        outline-offset: 2px;
+        text-decoration: none;
+      }
+    }
 
     blockquote {
       position: relative;

@@ -404,9 +404,10 @@ const Hero = styled.div`
     width: 100%;
     overflow: hidden;
 
-    div {
+    > div {
       position: absolute;
       bottom: 0;
+      pointer-events: none;
       padding: clamp(18px, 4.5vw, 50px);
 
       .title {
