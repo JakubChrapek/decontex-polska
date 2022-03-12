@@ -8,7 +8,6 @@ import News from '../components/layout/news'
 import Waves from '../components/vectors/heroOtherPageWaves'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { useState } from 'react'
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const { datoCmsBlogPost: { coverImage } } = data;
@@ -461,7 +460,7 @@ const Content = styled.div`
       line-height: 130%;
       letter-spacing: -0.5px;
       color: var(--superDarkText);
-      + p {
+      + p, + .gatsby-image-wrapper {
         margin-top: 24px;
       }
     }
