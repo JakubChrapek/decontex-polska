@@ -11,15 +11,16 @@ import { parseDateFromEnglishMonth } from '../utils/misc';
 
 const BlogArchiveTemplate = (props) => {
   const constraintsRef = useRef(null);
+  const pageSize = 6;
 
   const [choosenPosts, changeChoosenPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage))
   const [canRight, changeCanRight] = useState(true)
   const [canLeft, changeCanLeft] = useState(false)
   const [preFiltredPosts, changePreFiltredPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
   const [currentPage, changeCurrentPage] = useState(1)
-  const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(Math.ceil(preFiltredPosts.length / 9))
+  const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(Math.ceil(preFiltredPosts.length / pageSize))
   const [filtredPagesCount, changeFiltredPagesCount] = useState(null)
-  const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts.filter((el, id) => id < 9 * currentPage))
+  const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts.filter((el, id) => id < pageSize * currentPage))
   const [filtredType, changeFiltredType] = useState(props.location.state?.category ? props.location.state?.category : 'all')
 
   useEffect(() => {
@@ -33,10 +34,10 @@ const BlogArchiveTemplate = (props) => {
 
   useEffect(() => {
     if (filtredType !== 'all') {
-      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === filtredType).filter((el, id) => id < 9))
-      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === filtredType).length / 9))
+      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === filtredType).filter((el, id) => id < pageSize))
+      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === filtredType).length / pageSize))
     } else {
-      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < 9 * currentPage && id >= 9 * (currentPage - 1)))
+      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < pageSize * currentPage && id >= pageSize * (currentPage - 1)))
       canPaginate(preFiltredPagesCount)
     }
   }, [currentPage])
@@ -45,12 +46,12 @@ const BlogArchiveTemplate = (props) => {
     changeFiltredType(type)
 
     if (type === 'all') {
-      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < 9))
+      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < pageSize))
       canPaginate(preFiltredPagesCount)
       changeCurrentPage(1)
     } else {
-      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === type).length / 9))
-      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === type).filter((el, id) => id < 9))
+      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === type).length / pageSize))
+      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === type).filter((el, id) => id < pageSize))
       changeCurrentPage(1)
     }
 
