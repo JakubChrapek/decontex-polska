@@ -25,14 +25,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
     {
-      resolve: 'gatsby-plugin-robots-txt',
-      options: {
-        host: 'https://www.decontex.pl',
-        sitemap: 'https://www.decontex.pl/sitemap/sitemap-index.xml',
-        policy: [{ userAgent: '*', allow: '/' }],
-      },
-    },
-    {
       resolve: 'gatsby-source-datocms',
       options: {
         apiToken: process.env.DATOCMS_API_KEY,
@@ -51,6 +43,7 @@ module.exports = {
         background_color: `#51b8eb`,
         theme_color: `#51b8eb`,
         display: `standalone`,
+        icon: `src/images/icon.png`,
       },
     },
     'gatsby-plugin-offline',
