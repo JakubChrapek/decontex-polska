@@ -97,6 +97,7 @@ const Container = styled.div`
                 
                 p{
                     color: var(--buttonText);
+                    transition: color .2s linear;
                 }
 
               &:hover{

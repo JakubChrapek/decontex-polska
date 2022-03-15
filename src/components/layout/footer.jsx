@@ -21,6 +21,7 @@ const Footer = () => {
             link
             icon {
               url
+              alt
             }
           }
           navigation {
@@ -98,6 +99,7 @@ const Footer = () => {
                     <a
                       className={`c` + index}
                       href={innerEl.link}
+                      aria-label={innerEl.icon.alt}
                     >
                       <img src={innerEl.icon.url} alt={innerEl.icon.alt} />
                     </a>
@@ -161,59 +163,61 @@ const Flex = styled.div`
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 240px;
-  a{
+  a {
     padding: 13px 32px;
     border-radius: 8px;
     margin: 0 8px;
-    transition: background-color .2s linear, border .2s linear;
+    transition: background-color 0.2s linear, border 0.2s linear;
 
-    &.c0{
+    &.c0 {
       background-color: var(--active);
       border: 1px solid var(--active);
-      p{
-        color: var(--mainLightText);
+      p {
+        color: var(--mainDarkText);
         text-align: center;
+        transition: color .2s linear;
       }
 
-      &:hover{
+      &:hover {
         border: 1px solid var(--backgroundLight);
         background-color: var(--backgroundLight);
-
+        p {
+          color: var(--mainLightText);
+        }
       }
     }
 
-    &.c1{
+    &.c1 {
       border: 1px solid var(--divider);
-      p{
+      p {
         color: var(--mainDarkText);
         text-align: center;
       }
 
-      &:hover{
+      &:hover {
         background-color: var(--whiteButtonBackground);
-
       }
     }
   }
 
-  @media (max-width: 1024px){
-    a{
+  @media (max-width: 1024px) {
+    a {
       padding: clamp(7px, 1.8vw, 14px) clamp(16px, 4.1vw, 32px);
     }
   }
 
-  @media (max-width: 540px){
+  @media (max-width: 540px) {
     margin-bottom: 160px;
     display: grid;
     grid-template-columns: 100%;
     grid-row-gap: 16px;
 
-    a{
+    a {
       display: block;
       padding: 13px 32px;
     }
   }
-`
+`;
 
 const Nav = styled.nav`
   ul {

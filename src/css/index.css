@@ -2,13 +2,14 @@
 
 :root {
   /* Colors */
-  --superDarkText: #0a101a;
+  --superDarkText: rgb(10, 16, 26);
   --mainDarkText: rgba(20, 32, 51, 1);
   --subGreyText: rgba(18, 17, 39, 0.56);
   --subDarkText: rgba(18, 17, 39, 0.72);
   --formDarkText: rgba(18, 17, 39, 0.4);
   --mainLightText: rgba(255, 255, 255, 1);
   --subLightText: rgba(255, 255, 255, 0.72);
+  --svgDisabled: rgba(255, 255, 255, 0.35);
 
   --backgroundDark: #142033;
   --backgroundMedium: rgba(27, 53, 94, 1);

@@ -286,41 +286,42 @@ const Grid = styled.div`
 `
 
 const SliderControls = styled.div`
-    @media (min-width: 721px) {
-        display: none;
+  @media (min-width: 721px) {
+    display: none;
+  }
+  margin-top: 40px;
+  button {
+    margin-right: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--backgroundMedium);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s linear;
+    border: 1px solid var(--mainLightText);
+
+    path {
+      stroke: var(--mainLightText);
+      transition: stroke 0.2s linear;
     }
-    margin-top: 40px;
-    button{
-        margin-right: 16px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        border: 1px solid var(--backgroundMedium);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        transition: background-color .2s linear;
-        border: 1px solid var(--mainLightText);
 
-        path{
-            stroke: var(--mainLightText);
-            transition: stroke .2s linear;
-        }
-
-        &:hover{
-        background-color: var(--mainLightText);
-            path{
-                stroke: var(--backgroundMedium);
-            }
-        }
-
-        &:disabled{
-            border: 1px solid var(--divider);
-            background-color: transparent;
-
-            path{
-                stroke: var(--divider);
-            }
-        }
+    &:hover {
+      background-color: var(--mainLightText);
+      path {
+        stroke: var(--backgroundMedium);
+      }
     }
-`
+
+    &:disabled {
+      border: 1px solid var(--svgDisabled);
+      background-color: transparent;
+      cursor: not-allowed;
+
+      path {
+        stroke: var(--svgDisabled);
+      }
+    }
+  }
+`;

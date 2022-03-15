@@ -209,10 +209,11 @@ const ContentMobile = styled.div`
     border-radius: 8px;
     background-color: var(--mainLightText);
     border: 1px solid var(--mainLightText);
-    transition: 0.2s linear;
+    transition: background-color .2s linear, border .2s linear;
 
     p {
       color: var(--buttonText);
+      transition: color .2s linear;
     }
 
     &:hover {
