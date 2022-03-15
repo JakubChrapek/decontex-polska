@@ -25,6 +25,14 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
     {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.decontex.pl',
+        sitemap: 'https://www.decontex.pl/sitemap/sitemap-index.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
       resolve: 'gatsby-source-datocms',
       options: {
         apiToken: process.env.DATOCMS_API_KEY,

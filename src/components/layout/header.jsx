@@ -49,12 +49,6 @@ const LogoImage = styled(GatsbyImage)`
   width: ${158 / 16}rem;
   max-width: ${158 / 16}rem;
 
-  @media (max-width: 1024px) {
-    > div {
-      position: absolute;
-    }
-  }
-
   &.light{
     filter: brightness(0) invert(1);
   }
