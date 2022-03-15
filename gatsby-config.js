@@ -24,6 +24,7 @@ module.exports = {
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
+
     {
       resolve: 'gatsby-source-datocms',
       options: {
@@ -32,6 +33,14 @@ module.exports = {
           'en-EN': 'pl',
           en: 'pl',
         },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.decontex.pl',
+        sitemap: 'https://www.decontex.pl/sitemap/sitemap-index.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
       },
     },
     {
