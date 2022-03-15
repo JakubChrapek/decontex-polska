@@ -42,5 +42,17 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Decontex Polska`,
+        short_name: `DecontexPL`,
+        start_url: `/`,
+        background_color: `#51b8eb`,
+        theme_color: `#51b8eb`,
+        display: `standalone`,
+      },
+    },
+    'gatsby-plugin-offline',
   ],
 };
