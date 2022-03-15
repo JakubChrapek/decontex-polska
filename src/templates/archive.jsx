@@ -24,8 +24,8 @@ const BlogArchiveTemplate = (props) => {
 
   useEffect(() => {
     if (props.location.state?.category != null) {
-      document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
-      document.querySelector('.' + props.location.state.category.replace(/\s/g, '')).classList.add('active')
+      document.querySelectorAll('.filterItem').forEach(el => el?.classList.remove('active'))
+      document.querySelector('.' + props.location.state.category.replace(/\s/g, ''))?.classList.add('active')
       filter(props.location.state.category.replace(/\s/g, ''))
       changeFiltredType(props.location.state.category.replace(/\s/g, ''))
     }
@@ -54,8 +54,8 @@ const BlogArchiveTemplate = (props) => {
       changeCurrentPage(1)
     }
 
-    document.querySelectorAll('.filterItem').forEach(el => el.classList.remove('active'))
-    document.querySelector('.' + type.replace(/\s/g, '')).classList.add('active')
+    document.querySelectorAll('.filterItem').forEach(el => el?.classList.remove('active'))
+    document.querySelector('.' + type.replace(/\s/g, ''))?.classList.add('active')
   }
 
   function pagination(direct) {

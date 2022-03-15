@@ -23,8 +23,8 @@ const Grid = ({ data }) => {
             <StructuredText data={data.publicationDate} />
             <StructuredText className="subTitle" data={data.subTitle} />
             <p className="subText">{data.subText}</p>
-            {data.link.map((el) => (
-              <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+            {data.link.map((el,index) => (
+              <Link key={index} className="link" to={el.slug} aria-label={el.ariaLabel}>
                 <StructuredText data={el.name} />
               </Link>
             ))}
@@ -74,7 +74,7 @@ const Grid = ({ data }) => {
               <StructuredText className="subTitle" data={data.subTitle} />
               <p className="subText">{data.subText}</p>
               {data.link.map((el) => (
-                <Link className="link" to={el.slug} aria-label={el.ariaLabel}>
+                <Link key={el.slug} className="link" to={el.slug} aria-label={el.ariaLabel}>
                   <StructuredText data={el.name} />
                 </Link>
               ))}

@@ -1,29 +1,32 @@
 import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
-import Logo from "../vectors/logo"
+
+import logo from '../img/logo_light.png'
+
 
 const Advantages = ({ data }) => {
+    // console.log(data,"DATA");
     return (
         <Wrapper>
             <Container className="container">
-                <StructuredText data={data.title} />
-                <p>{data.text}</p>
+                <StructuredText data={data?.title} />
+                <p>{data?.text}</p>
                 <Flex>
                     <div>
-                        {data.listLeft.map(el => (
-                            <>
-                                <h3><Logo /><span>{el.title}</span></h3>
-                                <p>{el.text}</p>
-                            </>
+                        {data?.listLeft?.map((el,index) => (
+                            <div key={index}>
+                                <h3 ><img src={logo} width='25' height='24' alt="Logo" /><span>{el?.title}</span></h3>
+                                <p>{el?.text}</p>
+                            </div>
                         ))}
                     </div>
                     <div>
-                        {data.listRight.map(el => (
-                            <>
-                                <h3><Logo /><span>{el.title}</span></h3>
-                                <p>{el.text}</p>
-                            </>
+                        {data?.listRight?.map((el,index) => (
+                            <div key={index}>
+                                <h3><img src={logo} alt="Logo" width='25' height='24'/><span>{el?.title}</span></h3>
+                                <p>{el?.text}</p>
+                            </div>
                         ))}
                     </div>
                 </Flex>

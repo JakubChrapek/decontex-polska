@@ -11,16 +11,6 @@ const StyledHeroImage = styled(GatsbyImage)`
     position: absolute;
   }
 
-  &::after{
-      content: "";
-      position: absolute;
-      right: 0;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 1;
-    }
   left: calc(-1 * var(--image-shift));
   top: 0;
   width: calc(100% + var(--image-shift));
@@ -37,13 +27,16 @@ const Hero = ({ data }) => {
   const { background: { alt, title, gatsbyImageData } } = data;
   return (
     <Wrapper>
-      <StyledHeroImage alt={alt} title={title} image={gatsbyImageData} />
+      <StyledHeroImage alt={alt} title={title} image={gatsbyImageData}  />
+      
+     
       <Container className="container">
         <StructuredText data={data.title} />
         <Text>{data.text}</Text>
         <div>
           {data.buttons.map((el, index) => (
             <Link
+            key={el.slug}
               className={'c' + index}
               to={el.slug}
               aria-label={el.ariaLabel}

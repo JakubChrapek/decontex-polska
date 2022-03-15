@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { StructuredText } from 'react-datocms';
@@ -48,8 +48,8 @@ const Footer = () => {
       <Container className="container">
         {data.allDatoCmsFooter.nodes
           .filter((el) => el.locale === currentLanguage)
-          .map((el) => (
-            <StructuredText data={el.title} />
+          .map((el,index) => (
+            <StructuredText key={index} data={el.title} />
           ))}
         <Flex>
           {data.allDatoCmsFooter.nodes
@@ -60,7 +60,7 @@ const Footer = () => {
                   className={`c` + index}
                   aria-label={innerEl.ariaLabel}
                   to={`/${innerEl.slug}/`}
-                  key={el.id}
+                  key={innerEl.slug}
                 >
                   <StructuredText data={innerEl.name} />
                 </Link>
@@ -73,13 +73,13 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.navigation.map((innerEl, index) => (
-                  <li>
+                  <li key={innerEl.slug}>
                     <Link
                       activeClassName="activeClassLink"
                       className={`c` + index}
                       aria-label={innerEl.ariaLabel}
                       to={`/${innerEl.slug}`}
-                      key={el.id}
+                      
                     >
                       <StructuredText data={innerEl.name} />
                     </Link>
@@ -94,7 +94,7 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.socialMedia.map((innerEl, index) => (
-                  <li>
+                  <li key={index}>
                     <a
                       className={`c` + index}
                       href={innerEl.link}
@@ -108,8 +108,8 @@ const Footer = () => {
           <Copyright>
             {data.allDatoCmsFooter.nodes
               .filter((el) => el.locale === currentLanguage)
-              .map((el) => (
-                <>{el.copyright}</>
+              .map((el,index) => (
+                <Fragment key={index}>{el.copyright}</Fragment>
               ))}
           </Copyright>
         </CopyAndSocialWrapper>
@@ -216,7 +216,7 @@ const Flex = styled.div`
 `
 
 const Nav = styled.nav`
-  ul{
+  ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -227,63 +227,60 @@ const Nav = styled.nav`
       width: fit-content;
     }
 
-    li a p{
-            color: var(--subLightText);
-            line-height: 180%;
-            transition: all 0.1s linear; 
-            padding: 8px clamp(4px, 1vw, 16px);
-            border-radius: 50px;
-            width: fit-content;
+    li a p {
+      color: var(--subLightText);
+      line-height: 180%;
+      transition: all 0.1s linear;
+      padding: 8px clamp(4px, 1vw, 16px);
+      border-radius: 50px;
+      width: fit-content;
 
-            &:hover {
-              color: var(--mainLightText);
-              background-color: var(--backgroundMedium);
-            }
-            strong{
-              font-weight: 400;
-            }
+      &:hover {
+        color: var(--mainLightText);
+        background-color: var(--backgroundMedium);
+      }
+      strong {
+        font-weight: 400;
+      }
     }
     li a.activeClassLink p {
       color: var(--navHover);
       background-color: var(--backgroundMedium);
     }
-}
+  }
 
-  
   @media (max-width: 1024px) {
-    ul{
+    ul {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-row-gap: 8px;
 
       li a p {
-          padding: 8px 16px;
+        padding: 8px 16px;
       }
     }
   }
 
-  @media (max-width: 540px){
-    ul{
+  @media (max-width: 540px) {
+    ul {
       grid-template-columns: 1fr;
       li a {
         width: fit-content;
       }
       li a p {
-        padding: 0;
-
-        &:hover{
+        margin-left: -10px;
+        &:hover {
           color: var(--mainLightText);
           background-color: unset;
         }
-    
       }
-      li .activeClassLink p {
-          color: var(--mainLightText);
-          background-color: unset;
-    }
+      li a.activeClassLink p {
+        color: var(--mainLightText);
+        background-color: var(--backgroundMedium);
+      }
     }
   }
-`
+`;
 
 const SocialMedia = styled.ul`
   width: fit-content;

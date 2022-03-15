@@ -253,10 +253,6 @@ const MobileNav = styled.div`
   }
 `
 
-const Logo = styled.img`
-  max-width: 158px;
-`
-
 // Main Component
 
 const Header = () => {

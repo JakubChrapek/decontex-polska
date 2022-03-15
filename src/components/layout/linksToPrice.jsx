@@ -2,7 +2,6 @@ import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby';
 import { DOTS_IMAGES } from '../img/dots';
 
 const LinksToPrice = ({ data }) => {

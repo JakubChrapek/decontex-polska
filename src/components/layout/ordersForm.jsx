@@ -12,7 +12,7 @@ const OrdersForm = ({ buttonText }) => {
   const [sendedCount, changeSendedCount] = useState(0)
 
   const Submit = (data) => {
-    let res = handler(data)
+    handler(data)
       .then((res) => {
         if (res.status === 200) {
           changeIsSended('success')

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
 import { Link } from "gatsby"
-import { GatsbyImage, Placeholder } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { parseDateFromEnglishMonth } from '../../utils/misc';
 
 const News = ({ data, posts }) => {
@@ -69,7 +69,7 @@ const News = ({ data, posts }) => {
                                     {posts.map((el, index) => {
                                         const polishDate = parseDateFromEnglishMonth(el.publicationDate)
                                         return index <= 2 ? (
-                                            <Link className="wrapLink" to={'/blog/' + el.slug}>
+                                            <Link key={el.slug} className="wrapLink" to={'/blog/' + el.slug}>
                                                 <motion.div
                                                     className="sliderItem"
                                                     animate={{

@@ -6,7 +6,6 @@ import Logo from './../img/logo.png'
 import { motion } from "framer-motion"
 import { useSwipeable } from "react-swipeable"
 import { ArrowLeft, ArrowRight } from "../vectors/arrows";
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 const StagesWithInform = ({ data }) => {
     const [position, positionSet] = useState(0);
@@ -15,7 +14,7 @@ const StagesWithInform = ({ data }) => {
     const [canLeft, changeCanLeft] = useState(false)
 
     useEffect(() => {
-        if (position != 0 && position != data.inform[0].grid.length - 1) {
+        if (position !== 0 && position !== data.inform[0].grid.length - 1) {
             changeCanLeft(true)
             changeCanRight(true)
         } else if (position === data.inform[0].grid.length - 1) {
@@ -25,7 +24,7 @@ const StagesWithInform = ({ data }) => {
             changeCanLeft(false)
             changeCanRight(true)
         }
-    }, [position])
+    }, [position,data.inform])
 
     const handlers = useSwipeable({
         onSwipedLeft: () => {
@@ -64,8 +63,8 @@ const StagesWithInform = ({ data }) => {
           <Container className="containerExpanded">
             <StructuredText data={data.inform[0].title} />
             <Grid itemCount={data.inform[0].grid.length}>
-              {data.inform[0].grid.map((el) => (
-                <motion.div
+              {data.inform[0].grid.map((el,index) => (
+                <motion.div key={index}
                   {...handlers}
                   animate={{ left: `calc(${position} * (-100% - 35px))` }}
                 >

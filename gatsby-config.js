@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://kryptonum.eu',
+    siteUrl: 'https://decontex.pl',
   },
   plugins: [
     {
@@ -15,6 +15,7 @@ module.exports = {
       },
       __key: 'pages',
     },
+    'gatsby-plugin-postcss',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-sharp',

@@ -2,7 +2,6 @@ import React from "react"
 import { StructuredText } from "react-datocms"
 import styled from "styled-components"
 import Logo from './../img/logo_light.png'
-import Dots from '../img/dotsSmall.png'
 import { DOTS_IMAGES } from '../img/dots'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
