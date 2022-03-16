@@ -14,8 +14,8 @@ const Certificates = ({ data }) => {
                     <p>{data.text}</p>
                     <Flex ref={constraintsRef} >
                         <motion.div drag='x' dragConstraints={constraintsRef} className="slider" >
-                            {data.images.map(el => (
-                                <div>
+                            {data.images.map((el,index) => (
+                                <div key={index}>
                                     <GatsbyImage image={el.img.gatsbyImageData} alt={el.img.alt} title={el.img.title} />
                                 </div>
                             ))}

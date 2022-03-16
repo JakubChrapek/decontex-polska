@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://kryptonum.eu',
+    siteUrl: 'https://decontex.pl',
   },
   plugins: [
     {
@@ -15,6 +15,7 @@ module.exports = {
       },
       __key: 'pages',
     },
+    'gatsby-plugin-postcss',
     'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-sharp',
@@ -23,6 +24,7 @@ module.exports = {
     'gatsby-plugin-image',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-netlify',
+
     {
       resolve: 'gatsby-source-datocms',
       options: {
@@ -33,5 +35,26 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.decontex.pl',
+        sitemap: 'https://www.decontex.pl/sitemap/sitemap-index.xml',
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Decontex Polska`,
+        short_name: `DecontexPL`,
+        start_url: `/`,
+        background_color: `#51b8eb`,
+        theme_color: `#51b8eb`,
+        display: `standalone`,
+        icon: `src/images/icon.png`,
+      },
+    },
+    'gatsby-plugin-offline',
   ],
 };

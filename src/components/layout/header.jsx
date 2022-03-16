@@ -74,7 +74,7 @@ const NavList = styled.ul`
       background-color: var(--mainLightText);
     }
   }
-  .other-grey{
+  .other-grey {
     a p {
       color: var(--subDarkText);
       &:hover {
@@ -87,7 +87,7 @@ const NavList = styled.ul`
       background-color: var(--backgroundGrey);
     }
   }
-  & li a{
+  & li a {
     display: block;
     border-radius: 50px;
   }
@@ -107,22 +107,24 @@ const NavList = styled.ul`
     }
   }
 
-  &.right{
+  &.right {
     li a {
       border-radius: 6px;
     }
     li a p {
       padding: 10px 24px;
-      background: #51B8EB;
+      background: #51b8eb;
       border-radius: 6px;
       display: block;
       line-height: 1;
-      color: var(--navHover);
+      color: var(--mainDarkText);
       border: 1px solid var(--active);
+      transition: background-color .2s linear, border .2s linear, color .2s linear;
 
       &:hover {
         border: 1px solid var(--backgroundLight);
         background-color: var(--backgroundLight);
+        color: var(--mainLightText);
       }
     }
   }
@@ -417,6 +419,9 @@ const Header = () => {
             );
           })}
         <MobileButton
+          name="Menu główne"
+          aria-label="Menu główne"
+          role="button"
           onClick={() => {
             changeIsMenuOpened(!isMenuOpened);
           }}

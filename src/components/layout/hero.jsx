@@ -23,7 +23,7 @@ const Hero = ({ data }) => {
                   title={data.img.title}
                   imgClassName="mainImage"
                 />
-                <img className="dots" src={data.dotsOnRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM} alt='' />
+                <img className="dots" src={data.dotsOnRight ? DOTS_IMAGES.RIGHT_BOTTOM : DOTS_IMAGES.LEFT_BOTTOM} alt='Waves' />
               </div>
             ) : null}
           </div>

@@ -5,6 +5,7 @@ import Logo from "../vectors/logo"
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { DOTS_IMAGES } from '../img/dots'
 import { motion } from "framer-motion"
+import logo from '../img/logo_light.png'
 
 const ImageWithoutButton = ({ data }) => {
   return (
@@ -28,7 +29,7 @@ const ImageWithoutButton = ({ data }) => {
           <p>{data.text}</p>
 
           <h3>
-            <Logo />
+           <img src={logo} width='25' height='24' alt="Logo" />
             {data.bottomText}
           </h3>
         </motion.div>

@@ -2,7 +2,6 @@ import React from 'react'
 import { StructuredText } from 'react-datocms'
 import styled from 'styled-components'
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby';
 import { DOTS_IMAGES } from '../img/dots';
 
 const LinksToPrice = ({ data }) => {
@@ -80,9 +79,9 @@ const Flex = styled.div`
     width: fit-content;
     margin: ${(props) => (props.isImgRight ? '0 0 0 auto' : '0 auto 0 0')};
     padding-left: ${(props) =>
-    props.isImgRight ? '0' : 'clamp(24px, 3.88vw, 56px)'};
+      props.isImgRight ? '0' : 'clamp(24px, 3.88vw, 56px)'};
     padding-right: ${(props) =>
-    props.isImgRight ? 'clamp(24px, 3.88vw, 56px)' : '24px'};
+      props.isImgRight ? 'clamp(24px, 3.88vw, 56px)' : '24px'};
 
     .dots {
       display: ${(props) => (props.isImgBackground ? null : 'none')};
@@ -141,7 +140,6 @@ const Flex = styled.div`
       margin-top: 20px;
       width: fit-content;
       border-radius: 8px;
-      
 
       p {
         width: fit-content;
@@ -151,19 +149,19 @@ const Flex = styled.div`
         display: block;
         height: 49px;
         line-height: 49px;
-        color: var(--navHover);
+        color: var(--mainDarkText);
         border: 1px solid var(--active);
         position: relative;
-      transition: background-color .2s linear, border .2s linear;
+        transition: color 0.2s linear, background-color 0.2s linear,
+          border 0.2s linear;
         text-align: center;
       }
 
-      
-
       &:hover {
-        p{
+        p {
           border: 1px solid var(--backgroundLight);
           background-color: var(--backgroundLight);
+          color: var(--mainLightText);
         }
       }
     }
@@ -178,7 +176,7 @@ const Flex = styled.div`
     .imageWrapper {
       width: 100%;
       margin: ${(props) =>
-    props.isImgRight ? '72px auto 0 0' : '72px 0 0 auto'};
+        props.isImgRight ? '72px auto 0 0' : '72px 0 0 auto'};
       padding-left: 0;
       padding-right: 0;
 
@@ -193,7 +191,7 @@ const Flex = styled.div`
         max-width: 605px;
         width: 87%;
         margin: ${({ isImgRight }) =>
-    isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
+          isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }
