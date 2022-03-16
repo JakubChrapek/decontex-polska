@@ -135,28 +135,34 @@ const Container = styled.div`
       border: 1px solid
         ${(props) => (props.buttonColor ? props.buttonColor : 'var(--active)')};
       background: ${(props) =>
-    props.buttonColor ? props.buttonColor : 'var(--active)'};
+        props.buttonColor ? props.buttonColor : 'var(--active)'};
       border-radius: 8px;
       display: block;
-      color: var(--navHover);
+      color: ${(props) =>
+        props.buttonColor === '#51b8eb'
+          ? 'var(--mainDarkText)'
+          : 'var(--mainLightText)'};
       position: relative;
-      transition: background-color .2s linear, border .2s linear;
+      transition: color 0.2s linear, background-color 0.2s linear,
+        border 0.2s linear;
       text-align: center;
 
       &:hover {
         border: 1px solid
           ${(props) =>
-    props.buttonColor
-      ? props.buttonColor === '#51B8EB'
-        ? 'var(--backgroundLight)'
-        : 'var(--backgroundMedium)'
-      : 'var(--backgroundLight)'};
+            props.buttonColor
+              ? props.buttonColor === '#51B8EB'
+                ? 'var(--backgroundLight)'
+                : 'var(--backgroundMedium)'
+              : 'var(--backgroundLight)'};
         background-color: ${(props) =>
-    props.buttonColor
-      ? props.buttonColor === '#51B8EB'
-        ? 'var(--backgroundLight)'
-        : 'var(--backgroundMedium)'
-      : 'var(--backgroundLight)'};
+          props.buttonColor
+            ? props.buttonColor === '#51B8EB'
+              ? 'var(--backgroundLight)'
+              : 'var(--backgroundMedium)'
+            : 'var(--backgroundLight)'};
+
+        color: var(--mainLightText);
       }
     }
   }
@@ -185,7 +191,7 @@ const Container = styled.div`
         aspect-ratio: 4/3;
         width: 87%;
         margin: ${({ isImgRight }) =>
-    isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
+          isImgRight ? '0 auto 0 0' : '0 0 0 auto'};
         display: block;
       }
     }

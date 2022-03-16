@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import { StructuredText } from 'react-datocms';
@@ -21,6 +21,7 @@ const Footer = () => {
             link
             icon {
               url
+              alt
             }
           }
           navigation {
@@ -48,8 +49,8 @@ const Footer = () => {
       <Container className="container">
         {data.allDatoCmsFooter.nodes
           .filter((el) => el.locale === currentLanguage)
-          .map((el) => (
-            <StructuredText data={el.title} />
+          .map((el,index) => (
+            <StructuredText key={index} data={el.title} />
           ))}
         <Flex>
           {data.allDatoCmsFooter.nodes
@@ -60,7 +61,7 @@ const Footer = () => {
                   className={`c` + index}
                   aria-label={innerEl.ariaLabel}
                   to={`/${innerEl.slug}/`}
-                  key={el.id}
+                  key={innerEl.slug}
                 >
                   <StructuredText data={innerEl.name} />
                 </Link>
@@ -73,13 +74,13 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.navigation.map((innerEl, index) => (
-                  <li>
+                  <li key={innerEl.slug}>
                     <Link
                       activeClassName="activeClassLink"
                       className={`c` + index}
                       aria-label={innerEl.ariaLabel}
                       to={`/${innerEl.slug}`}
-                      key={el.id}
+                      
                     >
                       <StructuredText data={innerEl.name} />
                     </Link>
@@ -94,10 +95,11 @@ const Footer = () => {
               .filter((el) => el.locale === currentLanguage)
               .map((el) =>
                 el.socialMedia.map((innerEl, index) => (
-                  <li>
+                  <li key={index}>
                     <a
                       className={`c` + index}
                       href={innerEl.link}
+                      aria-label={innerEl.icon.alt}
                     >
                       <img src={innerEl.icon.url} alt={innerEl.icon.alt} />
                     </a>
@@ -108,8 +110,8 @@ const Footer = () => {
           <Copyright>
             {data.allDatoCmsFooter.nodes
               .filter((el) => el.locale === currentLanguage)
-              .map((el) => (
-                <>{el.copyright}</>
+              .map((el,index) => (
+                <Fragment key={index}>{el.copyright}</Fragment>
               ))}
           </Copyright>
         </CopyAndSocialWrapper>
@@ -161,59 +163,61 @@ const Flex = styled.div`
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 240px;
-  a{
+  a {
     padding: 13px 32px;
     border-radius: 8px;
     margin: 0 8px;
-    transition: background-color .2s linear, border .2s linear;
+    transition: background-color 0.2s linear, border 0.2s linear;
 
-    &.c0{
+    &.c0 {
       background-color: var(--active);
       border: 1px solid var(--active);
-      p{
-        color: var(--mainLightText);
+      p {
+        color: var(--mainDarkText);
         text-align: center;
+        transition: color .2s linear;
       }
 
-      &:hover{
+      &:hover {
         border: 1px solid var(--backgroundLight);
         background-color: var(--backgroundLight);
-
+        p {
+          color: var(--mainLightText);
+        }
       }
     }
 
-    &.c1{
+    &.c1 {
       border: 1px solid var(--divider);
-      p{
+      p {
         color: var(--mainDarkText);
         text-align: center;
       }
 
-      &:hover{
+      &:hover {
         background-color: var(--whiteButtonBackground);
-
       }
     }
   }
 
-  @media (max-width: 1024px){
-    a{
+  @media (max-width: 1024px) {
+    a {
       padding: clamp(7px, 1.8vw, 14px) clamp(16px, 4.1vw, 32px);
     }
   }
 
-  @media (max-width: 540px){
-    margin-bottom: 220px;
+  @media (max-width: 540px) {
+    margin-bottom: 160px;
     display: grid;
     grid-template-columns: 100%;
     grid-row-gap: 16px;
 
-    a{
+    a {
       display: block;
       padding: 13px 32px;
     }
   }
-`
+`;
 
 const Nav = styled.nav`
   ul {

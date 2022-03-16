@@ -28,8 +28,8 @@ const NotFoundPage = () => {
       <Wrapper>
         <Container className='container'>
           <div className="imageWrapper">
-            <img className="dots" src={Dots} />
-            <img className="mainImage" src={data.datoCmsNotFoundPage.img.url} />
+            <img className="dots" src={Dots} alt='DOTS' />
+            <img className="mainImage" src={data.datoCmsNotFoundPage.img.url} alt="MAIN"/>
           </div>
           <div className="textPart">
             <h1>{data.datoCmsNotFoundPage.title}</h1>

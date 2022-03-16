@@ -80,6 +80,7 @@ const Content = styled.div`
   .grid {
     display: grid;
     grid-template-columns: calc(50% - 6px) calc(50% - 6px);
+    grid-template-rows: repeat(3, minmax(auto, 104px));
     grid-gap: 12px;
 
     .gatsby-image-wrapper {
@@ -100,11 +101,11 @@ const Content = styled.div`
       justify-content: center;
       align-items: center;
       border-radius: 16px;
-
-      /* :last-child {
-        background-color: var(--superDarkText);
-      } */
     }
+
+  @media (max-width: 1024px) {
+    grid-template-rows: repeat(3, auto);
+  }
   }
 
   @media (max-width: 1024px) {

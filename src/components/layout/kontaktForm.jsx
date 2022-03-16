@@ -12,7 +12,7 @@ const KontaktForm = ({ buttonText }) => {
   const [sendedCount, changeSendedCount] = useState(0)
 
   const Submit = (data) => {
-    let res = handler(data)
+    handler(data)
       .then((res) => {
         if (res.status === 200) {
           changeIsSended('success')
@@ -167,52 +167,53 @@ const Wrapper = styled.form`
   width: 100%;
   display: grid;
 
-    .buttonWrapper{
-      position: relative;
+  .buttonWrapper {
+    position: relative;
 
-      .errorText{
-        color: var(--error);
-        margin-bottom: -10px;
-        font-size: 12px;
-        position: absolute;
-      }
+    .errorText {
+      color: var(--error);
+      margin-bottom: -10px;
+      font-size: 12px;
+      position: absolute;
+    }
 
-      .successText{
-        margin-bottom: -10px;
-        font-size: 12px;
-        position: absolute;
-      }
+    .successText {
+      margin-bottom: -10px;
+      font-size: 12px;
+      position: absolute;
+    }
 
-      button {
-        padding: 14px 0;
-        border-radius: 8px;
-        background-color: var(--active);
-        border: unset;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        font-family: 'Poppins';
+    button {
+      padding: 14px 0;
+      border-radius: 8px;
+      background-color: var(--active);
+      border: unset;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      font-family: 'Poppins';
+      color: var(--mainDarkText);
+      transition: color .2s linear, background-color 0.2s linear, border 0.2s linear;
+      border: 1px solid var(--active);
+      margin-bottom: 12px;
+      width: 100%;
+
+      &:hover {
+        border: 1px solid var(--backgroundLight);
+        background-color: var(--backgroundLight);
         color: var(--mainLightText);
-        transition: background-color .2s linear, border .2s linear;
-        border: 1px solid var(--active);
-        margin-bottom: 12px;
-        width: 100%;
+      }
 
-        &:hover {
-          border: 1px solid var(--backgroundLight);
-          background-color: var(--backgroundLight);
-        }
-
-      &:disabled{
+      &:disabled {
         filter: grayscale(1);
         cursor: unset;
         &:hover {
           border: 1px solid var(--active);
           background-color: var(--active);
+        }
       }
     }
   }
-}
 
   label {
     display: grid;
@@ -230,7 +231,7 @@ const Wrapper = styled.form`
 
     &.checkbox {
       display: grid;
-      grid-template-columns:16px 1fr;
+      grid-template-columns: 16px 1fr;
       grid-column-gap: 8px;
       align-items: center;
       margin-bottom: 34px;
@@ -280,7 +281,7 @@ const Wrapper = styled.form`
 
         a {
           color: var(--active);
-          transition: color .2s linear, border .2s linear;
+          transition: color 0.2s linear, border 0.2s linear;
           border-bottom: 1px solid #fff;
 
           &:hover {

@@ -70,7 +70,7 @@ export const query = graphql`
         background {
           alt
           title
-          gatsbyImageData(placeholder: BLURRED)
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         buttons {
           name {
@@ -91,7 +91,7 @@ export const query = graphql`
         text
         img {
           url
-          gatsbyImageData
+          gatsbyImageData(layout: FULL_WIDTH)
           alt
           title
         }
@@ -113,21 +113,21 @@ export const query = graphql`
         mainText
         firstImg {
           url
-          gatsbyImageData
+          gatsbyImageData(layout: FULL_WIDTH)
           alt
           title
         }
         firstText
         secondImg {
           url
-          gatsbyImageData
+          gatsbyImageData(layout: FULL_WIDTH)
           alt
           title
         }
         secondText
         thirdImg {
           url
-          gatsbyImageData
+          gatsbyImageData(layout: FULL_WIDTH)
           alt
           title
         }
@@ -175,48 +175,3 @@ export const query = graphql`
   }
 `;
 
-// query HomePageTemplate($locale: String!) {
-//   allDatoCmsBlogPost(
-//     sort: { order: ASC, fields: meta___firstPublishedAt }
-//     filter: { locale: { eq: $locale }, featuredInHomepage: { eq: true } }
-//     limit: 6
-//   ) {
-//     postNodes: nodes {
-//       id: originalId
-//       meta {
-//         firstPublishedAt(locale: $locale, formatString: "DD MMM YYYY")
-//       }
-//       minutesOfReading
-//       cardImage {
-//         gatsbyImageData(
-//           width: 280
-//           height: 100
-//           placeholder: NONE
-//           forceBlurhash: false
-//         )
-//         squaredImage: gatsbyImageData(
-//           width: 100
-//           height: 100
-//           imgixParams: { ar: "1", fit: "crop" }
-//         )
-//         alt
-//       }
-//       author {
-//         authorName: name
-//         picture {
-//           authorImageData: gatsbyImageData(height: 30, width: 30)
-//           authorImageAlt: alt
-//         }
-//       }
-//       publicationDate(formatString: "DD MMMM YYYY")
-//       title
-//       slug
-//       reference
-//     }
-//   }
-//   datoCmsWebsiteSetting(locale: { eq: $locale }) {
-//     minsReadSuffix
-//     seeTheGuideButton
-//     seeAllButton
-//   }
-// }

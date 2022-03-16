@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const useLanguages = () => {
-  const data = useStaticQuery(
+  useStaticQuery(
     graphql`
       query {
         allDatoCmsSite {
@@ -18,8 +18,8 @@ const useLanguages = () => {
     `
   );
 
-  let defaultLanguage = 'pl'
-  let blogPath = 'blog'
+  let defaultLanguage = 'pl';
+  let blogPath = 'blog';
   return {
     defaultLanguage,
     blogPath,

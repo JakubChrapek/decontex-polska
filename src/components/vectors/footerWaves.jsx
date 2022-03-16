@@ -31,7 +31,7 @@ const Wrapper = styled.div`
     }
 
     @media (max-width: 540px) {
-        height: 380px;
+        height: 360px;
         transform: translateX(-50%) translateY(100px);
     }
 

@@ -12,7 +12,7 @@ const OrdersForm = ({ buttonText }) => {
   const [sendedCount, changeSendedCount] = useState(0)
 
   const Submit = (data) => {
-    let res = handler(data)
+    handler(data)
       .then((res) => {
         if (res.status === 200) {
           changeIsSended('success')
@@ -205,23 +205,23 @@ const Wrapper = styled.form`
   width: 100%;
   display: grid;
 
-  .buttonWrapper{
+  .buttonWrapper {
     position: relative;
 
-    .errorText{
+    .errorText {
       color: var(--error);
       margin-bottom: -10px;
       font-size: 12px;
       position: absolute;
     }
 
-    .successText{
+    .successText {
       margin-bottom: -10px;
       font-size: 12px;
       position: absolute;
     }
 
-      button {
+    button {
       padding: 14px 0;
       border-radius: 8px;
       background-color: var(--active);
@@ -230,8 +230,8 @@ const Wrapper = styled.form`
       font-size: 16px;
       line-height: 24px;
       font-family: 'Poppins';
-      color: var(--mainLightText);
-    transition: background-color .2s linear, border .2s linear;
+      color: var(--mainDarkText);
+      transition: color .2s linear, background-color 0.2s linear, border 0.2s linear;
       border: 1px solid var(--active);
       margin-bottom: 12px;
       width: 100%;
@@ -239,27 +239,25 @@ const Wrapper = styled.form`
       &:hover {
         border: 1px solid var(--backgroundLight);
         background-color: var(--backgroundLight);
+        color: var(--mainLightText);
       }
 
-      &:disabled{
+      &:disabled {
         filter: grayscale(1);
         cursor: unset;
         &:hover {
           border: 1px solid var(--active);
           background-color: var(--active);
+        }
       }
     }
   }
-}
-  
 
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 24px;
   }
-
-  
 
   label {
     display: grid;
@@ -279,7 +277,7 @@ const Wrapper = styled.form`
       display: grid;
       align-items: center;
       margin-bottom: 34px;
-      grid-template-columns:16px 1fr;
+      grid-template-columns: 16px 1fr;
       grid-column-gap: 8px;
 
       input {
