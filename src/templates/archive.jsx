@@ -95,15 +95,15 @@ const BlogArchiveTemplate = (props) => {
           <Hero>
             <StructuredText data={props.data.datoCmsArchivePage.title} />
             <p>{props.data.datoCmsArchivePage.text}</p>
-              <div className='imageBox'>
-            <Link className='wrapLink' to={choosenPosts[0].slug}/>
-                <div>
-                  <Category categoryColor={choosenPosts[0].category.color.hex}>{choosenPosts[0].category.name}</Category>
-                  <p className="title">{choosenPosts[0].title}</p>
-                  <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
-                </div>
-                <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
+            <div className='imageBox'>
+              <Link className='wrapLink' to={choosenPosts[0].slug} />
+              <div>
+                <Category categoryColor={choosenPosts[0].category.color.hex}>{choosenPosts[0].category.name}</Category>
+                <p className="title">{choosenPosts[0].title}</p>
+                <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
               </div>
+              <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
+            </div>
           </Hero>
           {preFiltredPosts.length === 0
             ? null
@@ -165,27 +165,54 @@ const BlogArchiveTemplate = (props) => {
                   </Grid>
                 </AnimatePresence>
               </AnimateSharedLayout>
-              <Pagination>
-                <button
-                  disabled={!canLeft}
-                  onClick={() => {
-                    pagination('left')
-                  }}
-                >
-                  <ArrowLeft />
-                </button>
-                <p>
-                  {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
-                </p>
-                <button
-                  disabled={!canRight}
-                  onClick={() => {
-                    pagination('right')
-                  }}
-                >
-                  <ArrowRight />
-                </button>
-              </Pagination>
+              {
+                filtredPagesCount ?
+                  filtredPagesCount > 1
+                    ? <Pagination>
+                      <button
+                        disabled={!canLeft}
+                        onClick={() => {
+                          pagination('left')
+                        }}
+                      >
+                        <ArrowLeft />
+                      </button>
+                      <p>
+                        {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
+                      </p>
+                      <button
+                        disabled={!canRight}
+                        onClick={() => {
+                          pagination('right')
+                        }}
+                      >
+                        <ArrowRight />
+                      </button>
+                    </Pagination>
+                    : null
+                  : preFiltredPagesCount > 1
+                    ? <Pagination>
+                      <button
+                        disabled={!canLeft}
+                        onClick={() => {
+                          pagination('left')
+                        }}
+                      >
+                        <ArrowLeft />
+                      </button>
+                      <p>
+                        {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
+                      </p>
+                      <button
+                        disabled={!canRight}
+                        onClick={() => {
+                          pagination('right')
+                        }}
+                      >
+                        <ArrowRight />
+                      </button>
+                    </Pagination>
+                    : null}
             </>
           }
         </Container>
