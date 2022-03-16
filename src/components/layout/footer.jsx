@@ -49,7 +49,7 @@ const Footer = () => {
       <Container className="container">
         {data.allDatoCmsFooter.nodes
           .filter((el) => el.locale === currentLanguage)
-          .map((el,index) => (
+          .map((el, index) => (
             <StructuredText key={index} data={el.title} />
           ))}
         <Flex>
@@ -80,7 +80,6 @@ const Footer = () => {
                       className={`c` + index}
                       aria-label={innerEl.ariaLabel}
                       to={`/${innerEl.slug}`}
-                      
                     >
                       <StructuredText data={innerEl.name} />
                     </Link>
@@ -110,9 +109,38 @@ const Footer = () => {
           <Copyright>
             {data.allDatoCmsFooter.nodes
               .filter((el) => el.locale === currentLanguage)
-              .map((el,index) => (
+              .map((el, index) => (
                 <Fragment key={index}>{el.copyright}</Fragment>
               ))}
+          </Copyright>
+          <Copyright>
+              Stronę stworzyli:{' '}
+              <a
+                aria-label="Strona internetowa agencji kreatywnej Kryptonum"
+                href="https://www.kryptonum.eu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kryptonum Studio
+              </a>{' '}
+              &amp;{' '}
+              <a
+                aria-label="Strona designerki Agaty"
+                href="https://www.agathadesign.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Agatha&nbsp;Design
+              </a>{' '}
+              &amp;{' '}
+              <a
+                aria-label="Strona na Facebooku designera Luksari"
+                href="https://www.facebook.com/Luksaridesign/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Luksari
+              </a>
           </Copyright>
         </CopyAndSocialWrapper>
       </Container>
@@ -290,23 +318,23 @@ const SocialMedia = styled.ul`
   width: fit-content;
   margin: 32px auto 0;
 
-  img{
+  img {
     width: 24px;
     height: 24px;
   }
-  
-  li{
+
+  li {
     display: inline-block;
     margin: 0 24px;
     opacity: 0.56;
-    transition: opacity .1s linear;
+    transition: opacity 0.1s linear;
 
-    &:hover{
+    &:hover {
       opacity: 1;
     }
   }
 
-  li a{
+  li a {
     display: flex;
     border-radius: 50px;
   }
@@ -314,46 +342,98 @@ const SocialMedia = styled.ul`
   @media (max-width: 1024px) {
     margin: 0;
 
-    li{
+    li {
       margin: 0 0 0 32px;
+      :first-of-type {
+        margin: 0;
+      }
     }
   }
 
-  @media (max-width: 540px){
+  @media (max-width: 540px) {
     margin-bottom: 16px;
-    
-    li{
+
+    li {
       margin: 0 32px 0 0;
+      :first-of-type, :last-of-type {
+        margin: 0;
+      }
     }
   }
-`
+`;
 
 const Copyright = styled.p`
   margin-top: 32px;
   text-align: center;
   color: var(--navText);
-  
+
   @media (max-width: 1024px) {
-    margin: 0;
+    margin-top: 1rem;
   }
 
-  @media (max-width: 540px){
+  @media (max-width: 540px) {
     text-align: left;
   }
-`
+
+  :last-of-type {
+    margin-top: 1rem;
+    a {
+      color: inherit;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s linear;
+      --brand-color: var(--kryptonum);
+
+      :after {
+        content: '';
+        position: absolute;
+        left: 0px;
+        bottom: -1px;
+        width: 100%;
+        height: 1px;
+        background-color: var(--brand-color);
+        transform-origin: right center;
+        transition: transform 0.2s linear;
+        transform: scaleX(0);
+      }
+
+      :hover {
+        color: var(--brand-color);
+        :after {
+          transform-origin: left center;
+          transform: scaleX(1);
+        }
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand-color);
+        color: var(--brand-color);
+      }
+
+      :nth-of-type(2) {
+        --brand-color: var(--agatha);
+      }
+      :nth-of-type(3) {
+        --brand-color: var(--luksari);
+      }
+    }
+  }
+`;
 
 const CopyAndSocialWrapper = styled.div`
   display: grid;
 
   @media (max-width: 1024px) {
     display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
-    margin-top: 75px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: ${75 / 16}rem;
+    padding-left: 1rem;
   }
 
-  @media (max-width: 540px){
+  @media (max-width: 540px) {
     margin-top: 56px;
     flex-direction: column;
+    padding-left: 0.5rem;
   }
-`
+`;

@@ -24,9 +24,13 @@
   --blackButtonBackground: #0a101a;
   --whiteButtonBackground: rgba(18, 17, 39, 0.04);
 
-  --active: rgba(81, 184, 235, 1);
+  --active: #51b8eb;
   --divider: rgba(18, 17, 39, 0.16);
   --error: rgba(239, 68, 68, 1);
+
+  --kryptonum: rgb(48, 187, 120);
+  --agatha: rgb(104, 110, 235);
+  --luksari: rgb(32, 174, 206);
 }
 
 h1 {

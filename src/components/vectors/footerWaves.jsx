@@ -16,33 +16,35 @@ const Waves = () => {
 export default Waves
 
 const Wrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1920px;
+  transform: translateX(-50%) translateY(150px);
+  height: 100px;
+  background-color: var(--backgroundDark);
+
+  @media (max-width: 1024px) {
+    height: 240px;
+    transform: translateX(-50%) translateY(120px);
+  }
+
+  @media (max-width: 540px) {
+    height: 440px;
+    transform: translateX(-50%) translateY(100px);
+  }
+  @media (max-width: 380px) {
+    height: 480px;
+  }
+
+  svg {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 1920px;
-    transform: translateX(-50%) translateY(150px);
-    height: 60px;
-    background-color: var(--backgroundDark);
-    
+    top: 0;
+    transform: translateY(-99%);
+    width: 100%;
 
-    @media (max-width: 1024px) {
-        height: 200px;
-        transform: translateX(-50%) translateY(120px);
+    path {
+      width: 100%;
     }
-
-    @media (max-width: 540px) {
-        height: 380px;
-        transform: translateX(-50%) translateY(100px);
-    }
-
-    svg{
-        position: absolute;
-        top: 0;
-        transform: translateY(-99%);
-        width: 100%;
-
-        path{
-            width: 100%;
-        }
-    }
-`
+  }
+`;
