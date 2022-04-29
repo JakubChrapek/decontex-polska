@@ -29,6 +29,7 @@ const Benefits = ({ data }) => {
 export default Benefits
 
 const Wrapper = styled.section`
+  overflow: hidden;
   padding: 96px 0;
   @media (max-width: 1024px) {
     padding: 72px 0 90px;
