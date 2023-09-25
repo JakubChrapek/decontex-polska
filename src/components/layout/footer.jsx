@@ -116,17 +116,17 @@ const Footer = () => {
           <Copyright>
               Stronę stworzyli:{' '}
               <a
-                aria-label="Strona internetowa agencji kreatywnej Kryptonum"
-                href="https://www.kryptonum.eu"
+                aria-label="Strona internetowa software house Kryptonum"
+                href="https://www.kryptonum.eu/pl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Kryptonum Studio
+                Kryptonum
               </a>{' '}
               &amp;{' '}
               <a
                 aria-label="Strona designerki Agaty"
-                href="https://www.agathadesign.co.uk"
+                href="https://www.linkedin.com/in/agatha-sakowicz-6b9957124/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -134,8 +134,8 @@ const Footer = () => {
               </a>{' '}
               &amp;{' '}
               <a
-                aria-label="Strona na Facebooku designera Luksari"
-                href="https://www.facebook.com/Luksaridesign/"
+                aria-label="Podstrona designera Luksari"
+                href="https://kryptonum.eu/pl/zespol/damian"
                 target="_blank"
                 rel="noopener noreferrer"
               >
