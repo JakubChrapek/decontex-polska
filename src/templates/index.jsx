@@ -20,7 +20,12 @@ const HomePageTemplate = ({ data, pageContext }) => {
       <Grid data={data.datoCmsHomepage.grid[0]} />
       <Advantages data={data.datoCmsHomepage.advantages[0]} />
       <Certificates data={data.datoCmsHomepage.certificates[0]} />
-      <News data={data.datoCmsHomepage.news[0]} posts={data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage)} />
+      <News
+        data={data.datoCmsHomepage.news[0]}
+        posts={data.allDatoCmsBlogPost.blogPostNodes.filter(
+          (el) => el.featuredInHomepage
+        )}
+      />
     </PageWrapper>
   );
 };
@@ -174,4 +179,3 @@ export const query = graphql`
     }
   }
 `;
-

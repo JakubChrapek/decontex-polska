@@ -1,29 +1,33 @@
-import React, { useState } from "react"
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import { Link } from "gatsby"
-import Yes from '../vectors/yes.svg'
-import handler from "../../api/kontaktForm";
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
+import Yes from '../vectors/yes.svg';
+import handler from '../../api/kontaktForm';
+import { motion } from 'framer-motion';
 
 const KontaktForm = ({ buttonText }) => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onBlur' })
-  const [isSended, changeIsSended] = useState(false)
-  const [sendedCount, changeSendedCount] = useState(0)
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur' });
+  const [isSended, changeIsSended] = useState(false);
+  const [sendedCount, changeSendedCount] = useState(0);
 
   const Submit = (data) => {
-    handler(data)
-      .then((res) => {
-        if (res.status === 200) {
-          changeIsSended('success')
-          changeSendedCount(sendedCount + 1)
-          reset()
-        } else {
-          changeIsSended('error')
-          changeSendedCount(sendedCount + 1)
-        }
-      })
-  }
+    handler(data).then((res) => {
+      if (res.status === 200) {
+        changeIsSended('success');
+        changeSendedCount(sendedCount + 1);
+        reset();
+      } else {
+        changeIsSended('error');
+        changeSendedCount(sendedCount + 1);
+      }
+    });
+  };
 
   return (
     <Wrapper yes={Yes} onSubmit={handleSubmit((data) => Submit(data))}>
@@ -159,9 +163,9 @@ const KontaktForm = ({ buttonText }) => {
       </div>
     </Wrapper>
   );
-}
+};
 
-export default KontaktForm
+export default KontaktForm;
 
 const Wrapper = styled.form`
   width: 100%;
@@ -193,7 +197,8 @@ const Wrapper = styled.form`
       line-height: 24px;
       font-family: 'Poppins';
       color: var(--mainDarkText);
-      transition: color .2s linear, background-color 0.2s linear, border 0.2s linear;
+      transition: color 0.2s linear, background-color 0.2s linear,
+        border 0.2s linear;
       border: 1px solid var(--active);
       margin-bottom: 12px;
       width: 100%;

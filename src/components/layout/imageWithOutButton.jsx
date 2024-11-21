@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import { StructuredText } from 'react-datocms'
-import Logo from "../vectors/logo"
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { DOTS_IMAGES } from '../img/dots'
 import { motion } from "framer-motion"

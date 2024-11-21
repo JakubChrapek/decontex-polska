@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { graphql } from 'gatsby';
 import PageWrapper from '../components/layout/pageWrapper';
 import styled from 'styled-components';
-import { Link } from "gatsby"
+import { Link } from 'gatsby';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 import { StructuredText } from 'react-datocms';
-import { ArrowLeft, ArrowRight } from "../components/vectors/arrows";
+import { ArrowLeft, ArrowRight } from '../components/vectors/arrows';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { parseDateFromEnglishMonth } from '../utils/misc';
 
@@ -13,74 +13,119 @@ const BlogArchiveTemplate = (props) => {
   const constraintsRef = useRef(null);
   const pageSize = 6;
 
-  const [choosenPosts, changeChoosenPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.featuredInHomepage))
-  const [canRight, changeCanRight] = useState(true)
-  const [canLeft, changeCanLeft] = useState(false)
-  const [preFiltredPosts, changePreFiltredPosts] = useState(props.data.allDatoCmsBlogPost.blogPostNodes.filter(el => el.title != choosenPosts[0].title))
-  const [currentPage, changeCurrentPage] = useState(1)
-  const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(Math.ceil(preFiltredPosts.length / pageSize))
-  const [filtredPagesCount, changeFiltredPagesCount] = useState(null)
-  const [filtredPosts, changeFiltredPosts] = useState(preFiltredPosts.filter((el, id) => id < pageSize * currentPage))
-  const [filtredType, changeFiltredType] = useState(props.location.state?.category ? props.location.state?.category : 'all')
+  const [choosenPosts, changeChoosenPosts] = useState(
+    props.data.allDatoCmsBlogPost.blogPostNodes.filter(
+      (el) => el.featuredInHomepage
+    )
+  );
+  const [canRight, changeCanRight] = useState(true);
+  const [canLeft, changeCanLeft] = useState(false);
+  const [preFiltredPosts, changePreFiltredPosts] = useState(
+    props.data.allDatoCmsBlogPost.blogPostNodes.filter(
+      (el) => el.title != choosenPosts[0].title
+    )
+  );
+  const [currentPage, changeCurrentPage] = useState(1);
+  const [preFiltredPagesCount, changePreFiltredPagesCount] = useState(
+    Math.ceil(preFiltredPosts.length / pageSize)
+  );
+  const [filtredPagesCount, changeFiltredPagesCount] = useState(null);
+  const [filtredPosts, changeFiltredPosts] = useState(
+    preFiltredPosts.filter((el, id) => id < pageSize * currentPage)
+  );
+  const [filtredType, changeFiltredType] = useState(
+    props.location.state?.category ? props.location.state?.category : 'all'
+  );
 
   useEffect(() => {
     if (props.location.state?.category != null) {
-      document.querySelectorAll('.filterItem').forEach(el => el?.classList.remove('active'))
-      document.querySelector('.' + props.location.state.category.replace(/\s/g, ''))?.classList.add('active')
-      filter(props.location.state.category.replace(/\s/g, ''))
-      changeFiltredType(props.location.state.category.replace(/\s/g, ''))
+      document
+        .querySelectorAll('.filterItem')
+        .forEach((el) => el?.classList.remove('active'));
+      document
+        .querySelector('.' + props.location.state.category.replace(/\s/g, ''))
+        ?.classList.add('active');
+      filter(props.location.state.category.replace(/\s/g, ''));
+      changeFiltredType(props.location.state.category.replace(/\s/g, ''));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (filtredType !== 'all') {
-      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === filtredType).filter((el, id) => id < pageSize))
-      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === filtredType).length / pageSize))
+      changeFiltredPosts(
+        preFiltredPosts
+          .filter((el) => el.category.name === filtredType)
+          .filter((el, id) => id < pageSize)
+      );
+      canPaginate(
+        Math.ceil(
+          preFiltredPosts.filter((el) => el.category.name === filtredType)
+            .length / pageSize
+        )
+      );
     } else {
-      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < pageSize * currentPage && id >= pageSize * (currentPage - 1)))
-      canPaginate(preFiltredPagesCount)
+      changeFiltredPosts(
+        preFiltredPosts.filter(
+          (el, id) =>
+            id < pageSize * currentPage && id >= pageSize * (currentPage - 1)
+        )
+      );
+      canPaginate(preFiltredPagesCount);
     }
-  }, [currentPage])
+  }, [currentPage]);
 
   function filter(type) {
-    changeFiltredType(type)
+    changeFiltredType(type);
 
     if (type === 'all') {
-      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < pageSize))
-      canPaginate(preFiltredPagesCount)
-      changeCurrentPage(1)
+      changeFiltredPosts(preFiltredPosts.filter((el, id) => id < pageSize));
+      canPaginate(preFiltredPagesCount);
+      changeCurrentPage(1);
     } else {
-      canPaginate(Math.ceil(preFiltredPosts.filter(el => el.category.name === type).length / pageSize))
-      changeFiltredPosts(preFiltredPosts.filter(el => el.category.name === type).filter((el, id) => id < pageSize))
-      changeCurrentPage(1)
+      canPaginate(
+        Math.ceil(
+          preFiltredPosts.filter((el) => el.category.name === type).length /
+            pageSize
+        )
+      );
+      changeFiltredPosts(
+        preFiltredPosts
+          .filter((el) => el.category.name === type)
+          .filter((el, id) => id < pageSize)
+      );
+      changeCurrentPage(1);
     }
 
-    document.querySelectorAll('.filterItem').forEach(el => el?.classList.remove('active'))
-    document.querySelector('.' + type.replace(/\s/g, ''))?.classList.add('active')
+    document
+      .querySelectorAll('.filterItem')
+      .forEach((el) => el?.classList.remove('active'));
+    document
+      .querySelector('.' + type.replace(/\s/g, ''))
+      ?.classList.add('active');
   }
 
   function pagination(direct) {
     if (direct === 'left' && canLeft) {
-      changeCurrentPage(currentPage - 1)
+      changeCurrentPage(currentPage - 1);
     } else if (direct === 'right' && canRight) {
-      changeCurrentPage(currentPage + 1)
+      changeCurrentPage(currentPage + 1);
     }
   }
 
   function canPaginate(currentPagesCount) {
-    changeFiltredPagesCount(currentPagesCount)
+    changeFiltredPagesCount(currentPagesCount);
     if (currentPagesCount === 1) {
-      changeCanRight(false)
-      changeCanLeft(false)
+      changeCanRight(false);
+      changeCanLeft(false);
     } else if (currentPage === 1) {
-      changeCanRight(true)
-      changeCanLeft(false)
+      changeCanRight(true);
+      changeCanLeft(false);
     } else if (currentPage === currentPagesCount) {
-      changeCanRight(false)
-      changeCanLeft(true)
+      changeCanRight(false);
+      changeCanLeft(true);
     } else {
-      changeCanRight(true)
-      changeCanLeft(true)
+      changeCanRight(true);
+      changeCanLeft(true);
     }
   }
 
@@ -95,19 +140,26 @@ const BlogArchiveTemplate = (props) => {
           <Hero>
             <StructuredText data={props.data.datoCmsArchivePage.title} />
             <p>{props.data.datoCmsArchivePage.text}</p>
-            <div className='imageBox'>
-              <Link className='wrapLink' to={choosenPosts[0].slug} />
+            <div className="imageBox">
+              <Link className="wrapLink" to={choosenPosts[0].slug} />
               <div>
-                <Category categoryColor={choosenPosts[0].category.color.hex}>{choosenPosts[0].category.name}</Category>
+                <Category categoryColor={choosenPosts[0].category.color.hex}>
+                  {choosenPosts[0].category.name}
+                </Category>
                 <p className="title">{choosenPosts[0].title}</p>
-                <p className="date">{parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}</p>
+                <p className="date">
+                  {parseDateFromEnglishMonth(choosenPosts[0].publicationDate)}
+                </p>
               </div>
-              <GatsbyImage image={choosenPosts[0].coverImage.gatsbyImageData} alt={choosenPosts[0].coverImage.alt} title={choosenPosts[0].coverImage.title} />
+              <GatsbyImage
+                image={choosenPosts[0].coverImage.gatsbyImageData}
+                alt={choosenPosts[0].coverImage.alt}
+                title={choosenPosts[0].coverImage.title}
+              />
             </div>
           </Hero>
-          {preFiltredPosts.length === 0
-            ? null
-            : <>
+          {preFiltredPosts.length === 0 ? null : (
+            <>
               <Controls ref={constraintsRef}>
                 <h2>
                   {props.data.datoCmsArchivePage.locale === 'pl'
@@ -127,8 +179,10 @@ const BlogArchiveTemplate = (props) => {
                   </button>
                   {props.data.allDatoCmsCategory.nodes.map((el) => (
                     <>
-                      {preFiltredPosts.filter(innerEl => innerEl.category.name === el.name).length > 0
-                        ? <button
+                      {preFiltredPosts.filter(
+                        (innerEl) => innerEl.category.name === el.name
+                      ).length > 0 ? (
+                        <button
                           className={el.name.replace(/\s/g, '') + ' filterItem'}
                           onClick={() => {
                             filter(el.name);
@@ -136,7 +190,7 @@ const BlogArchiveTemplate = (props) => {
                         >
                           {el.name}
                         </button>
-                        : null}
+                      ) : null}
                     </>
                   ))}
                 </motion.div>
@@ -152,8 +206,12 @@ const BlogArchiveTemplate = (props) => {
                         key={el.title}
                         layout
                       >
-                        <Link className='imgWrapp' to={el.slug}>
-                          <GatsbyImage image={el.cardImage.gatsbyImageData} alt={el.cardImage.alt} title={el.cardImage.title} />
+                        <Link className="imgWrapp" to={el.slug}>
+                          <GatsbyImage
+                            image={el.cardImage.gatsbyImageData}
+                            alt={el.cardImage.alt}
+                            title={el.cardImage.title}
+                          />
                         </Link>
                         <motion.span>{el.category.name}</motion.span>
                         <motion.h3>{el.title}</motion.h3>
@@ -165,56 +223,61 @@ const BlogArchiveTemplate = (props) => {
                   </Grid>
                 </AnimatePresence>
               </AnimateSharedLayout>
-              {
-                filtredPagesCount ?
-                  filtredPagesCount > 1
-                    ? <Pagination>
-                      <button
-                        disabled={!canLeft}
-                        onClick={() => {
-                          pagination('left')
-                        }}
-                      >
-                        <ArrowLeft />
-                      </button>
-                      <p>
-                        {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
-                      </p>
-                      <button
-                        disabled={!canRight}
-                        onClick={() => {
-                          pagination('right')
-                        }}
-                      >
-                        <ArrowRight />
-                      </button>
-                    </Pagination>
-                    : null
-                  : preFiltredPagesCount > 1
-                    ? <Pagination>
-                      <button
-                        disabled={!canLeft}
-                        onClick={() => {
-                          pagination('left')
-                        }}
-                      >
-                        <ArrowLeft />
-                      </button>
-                      <p>
-                        {currentPage} z {filtredPagesCount ? filtredPagesCount : preFiltredPagesCount}
-                      </p>
-                      <button
-                        disabled={!canRight}
-                        onClick={() => {
-                          pagination('right')
-                        }}
-                      >
-                        <ArrowRight />
-                      </button>
-                    </Pagination>
-                    : null}
+              {filtredPagesCount ? (
+                filtredPagesCount > 1 ? (
+                  <Pagination>
+                    <button
+                      disabled={!canLeft}
+                      onClick={() => {
+                        pagination('left');
+                      }}
+                    >
+                      <ArrowLeft />
+                    </button>
+                    <p>
+                      {currentPage} z{' '}
+                      {filtredPagesCount
+                        ? filtredPagesCount
+                        : preFiltredPagesCount}
+                    </p>
+                    <button
+                      disabled={!canRight}
+                      onClick={() => {
+                        pagination('right');
+                      }}
+                    >
+                      <ArrowRight />
+                    </button>
+                  </Pagination>
+                ) : null
+              ) : preFiltredPagesCount > 1 ? (
+                <Pagination>
+                  <button
+                    disabled={!canLeft}
+                    onClick={() => {
+                      pagination('left');
+                    }}
+                  >
+                    <ArrowLeft />
+                  </button>
+                  <p>
+                    {currentPage} z{' '}
+                    {filtredPagesCount
+                      ? filtredPagesCount
+                      : preFiltredPagesCount}
+                  </p>
+                  <button
+                    disabled={!canRight}
+                    onClick={() => {
+                      pagination('right');
+                    }}
+                  >
+                    <ArrowRight />
+                  </button>
+                </Pagination>
+              ) : null}
             </>
-          }
+          )}
         </Container>
       </Wrapper>
     </PageWrapper>
@@ -226,7 +289,7 @@ export default BlogArchiveTemplate;
 export const query = graphql`
   query BlogArchiveQuery($locale: String!, $skip: Int!) {
     datoCmsArchivePage(locale: { eq: $locale }) {
-      title{
+      title {
         value
       }
       text
@@ -262,7 +325,7 @@ export const query = graphql`
         }
         category {
           name
-          color{
+          color {
             hex
           }
         }
@@ -272,9 +335,7 @@ export const query = graphql`
         reference
       }
     }
-    allDatoCmsCategory(
-      filter: { locale: { eq: $locale } }
-    ) {
+    allDatoCmsCategory(filter: { locale: { eq: $locale } }) {
       nodes {
         name
       }
@@ -289,42 +350,42 @@ const Pagination = styled.div`
   margin-top: 40px;
   display: flex;
   align-items: center;
-  p{
+  p {
     margin: 0 20px;
     font-size: 24px;
   }
-  button{
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 1px solid var(--backgroundMedium);
-      justify-content: center;
-      align-items: center;
-      display: inline-flex;
-      transition: background-color .2s linear, border .2s linear, color .2s linear;
+  button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--backgroundMedium);
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+    transition: background-color 0.2s linear, border 0.2s linear,
+      color 0.2s linear;
 
-      path{
-        transition: stroke .2s linear;
+    path {
+      transition: stroke 0.2s linear;
+    }
+
+    &:hover {
+      background-color: var(--backgroundMedium);
+      path {
+        stroke: var(--mainLightText);
       }
+    }
 
-      &:hover{
-        background-color: var(--backgroundMedium);
-        path{
-          stroke: var(--mainLightText);
-        }
+    &:disabled {
+      border: 1px solid var(--divider);
+      background-color: var(--mainLightText);
+
+      path {
+        stroke: var(--divider);
       }
-
-      &:disabled{
-          border: 1px solid var(--divider);
-          background-color: var(--mainLightText);
-
-          path{
-              stroke: var(--divider);
-          }
-      }
+    }
   }
-
-`
+`;
 
 const Category = styled.span`
   background-color: var(--mainLightText);
@@ -351,40 +412,36 @@ const Category = styled.span`
     transition: background-color 0.2s linear, border 0.2s linear,
       color 0.2s linear;
   }
-
-  
 `;
 
 const Wrapper = styled.div`
   padding-top: 192px;
   padding-bottom: 110px;
-  overflow-x: hidden ;
+  overflow-x: hidden;
 
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     padding-top: clamp(140px, 18.2vw, 192px);
     padding-bottom: clamp(45px, 8.4vw, 110px);
   }
 
-  .wrapLink{
-      border-radius: 15px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      &:focus-visible {
-          outline: 3px solid var(--active);
-          outline-offset: -3px;
-      }
+  .wrapLink {
+    border-radius: 15px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    &:focus-visible {
+      outline: 3px solid var(--active);
+      outline-offset: -3px;
+    }
 
-      img{
-      }
+    img {
+    }
   }
-`
+`;
 
-const Container = styled.div`
-
-`
+const Container = styled.div``;
 
 const Hero = styled.div`
   h1 {
@@ -551,9 +608,9 @@ const Grid = styled(motion.ul)`
 
   li {
     position: relative;
-    
-    filter: drop-shadow(0px 20px 50px rgba(0,0,0,0.18));
-    
+
+    filter: drop-shadow(0px 20px 50px rgba(0, 0, 0, 0.18));
+
     span {
       margin-top: 32px;
       margin-bottom: 8px;
