@@ -2,93 +2,112 @@
   from = "/serwis"
   to = "https://decontex.com/pl/decon-solution/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/blog/dekontaminacja-pierwszy-raz-w-polsce"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/zamowienia"
   to = "https://orders.decontex.com/en/login"
   status = 301
-
+  force = true
+  
 [[redirects]]
   from = "/partnerzy"
   to = "https://decontex.com/pl/z-kim-wspolpracujemy/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/blog"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/kontakt"
   to = "https://decontex.com/pl/kontakt/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/uslugi"
   to = "https://decontex.com/pl/decon-solution/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/o-nas"
   to = "https://decontex.com/pl/o-nas/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/rodo"
   to = "https://decontex.com/pl/polityka-prywatnosci/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/app-023101a1d2923b590a45.js"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/webpack-runtime-ca222d9d829c398ff293.js"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/framework-9043f98811f52ec85b1e.js"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/o-nas/"
   to = "https://decontex.com/pl/o-nas/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/partnerzy/"
   to = "https://decontex.com/pl/z-kim-wspolpracujemy/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/zamowienia/"
   to = "https://orders.decontex.com/en/login"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/blog/dekontaminacja-pierwszy-raz-w-polsce/"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/static/dotsSmall-fb26edc7a79e1533a9f2e94abdb4be47.png"
   to = "https://decontex.com/pl/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/rodo/"
   to = "https://decontex.com/pl/polityka-prywatnosci/"
   status = 301
+  force = true
