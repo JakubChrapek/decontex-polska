@@ -12,7 +12,6 @@
   from = "/zamowienia"
   to = "https://orders.decontex.com/en/login"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/partnerzy"
@@ -57,7 +56,7 @@
 [[redirects]]
   from = "/webpack-runtime-ca222d9d829c398ff293.js"
   to = "https://decontex.com/pl/"
-  status =
+  status = 301
 
 [[redirects]]
   from = "/framework-9043f98811f52ec85b1e.js"
@@ -82,7 +81,7 @@
 [[redirects]]
   from = "/blog/dekontaminacja-pierwszy-raz-w-polsce/"
   to = "https://decontex.com/pl/"
-  status =
+  status = 301
 
 [[redirects]]
   from = "/static/dotsSmall-fb26edc7a79e1533a9f2e94abdb4be47.png"
